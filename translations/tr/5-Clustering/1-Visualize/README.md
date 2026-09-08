@@ -1,116 +1,116 @@
-# Kümeleme Giriş
+# Kümelemeye Giriş
 
-Kümeleme, bir veri kümesinin etiketlenmediğini veya girdilerin önceden tanımlanmış çıktılarla eşleşmediğini varsayan bir tür [Gözetimsiz Öğrenme](https://wikipedia.org/wiki/Unsupervised_learning)'dir. Etiketlenmemiş verileri sıralamak ve veride algıladığı desenlere göre gruplamalar sağlamak için çeşitli algoritmalar kullanır.
+Kümeleme, bir veri kümesinin etiketlenmediğini veya girdilerin önceden tanımlanmış çıktılarla eşleştirilmediğini varsayan bir [Denetimsiz Öğrenme](https://wikipedia.org/wiki/Unsupervised_learning) türüdür. Etiketlenmemiş verileri çeşitli algoritmalarla tarar ve veride algıladığı desenlere göre gruplamalar sağlar.
 
-[![PSquare tarafından No One Like You](https://img.youtube.com/vi/ty2advRiWJM/0.jpg)](https://youtu.be/ty2advRiWJM "PSquare tarafından No One Like You")
+[![No One Like You by PSquare](https://img.youtube.com/vi/ty2advRiWJM/0.jpg)](https://youtu.be/ty2advRiWJM "No One Like You by PSquare")
 
-> 🎥 Yukarıdaki resme tıklayarak bir video izleyebilirsiniz. Kümeleme ile makine öğrenimi çalışırken, bazı Nijeryalı Dance Hall şarkılarının tadını çıkarın - bu, PSquare tarafından 2014 yılında yayımlanmış yüksek puanlı bir şarkıdır.
+> 🎥 Video için yukarıdaki görüntüye tıklayın. Kümeleme ile makine öğrenmesini incelerken, bazı Nijeryalı Dance Hall parçalarının tadını çıkarın - bu, PSquare tarafından 2014 yılında yüksek puan alan bir şarkıdır.
 
-## [Ön Ders Testi](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/27/)
+## [Ön ders sınavı](https://ff-quizzes.netlify.app/en/ml/)
 
 ### Giriş
 
-[Clustering](https://link.springer.com/referenceworkentry/10.1007%2F978-0-387-30164-8_124) veri keşfi için çok kullanışlıdır. Nijeryalı dinleyicilerin müzik tüketiminde eğilimleri ve desenleri keşfetmeye yardımcı olup olmadığını görelim.
+[Kümeleme](https://link.springer.com/referenceworkentry/10.1007%2F978-0-387-30164-8_124) veri keşfi için çok faydalıdır. Nijeryalı dinleyicilerin müziği tüketme biçimindeki eğilimleri ve desenleri keşfetmeye yardımcı olup olmadığını görelim.
 
-✅ Kümeleme kullanım alanlarını düşünmek için bir dakika ayırın. Gerçek hayatta, çamaşır yığınınız olduğunda ve aile üyelerinizin kıyafetlerini ayırmanız gerektiğinde kümeleme olur 🧦👕👖🩲. Veri biliminde, kullanıcı tercihlerinin analiz edilmesi veya etiketlenmemiş herhangi bir veri kümesinin özelliklerinin belirlenmesi gerektiğinde kümeleme olur. Kümeleme, bir anlamda, kaosu anlamlandırmaya yardımcı olur, tıpkı bir çorap çekmecesi gibi.
+✅ Kümelemenin kullanım alanları hakkında bir dakika düşünün. Gerçek hayatta, bir çamaşır yığını ve aile üyelerinizin kıyafetlerini ayırmanız gerektiğinde kümeleme olur 🧦👕👖🩲. Veri bilimine gelince, kümeleme bir kullanıcının tercihlerini analiz etmeye veya herhangi bir etiketlenmemiş veri kümesinin özelliklerini belirlemeye çalışırken olur. Kümeleme, bir bakıma, kaosu anlamaya yardımcı olur; çorap çekmecesi gibi.
 
-[![Makine Öğrenimine Giriş](https://img.youtube.com/vi/esmzYhuFnds/0.jpg)](https://youtu.be/esmzYhuFnds "Kümelemeye Giriş")
+[![Introduction to ML](https://img.youtube.com/vi/esmzYhuFnds/0.jpg)](https://youtu.be/esmzYhuFnds "Introduction to Clustering")
 
-> 🎥 Yukarıdaki resme tıklayarak bir video izleyebilirsiniz: MIT'den John Guttag kümelemeyi tanıtıyor.
+> 🎥 Video için yukarıdaki görüntüye tıklayın: MIT'den John Guttag kümelemeyi tanıtıyor
 
-Profesyonel bir ortamda, kümeleme pazar segmentasyonu gibi şeyleri belirlemek için kullanılabilir, örneğin hangi yaş gruplarının hangi ürünleri satın aldığını belirlemek için. Bir başka kullanım alanı, kredi kartı işlemlerinden oluşan bir veri kümesinde dolandırıcılığı tespit etmek olabilir. Ya da tıbbi taramalardan oluşan bir veri kümesinde tümörleri belirlemek için kümeleme kullanabilirsiniz.
+Profesyonel bir ortamda, kümeleme piyasa segmentasyonu, hangi yaş gruplarının hangi ürünleri satın aldığını belirlemek gibi şeylerde kullanılabilir. Başka bir kullanım örneği olarak, dolandırıcılığı tespit etmek için kredi kartı işlemlerinin bulunduğu bir veri kümesinde anomali tespiti yapılabilir. Ya da bir grup tıbbi taramada tümörleri belirlemek için kümeleme kullanılabilir.
 
-✅ Bir bankacılık, e-ticaret veya iş ortamında 'vahşi doğada' kümelemeyle nasıl karşılaşmış olabileceğinizi bir dakika düşünün.
+✅ Bankacılık, e-ticaret veya iş ortamında "doğada" kümelemeyle nasıl karşılaşmış olabileceğinizi bir dakika düşünün.
 
-> 🎓 İlginç bir şekilde, kümeleme analizi 1930'larda Antropoloji ve Psikoloji alanlarında ortaya çıktı. O zamanlar nasıl kullanıldığını hayal edebilir misiniz?
+> 🎓 İlginçtir ki, küme analizleri 1930'larda Antropoloji ve Psikoloji alanlarında ortaya çıkmıştır. Nasıl kullanılmış olabileceğini hayal edebiliyor musunuz?
 
-Alternatif olarak, arama sonuçlarını gruplamak için kullanabilirsiniz - örneğin alışveriş bağlantıları, resimler veya incelemeler. Kümeleme, büyük bir veri kümesini azaltmak ve üzerinde daha ayrıntılı analiz yapmak istediğinizde kullanışlıdır, bu nedenle teknik, diğer modeller oluşturulmadan önce veri hakkında bilgi edinmek için kullanılabilir.
+Alternatif olarak, örneğin alışveriş bağlantıları, resimler veya yorumlar gibi arama sonuçlarını gruplamak için kullanabilirsiniz. Kümeleme, büyük bir veri kümeniz olduğunda ve daha detaylı analiz yapmak istediğinizde faydalıdır, böylece diğer modeller oluşturulmadan önce veriler hakkında öğrenme yapılabilir.
 
-✅ Verileriniz kümeler halinde düzenlendikten sonra, ona bir küme kimliği atarsınız ve bu teknik, bir veri kümesinin gizliliğini korurken yararlı olabilir; daha belirgin tanımlanabilir veriler yerine bir veri noktasına küme kimliği ile atıfta bulunabilirsiniz. Bir küme kimliğine başvurmanın, kümeyi tanımlamak için diğer öğeler yerine başka nedenler düşünebilir misiniz?
+✅ Verileriniz kümelere organize edildikten sonra, küme kimliği atarsınız ve bu teknik, bir veri kümesinin gizliliğini korumada faydalı olabilir; bir veri noktasına daha fazla açıklayıcı tanımlayıcı veri yerine küme kimliğiyle referans verebilirsiniz. Bir küme kimliğine, kümeyi tanımlamak için diğer unsurlardan daha çok neden başvurmak isteyebileceğinize dair başka nedenler düşünebiliyor musunuz?
 
-Kümeleme teknikleri hakkındaki bilginizi bu [Öğrenme modülünde](https://docs.microsoft.com/learn/modules/train-evaluate-cluster-models?WT.mc_id=academic-77952-leestott) derinleştirin.
+Kümeleme tekniklerini bu [Öğrenme modülünde](https://docs.microsoft.com/learn/modules/train-evaluate-cluster-models?WT.mc_id=academic-77952-leestott) derinlemesine inceleyin.
 
-## Kümelemeye Başlarken
+## Kümelemeye Başlamak
 
-[Scikit-learn geniş bir yelpazede](https://scikit-learn.org/stable/modules/clustering.html) kümeleme yöntemleri sunar. Seçtiğiniz tür, kullanım durumunuza bağlı olacaktır. Dokümana göre, her yöntemin çeşitli faydaları vardır. İşte Scikit-learn tarafından desteklenen yöntemlerin ve uygun kullanım durumlarının basitleştirilmiş bir tablosu:
+[Scikit-learn, kümeleme yapmak için geniş bir yöntem dizisi sunar](https://scikit-learn.org/stable/modules/clustering.html). Seçeceğiniz tür kullanım durumunuza bağlıdır. Dokümantasyona göre, her yöntemin çeşitli faydaları vardır. İşte Scikit-learn tarafından desteklenen yöntemlerin ve uygun kullanım durumlarının basit bir tablosu:
 
-| Yöntem Adı                   | Kullanım Durumu                                                        |
-| :--------------------------- | :--------------------------------------------------------------------- |
-| K-Means                      | genel amaçlı, tümevarımsal                                              |
-| Affinity propagation         | çok, düzensiz kümeler, tümevarımsal                                      |
-| Mean-shift                   | çok, düzensiz kümeler, tümevarımsal                                      |
-| Spectral clustering          | az, düzenli kümeler, tümdengelimsel                                      |
-| Ward hierarchical clustering | çok, kısıtlı kümeler, tümdengelimsel                                    |
-| Agglomerative clustering     | çok, kısıtlı, Öklidyen olmayan mesafeler, tümdengelimsel                |
-| DBSCAN                       | düz olmayan geometri, düzensiz kümeler, tümdengelimsel                  |
-| OPTICS                       | düz olmayan geometri, değişken yoğunluklu düzensiz kümeler, tümdengelimsel |
-| Gaussian mixtures            | düz geometri, tümevarımsal                                              |
-| BIRCH                        | büyük veri kümesi, aykırı değerlerle, tümevarımsal                       |
+| Yöntem Adı                  | Kullanım Durumu                                                      |
+| :--------------------------- | :------------------------------------------------------------------ |
+| K-Ortalamalar               | genel amaçlı, tümevarımsal                                          |
+| Affinity propagation         | çok sayıda, düzensiz kümeler, tümevarımsal                         |
+| Mean-shift                   | çok sayıda, düzensiz kümeler, tümevarımsal                         |
+| Spektral kümeleme           | az sayıda, düzenli kümeler, dönüştürücü                             |
+| Ward hiyerarşik kümeleme    | çok sayıda, kısıtlanmış kümeler, dönüştürücü                       |
+| Agglomerative kümeleme      | çok sayıda, kısıtlanmış, Öklidyen olmayan mesafeler, dönüştürücü   |
+| DBSCAN                      | düz olmayan geometri, düzensiz kümeler, dönüştürücü                |
+| OPTICS                      | düz olmayan geometri, değişken yoğunluklu düzensiz kümeler, dönüştürücü |
+| Gauss karışımları           | düz geometri, tümevarımsal                                         |
+| BIRCH                       | aykırı değer içeren büyük veri seti, tümevarımsal                   |
 
-> 🎓 Kümeleri nasıl oluşturduğumuz, veri noktalarını gruplara nasıl topladığımızla çok ilgilidir. Bazı terimleri açalım:
+> 🎓 Kümeler oluşturma şeklimiz, veri noktalarını gruplara nasıl topladığımızla çok ilgilidir. Bazı terimleri açıklayalım:
 >
-> 🎓 ['Tümdengelimsel' vs. 'Tümevarımsal'](https://wikipedia.org/wiki/Transduction_(machine_learning))
-> 
-> Tümdengelimsel çıkarım, belirli test durumlarına eşlenen gözlemlenmiş eğitim vakalarından türetilir. Tümevarımsal çıkarım ise eğitim vakalarından türetilir ve yalnızca daha sonra test durumlarına uygulanır.
-> 
-> Bir örnek: Kısmen etiketlenmiş bir veri kümeniz olduğunu hayal edin. Bazı şeyler 'kayıt', bazıları 'cd' ve bazıları boştur. Göreviniz, boşlara etiket vermektir. Tümevarımsal bir yaklaşım seçerseniz, 'kayıtlar' ve 'cd'ler arayan bir model eğitirsiniz ve bu etiketleri etiketlenmemiş verinize uygularsınız. Bu yaklaşım, aslında 'kaset' olan şeyleri sınıflandırmakta zorlanır. Tümdengelimsel bir yaklaşım ise bu bilinmeyen veriyi daha etkili bir şekilde ele alır çünkü benzer öğeleri bir araya getirir ve ardından bir gruba etiket uygular. Bu durumda, kümeler 'yuvarlak müzik şeyleri' ve 'kare müzik şeyleri' gibi olabilir.
-> 
-> 🎓 ['Düz olmayan' vs. 'düz' geometri](https://datascience.stackexchange.com/questions/52260/terminology-flat-geometry-in-the-context-of-clustering)
-> 
-> Matematiksel terminolojiden türetilen düz olmayan ve düz geometri, noktalar arasındaki mesafelerin 'düz' ([Öklidyen](https://wikipedia.org/wiki/Euclidean_geometry)) veya 'düz olmayan' (Öklidyen olmayan) geometrik yöntemlerle ölçülmesini ifade eder.
+> 🎓 ['Dönüştürücü' vs. 'Tümevarımsal'](https://wikipedia.org/wiki/Transduction_(machine_learning))
 >
->'Düz' bu bağlamda Öklidyen geometriyi ifade eder (bir kısmı 'düzlem' geometri olarak öğretilir) ve düz olmayan, Öklidyen olmayan geometriyi ifade eder. Geometri, makine öğrenimi ile ne ilgisi var? Matematik kökenli iki alan olarak, kümelerdeki noktalar arasındaki mesafeleri ölçmenin ortak bir yolu olmalıdır ve bu, verinin doğasına bağlı olarak 'düz' veya 'düz olmayan' bir şekilde yapılabilir. [Öklidyen mesafeler](https://wikipedia.org/wiki/Euclidean_distance) iki nokta arasındaki bir doğru parçasının uzunluğu olarak ölçülür. [Öklidyen olmayan mesafeler](https://wikipedia.org/wiki/Non-Euclidean_geometry) bir eğri boyunca ölçülür. Veriniz, görselleştirildiğinde, bir düzlemde var olmuyormuş gibi görünüyorsa, bunu ele almak için özel bir algoritma kullanmanız gerekebilir.
+> Dönüştürücü çıkarım, belirli test durumlarına eşlenen gözlemlenmiş eğitim örneklerinden türetilir. Tümevarımsal çıkarım ise öncelikle genel kurallara eşlenen eğitim örneklerinden türetilir ve sonra bu kurallar test örneklerine uygulanır.
 >
-![Düz vs Düz Olmayan Geometri Bilgilendirme Grafiği](../../../../translated_images/flat-nonflat.d1c8c6e2a96110c1d57fa0b72913f6aab3c245478524d25baf7f4a18efcde224.tr.png)
-> Bilgilendirme Grafiği [Dasani Madipalli](https://twitter.com/dasani_decoded) tarafından
-> 
+> Bir örnek: Etiketleri kısmen bulunan bir veri kümeniz olsun. Bazıları 'plak', bazıları 'cd', bazıları boş. Göreviniz boşlara etiket vermek. Tümevarımsal yaklaşımı seçerseniz, 'plak' ve 'cd' arayan bir model eğitirsiniz ve bu etiketleri etiketlenmemiş verilere uygularsınız. Bu yöntem, aslında 'kaset' olanları sınıflandırmakta zorlanır. Dönüştürücü yaklaşım ise bilinmeyen bu verileri, benzer öğeleri bir araya getirip gruplandırarak ve ardından gruba etiket atayarak daha etkili işler. Bu durumda kümeler 'yuvarlak müzik şeyleri' ve 'kare müzik şeyleri' şeklinde olabilir.
+>
+> 🎓 ['Düz' vs. 'Düz olmayan' geometri](https://datascience.stackexchange.com/questions/52260/terminology-flat-geometry-in-the-context-of-clustering)
+>
+> Matematiksel terimlerden türetilmiş, düz ve düz olmayan geometri, noktalar arasındaki mesafelerin ya 'düz' ([Öklidyen](https://wikipedia.org/wiki/Euclidean_geometry)) veya 'düz olmayan' (Öklidyen olmayan) geometrik yöntemlerle ölçülmesini ifade eder.
+>
+> Buradaki 'düz', Öklidyen geometriyi (bir kısmı 'düzlem' geometri olarak öğretilir) ifade eder, düz olmayan ise Öklidyen olmayan geometridir. Geometrinin makine öğrenmesi ile ne ilgisi var? Her iki alan da matematiğe dayandığından, kümelerdeki noktalar arasındaki mesafeleri ölçmek için ortak bir yol olmalıdır ve bu, verinin doğasına bağlı olarak düz veya düz olmayan şekilde yapılabilir. [Öklidyen mesafeler](https://wikipedia.org/wiki/Euclidean_distance), iki nokta arasındaki doğru parçasının uzunluğudur. [Öklidyen olmayan mesafeler](https://wikipedia.org/wiki/Non-Euclidean_geometry) ise bir eğri boyunca ölçülür. Veriniz, görselleştirildiğinde bir düzlemde değilse, bunu işlemek için özel bir algoritma gerekebilir.
+>
+![Düz ve Düz Olmayan Geometri Bilgi Grafiği](../../../../translated_images/tr/flat-nonflat.d1c8c6e2a96110c1.webp)
+> Bilgi grafiği: [Dasani Madipalli](https://twitter.com/dasani_decoded)
+>
 > 🎓 ['Mesafeler'](https://web.stanford.edu/class/cs345a/slides/12-clustering.pdf)
-> 
-> Kümeler, noktalar arasındaki mesafelerle tanımlanır. Bu mesafe birkaç şekilde ölçülebilir. Öklidyen kümeler, nokta değerlerinin ortalaması ile tanımlanır ve bir 'merkez nokta' içerir. Mesafeler, bu merkez noktaya olan mesafeyle ölçülür. Öklidyen olmayan mesafeler, diğer noktalara en yakın nokta olan 'clustroid'ler referans alınarak ölçülür. Clustroid'ler de çeşitli şekillerde tanımlanabilir.
-> 
-> 🎓 ['Kısıtlı'](https://wikipedia.org/wiki/Constrained_clustering)
-> 
-> [Kısıtlı Kümeleme](https://web.cs.ucdavis.edu/~davidson/Publications/ICDMTutorial.pdf), bu gözetimsiz yönteme 'yarı gözetimli' öğrenmeyi tanıtır. Noktalar arasındaki ilişkiler 'bağlanamaz' veya 'bağlanması gerekir' olarak işaretlenir, böylece veri kümesine bazı kurallar uygulanır.
 >
->Bir örnek: Bir algoritma, etiketlenmemiş veya yarı etiketlenmiş bir veri kümesine serbest bırakıldığında, oluşturduğu kümeler kalitesiz olabilir. Yukarıdaki örnekte, kümeler 'yuvarlak müzik şeyleri', 'kare müzik şeyleri', 'üçgen şeyler' ve 'kurabiyeler' olarak gruplandırılabilir. Bazı kısıtlamalar veya kurallar verilirse ("öğe plastikten yapılmış olmalı", "öğe müzik üretebilmeli"), bu algoritmanın daha iyi seçimler yapmasına yardımcı olabilir.
-> 
+> Kümeler, mesafe matrisleri ile tanımlanır; örneğin noktalar arasındaki mesafeler. Bu mesafe birkaç şekilde ölçülebilir. Öklidyen kümeler, nokta değerlerinin ortalaması ile tanımlanır ve bir 'merkez' noktası (centroid) içerir. Mesafeler bu merkeze olan uzaklıkla ölçülür. Öklidyen olmayan mesafeler ise 'kümeidroid' denen, diğer noktalara en yakın nokta ile tanımlanır. Kümeidroidler çeşitli şekillerde tanımlanabilir.
+>
+> 🎓 ['Kısıtlı'](https://wikipedia.org/wiki/Constrained_clustering)
+>
+> [Kısıtlı Kümeleme](https://web.cs.ucdavis.edu/~davidson/Publications/ICDMTutorial.pdf), denetimsiz yönteme 'yarı denetimli' öğrenmeyi tanıtır. Noktalar arasındaki ilişkiler 'bağlanamaz' veya 'zorunlu bağlanır' olarak işaretlenerek veri setine bazı kurallar getirilir.
+>
+> Bir örnek: Bir algoritma, etiketsiz veya yarı etiketli bir veri kümesine serbest bırakılırsa, ürettiği kümeler düşük kalitede olabilir. Yukarıdaki örnekte kümeler 'yuvarlak müzik şeyleri', 'kare müzik şeyleri', 'üçgen şeyler' ve 'kurabiyeler' şeklinde gruplanabilir. Bazı kısıtlamalar veya izlenecek kurallar verilirse ("ürün plastiğe yapılmalı", "ürün müzik üretebilmeli"), bu algoritmanın daha iyi seçimler yapmasını sağlar.
+>
 > 🎓 'Yoğunluk'
-> 
-> 'Gürültülü' veri 'yoğun' olarak kabul edilir. Her bir kümedeki noktalar arasındaki mesafeler, incelendiğinde daha veya az yoğun, yani 'kalabalık' olabilir ve bu nedenle bu veri, uygun kümeleme yöntemiyle analiz edilmelidir. [Bu makale](https://www.kdnuggets.com/2020/02/understanding-density-based-clustering.html), düzensiz küme yoğunluğuna sahip gürültülü bir veri kümesini keşfetmek için K-Means kümeleme ile HDBSCAN algoritmalarını kullanmanın farkını göstermektedir.
+>
+> 'Gürültülü' veri, 'yoğun' olarak kabul edilir. Kümelerindeki noktalar arasındaki mesafeler incelendiğinde daha seyrek veya daha yoğun, yani 'kalabalık' olabilir ve bu nedenle veri uygun kümeleme yöntemiyle analiz edilmelidir. [Bu makale](https://www.kdnuggets.com/2020/02/understanding-density-based-clustering.html), gürültülü ve düzensiz küme yoğunluğuna sahip bir veri setini keşfetmek için K-Ortalamalar kümeleme ile HDBSCAN algoritmalarının farkını göstermektedir.
 
 ## Kümeleme Algoritmaları
 
-100'den fazla kümeleme algoritması vardır ve kullanımları eldeki verinin doğasına bağlıdır. Bazı ana algoritmaları tartışalım:
+100’den fazla kümeleme algoritması bulunmaktadır ve kullanımları mevcut verinin doğasına bağlıdır. Bazı büyük algoritmalara bakalım:
 
-- **Hiyerarşik kümeleme**. Bir nesne, yakın bir nesneye olan yakınlığına göre sınıflandırıldığında, kümeler üyelerinin diğer nesnelere olan mesafelerine göre oluşturulur. Scikit-learn'ün agglomeratif kümelemesi hiyerarşiktir.
+- **Hiyerarşik kümeleme**. Bir nesne, daha uzak olan yerine yakın bir nesneye göre sınıflandırılırsa, kümeler üyelerinin diğer nesnelere olan mesafesine dayanarak oluşur. Scikit-learn’un aglomeratif kümelemesi hiyerarşiktir.
 
-   ![Hiyerarşik kümeleme Bilgilendirme Grafiği](../../../../translated_images/hierarchical.bf59403aa43c8c47493bfdf1cc25230f26e45f4e38a3d62e8769cd324129ac15.tr.png)
-   > Bilgilendirme Grafiği [Dasani Madipalli](https://twitter.com/dasani_decoded) tarafından
+   ![Hiyerarşik kümeleme Bilgi Grafiği](../../../../translated_images/tr/hierarchical.bf59403aa43c8c47.webp)
+   > Bilgi grafiği: [Dasani Madipalli](https://twitter.com/dasani_decoded)
 
-- **Merkez noktası kümeleme**. Bu popüler algoritma, oluşturulacak küme sayısını belirledikten sonra, bir kümenin merkez noktasını belirler ve bu nokta etrafında veri toplar. [K-means kümeleme](https://wikipedia.org/wiki/K-means_clustering), merkez noktası kümelemesinin popüler bir versiyonudur. Merkez, en yakın ortalama ile belirlenir, bu nedenle adı. Kümeden olan kare mesafesi minimize edilir.
+- **Merkez noktası kümelemesi**. Bu popüler algoritma, oluşturulacak küme sayısı 'k' seçimini gerektirir, ardından algoritma kümenin merkez noktasını belirler ve verileri bu noktanın etrafında toplar. [K-ortalama kümelenmesi](https://wikipedia.org/wiki/K-means_clustering), merkez noktası kümelemenin popüler bir versiyonudur. Merkez, en yakın ortalamaya göre belirlenir, bu yüzden adı böyledir. Kümeden olan karesel uzaklık minimize edilir.
 
-   ![Merkez noktası kümeleme Bilgilendirme Grafiği](../../../../translated_images/centroid.097fde836cf6c9187d0b2033e9f94441829f9d86f4f0b1604dd4b3d1931aee34.tr.png)
-   > Bilgilendirme Grafiği [Dasani Madipalli](https://twitter.com/dasani_decoded) tarafından
+   ![Merkez noktası kümeleme Bilgi Grafiği](../../../../translated_images/tr/centroid.097fde836cf6c918.webp)
+   > Bilgi grafiği: [Dasani Madipalli](https://twitter.com/dasani_decoded)
 
-- **Dağılım tabanlı kümeleme**. İstatistiksel modellemeye dayalı olan dağılım tabanlı kümeleme, bir veri noktasının bir kümeye ait olma olasılığını belirlemeye ve buna göre atamaya odaklanır. Gaussian karışım yöntemleri bu türe aittir.
+- **Dağılıma dayalı kümeleme**. İstatistiksel modellemeye dayanan bu tür, bir veri noktasının kümeye ait olma olasılığını belirlemeye ve ona göre atamaya odaklanır. Gauss karışımı yöntemleri bu türe aittir.
 
-- **Yoğunluk tabanlı kümeleme**. Veri noktaları, yoğunluklarına veya birbirleri etrafında gruplandırılmalarına göre kümelere atanır. Grup dışındaki veri noktaları, aykırı değerler veya gürültü olarak kabul edilir. DBSCAN, Mean-shift ve OPTICS bu tür kümelemeye aittir.
+- **Yoğunluğa dayalı kümeleme**. Veri noktaları, kendi aralarındaki yoğunluklarına veya birbirlerinin etrafında gruplanmalarına göre kümelere atanır. Grubun çok uzağındaki veri noktaları aykırı değer veya gürültü olarak kabul edilir. DBSCAN, Mean-shift ve OPTICS bu tür kümelemeye örnektir.
 
-- **Izgara tabanlı kümeleme**. Çok boyutlu veri kümeleri için bir ızgara oluşturulur ve veri ızgaranın hücrelerine bölünerek kümeler oluşturulur.
+- **Kafes tabanlı kümeleme**. Çok boyutlu veri setleri için bir kafes oluşturulur ve veriler kafesin hücrelerine bölünerek kümeler oluşturulur.
 
 ## Alıştırma - Verinizi Kümeleyin
 
-Kümeleme tekniği, doğru görselleştirme ile büyük ölçüde desteklenir, bu yüzden müzik verilerimizi görselleştirmeye başlayalım. Bu alıştırma, bu verinin doğası için en etkili hangi kümeleme yöntemlerini kullanmamız gerektiğine karar vermemize yardımcı olacaktır.
+Kümeleme tekniği, uygun görselleştirmeyle çok desteklenir; bu yüzden müzik verimizi görselleştirmekle başlayalım. Bu alıştırma, verinin doğasına göre hangi kümeleme yöntemini en iyi şekilde kullanmamız gerektiğine karar vermemize yardımcı olacak.
 
 1. Bu klasördeki [_notebook.ipynb_](https://github.com/microsoft/ML-For-Beginners/blob/main/5-Clustering/1-Visualize/notebook.ipynb) dosyasını açın.
 
-1. İyi veri görselleştirme için `Seaborn` paketini içe aktarın.
+1. İyi veri görselleştirmesi için `Seaborn` paketini içe aktarın.
 
     ```python
     !pip install seaborn
     ```
 
-1. [_nigerian-songs.csv_](https://github.com/microsoft/ML-For-Beginners/blob/main/5-Clustering/data/nigerian-songs.csv) dosyasından şarkı verilerini ekleyin. Şarkılar hakkında bazı verilerle bir dataframe yükleyin. Kütüphaneleri içe aktararak ve verileri dökerek bu veriyi keşfetmeye hazırlanın:
+1. [_nigerian-songs.csv_](https://github.com/microsoft/ML-For-Beginners/blob/main/5-Clustering/data/nigerian-songs.csv) dosyasından şarkı verilerini ekleyin. Şarkılar hakkında bazı verilerle bir dataframe yükleyin. Kütüphaneleri içe aktararak ve verileri dökerek keşfe hazır olun:
 
     ```python
     import matplotlib.pyplot as plt
@@ -120,7 +120,7 @@ Kümeleme tekniği, doğru görselleştirme ile büyük ölçüde desteklenir, b
     df.head()
     ```
 
-    İlk birkaç satırı kontrol edin:
+    Verinin ilk birkaç satırını kontrol edin:
 
     |     | name                     | album                        | artist              | artist_top_genre | release_date | length | popularity | danceability | acousticness | energy | instrumentalness | liveness | loudness | speechiness | tempo   | time_signature |
     | --- | ------------------------ | ---------------------------- | ------------------- | ---------------- | ------------ | ------ | ---------- | ------------ | ------------ | ------ | ---------------- | -------- | -------- | ----------- | ------- | -------------- |
@@ -130,13 +130,13 @@ Kümeleme tekniği, doğru görselleştirme ile büyük ölçüde desteklenir, b
     | 3   | Confident / Feeling Cool | Enjoy Your Life              | Lady Donli          | nigerian pop     | 2019         | 175135 | 14         | 0.894        | 0.798        | 0.611  | 0.000187         | 0.0964   | -4.961   | 0.113       | 111.087 | 4              |
     | 4   | wanted you               | rare.                        | Odunsi (The Engine) | afropop          | 2018         | 152049 | 25         | 0.702        | 0.116        | 0.833  | 0.91             | 0.348    | -6.044   | 0.0447      | 105.115 | 4              |
 
-1. `info()` çağırarak dataframe hakkında bazı bilgiler edinin:
+1. Dataframe hakkında biraz bilgi alın, `info()` çağırarak:
 
     ```python
     df.info()
     ```
 
-   Çıktı şöyle görünecek:
+   Çıktı şu şekilde görünür:
 
     ```output
     <class 'pandas.core.frame.DataFrame'>
@@ -164,13 +164,13 @@ Kümeleme tekniği, doğru görselleştirme ile büyük ölçüde desteklenir, b
     memory usage: 66.4+ KB
     ```
 
-1. `isnull()` çağırarak ve toplamın 0 olduğunu doğrulayarak null değerleri iki kez kontrol edin:
+1. Null değerler için iki kez kontrol yapın, `isnull()` çağırarak toplamın 0 olduğunu doğrulayın:
 
     ```python
     df.isnull().sum()
     ```
 
-    İyi görünüyor:
+    Sorun görünmüyor:
 
     ```output
     name                0
@@ -192,7 +192,7 @@ Kümeleme tekniği, doğru görselleştirme ile büyük ölçüde desteklenir, b
     dtype: int64
     ```
 
-1. Verileri tanımlayın:
+1. Veriyi tanımlayın:
 
     ```python
     df.describe()
@@ -200,18 +200,141 @@ Kümeleme tekniği, doğru görselleştirme ile büyük ölçüde desteklenir, b
 
     |       | release_date | length      | popularity | danceability | acousticness | energy   | instrumentalness | liveness | loudness  | speechiness | tempo      | time_signature |
     | ----- | ------------ | ----------- | ---------- | ------------ | ------------ | -------- | ---------------- | -------- | --------- | ----------- | ---------- | -------------- |
-    | count | 530          | 530         | 530        | 530          |
-## [Ders Sonrası Quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/28/)
+    | count | 530          | 530         | 530        | 530          | 530          | 530      | 530              | 530      | 530       | 530         | 530        | 530            |
+    | mean  | 2015.390566  | 222298.1698 | 17.507547  | 0.741619     | 0.265412     | 0.760623 | 0.016305         | 0.147308 | -4.953011 | 0.130748    | 116.487864 | 3.986792       |
+    | std   | 3.131688     | 39696.82226 | 18.992212  | 0.117522     | 0.208342     | 0.148533 | 0.090321         | 0.123588 | 2.464186  | 0.092939    | 23.518601  | 0.333701       |
+    | min   | 1998         | 89488       | 0          | 0.255        | 0.000665     | 0.111    | 0                | 0.0283   | -19.362   | 0.0278      | 61.695     | 3              |
+    | 25%   | 2014         | 199305      | 0          | 0.681        | 0.089525     | 0.669    | 0                | 0.07565  | -6.29875  | 0.0591      | 102.96125  | 4              |
+    | 50%   | 2016         | 218509      | 13         | 0.761        | 0.2205       | 0.7845   | 0.000004         | 0.1035   | -4.5585   | 0.09795     | 112.7145   | 4              |
+    | 75%   | 2017         | 242098.5    | 31         | 0.8295       | 0.403        | 0.87575  | 0.000234         | 0.164    | -3.331    | 0.177       | 125.03925  | 4              |
+    | max   | 2020         | 511738      | 73         | 0.966        | 0.954        | 0.995    | 0.91             | 0.811    | 0.582     | 0.514       | 206.007    | 5              |
 
-## Gözden Geçirme ve Kendi Kendine Çalışma
+> 🤔 Eğer üzerinde çalıştığımız kümeleme, etiketlenmiş veriye ihtiyaç duymayan denetimsiz bir yöntem ise, neden bu verileri etiketlerle gösteriyoruz? Veri keşif aşamasında bunlar kullanışlıdır, ancak kümeleme algoritmalarının çalışması için gerekli değillerdir. Sütun başlıklarını kaldırabilir ve veriye sütun numarası ile başvurabilirsiniz.
 
-Kümeleme algoritmalarını uygulamadan önce, öğrendiğimiz gibi, veri setinizin doğasını anlamak iyi bir fikirdir. Bu konu hakkında daha fazla bilgi edinmek için [buraya](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html) tıklayın.
+Verinin genel değerlerine bakın. Popülerlik değerinin '0' olabileceğini unutmayın, bu da sıralaması olmayan şarkıları gösterir. Bu tür kayıtları kısa sürede kaldıracağız.
 
-[Faydalı bu makale](https://www.freecodecamp.org/news/8-clustering-algorithms-in-machine-learning-that-all-data-scientists-should-know/), farklı veri şekilleri göz önüne alındığında çeşitli kümeleme algoritmalarının nasıl davrandığını açıklar.
+1. En popüler türleri bulmak için bir barplot kullanın:
+
+    ```python
+    import seaborn as sns
+    
+    top = df['artist_top_genre'].value_counts()
+    plt.figure(figsize=(10,7))
+    sns.barplot(x=top[:5].index,y=top[:5].values)
+    plt.xticks(rotation=45)
+    plt.title('Top genres',color = 'blue')
+    ```
+
+    ![most popular](../../../../translated_images/tr/popular.9c48d84b3386705f.webp)
+
+✅ Daha fazla üst değer görmek isterseniz, `[:5]` ifadesini daha büyük bir değer ile değiştirebilir veya tamamen kaldırabilirsiniz.
+
+Unutmayın, en popüler tür 'Missing' olarak tanımlanıyorsa, Spotify'ın onu sınıflandırmadığı anlamına gelir; bu yüzden bundan kurtulalım.
+
+1. Eksik verilerden kurtulmak için filtre uygulayın:
+
+    ```python
+    df = df[df['artist_top_genre'] != 'Missing']
+    top = df['artist_top_genre'].value_counts()
+    plt.figure(figsize=(10,7))
+    sns.barplot(x=top.index,y=top.values)
+    plt.xticks(rotation=45)
+    plt.title('Top genres',color = 'blue')
+    ```
+
+    Şimdi türlere tekrar bakın:
+
+    ![most popular](../../../../translated_images/tr/all-genres.1d56ef06cefbfcd6.webp)
+
+1. Açıkça, en üst üç tür bu veri setine hakim. `afro dancehall`, `afropop` ve `nigerian pop` türlerine odaklanalım, ayrıca popülerlik değeri 0 olanları filtreleyelim (bu veride popülerlik ile sınıflandırılmamış ve amaçlarımız için gürültü olarak kabul edilebilir):
+
+    ```python
+    df = df[(df['artist_top_genre'] == 'afro dancehall') | (df['artist_top_genre'] == 'afropop') | (df['artist_top_genre'] == 'nigerian pop')]
+    df = df[(df['popularity'] > 0)]
+    top = df['artist_top_genre'].value_counts()
+    plt.figure(figsize=(10,7))
+    sns.barplot(x=top.index,y=top.values)
+    plt.xticks(rotation=45)
+    plt.title('Top genres',color = 'blue')
+    ```
+
+1. Verinin herhangi kuvvetli bir şekilde korelasyon gösterip göstermediğini hızlıca test edin:
+
+    ```python
+    corrmat = df.corr(numeric_only=True)
+    f, ax = plt.subplots(figsize=(12, 9))
+    sns.heatmap(corrmat, vmax=.8, square=True)
+    ```
+
+    ![correlations](../../../../translated_images/tr/correlation.a9356bb798f5eea5.webp)
+
+    Tek güçlü korelasyon `energy` ve `loudness` arasında, bu da çok şaşırtıcı değil çünkü yüksek sesli müzikler genellikle oldukça enerjiktir. Diğer korelasyonlar nispeten zayıf. Bir kümeleme algoritmasının bu veriden ne çıkaracağını görmek ilginç olacak.
+
+    > 🎓 Korelasyon nedensellik anlamına gelmez! Korelasyon kanıtımız var ama nedensellik kanıtımız yok. [Komik bir web sitesi](https://tylervigen.com/spurious-correlations) bu noktayı vurgulayan görseller içeriyor.
+
+Bu dataset'te şarkının algılanan popülerliği ile dans edilebilirlik arasında bir yakınsama var mı? Bir FacetGrid, türden bağımsız olarak hizalanan iç içe halkalar olduğunu gösteriyor. Bu tür için Nijerya zevklerinin belirli bir dans edilebilirlik seviyesinde yakınsaması olabilir mi?
+
+✅ Farklı veri noktaları (energy, loudness, speechiness) ve daha fazla veya farklı müzik türleri deneyin. Neler keşfedebilirsiniz? Veri noktalarının genel yayılımını görmek için `df.describe()` tablosuna bakın.
+
+### Egzersiz - veri dağılımı
+
+Bu üç tür, popülerliklerine göre dans edilebilirlik algısında anlamlı farklılık gösteriyor mu?
+
+1. Üç en iyi türün popülerlik ve dans edilebilirlik veri dağılımını, verilen x ve y eksenlerinde inceleyin.
+
+    ```python
+    sns.set_theme(style="ticks")
+    
+    g = sns.jointplot(
+        data=df,
+        x="popularity", y="danceability", hue="artist_top_genre",
+        kind="kde",
+    )
+    ```
+
+    Genel bir yakınsama noktasının etrafında iç içe halkalar keşfedebilirsiniz, bu da noktaların dağılımını gösterir.
+
+    > 🎓 Bu örnek, veriyi sürekli bir olasılık yoğunluk eğrisi kullanarak temsil eden bir KDE (Kernel Yoğunluk Tahmini) grafiği kullanır. Bu, birden fazla dağılımla çalışırken veriyi yorumlamamızı sağlar.
+
+    Genel olarak, üç tür popülerlik ve dans edilebilirlik açısından gevşek bir şekilde hizalanmıştır. Bu gevşek hizalanmış veride kümeleri belirlemek zor olacaktır:
+
+    ![distribution](../../../../translated_images/tr/distribution.9be11df42356ca95.webp)
+
+1. Bir scatter plot (dağılım grafiği) oluşturun:
+
+    ```python
+    sns.FacetGrid(df, hue="artist_top_genre", height=5) \
+       .map(plt.scatter, "popularity", "danceability") \
+       .add_legend()
+    ```
+
+    Aynı eksenlerin scatterplot'u benzer bir yakınsama deseni gösteriyor
+
+    ![Facetgrid](../../../../translated_images/tr/facetgrid.9b2e65ce707eba1f.webp)
+
+Genel olarak, kümeleme için veri kümelerini göstermek amacıyla scatterplotlar kullanılabilir, bu tür görselleştirmede ustalaşmak çok faydalıdır. Sonraki derste, bu filtrelenmiş veriyi kullanarak k-means kümeleme algoritmasıyla bu veride ilgi çekici şekilde örtüşen gruplar keşfedeceğiz.
+
+---
+
+## 🚀Meydan Okuma
+
+Bir sonraki derse hazırlık olarak, üretim ortamında keşfedip kullanabileceğiniz çeşitli kümeleme algoritmaları hakkında bir grafik hazırlayın. Kümeleme hangi tür problemleri çözmeye çalışıyor?
+
+## [Ders Sonrası Quiz](https://ff-quizzes.netlify.app/en/ml/)
+
+## İnceleme & Kendi Kendine Çalışma
+
+Kümeleme algoritmalarını uygulamadan önce, öğrendiğimiz gibi, veri setinizin doğasını anlamak iyi bir fikirdir. Bu konu hakkında daha fazla bilgi edinmek için [buraya](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html) bakabilirsiniz.
+
+[Bu faydalı makale](https://www.freecodecamp.org/news/8-clustering-algorithms-in-machine-learning-that-all-data-scientists-should-know/) farklı veri şekillerine göre çeşitli kümeleme algoritmalarının nasıl davrandığını açıklamaktadır.
 
 ## Ödev
 
 [Kümeleme için diğer görselleştirmeleri araştırın](assignment.md)
 
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:
-Bu belge, makine tabanlı AI çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki hali yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

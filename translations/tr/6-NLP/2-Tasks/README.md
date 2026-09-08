@@ -1,46 +1,46 @@
 # Doğal Dil İşleme Görevleri ve Teknikleri
 
-Çoğu *doğal dil işleme* görevi için işlenecek metin parçalanmalı, incelenmeli ve sonuçlar kurallar ve veri setleri ile çapraz referanslanarak saklanmalıdır. Bu görevler, programcının bir metindeki terimlerin ve kelimelerin _anlamını_ veya _amacını_ ya da sadece _frekansını_ çıkarmasına olanak tanır.
+Çoğu *doğal dil işleme* görevi için işlenecek metin parçalanmalı, incelenmeli ve sonuçlar kurallar ve veri setleriyle saklanmalı veya çapraz referans yapılmalıdır. Bu görevler, programcının bir metindeki _anlamı_, _niyeti_ veya yalnızca _terimlerin ve kelimelerin sıklığını_ çıkarmasına olanak tanır.
 
-## [Ders Öncesi Quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/33/)
+## [Ders Öncesi Test](https://ff-quizzes.netlify.app/en/ml/)
 
-Metin işleme sırasında kullanılan yaygın teknikleri keşfedelim. Bu teknikler, makine öğrenimi ile birleştirildiğinde, büyük miktarda metni verimli bir şekilde analiz etmenize yardımcı olur. Ancak, bu görevlerde ML uygulamadan önce, bir NLP uzmanının karşılaştığı sorunları anlamak önemlidir.
+Metin işleme sırasında kullanılan yaygın teknikleri keşfedelim. Makine öğrenimi ile birleştirildiğinde, bu teknikler büyük miktarda metni verimli bir şekilde analiz etmenize yardımcı olur. Ancak, bu görevlerde ML uygulamadan önce, bir NLP uzmanının karşılaştığı sorunları anlamamız gerekiyor.
 
-## NLP'ye Ortak Görevler
+## NLP'ye Özgü Görevler
 
-Üzerinde çalıştığınız bir metni analiz etmenin farklı yolları vardır. Bu görevleri gerçekleştirebilir ve bu görevler aracılığıyla metni anlayabilir ve sonuçlar çıkarabilirsiniz. Genellikle bu görevleri bir sırayla yaparsınız.
+Üzerinde çalıştığınız bir metni analiz etmenin farklı yolları vardır. Gerçekleştirebileceğiniz görevler vardır ve bu görevler aracılığıyla metni anlamaya yönelik bir fikir edinebilir ve sonuçlar çıkarabilirsiniz. Genellikle bu görevleri bir sırayla gerçekleştirirsiniz.
 
 ### Tokenizasyon
 
-Muhtemelen çoğu NLP algoritmasının yapması gereken ilk şey, metni tokenlere veya kelimelere ayırmaktır. Bu basit gibi görünse de, noktalama işaretlerini ve farklı dillerin kelime ve cümle ayırıcılarını hesaba katmak işleri zorlaştırabilir. Sınırları belirlemek için çeşitli yöntemler kullanmanız gerekebilir.
+Muhtemelen çoğu NLP algoritmasının yapması gereken ilk şey, metni tokenlara veya kelimelere ayırmaktır. Bu basit gibi görünse de, noktalama işaretleri ve farklı dillerin kelime ve cümle sınırlarını hesaba katmak işleri zorlaştırabilir. Sınırları belirlemek için çeşitli yöntemler kullanmanız gerekebilir.
 
-![tokenization](../../../../translated_images/tokenization.1641a160c66cd2d93d4524e8114e93158a9ce0eba3ecf117bae318e8a6ad3487.tr.png)
-> **Pride and Prejudice**'den bir cümleyi tokenizasyon. Infografik: [Jen Looper](https://twitter.com/jenlooper)
+![tokenization](../../../../6-NLP/2-Tasks/images/tokenization.png)
+> **Pride and Prejudice** kitabından bir cümleyi tokenlere ayırma. [Jen Looper](https://twitter.com/jenlooper) tarafından hazırlanan infografik.
 
-### Gömme Teknikleri
+### Gömülü Temsiller
 
-[Kelime gömmeleri](https://wikipedia.org/wiki/Word_embedding), metin verilerinizi sayısal olarak dönüştürmenin bir yoludur. Gömme işlemleri, benzer anlamlara sahip kelimeler veya birlikte kullanılan kelimeler bir araya gelecek şekilde yapılır.
+[Kelime gömülü temsilleri](https://wikipedia.org/wiki/Word_embedding), metin verilerinizi sayısal olarak dönüştürmenin bir yoludur. Gömülü temsiller, benzer anlamlara sahip kelimelerin veya birlikte kullanılan kelimelerin bir arada kümelenmesi şeklinde yapılır.
 
-![word embeddings](../../../../translated_images/embedding.2cf8953c4b3101d188c2f61a5de5b6f53caaa5ad4ed99236d42bc3b6bd6a1fe2.tr.png)
-> "Sinirlerinize en yüksek saygıyı duyuyorum, onlar benim eski arkadaşlarım." - **Pride and Prejudice**'den bir cümle için kelime gömmeleri. Infografik: [Jen Looper](https://twitter.com/jenlooper)
+![word embeddings](../../../../6-NLP/2-Tasks/images/embedding.png)
+> "I have the highest respect for your nerves, they are my old friends." - **Pride and Prejudice** kitabından bir cümle için kelime gömülü temsilleri. [Jen Looper](https://twitter.com/jenlooper) tarafından hazırlanan infografik.
 
-✅ Kelime gömmeleriyle denemeler yapmak için [bu ilginç aracı](https://projector.tensorflow.org/) deneyin. Bir kelimeye tıklamak, benzer kelimelerin kümelerini gösterir: 'toy' 'disney', 'lego', 'playstation' ve 'console' ile kümelenir.
+✅ [Bu ilginç aracı](https://projector.tensorflow.org/) deneyerek kelime gömülü temsilleriyle deney yapabilirsiniz. Bir kelimeye tıklamak, 'toy' kelimesinin 'disney', 'lego', 'playstation' ve 'console' ile kümelendiği gibi benzer kelimelerin kümelerini gösterir.
 
 ### Ayrıştırma ve Sözcük Türü Etiketleme
 
-Tokenize edilen her kelime, bir isim, fiil veya sıfat gibi bir sözcük türü olarak etiketlenebilir. `the quick red fox jumped over the lazy brown dog` cümlesi POS etiketlemesiyle şu şekilde olabilir: fox = isim, jumped = fiil.
+Tokenize edilmiş her kelime, bir isim, fiil veya sıfat gibi bir sözcük türü olarak etiketlenebilir. `the quick red fox jumped over the lazy brown dog` cümlesi POS olarak şu şekilde etiketlenebilir: fox = isim, jumped = fiil.
 
-![parsing](../../../../translated_images/parse.d0c5bbe1106eae8fe7d60a183cd1736c8b6cec907f38000366535f84f3036101.tr.png)
+![parsing](../../../../6-NLP/2-Tasks/images/parse.png)
 
-> **Pride and Prejudice**'den bir cümleyi ayrıştırma. Infografik: [Jen Looper](https://twitter.com/jenlooper)
+> **Pride and Prejudice** kitabından bir cümleyi ayrıştırma. [Jen Looper](https://twitter.com/jenlooper) tarafından hazırlanan infografik.
 
-Ayrıştırma, bir cümlede hangi kelimelerin birbiriyle ilişkili olduğunu tanımaktır - örneğin `the quick red fox jumped` sıfat-isim-fiil dizisi, `lazy brown dog` dizisinden ayrıdır.
+Ayrıştırma, bir cümledeki kelimelerin birbirleriyle nasıl ilişkili olduğunu tanımaktır - örneğin `the quick red fox jumped` sıfat-isim-fiil dizisi, `lazy brown dog` dizisinden ayrı bir dizidir.
 
-### Kelime ve İfade Frekansları
+### Kelime ve İfade Sıklıkları
 
-Büyük bir metin kümesini analiz ederken yararlı bir prosedür, ilgilenilen her kelime veya ifadenin ve ne sıklıkta göründüğünün bir sözlüğünü oluşturmaktır. `the quick red fox jumped over the lazy brown dog` ifadesi için 'the' kelimesinin frekansı 2'dir.
+Büyük bir metin gövdesini analiz ederken yararlı bir prosedür, ilgi çekici her kelime veya ifadenin bir sözlüğünü oluşturmak ve ne sıklıkla göründüğünü belirlemektir. `the quick red fox jumped over the lazy brown dog` ifadesi için "the" kelimesinin sıklığı 2'dir.
 
-Kelime frekanslarını saydığımız bir örnek metne bakalım. Rudyard Kipling'in The Winners şiiri şu dizeyi içerir:
+Kelime sıklıklarını saydığımız bir örnek metne bakalım. Rudyard Kipling'in The Winners adlı şiiri şu dizeyi içerir:
 
 ```output
 What the moral? Who rides may read.
@@ -51,13 +51,13 @@ Down to Gehenna or up to the Throne,
 He travels the fastest who travels alone.
 ```
 
-İfade frekansları gerektiği gibi büyük/küçük harf duyarlı veya duyarsız olabilir, `a friend` has a frequency of 2 and `the` has a frequency of 6, and `travels` ifadesi 2'dir.
+İfade sıklıkları gerektiğinde büyük/küçük harf duyarlı veya duyarsız olabilir. Örneğin, `a friend` ifadesinin sıklığı 2, `the` ifadesinin sıklığı 6 ve `travels` ifadesinin sıklığı 2'dir.
 
 ### N-gramlar
 
-Bir metin, belirli bir uzunluktaki kelime dizilerine bölünebilir: tek kelime (unigram), iki kelime (bigram), üç kelime (trigram) veya herhangi bir sayıda kelime (n-gram).
+Bir metin, belirli bir uzunlukta kelime dizilerine bölünebilir: tek kelime (unigram), iki kelime (bigram), üç kelime (trigram) veya herhangi bir kelime sayısı (n-gram).
 
-Örneğin `the quick red fox jumped over the lazy brown dog` ifadesi, 2 n-gram skoru ile şu n-gramları üretir:
+Örneğin, `the quick red fox jumped over the lazy brown dog` cümlesi için n-gram skoru 2 olduğunda şu n-gramlar üretilir:
 
 1. the quick 
 2. quick red 
@@ -69,7 +69,7 @@ Bir metin, belirli bir uzunluktaki kelime dizilerine bölünebilir: tek kelime (
 8. lazy brown 
 9. brown dog
 
-Bunu bir cümlenin üzerinde kayan bir kutu olarak görselleştirmek daha kolay olabilir. İşte 3 kelimelik n-gramlar için örnek, her cümlede n-gram kalın olarak belirtilmiştir:
+Bunu bir cümle üzerinde kayan bir kutu olarak görselleştirmek daha kolay olabilir. İşte 3 kelimelik n-gramlar için bir örnek, her cümlede n-gram kalın olarak gösterilmiştir:
 
 1.   <u>**the quick red**</u> fox jumped over the lazy brown dog
 2.   the **<u>quick red fox</u>** jumped over the lazy brown dog
@@ -82,49 +82,49 @@ Bunu bir cümlenin üzerinde kayan bir kutu olarak görselleştirmek daha kolay 
 
 ![n-grams sliding window](../../../../6-NLP/2-Tasks/images/n-grams.gif)
 
-> 3 n-gram değeri: Infografik: [Jen Looper](https://twitter.com/jenlooper)
+> N-gram değeri 3: [Jen Looper](https://twitter.com/jenlooper) tarafından hazırlanan infografik.
 
-### İsim İfadesi Çıkarma
+### İsim İfadesi Çıkarımı
 
-Çoğu cümlede, cümlenin öznesi veya nesnesi olan bir isim vardır. İngilizcede, genellikle 'a', 'an' veya 'the' ile tanımlanabilir. Bir cümlenin öznesini veya nesnesini 'isim ifadesini çıkararak' tanımlamak, cümlenin anlamını anlamaya çalışırken NLP'de yaygın bir görevdir.
+Çoğu cümlede, cümlenin öznesi veya nesnesi olan bir isim vardır. İngilizcede genellikle 'a', 'an' veya 'the' ile tanımlanabilir. Bir cümlenin anlamını anlamaya çalışırken 'isim ifadesini çıkarmak', NLP'de yaygın bir görevdir.
 
-✅ "Saat, yer, görünüş veya kelimeler, temeli atan şeyler üzerine karar veremem. Çok uzun zaman oldu. Başladığımı bilmeden önce ortasındaydım." cümlesinde isim ifadelerini tanımlayabilir misiniz?
+✅ "I cannot fix on the hour, or the spot, or the look or the words, which laid the foundation. It is too long ago. I was in the middle before I knew that I had begun." cümlesinde isim ifadelerini belirleyebilir misiniz?
 
 `the quick red fox jumped over the lazy brown dog` cümlesinde 2 isim ifadesi vardır: **quick red fox** ve **lazy brown dog**.
 
 ### Duygu Analizi
 
-Bir cümle veya metin, ne kadar *pozitif* veya *negatif* olduğuna göre analiz edilebilir. Duygu, *kutupluluk* ve *nesnellik/öznellik* olarak ölçülür. Kutupluluk, -1.0'dan 1.0'a (negatiften pozitife) ve 0.0'dan 1.0'a (en nesnelden en öznel) ölçülür.
+Bir cümle veya metin, ne kadar *pozitif* veya *negatif* olduğu açısından analiz edilebilir. Duygu, *kutupluluk* ve *nesnellik/öznelik* açısından ölçülür. Kutupluluk -1.0 ile 1.0 arasında (negatiften pozitife) ve 0.0 ile 1.0 arasında (en nesnelden en öznel) ölçülür.
 
-✅ Daha sonra makine öğrenimi kullanarak duyguyu belirlemenin farklı yollarını öğreneceksiniz, ancak bir yol, insan uzman tarafından pozitif veya negatif olarak kategorize edilen kelime ve ifadelerden oluşan bir listeye sahip olmak ve bu modeli metne uygulayarak bir kutupluluk skoru hesaplamaktır. Bunun bazı durumlarda nasıl işe yarayacağını ve diğerlerinde daha az işe yarayacağını görebilir misiniz?
+✅ Daha sonra makine öğrenimi kullanarak duygu belirlemenin farklı yollarını öğreneceksiniz, ancak bir yol, bir insan uzman tarafından pozitif veya negatif olarak kategorize edilen kelime ve ifadelerden oluşan bir listeye sahip olmak ve bu modeli metne uygulayarak bir kutupluluk skoru hesaplamaktır. Bunun bazı durumlarda nasıl işe yarayacağını ve diğer durumlarda neden daha az etkili olacağını görebiliyor musunuz?
 
 ### Çekim
 
-Çekim, bir kelimeyi almanızı ve kelimenin tekil veya çoğul halini elde etmenizi sağlar.
+Çekim, bir kelimeyi alıp kelimenin tekil veya çoğul halini elde etmenizi sağlar.
 
-### Lematizasyon
+### Lemmatizasyon
 
-Bir *lemma*, bir kelime kümesi için kök veya baş kelimedir, örneğin *flew*, *flies*, *flying* kelimelerinin lemması *fly* fiilidir.
+Bir *lemma*, bir kelime grubunun kökü veya ana kelimesidir. Örneğin, *flew*, *flies*, *flying* kelimelerinin lemması fiil olan *fly*dır.
 
-NLP araştırmacısı için kullanışlı veritabanları da mevcuttur, özellikle:
+NLP araştırmacıları için kullanışlı veritabanları da mevcuttur, özellikle:
 
 ### WordNet
 
-[WordNet](https://wordnet.princeton.edu/), birçok farklı dildeki her kelime için kelimeler, eşanlamlılar, zıt anlamlılar ve birçok diğer detayların yer aldığı bir veritabanıdır. Çeviri, yazım denetleyicileri veya herhangi bir türde dil araçları oluştururken inanılmaz derecede faydalıdır.
+[WordNet](https://wordnet.princeton.edu/), birçok farklı dildeki her kelime için eş anlamlılar, zıt anlamlılar ve diğer birçok ayrıntıyı içeren bir kelime veritabanıdır. Çeviriler, yazım denetleyiciler veya herhangi bir türde dil araçları oluştururken son derece kullanışlıdır.
 
 ## NLP Kütüphaneleri
 
-Neyse ki, tüm bu teknikleri kendiniz oluşturmanız gerekmiyor, çünkü doğal dil işleme veya makine öğrenimi konusunda uzman olmayan geliştiriciler için çok daha erişilebilir hale getiren mükemmel Python kütüphaneleri mevcut. Bir sonraki derslerde bunların daha fazla örneğini göreceksiniz, ancak burada bir sonraki görevinizde size yardımcı olacak bazı faydalı örnekler öğreneceksiniz.
+Neyse ki, bu tekniklerin hepsini kendiniz oluşturmanız gerekmiyor, çünkü doğal dil işleme veya makine öğrenimi konusunda uzman olmayan geliştiriciler için çok daha erişilebilir hale getiren mükemmel Python kütüphaneleri mevcut. Bir sonraki derslerde bunların daha fazla örneğini göreceksiniz, ancak burada bir sonraki görevinizde size yardımcı olacak bazı kullanışlı örnekler öğreneceksiniz.
 
-### Egzersiz - `TextBlob` library
+### Egzersiz - `TextBlob` kütüphanesini kullanma
 
-Let's use a library called TextBlob as it contains helpful APIs for tackling these types of tasks. TextBlob "stands on the giant shoulders of [NLTK](https://nltk.org) and [pattern](https://github.com/clips/pattern), and plays nicely with both." It has a considerable amount of ML embedded in its API.
+TextBlob adlı bir kütüphaneyi kullanalım çünkü bu tür görevlerle başa çıkmak için kullanışlı API'ler içeriyor. TextBlob "[NLTK](https://nltk.org) ve [pattern](https://github.com/clips/pattern) gibi devlerin omuzlarında durur ve her ikisiyle de uyumlu çalışır." API'sinde önemli miktarda ML gömülüdür.
 
-> Note: A useful [Quick Start](https://textblob.readthedocs.io/en/dev/quickstart.html#quickstart) guide is available for TextBlob that is recommended for experienced Python developers 
+> Not: Deneyimli Python geliştiricileri için önerilen bir [Hızlı Başlangıç](https://textblob.readthedocs.io/en/dev/quickstart.html#quickstart) kılavuzu TextBlob için mevcuttur.
 
-When attempting to identify *noun phrases*, TextBlob offers several options of extractors to find noun phrases. 
+*İsim ifadelerini* tanımlamaya çalışırken, TextBlob isim ifadelerini bulmak için birkaç çıkarıcı seçeneği sunar.
 
-1. Take a look at `ConllExtractor` kullanımı
+1. `ConllExtractor`'a bir göz atın.
 
     ```python
     from textblob import TextBlob
@@ -138,24 +138,24 @@ When attempting to identify *noun phrases*, TextBlob offers several options of e
     np = user_input_blob.noun_phrases                                    
     ```
 
-    > Burada ne oluyor? [ConllExtractor](https://textblob.readthedocs.io/en/dev/api_reference.html?highlight=Conll#textblob.en.np_extractors.ConllExtractor), "ConLL-2000 eğitim korpusu ile eğitilmiş chunk ayrıştırma kullanan bir isim ifadesi çıkarıcısıdır." ConLL-2000, 2000 Yılı Hesaplamalı Doğal Dil Öğrenme Konferansı'na atıfta bulunur. Her yıl konferans, zorlu bir NLP sorununu ele almak için bir atölye çalışması düzenler ve 2000 yılında bu isim chunking idi. Bir model Wall Street Journal'da eğitildi, "15-18. bölümler eğitim verisi olarak (211727 token) ve 20. bölüm test verisi olarak (47377 token) kullanıldı". Kullanılan prosedürlere [buradan](https://www.clips.uantwerpen.be/conll2000/chunking/) ve [sonuçlara](https://ifarm.nl/erikt/research/np-chunking.html) bakabilirsiniz.
+    > Burada neler oluyor? [ConllExtractor](https://textblob.readthedocs.io/en/dev/api_reference.html?highlight=Conll#textblob.en.np_extractors.ConllExtractor), "ConLL-2000 eğitim veri kümesiyle eğitilmiş chunk parsing kullanan bir isim ifade çıkarıcıdır." ConLL-2000, 2000 yılında düzenlenen Hesaplamalı Doğal Dil Öğrenme Konferansı'na atıfta bulunur. Her yıl konferans, zorlu bir NLP sorununu ele almak için bir atölye çalışması düzenledi ve 2000 yılında bu sorun isim chunking idi. Bir model Wall Street Journal üzerinde eğitildi, "15-18 bölümleri eğitim verisi (211727 token) ve 20. bölüm test verisi (47377 token) olarak kullanıldı". Kullanılan prosedürlere [buradan](https://www.clips.uantwerpen.be/conll2000/chunking/) ve [sonuçlara](https://ifarm.nl/erikt/research/np-chunking.html) göz atabilirsiniz.
 
-### Meydan Okuma - Botunuzu NLP ile geliştirmek
+### Zorluk - NLP ile botunuzu geliştirme
 
-Önceki derste çok basit bir Soru-Cevap botu oluşturmuştunuz. Şimdi, Marvin'i biraz daha sempatik hale getirerek girdiğiniz metni analiz edip duyguya uygun bir yanıt vererek geliştireceksiniz. Ayrıca bir `noun_phrase` tanımlayıp onun hakkında daha fazla bilgi isteyeceksiniz.
+Önceki derste çok basit bir Soru-Cevap botu oluşturmuştunuz. Şimdi, Marvin'i biraz daha sempatik hale getirerek girdinizi analiz edip duyguya uygun bir yanıt yazdırmasını sağlayacaksınız. Ayrıca bir `noun_phrase` tespit edip onun hakkında soru sormanız gerekecek.
 
 Daha iyi bir konuşma botu oluştururken adımlarınız:
 
-1. Kullanıcıya botla nasıl etkileşime geçeceğini açıklayan talimatları yazdırın
-2. Döngüye başlayın
-   1. Kullanıcı girdiğini kabul edin
-   2. Kullanıcı çıkmak isterse çıkın
+1. Kullanıcıya botla nasıl etkileşim kuracağına dair talimatları yazdırın
+2. Döngüyü başlatın 
+   1. Kullanıcı girdisini kabul edin
+   2. Kullanıcı çıkmak istediğini belirtirse çıkın
    3. Kullanıcı girdisini işleyin ve uygun duygu yanıtını belirleyin
-   4. Duyguda bir isim ifadesi tespit edilirse, onu çoğullaştırın ve bu konu hakkında daha fazla bilgi isteyin
+   4. Eğer duygu içinde bir isim ifadesi tespit edilirse, bunu çoğullaştırın ve o konu hakkında daha fazla girdi isteyin
    5. Yanıtı yazdırın
 3. 2. adıma geri dönün
 
-Duyguyu belirlemek için TextBlob kullanarak kod parçası burada. Not: sadece dört *duygu derecesi* vardır (daha fazla ekleyebilirsiniz):
+TextBlob kullanarak duygu belirlemek için kod snippet'i aşağıdadır. Duygu yanıtlarının yalnızca dört *gradyanı* vardır (isterseniz daha fazla ekleyebilirsiniz):
 
 ```python
 if user_input_blob.polarity <= -0.5:
@@ -168,7 +168,7 @@ elif user_input_blob.polarity <= 1:
   response = "Wow, that sounds great. "
 ```
 
-İşte bazı örnek çıktı (kullanıcı girdiği > ile başlayan satırlardadır):
+İşte size rehberlik edecek örnek bir çıktı (kullanıcı girdisi > ile başlayan satırlarda):
 
 ```output
 Hello, I am Marvin, the friendly robot.
@@ -187,31 +187,33 @@ Hmm, that's not great. Can you tell me more about old hounddogs?
 It was nice talking to you, goodbye!
 ```
 
-Görevin bir olası çözümü [burada](https://github.com/microsoft/ML-For-Beginners/blob/main/6-NLP/2-Tasks/solution/bot.py)
+Görev için olası bir çözüm [burada](https://github.com/microsoft/ML-For-Beginners/blob/main/6-NLP/2-Tasks/solution/bot.py)
 
 ✅ Bilgi Kontrolü
 
-1. Sempatik yanıtların birini botun gerçekten anladığını düşündürebileceğini düşünüyor musunuz?
-2. İsim ifadesini belirlemek botu daha inandırıcı kılar mı?
-3. Bir cümleden 'isim ifadesi' çıkarmak neden faydalı olabilir?
+1. Sempatik yanıtların birinin botun gerçekten kendisini anladığını düşünmesini sağlayabileceğini düşünüyor musunuz?
+2. İsim ifadesini belirlemek botu daha 'inandırıcı' hale getiriyor mu?
+3. Bir cümleden 'isim ifadesi' çıkarmak neden yararlı bir şey olabilir?
 
 ---
 
-Önceki bilgi kontrolünde botu uygulayın ve bir arkadaşınız üzerinde test edin. Onları kandırabilir mi? Botunuzu daha inandırıcı yapabilir misiniz?
+Önceki bilgi kontrolündeki botu uygulayın ve bir arkadaşınız üzerinde test edin. Bot onları kandırabilir mi? Botunuzu daha 'inandırıcı' hale getirebilir misiniz?
 
-## 🚀Meydan Okuma
+## 🚀Zorluk
 
-Önceki bilgi kontrolündeki bir görevi alın ve uygulamaya çalışın. Botu bir arkadaşınız üzerinde test edin. Onları kandırabilir mi? Botunuzu daha inandırıcı yapabilir misiniz?
+Önceki bilgi kontrolündeki bir görevi alın ve uygulamaya çalışın. Botu bir arkadaşınız üzerinde test edin. Bot onları kandırabilir mi? Botunuzu daha 'inandırıcı' hale getirebilir misiniz?
 
-## [Ders Sonrası Quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/34/)
+## [Ders Sonrası Test](https://ff-quizzes.netlify.app/en/ml/)
 
-## İnceleme ve Kendi Kendine Çalışma
+## Gözden Geçirme ve Kendi Kendine Çalışma
 
-Sonraki birkaç derste duygu analizini daha fazla öğreneceksiniz. [KDNuggets](https://www.kdnuggets.com/tag/nlp) gibi makalelerde bu ilginç tekniği araştırın.
+Sonraki birkaç derste duygu analizi hakkında daha fazla bilgi edineceksiniz. [KDNuggets](https://www.kdnuggets.com/tag/nlp) gibi makalelerde bu ilginç tekniği araştırın.
 
 ## Ödev 
 
-[Bir botu konuştur](assignment.md)
+[Botun Konuşmasını Sağla](assignment.md)
 
-**Feragatname**: 
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki hali, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından doğabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+---
+
+**Feragatname**:  
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

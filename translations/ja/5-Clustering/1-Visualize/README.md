@@ -1,115 +1,116 @@
 # クラスタリング入門
 
-クラスタリングは、データセットがラベル付けされていない、またはその入力が事前定義された出力と一致していないことを前提とする[教師なし学習](https://wikipedia.org/wiki/Unsupervised_learning)の一種です。さまざまなアルゴリズムを使用してラベルのないデータを整理し、データ内のパターンに従ってグループ化を提供します。
+クラスタリングは、データセットにラベルが付いていないか、その入力と事前定義された出力が対応付けられていないことを想定する [教師なし学習](https://wikipedia.org/wiki/Unsupervised_learning) の一種です。さまざまなアルゴリズムを用いてラベルのないデータを分類し、データ中に認識されたパターンに基づいてグループ分けを行います。
 
 [![No One Like You by PSquare](https://img.youtube.com/vi/ty2advRiWJM/0.jpg)](https://youtu.be/ty2advRiWJM "No One Like You by PSquare")
 
-> 🎥 上の画像をクリックするとビデオが再生されます。クラスタリングを使った機械学習を勉強しながら、ナイジェリアのダンスホールトラックを楽しんでください。これはPSquareの2014年の高評価の曲です。
+> 🎥 上記の画像をクリックすると動画が再生されます。クラスタリングで機械学習を学習しながら、ナイジェリアのダンスホールトラックをお楽しみください。これは PSquare による2014年の高評価曲です。
 
-## [プレ講義クイズ](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/27/)
-### イントロダクション
+## [事前講義クイズ](https://ff-quizzes.netlify.app/en/ml/)
 
-[クラスタリング](https://link.springer.com/referenceworkentry/10.1007%2F978-0-387-30164-8_124)はデータ探索に非常に役立ちます。ナイジェリアの聴衆が音楽を消費する方法に関するトレンドやパターンを発見できるかどうか見てみましょう。
+### はじめに
 
-✅ クラスタリングの利用方法について少し考えてみてください。現実世界では、洗濯物を家族ごとに仕分けるときにクラスタリングが行われます🧦👕👖🩲。データサイエンスでは、ユーザーの好みを分析したり、ラベルのないデータセットの特性を決定したりする際にクラスタリングが行われます。クラスタリングは、混沌とした状況を整理するのに役立ちます。例えば、靴下の引き出しのように。
+[クラスタリング](https://link.springer.com/referenceworkentry/10.1007%2F978-0-387-30164-8_124)はデータ探索に非常に有用です。ナイジェリアの聴衆が音楽を消費する傾向やパターンの発見に役立つか見てみましょう。
+
+✅ クラスタリングの用途について1分考えてみましょう。実生活では、洗濯物の山があって家族の服を分ける必要があるときにクラスタリングが起きます 🧦👕👖🩲。データ科学では、ユーザーの好みを分析したり、ラベルのないデータセットの特徴を判別したりするときにクラスタリングが使われます。クラスタリングはある意味で混沌を理解する助けとなり、靴下の引き出しの整理のようなものです。
 
 [![Introduction to ML](https://img.youtube.com/vi/esmzYhuFnds/0.jpg)](https://youtu.be/esmzYhuFnds "Introduction to Clustering")
 
-> 🎥 上の画像をクリックするとビデオが再生されます。MITのジョン・グットタグがクラスタリングを紹介します。
+> 🎥 上記の画像をクリックすると動画が再生されます：MITのジョン・ガタッグがクラスタリングを紹介します
 
-プロフェッショナルな設定では、クラスタリングは市場セグメンテーションや、どの年齢層がどの商品を購入するかの決定などに使用されます。別の使用例としては、クレジットカード取引のデータセットから詐欺を検出するための異常検出があります。また、医療スキャンのバッチから腫瘍を特定するためにクラスタリングを使用することもできます。
+専門的な環境では、市場セグメンテーションの決定、例えばどの年齢層がどの製品を購入するかを明らかにするためにクラスタリングを使うことができます。もう一つの用途は異常検知で、クレジットカード取引のデータセットから不正を検出する場合などです。あるいは医療画像の一括スキャンの中で腫瘍を特定するためにクラスタリングを使うこともあります。
 
-✅ 銀行、eコマース、ビジネスの設定で「野生の中で」クラスタリングに遭遇した方法について考えてみてください。
+✅ 銀行業界、電子商取引、ビジネスの現場でクラスタリングがどのように使われているかについて、1分考えてみましょう。
 
-> 🎓 興味深いことに、クラスタ分析は1930年代に人類学と心理学の分野で始まりました。どのように使用されたか想像できますか？
+> 🎓 興味深いことに、クラスタ分析は1930年代に人類学や心理学の分野から始まりました。どのように使われていたか想像できますか？
 
-また、検索結果をグループ化するために使用することもできます。例えば、ショッピングリンク、画像、レビューなど。クラスタリングは、大規模なデータセットを減らし、より詳細な分析を行いたいときに役立ちます。この技術は、他のモデルを構築する前にデータを理解するために使用されます。
+または、検索結果をショッピングリンク、画像、レビューなどでグループ化するために使うこともできます。クラスタリングは大規模なデータセットを縮約し、より詳細な分析を行いたい場合に便利なため、他のモデルを構築する前にデータについて学ぶための技術として使われます。
 
-✅ データがクラスタに整理されると、クラスタIDを割り当てます。この技術はデータセットのプライバシーを保護する際に役立ちます。クラスタIDでデータポイントを参照することで、より具体的な識別可能なデータを使用せずに済みます。他の要素ではなくクラスタIDを使用して識別する理由を考えてみてください。
+✅ データがクラスタに整理されたらクラスタIDを割り当てます。この技術はデータセットのプライバシー保護に役立つことがあります。個別特定しやすいデータではなくクラスタIDで参照できるからです。クラスタIDを使って他のクラスタの要素ではなく識別する理由を考えてみてください。
 
-クラスタリング技術の理解を深めるために、この[Learnモジュール](https://docs.microsoft.com/learn/modules/train-evaluate-cluster-models?WT.mc_id=academic-77952-leestott)を参照してください。
+クラスタリング技術の理解を深めるには、この [Learn モジュール](https://docs.microsoft.com/learn/modules/train-evaluate-cluster-models?WT.mc_id=academic-77952-leestott) をご覧ください。
 
 ## クラスタリングの始め方
 
-[Scikit-learnは](https://scikit-learn.org/stable/modules/clustering.html)クラスタリングを実行するための多くの方法を提供しています。選択するタイプは使用ケースに依存します。ドキュメントによると、各方法にはさまざまな利点があります。以下は、Scikit-learnでサポートされている方法とその適切な使用ケースの簡略化された表です：
+[Scikit-learn は豊富なクラスタリング手法](https://scikit-learn.org/stable/modules/clustering.html)を提供しています。どのタイプを選ぶかはユースケースによります。ドキュメントによると、それぞれの手法に様々な利点があります。Scikit-learnでサポートされている手法と適切な適用例の簡単な表は以下のとおりです。
 
-| メソッド名                    | 使用ケース                                                               |
-| :--------------------------- | :--------------------------------------------------------------------- |
-| K-Means                      | 一般的な目的、帰納的                                                   |
-| Affinity propagation         | 多くの、不均一なクラスタ、帰納的                                       |
-| Mean-shift                   | 多くの、不均一なクラスタ、帰納的                                       |
-| Spectral clustering          | 少数の、均一なクラスタ、推論的                                         |
-| Ward hierarchical clustering | 多くの、制約されたクラスタ、推論的                                     |
-| Agglomerative clustering     | 多くの、制約された、非ユークリッド距離、推論的                         |
-| DBSCAN                       | 非平坦な幾何学、不均一なクラスタ、推論的                               |
-| OPTICS                       | 非平坦な幾何学、変動密度の不均一なクラスタ、推論的                     |
-| Gaussian mixtures            | 平坦な幾何学、帰納的                                                   |
-| BIRCH                        | 外れ値のある大規模なデータセット、帰納的                               |
+| メソッド名                  | 使用例                                                             |
+| :--------------------------- | :----------------------------------------------------------------- |
+| K-Means                      | 一般用途、帰納的                                                   |
+| Affinity propagation         | クラスタ数が多く不均等、帰納的                                     |
+| Mean-shift                   | クラスタ数が多く不均等、帰納的                                     |
+| Spectral clustering          | クラスタ数が少なく均等、演繹的                                     |
+| Ward hierarchical clustering | クラスタ数が多く制約あり、演繹的                                   |
+| Agglomerative clustering     | クラスタ数が多く制約あり、非ユークリッド距離、演繹的              |
+| DBSCAN                       | 非平坦な幾何、クラスタが不均等、演繹的                            |
+| OPTICS                       | 非平坦な幾何、密度が不均一なクラスタ、演繹的                      |
+| Gaussian mixtures            | 平坦な幾何、帰納的                                                 |
+| BIRCH                        | 大規模データセットに外れ値あり、帰納的                             |
 
-> 🎓 クラスタを作成する方法は、データポイントをグループにまとめる方法に大きく関係しています。いくつかの用語を解説しましょう：
+> 🎓 クラスタの作成方法は、データポイントをどうまとめるかに大きく関係しています。用語を解説しましょう：
 >
-> 🎓 ['推論的' vs. '帰納的'](https://wikipedia.org/wiki/Transduction_(machine_learning))
+> 🎓 ['演繹的'vs. '帰納的'](https://wikipedia.org/wiki/Transduction_(machine_learning))
 > 
-> 推論的推論は、特定のテストケースにマッピングされる観察されたトレーニングケースから導かれます。帰納的推論は、一般的なルールにマッピングされるトレーニングケースから導かれ、それがテストケースに適用されます。
+> 演繹推論は、特定のテストケースに対応する観測された訓練ケースから導出されます。帰納推論は、訓練ケースから一般化された規則を導き、それをテストケースに適用します。
 > 
-> 例：部分的にラベル付けされたデータセットがあると想像してください。いくつかは「レコード」、いくつかは「CD」、いくつかは空白です。あなたの仕事は空白にラベルを付けることです。帰納的アプローチを選択すると、「レコード」と「CD」を探すモデルをトレーニングし、そのラベルをラベルのないデータに適用します。このアプローチは、実際には「カセット」であるものを分類するのに苦労します。一方、推論的アプローチは、似たアイテムをグループ化し、そのグループにラベルを適用することで、この未知のデータをより効果的に処理します。この場合、クラスタは「丸い音楽のもの」や「四角い音楽のもの」を反映するかもしれません。
+> 例：部分的にラベル付きのデータセットがあります。一部は 'records'、一部は 'cds'、そして一部は空白です。空白のラベルを付けるのが仕事です。帰納的手法なら、'records' と 'cds'のラベルの付いたモデルを訓練し、それを未ラベルデータに適用しますが、実際は 'cassettes' であるものを分類するのが難しいです。一方、演繹的手法は不明のデータをより効果的に扱い、似たアイテムをまとめてグループにラベルを付けます。この場合、例えば「丸い楽器」と「四角い楽器」のようなクラスタが形成されます。
 > 
-> 🎓 ['非平坦' vs. '平坦'な幾何学](https://datascience.stackexchange.com/questions/52260/terminology-flat-geometry-in-the-context-of-clustering)
+> 🎓 ['非平坦' vs. '平坦' 幾何学](https://datascience.stackexchange.com/questions/52260/terminology-flat-geometry-in-the-context-of-clustering)
 > 
-> 数学的用語から派生した非平坦 vs. 平坦な幾何学は、ポイント間の距離を「平坦」（[ユークリッド](https://wikipedia.org/wiki/Euclidean_geometry)）または「非平坦」（非ユークリッド）な幾何学的方法で測定することを指します。
+> 数学用語に由来し、非平坦と平坦の幾何学は、点間の距離を平坦な([ユークリッド](https://wikipedia.org/wiki/Euclidean_geometry))か非平坦な(非ユークリッド)幾何学的手法で測る区別です。
 >
->'平坦'はユークリッド幾何学（部分的には「平面」幾何学として教えられる）を指し、非平坦は非ユークリッド幾何学を指します。幾何学が機械学習と何の関係があるのでしょうか？数学に根ざした2つの分野として、クラスタ内のポイント間の距離を測定する共通の方法が必要であり、それはデータの性質に応じて「平坦」または「非平坦」な方法で行うことができます。[ユークリッド距離](https://wikipedia.org/wiki/Euclidean_distance)は、2つのポイント間の線分の長さとして測定されます。[非ユークリッド距離](https://wikipedia.org/wiki/Non-Euclidean_geometry)は曲線に沿って測定されます。データが平面上に存在しないように見える場合、特殊なアルゴリズムを使用する必要があるかもしれません。
+> ここでの『平坦』はユークリッド幾何学（「平面」幾何学として教えられる部分もある）を指し、『非平坦』は非ユークリッド幾何学を指します。機械学習で幾何学が関係するのは、数学を基盤とする両分野で、クラスタ内の点間距離を共通の方法で測る必要があるためです。距離は『平坦』または『非平坦』で可能です。 [ユークリッド距離](https://wikipedia.org/wiki/Euclidean_distance)は2点間の直線距離、[非ユークリッド距離](https://wikipedia.org/wiki/Non-Euclidean_geometry)は曲線に沿った距離となります。データが平面上にないように見える場合は、特殊なアルゴリズムを使用する必要があります。
 >
-![Flat vs Nonflat Geometry Infographic](../../../../translated_images/flat-nonflat.d1c8c6e2a96110c1d57fa0b72913f6aab3c245478524d25baf7f4a18efcde224.ja.png)
-> インフォグラフィック: [Dasani Madipalli](https://twitter.com/dasani_decoded)
+![平坦と非平坦の幾何学インフォグラフィック](../../../../translated_images/ja/flat-nonflat.d1c8c6e2a96110c1.webp)
+> インフォグラフィック作成： [Dasani Madipalli](https://twitter.com/dasani_decoded)
 > 
 > 🎓 ['距離'](https://web.stanford.edu/class/cs345a/slides/12-clustering.pdf)
 > 
-> クラスタは、その距離行列、つまりポイント間の距離によって定義されます。この距離は、いくつかの方法で測定できます。ユークリッドクラスタはポイント値の平均によって定義され、「重心」または中心点を含みます。距離はその重心までの距離によって測定されます。非ユークリッド距離は「クラストロイド」と呼ばれる最も近いポイントによって測定されます。クラストロイドはさまざまな方法で定義できます。
+> クラスタは距離行列、つまり点間距離で定義されます。この距離は幾通りかに測定可能です。ユークリッドクラスタは点の値の平均によって定義され、中心点（セントロイド）を持ちます。距離はこのセントロイドへの距離で測定されます。非ユークリッド距離は近接点に最も近い点（クラストロイド）を用います。クラストロイドは様々な定義があります。
 > 
-> 🎓 ['制約された'](https://wikipedia.org/wiki/Constrained_clustering)
+> 🎓 ['制約あり'](https://wikipedia.org/wiki/Constrained_clustering)
 > 
-> [制約付きクラスタリング](https://web.cs.ucdavis.edu/~davidson/Publications/ICDMTutorial.pdf)は、この教師なし方法に「半教師あり」学習を導入します。ポイント間の関係は「リンクできない」または「リンクしなければならない」としてフラグが立てられ、データセットにいくつかのルールが適用されます。
+> [制約付きクラスタリング](https://web.cs.ucdavis.edu/~davidson/Publications/ICDMTutorial.pdf)は、この教師なし手法に半教師あり学習を導入します。点間の関係は『リンク禁止』や『リンク必須』とフラグ付けされ、データセットに規則が課されます。
 >
->例：アルゴリズムがラベルのないまたは半ラベルのデータのバッチに自由に設定されると、生成されるクラスタは質が低い可能性があります。上記の例では、クラスタは「丸い音楽のもの」、「四角い音楽のもの」、「三角形のもの」、「クッキー」をグループ化するかもしれません。いくつかの制約、つまりフォローするルール（「アイテムはプラスチックでなければならない」、「アイテムは音楽を生成できる必要がある」）を与えると、アルゴリズムがより良い選択をするのに役立ちます。
+> 例：アルゴリズムを未ラベルまたは半ラベルデータに自由に適用すると、クラスタ品質は低下します。上の例では「丸い音楽物体」「四角い音楽物体」「三角形の物」「クッキー」が混ざるかもしれません。制約（「アイテムはプラスチック製である」「音楽を再生できる必要がある」など）を与えれば、アルゴリズムの選択が改善します。
 > 
-> 🎓 '密度'
+> 🎓 『密度』
 > 
-> 'ノイズ'の多いデータは「密度が高い」と見なされます。そのクラスタ内のポイント間の距離は、調査の結果、より密度が高い、または低い、つまり「混雑している」ことがわかるかもしれません。このデータは適切なクラスタリング方法で分析する必要があります。[この記事](https://www.kdnuggets.com/2020/02/understanding-density-based-clustering.html)は、不均一なクラスタ密度を持つノイズの多いデータセットを探索するためにK-MeansクラスタリングとHDBSCANアルゴリズムを使用する違いを示しています。
+> 『ノイズの多い』データは『密度が高い』とされます。各クラスタ内の点間距離が検討され、よりまたはそうでない密度、つまり混み具合が測定されます。このため適切なクラスタリング法で解析する必要があります。 [この記事](https://www.kdnuggets.com/2020/02/understanding-density-based-clustering.html) は、K-MeansとHDBSCANを用いたノイズの多い不均一密度クラスタのデータセット解析の違いを示しています。
 
 ## クラスタリングアルゴリズム
 
-クラスタリングアルゴリズムは100以上あり、その使用は手元のデータの性質に依存します。主要なものをいくつか紹介しましょう：
+100を超えるクラスタリングアルゴリズムがあり、利用はデータの性質によって異なります。代表的なものをいくつか紹介しましょう。
 
-- **階層的クラスタリング**。オブジェクトが遠くのオブジェクトよりも近くのオブジェクトに基づいて分類される場合、クラスタはメンバーの他のオブジェクトとの距離に基づいて形成されます。Scikit-learnの凝集クラスタリングは階層的です。
+- <strong>階層的クラスタリング</strong>。オブジェクトが遠くより近くのオブジェクトへの近接性で分類される場合、メンバーの他オブジェクトとの距離に基づきクラスタが形成されます。Scikit-learn の凝集型クラスタリングは階層的です。
 
-   ![Hierarchical clustering Infographic](../../../../translated_images/hierarchical.bf59403aa43c8c47493bfdf1cc25230f26e45f4e38a3d62e8769cd324129ac15.ja.png)
-   > インフォグラフィック: [Dasani Madipalli](https://twitter.com/dasani_decoded)
+   ![階層的クラスタリング インフォグラフィック](../../../../translated_images/ja/hierarchical.bf59403aa43c8c47.webp)
+   > インフォグラフィック作成： [Dasani Madipalli](https://twitter.com/dasani_decoded)
 
-- **重心クラスタリング**。この人気のあるアルゴリズムは、'k'、つまり形成するクラスタの数を選択する必要があります。その後、アルゴリズムはクラスタの中心点を決定し、その点の周りにデータを収集します。[K-meansクラスタリング](https://wikipedia.org/wiki/K-means_clustering)は重心クラスタリングの人気バージョンです。中心は最も近い平均によって決定されるため、この名前が付いています。クラスタからの二乗距離が最小化されます。
+- <strong>セントロイドクラスタリング</strong>。人気のあるアルゴリズムで、まず 'k'、すなわち形成するクラスタ数を選択し、その後アルゴリズムがクラスタの中心点を決定してデータを集めます。[K-means クラスタリング](https://wikipedia.org/wiki/K-means_clustering)は有名なセントロイドクラスタリングの一例です。中心は最も近い平均で決定され、名前の由来となっています。クラスタからの二乗距離が最小化されます。
 
-   ![Centroid clustering Infographic](../../../../translated_images/centroid.097fde836cf6c9187d0b2033e9f94441829f9d86f4f0b1604dd4b3d1931aee34.ja.png)
-   > インフォグラフィック: [Dasani Madipalli](https://twitter.com/dasani_decoded)
+   ![セントロイドクラスタリング インフォグラフィック](../../../../translated_images/ja/centroid.097fde836cf6c918.webp)
+   > インフォグラフィック作成： [Dasani Madipalli](https://twitter.com/dasani_decoded)
 
-- **分布ベースのクラスタリング**。統計モデリングに基づいており、分布ベースのクラスタリングはデータポイントがクラスタに属する確率を決定し、それに応じて割り当てます。ガウス混合法はこのタイプに属します。
+- <strong>分布ベースクラスタリング</strong>。統計モデリングに基づき、データ点がクラスタに属する確率を求めて割り当てます。ガウス混合法はこのタイプに含まれます。
 
-- **密度ベースのクラスタリング**。データポイントはその密度、つまり互いの周りにグループ化されることに基づいてクラスタに割り当てられます。グループから遠く離れたデータポイントは外れ値またはノイズと見なされます。DBSCAN、Mean-shift、およびOPTICSはこのタイプのクラスタリングに属します。
+- <strong>密度ベースクラスタリング</strong>。データポイントは密度、すなわち互いの周囲での集まりに基づきクラスタに割り当てられます。グループから離れた点は外れ値やノイズとされます。DBSCAN、Mean-shift、OPTICSがこのタイプです。
 
-- **グリッドベースのクラスタリング**。多次元データセットの場合、グリッドが作成され、データはグリッドのセルに分割され、それによってクラスタが作成されます。
+- <strong>グリッドベースクラスタリング</strong>。多次元データセット用で、グリッドを作成し、データをグリッドのセルに割り当ててクラスタを形成します。
 
-## 演習 - データをクラスタリングする
+## 演習 - データをクラスタリングしよう
 
-クラスタリング技術は適切な視覚化によって大いに助けられるので、音楽データを視覚化することから始めましょう。この演習は、このデータの性質に最も効果的なクラスタリング方法を決定するのに役立ちます。
+クラスタリングは適切な可視化と組み合わせることで効果が高まるため、まず音楽データの可視化から始めましょう。この演習は、このデータの性質に最適なクラスタリング手法を決めるのに役立ちます。
 
-1. このフォルダ内の[_notebook.ipynb_](https://github.com/microsoft/ML-For-Beginners/blob/main/5-Clustering/1-Visualize/notebook.ipynb)ファイルを開きます。
+1. このフォルダの[_notebook.ipynb_](https://github.com/microsoft/ML-For-Beginners/blob/main/5-Clustering/1-Visualize/notebook.ipynb)ファイルを開いてください。
 
-1. 良いデータ視覚化のために`Seaborn`パッケージをインポートします。
+1. 良好なデータ可視化のために `Seaborn` パッケージをインポートします。
 
     ```python
     !pip install seaborn
     ```
 
-1. [_nigerian-songs.csv_](https://github.com/microsoft/ML-For-Beginners/blob/main/5-Clustering/data/nigerian-songs.csv)から曲データを追加します。曲に関するデータでデータフレームを読み込みます。ライブラリをインポートし、データをダンプしてこのデータを探索する準備をします：
+1. [_nigerian-songs.csv_](https://github.com/microsoft/ML-For-Beginners/blob/main/5-Clustering/data/nigerian-songs.csv) から曲データを追加します。曲に関するデータフレームを作成して読み込みます。ライブラリをインポートし、データを表示してこのデータの探索に備えましょう。
 
     ```python
     import matplotlib.pyplot as plt
@@ -119,26 +120,221 @@
     df.head()
     ```
 
-    最初の数行のデータを確認します：
+    最初の数行を確認します。
 
-    |     | name                     | album                        | artist              | artist_top_genre | release_date | length | popularity | danceability | acousticness | energy | instrumentalness | liveness | loudness | speechiness | tempo   | time_signature |
-    | --- | ------------------------ | ---------------------------- | ------------------- | ---------------- | ------------ | ------ | ---------- | ------------ | ------------ | ------ | ---------------- | -------- | -------- | ----------- | ------- | -------------- |
-    | 0   | Sparky                   | Mandy & The Jungle           | Cruel Santino       | alternative r&b  | 2019         | 144000 | 48         | 0.666        | 0.851        | 0.42   | 0.534            | 0.11     | -6.699   | 0.0829      | 133.015 | 5              |
+    |     | name                     | album                    | artist              | artist_top_genre | release_date | length | popularity | danceability | acousticness | energy | instrumentalness | liveness | loudness | speechiness | tempo   | time_signature |
+    | --- | ------------------------ | ------------------------ | ------------------- | ---------------- | ------------ | ------ | ---------- | ------------ | ------------ | ------ | ---------------- | -------- | -------- | ----------- | ------- | -------------- |
+    | 0   | Sparky                   | Mandy & The Jungle       | Cruel Santino       | alternative r&b  | 2019         | 144000 | 48         | 0.666        | 0.851        | 0.42   | 0.534            | 0.11     | -6.699   | 0.0829      | 133.015 | 5              |
     | 1   | shuga rush               | EVERYTHING YOU HEARD IS TRUE | Odunsi (The Engine) | afropop          | 2020         | 89488  | 30         | 0.71         | 0.0822       | 0.683  | 0.000169         | 0.101    | -5.64    | 0.36        | 129.993 | 3              |
-    | 2   | LITT!                    | LITT!                        | AYLØ                | indie r&b        | 2018         | 207758 | 40         | 0.836        | 0.272        | 0.564  | 0.000537         | 0.11     | -7.127   | 0.0424      | 130.005 | 4              |
-    | 3   | Confident / Feeling Cool | Enjoy Your Life              | Lady Donli          | nigerian pop     | 2019         | 175135 | 14         | 0.894        | 0.798        | 0.611  | 0.000187         | 0.0964   | -4.961   | 0.113       | 111.087 | 4              |
-    | 4   | wanted you               | rare.                        | Odunsi (The Engine) | afropop          | 2018         | 152049 | 25
-## [講義後のクイズ](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/28/)
+    | 2   | LITT!                    | LITT!                        | AYLØ                | インディーR&B   | 2018         | 207758 | 40         | 0.836        | 0.272        | 0.564  | 0.000537         | 0.11     | -7.127   | 0.0424      | 130.005 | 4              |
+    | 3   | Confident / Feeling Cool | Enjoy Your Life              | Lady Donli          | ナイジェリアンポップ | 2019         | 175135 | 14         | 0.894        | 0.798        | 0.611  | 0.000187         | 0.0964   | -4.961   | 0.113       | 111.087 | 4              |
+    | 4   | wanted you               | rare.                        | Odunsi (The Engine) | アフロポップ    | 2018         | 152049 | 25         | 0.702        | 0.116        | 0.833  | 0.91             | 0.348    | -6.044   | 0.0447      | 105.115 | 4              |
 
-## 復習と自主学習
+1. `info()` を呼び出してデータフレームの情報を取得します。
 
-クラスタリングアルゴリズムを適用する前に、データセットの性質を理解することが重要です。このトピックについてもっと知りたい方は[こちら](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)をご覧ください。
+    ```python
+    df.info()
+    ```
 
-[この役立つ記事](https://www.freecodecamp.org/news/8-clustering-algorithms-in-machine-learning-that-all-data-scientists-should-know/)では、さまざまなデータ形状に応じた異なるクラスタリングアルゴリズムの挙動について説明しています。
+   結果は以下のようになります:
+
+    ```output
+    <class 'pandas.core.frame.DataFrame'>
+    RangeIndex: 530 entries, 0 to 529
+    Data columns (total 16 columns):
+     #   Column            Non-Null Count  Dtype  
+    ---  ------            --------------  -----  
+     0   name              530 non-null    object 
+     1   album             530 non-null    object 
+     2   artist            530 non-null    object 
+     3   artist_top_genre  530 non-null    object 
+     4   release_date      530 non-null    int64  
+     5   length            530 non-null    int64  
+     6   popularity        530 non-null    int64  
+     7   danceability      530 non-null    float64
+     8   acousticness      530 non-null    float64
+     9   energy            530 non-null    float64
+     10  instrumentalness  530 non-null    float64
+     11  liveness          530 non-null    float64
+     12  loudness          530 non-null    float64
+     13  speechiness       530 non-null    float64
+     14  tempo             530 non-null    float64
+     15  time_signature    530 non-null    int64  
+    dtypes: float64(8), int64(4), object(4)
+    memory usage: 66.4+ KB
+    ```
+
+1. `isnull()` を使って null 値を二重チェックし、合計が0であることを確認します。
+
+    ```python
+    df.isnull().sum()
+    ```
+
+    問題ありません:
+
+    ```output
+    name                0
+    album               0
+    artist              0
+    artist_top_genre    0
+    release_date        0
+    length              0
+    popularity          0
+    danceability        0
+    acousticness        0
+    energy              0
+    instrumentalness    0
+    liveness            0
+    loudness            0
+    speechiness         0
+    tempo               0
+    time_signature      0
+    dtype: int64
+    ```
+
+1. データを記述します。
+
+    ```python
+    df.describe()
+    ```
+
+    |       | release_date | length      | popularity | danceability | acousticness | energy   | instrumentalness | liveness | loudness  | speechiness | tempo      | time_signature |
+    | ----- | ------------ | ----------- | ---------- | ------------ | ------------ | -------- | ---------------- | -------- | --------- | ----------- | ---------- | -------------- |
+    | count | 530          | 530         | 530        | 530          | 530          | 530      | 530              | 530      | 530       | 530         | 530        | 530            |
+    | mean  | 2015.390566  | 222298.1698 | 17.507547  | 0.741619     | 0.265412     | 0.760623 | 0.016305         | 0.147308 | -4.953011 | 0.130748    | 116.487864 | 3.986792       |
+    | std   | 3.131688     | 39696.82226 | 18.992212  | 0.117522     | 0.208342     | 0.148533 | 0.090321         | 0.123588 | 2.464186  | 0.092939    | 23.518601  | 0.333701       |
+    | min   | 1998         | 89488       | 0          | 0.255        | 0.000665     | 0.111    | 0                | 0.0283   | -19.362   | 0.0278      | 61.695     | 3              |
+    | 25%   | 2014         | 199305      | 0          | 0.681        | 0.089525     | 0.669    | 0                | 0.07565  | -6.29875  | 0.0591      | 102.96125  | 4              |
+    | 50%   | 2016         | 218509      | 13         | 0.761        | 0.2205       | 0.7845   | 0.000004         | 0.1035   | -4.5585   | 0.09795     | 112.7145   | 4              |
+    | 75%   | 2017         | 242098.5    | 31         | 0.8295       | 0.403        | 0.87575  | 0.000234         | 0.164    | -3.331    | 0.177       | 125.03925  | 4              |
+    | max   | 2020         | 511738      | 73         | 0.966        | 0.954        | 0.995    | 0.91             | 0.811    | 0.582     | 0.514       | 206.007    | 5              |
+
+> 🤔 クラスタリングはラベルを必要としない教師なし学習法ですが、なぜラベル付きでこのデータを示しているのでしょうか？データ探索段階ではラベルが役立ちますが、クラスタリングアルゴリズムの動作にラベルは不要です。列名を削除し、列番号でデータを参照しても問題ありません。
+
+データの一般的な値を見てみましょう。人気度が '0' の場合はランキングに入っていない曲を示します。あとでこれらを除去しましょう。
+
+1. バープロットを使って最も人気のあるジャンルを見つけます。
+
+    ```python
+    import seaborn as sns
+    
+    top = df['artist_top_genre'].value_counts()
+    plt.figure(figsize=(10,7))
+    sns.barplot(x=top[:5].index,y=top[:5].values)
+    plt.xticks(rotation=45)
+    plt.title('Top genres',color = 'blue')
+    ```
+
+    ![most popular](../../../../translated_images/ja/popular.9c48d84b3386705f.webp)
+
+✅ より多くの上位値を見たい場合は、`[:5]` の数値を大きくするか、すべてを見るために外してください。
+
+トップジャンルが「Missing」と表示される場合、それはSpotifyが分類していないことを意味します。これを取り除きましょう。
+
+1. 欠損データを取り除くためにフィルタリングします。
+
+    ```python
+    df = df[df['artist_top_genre'] != 'Missing']
+    top = df['artist_top_genre'].value_counts()
+    plt.figure(figsize=(10,7))
+    sns.barplot(x=top.index,y=top.values)
+    plt.xticks(rotation=45)
+    plt.title('Top genres',color = 'blue')
+    ```
+
+    ジャンルを再確認します:
+
+    ![most popular](../../../../translated_images/ja/all-genres.1d56ef06cefbfcd6.webp)
+
+1. 断然、トップ3のジャンルがこのデータセットの大部分を占めています。`afro dancehall`、`afropop`、`nigerian pop` に注目し、人気度が0のデータ（データセットで人気度が割り当てられていないためノイズと見なせるデータ）を除外しましょう。
+
+    ```python
+    df = df[(df['artist_top_genre'] == 'afro dancehall') | (df['artist_top_genre'] == 'afropop') | (df['artist_top_genre'] == 'nigerian pop')]
+    df = df[(df['popularity'] > 0)]
+    top = df['artist_top_genre'].value_counts()
+    plt.figure(figsize=(10,7))
+    sns.barplot(x=top.index,y=top.values)
+    plt.xticks(rotation=45)
+    plt.title('Top genres',color = 'blue')
+    ```
+
+1. データが特に強い相関を持つかどうかを簡単にテストします。
+
+    ```python
+    corrmat = df.corr(numeric_only=True)
+    f, ax = plt.subplots(figsize=(12, 9))
+    sns.heatmap(corrmat, vmax=.8, square=True)
+    ```
+
+    ![correlations](../../../../translated_images/ja/correlation.a9356bb798f5eea5.webp)
+
+    唯一強い相関は `energy` と `loudness` の間にあり、音量が大きい音楽は通常エネルギッシュであることを考えれば驚くにはあたりません。それ以外の相関は比較的弱いです。このデータにクラスタリングアルゴリズムを適用するとどのような結果になるか興味深いでしょう。
+
+    > 🎓 相関は因果関係を示すものではありません！相関の証拠はありますが因果の証拠はありません。 [面白いウェブサイト](https://tylervigen.com/spurious-correlations) にはその点を強調するビジュアルがあります。
+
+このデータセットで楽曲の人気度とダンス適性の間に収束はありますか？FacetGrid ではジャンルに関係なく同心円が並んでいる様子が見られます。ナイジェリアの趣味はこのジャンルのダンス適性で一定のレベルに収束しているのかもしれません。
+
+✅ 異なるデータポイント（energy、loudness、speechiness）や異なる音楽ジャンルも試してみてください。何が発見できるでしょうか？一般的なデータの広がりを見るには `df.describe()` テーブルを参照してください。
+
+### 演習 - データ分布
+
+これら3つのジャンルは、人気度に基づくダンス適性の認識において有意差がありますか？
+
+1. 人気度とダンス適性について、3大ジャンルのデータ分布を x軸と y軸に沿って調べてみます。
+
+    ```python
+    sns.set_theme(style="ticks")
+    
+    g = sns.jointplot(
+        data=df,
+        x="popularity", y="danceability", hue="artist_top_genre",
+        kind="kde",
+    )
+    ```
+
+    一般的な収束点のまわりに同心円が見られ、ポイントの分布が示されます。
+
+    > 🎓 この例は KDE（カーネル密度推定）グラフを用いており、連続確率密度曲線でデータを表現しています。複数分布を扱うときに役立ちます。
+
+    全体的に、これら3ジャンルは人気度とダンス適性でゆるやかに一致しています。このゆるい一致データでクラスタを判断するのは難題です。
+
+    ![distribution](../../../../translated_images/ja/distribution.9be11df42356ca95.webp)
+
+1. 散布図を作成します。
+
+    ```python
+    sns.FacetGrid(df, hue="artist_top_genre", height=5) \
+       .map(plt.scatter, "popularity", "danceability") \
+       .add_legend()
+    ```
+
+    同じ軸の散布図は似た収束パターンを示します。
+
+    ![Facetgrid](../../../../translated_images/ja/facetgrid.9b2e65ce707eba1f.webp)
+
+一般的に、クラスタリングのために散布図を用いてデータのクラスタを示すことができます。この種の可視化を習得することは非常に有用です。次のレッスンでは、このフィルターされたデータを使い、k-means クラスタリングで興味深い重なりを持つグループを発見します。
+
+---
+
+## 🚀チャレンジ
+
+次のレッスンに向けて、さまざまなクラスタリングアルゴリズムについてのチャートを作成してください。これらのクラスタリングはどのような問題の解決を目指しているでしょうか？
+
+## [講義後クイズ](https://ff-quizzes.netlify.app/en/ml/)
+
+## 復習 & 自主学習
+
+クラスタリングアルゴリズムを適用する前に、データセットの性質を理解することは重要です。詳しくはこちらをご覧ください: [こちら](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)
+
+[この役立つ記事](https://www.freecodecamp.org/news/8-clustering-algorithms-in-machine-learning-that-all-data-scientists-should-know/) は、異なるデータ形状に対して各種クラスタリングアルゴリズムがどのように動作するかをわかりやすく解説しています。
 
 ## 課題
 
-[クラスタリングの他の可視化方法を調査する](assignment.md)
+[クラスタリングの他の可視化方法について調査する](assignment.md)
 
-**免責事項**:
-この文書は、機械ベースのAI翻訳サービスを使用して翻訳されています。正確さを期していますが、自動翻訳にはエラーや不正確さが含まれる場合がありますのでご注意ください。元の言語での原文が権威ある情報源と見なされるべきです。重要な情報については、専門の人間による翻訳をお勧めします。この翻訳の使用に起因する誤解や誤解について、当社は責任を負いません。
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

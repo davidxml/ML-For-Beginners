@@ -1,46 +1,46 @@
 # ARIMA ile Zaman Serisi Tahmini
 
-Önceki derste, zaman serisi tahmini hakkında biraz bilgi edindiniz ve bir zaman dilimi boyunca elektrik yükünün dalgalanmalarını gösteren bir veri kümesini yüklediniz.
+Önceki derste, zaman serisi tahmini hakkında biraz bilgi edindiniz ve bir zaman dilimi boyunca elektrik yükündeki dalgalanmaları gösteren bir veri seti yüklediniz.
 
-[![ARIMA'ya Giriş](https://img.youtube.com/vi/IUSk-YDau10/0.jpg)](https://youtu.be/IUSk-YDau10 "Introduction to ARIMA")
+[![ARIMA'ya Giriş](https://img.youtube.com/vi/IUSk-YDau10/0.jpg)](https://youtu.be/IUSk-YDau10 "ARIMA'ya Giriş")
 
-> 🎥 Yukarıdaki görüntüye tıklayarak bir video izleyin: ARIMA modellerine kısa bir giriş. Örnek R dilinde yapılmıştır, ancak kavramlar evrenseldir.
+> 🎥 Yukarıdaki görsele tıklayarak bir video izleyebilirsiniz: ARIMA modellerine kısa bir giriş. Örnek R dilinde yapılmıştır, ancak kavramlar evrenseldir.
 
-## [Ders Öncesi Test](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/43/)
+## [Ders Öncesi Test](https://ff-quizzes.netlify.app/en/ml/)
 
 ## Giriş
 
-Bu derste, [ARIMA: *A*uto*R*egressive *I*ntegrated *M*oving *A*verage](https://wikipedia.org/wiki/Autoregressive_integrated_moving_average) ile model oluşturmanın belirli bir yolunu keşfedeceksiniz. ARIMA modelleri, özellikle [durağan olmayan](https://wikipedia.org/wiki/Stationary_process) verileri uyarlamak için uygundur.
+Bu derste, [ARIMA: *A*uto*R*egressive *I*ntegrated *M*oving *A*verage](https://wikipedia.org/wiki/Autoregressive_integrated_moving_average) ile model oluşturmanın özel bir yolunu keşfedeceksiniz. ARIMA modelleri, özellikle [durağan olmayan](https://wikipedia.org/wiki/Stationary_process) verileri modellemek için uygundur.
 
 ## Genel Kavramlar
 
 ARIMA ile çalışabilmek için bilmeniz gereken bazı kavramlar vardır:
 
-- 🎓 **Durağanlık**. İstatistiksel bağlamda, durağanlık, zaman içinde kaydırıldığında dağılımı değişmeyen verilere atıfta bulunur. Durağan olmayan veriler ise analiz edilmek üzere dönüştürülmesi gereken eğilimlerden kaynaklanan dalgalanmalar gösterir. Örneğin, mevsimsellik verilerde dalgalanmalara neden olabilir ve 'mevsimsel fark alma' süreci ile ortadan kaldırılabilir.
+- 🎓 **Durağanlık**. İstatistiksel bağlamda durağanlık, zaman içinde kaydırıldığında dağılımı değişmeyen verilere atıfta bulunur. Durağan olmayan veriler ise analiz edilebilmesi için dönüştürülmesi gereken eğilimlerden kaynaklanan dalgalanmalar gösterir. Örneğin, mevsimsellik verilerde dalgalanmalara neden olabilir ve 'mevsimsel fark alma' işlemiyle ortadan kaldırılabilir.
 
-- 🎓 **[Fark Alma](https://wikipedia.org/wiki/Autoregressive_integrated_moving_average#Differencing)**. İstatistiksel bağlamda, fark alma, durağan olmayan verileri durağan hale getirmek için değişken eğilimlerini ortadan kaldırma sürecine atıfta bulunur. "Fark alma, bir zaman serisinin seviyesindeki değişiklikleri ortadan kaldırarak eğilim ve mevsimselliği ortadan kaldırır ve böylece zaman serisinin ortalamasını stabilize eder." [Shixiong ve diğerlerinin makalesi](https://arxiv.org/abs/1904.07632)
+- 🎓 **[Fark Alma](https://wikipedia.org/wiki/Autoregressive_integrated_moving_average#Differencing)**. İstatistiksel bağlamda fark alma, durağan olmayan verileri durağan hale getirmek için sabit olmayan eğilimi ortadan kaldırma işlemine atıfta bulunur. "Fark alma, bir zaman serisinin seviyesindeki değişiklikleri ortadan kaldırır, eğilim ve mevsimselliği yok eder ve dolayısıyla zaman serisinin ortalamasını sabitler." [Shixiong ve diğerleri tarafından yazılan makale](https://arxiv.org/abs/1904.07632)
 
 ## Zaman Serisi Bağlamında ARIMA
 
-ARIMA'nın bölümlerini açarak, zaman serilerini nasıl modellediğini ve tahmin yapmamıza nasıl yardımcı olduğunu daha iyi anlayalım.
+ARIMA'nın bölümlerini inceleyerek zaman serisi verilerini modellemeye nasıl yardımcı olduğunu ve tahmin yapmamıza nasıl olanak sağladığını daha iyi anlayalım.
 
-- **AR - Otoregresif**. Otoregresif modeller, adından da anlaşılacağı gibi, verilerinizdeki önceki değerlere bakarak onları analiz eder ve varsayımlar yapar. Bu önceki değerlere 'gecikmeler' denir. Örneğin, aylık kalem satışlarını gösteren veriler. Her ayın satış toplamı, veri kümesinde 'gelişen değişken' olarak kabul edilir. Bu model, "ilgilenen gelişen değişkenin kendi gecikmiş (yani, önceki) değerlerine göre regresyona tabi tutulduğu" şeklinde oluşturulur. [wikipedia](https://wikipedia.org/wiki/Autoregressive_integrated_moving_average)
+- **AR - Otoregresif (AutoRegressive)**. Otoregresif modeller, adından da anlaşılacağı gibi, verilerinizdeki önceki değerleri analiz etmek ve bunlar hakkında varsayımlarda bulunmak için 'geçmişe' bakar. Bu önceki değerlere 'gecikmeler' denir. Örneğin, aylık kalem satışlarını gösteren bir veri. Her ayın satış toplamı, veri setinde 'gelişen bir değişken' olarak kabul edilir. Bu model, "ilgili gelişen değişkenin kendi gecikmeli (yani, önceki) değerlerine göre regresyon yapılması" ile oluşturulur. [wikipedia](https://wikipedia.org/wiki/Autoregressive_integrated_moving_average)
 
-- **I - Entegre**. Benzer 'ARMA' modellerinden farklı olarak, ARIMA'daki 'I', *[entegre](https://wikipedia.org/wiki/Order_of_integration)* yönünü ifade eder. Veriler, durağanlığı ortadan kaldırmak için fark alma adımları uygulandığında 'entegre' olur.
+- **I - Entegre (Integrated)**. Benzer 'ARMA' modellerinden farklı olarak, ARIMA'daki 'I', *[entegre](https://wikipedia.org/wiki/Order_of_integration)* yönüne atıfta bulunur. Veriler, durağan olmayanlığı ortadan kaldırmak için fark alma adımları uygulandığında 'entegre' hale gelir.
 
-- **MA - Hareketli Ortalama**. Bu modelin [hareketli ortalama](https://wikipedia.org/wiki/Moving-average_model) yönü, çıkış değişkeninin, mevcut ve geçmiş gecikme değerlerini gözlemleyerek belirlendiğini ifade eder.
+- **MA - Hareketli Ortalama (Moving Average)**. Bu modelin [hareketli ortalama](https://wikipedia.org/wiki/Moving-average_model) yönü, gecikmelerin mevcut ve geçmiş değerlerini gözlemleyerek belirlenen çıktı değişkenine atıfta bulunur.
 
 Sonuç: ARIMA, zaman serisi verilerinin özel formuna mümkün olduğunca yakın bir model oluşturmak için kullanılır.
 
-## Alıştırma - Bir ARIMA Modeli Oluşturun
+## Alıştırma - ARIMA Modeli Oluşturma
 
 Bu dersteki [_/working_](https://github.com/microsoft/ML-For-Beginners/tree/main/7-TimeSeries/2-ARIMA/working) klasörünü açın ve [_notebook.ipynb_](https://github.com/microsoft/ML-For-Beginners/blob/main/7-TimeSeries/2-ARIMA/working/notebook.ipynb) dosyasını bulun.
 
-1. ARIMA modelleri için ihtiyacınız olan `statsmodels` Python kütüphanesini yüklemek için notebook'u çalıştırın.
+1. ARIMA modelleri için gerekli olan `statsmodels` Python kütüphanesini yüklemek için notebook'u çalıştırın.
 
 1. Gerekli kütüphaneleri yükleyin.
 
-1. Şimdi, verileri çizmek için faydalı olan birkaç kütüphaneyi daha yükleyin:
+1. Şimdi, verileri görselleştirmek için birkaç kütüphane daha yükleyin:
 
     ```python
     import os
@@ -63,14 +63,14 @@ Bu dersteki [_/working_](https://github.com/microsoft/ML-For-Beginners/tree/main
     warnings.filterwarnings("ignore") # specify to ignore warning messages
     ```
 
-1. Verileri `/data/energy.csv` dosyasından bir Pandas dataframe'ine yükleyin ve bir göz atın:
+1. `/data/energy.csv` dosyasındaki verileri bir Pandas veri çerçevesine yükleyin ve inceleyin:
 
     ```python
     energy = load_data('./data')[['load']]
     energy.head(10)
     ```
 
-1. Ocak 2012'den Aralık 2014'e kadar mevcut tüm enerji verilerini çizin. Bu verileri önceki derste gördüğümüz için sürpriz olmamalı:
+1. Ocak 2012'den Aralık 2014'e kadar mevcut tüm enerji verilerini görselleştirin. Bu verileri önceki derste gördüğümüz için sürpriz olmamalı:
 
     ```python
     energy.plot(y='load', subplots=True, figsize=(15, 8), fontsize=12)
@@ -79,20 +79,20 @@ Bu dersteki [_/working_](https://github.com/microsoft/ML-For-Beginners/tree/main
     plt.show()
     ```
 
-    Şimdi, bir model oluşturalım!
+    Şimdi bir model oluşturalım!
 
-### Eğitim ve Test Veri Setleri Oluşturun
+### Eğitim ve Test Veri Setleri Oluşturma
 
-Verileriniz yüklendi, bu yüzden onları eğitim ve test setlerine ayırabilirsiniz. Modelinizi eğitim setinde eğiteceksiniz. Her zamanki gibi, model eğitimi tamamlandıktan sonra, doğruluğunu test setini kullanarak değerlendireceksiniz. Modelin gelecekteki zaman dilimlerinden bilgi almamasını sağlamak için test setinin eğitim setinden sonraki bir dönemi kapsadığından emin olmanız gerekir.
+Verileriniz yüklendi, şimdi bunları eğitim ve test setlerine ayırabilirsiniz. Modelinizi eğitim seti üzerinde eğiteceksiniz. Her zamanki gibi, model eğitimi tamamlandıktan sonra doğruluğunu test seti kullanarak değerlendireceksiniz. Modelin gelecekteki zaman dilimlerinden bilgi edinmemesini sağlamak için test setinin eğitim setinden daha sonraki bir zaman dilimini kapsaması gerekir.
 
-1. 1 Eylül - 31 Ekim 2014 tarihlerini eğitim setine ayırın. Test seti, 1 Kasım - 31 Aralık 2014 dönemini kapsayacaktır:
+1. Eğitim seti için 1 Eylül - 31 Ekim 2014 arasındaki iki aylık bir dönem ayırın. Test seti ise 1 Kasım - 31 Aralık 2014 arasındaki iki aylık dönemi içerecek:
 
     ```python
     train_start_dt = '2014-11-01 00:00:00'
     test_start_dt = '2014-12-30 00:00:00'
     ```
 
-    Bu veriler günlük enerji tüketimini yansıttığı için güçlü bir mevsimsel desen vardır, ancak tüketim en son günlerdeki tüketime en benzer.
+    Bu veriler günlük enerji tüketimini yansıttığı için güçlü bir mevsimsel desen vardır, ancak tüketim en çok son günlerdeki tüketime benzer.
 
 1. Farklılıkları görselleştirin:
 
@@ -105,17 +105,17 @@ Verileriniz yüklendi, bu yüzden onları eğitim ve test setlerine ayırabilirs
     plt.show()
     ```
 
-    ![eğitim ve test verileri](../../../../translated_images/train-test.8928d14e5b91fc942f0ca9201b2d36c890ea7e98f7619fd94f75de3a4c2bacb9.tr.png)
+    ![eğitim ve test verileri](../../../../7-TimeSeries/2-ARIMA/images/train-test.png)
 
-    Bu nedenle, verileri eğitmek için nispeten küçük bir zaman penceresi kullanmak yeterli olmalıdır.
+    Bu nedenle, verileri eğitmek için nispeten küçük bir zaman aralığı kullanmak yeterli olmalıdır.
 
-    > Not: ARIMA modelini uyarlamak için kullandığımız fonksiyon, uyarlama sırasında örnek içi doğrulama kullandığından, doğrulama verilerini göz ardı edeceğiz.
+    > Not: ARIMA modelini uyarlamak için kullandığımız fonksiyon, uyarlama sırasında örnek içi doğrulama kullandığından, doğrulama verilerini atlayacağız.
 
-### Verileri Eğitime Hazırlayın
+### Verileri Eğitime Hazırlama
 
-Şimdi, verileri filtreleme ve ölçeklendirme yaparak eğitime hazırlamanız gerekiyor. Veri kümenizi yalnızca ihtiyaç duyduğunuz zaman dilimlerini ve sütunları içerecek şekilde filtreleyin ve verilerin 0,1 aralığında projeksiyonunu sağlamak için ölçeklendirin.
+Şimdi, verileri filtreleme ve ölçeklendirme işlemleri yaparak eğitime hazırlamanız gerekiyor. Veri setinizi yalnızca ihtiyaç duyduğunuz zaman dilimlerini ve sütunları içerecek şekilde filtreleyin ve verilerin 0,1 aralığında projeksiyonunu sağlamak için ölçeklendirme yapın.
 
-1. Orijinal veri kümesini, set başına yalnızca belirtilen zaman dilimlerini ve yalnızca gerekli olan 'load' sütunu ile tarih sütununu içerecek şekilde filtreleyin:
+1. Orijinal veri setini yalnızca belirtilen zaman dilimlerini ve yalnızca gerekli 'load' sütunu ile tarihi içerecek şekilde filtreleyin:
 
     ```python
     train = energy.copy()[(energy.index >= train_start_dt) & (energy.index < test_start_dt)][['load']]
@@ -125,7 +125,7 @@ Verileriniz yüklendi, bu yüzden onları eğitim ve test setlerine ayırabilirs
     print('Test data shape: ', test.shape)
     ```
 
-    Verinin şeklini görebilirsiniz:
+    Verilerin şekline bakabilirsiniz:
 
     ```output
     Training data shape:  (1416, 1)
@@ -148,40 +148,40 @@ Verileriniz yüklendi, bu yüzden onları eğitim ve test setlerine ayırabilirs
     plt.show()
     ```
 
-    ![orijinal](../../../../translated_images/original.b2b15efe0ce92b8745918f071dceec2231661bf49c8db6918e3ff4b3b0b183c2.tr.png)
+    ![orijinal](../../../../7-TimeSeries/2-ARIMA/images/original.png)
 
     > Orijinal veri
 
-    ![ölçeklendirilmiş](../../../../translated_images/scaled.e35258ca5cd3d43f86d5175e584ba96b38d51501f234abf52e11f4fe2631e45f.tr.png)
+    ![ölçeklendirilmiş](../../../../7-TimeSeries/2-ARIMA/images/scaled.png)
 
     > Ölçeklendirilmiş veri
 
-1. Şimdi ölçeklendirilmiş verileri kalibre ettiğinize göre, test verilerini de ölçeklendirebilirsiniz:
+1. Ölçeklendirilmiş verileri kalibre ettikten sonra test verilerini ölçeklendirebilirsiniz:
 
     ```python
     test['load'] = scaler.transform(test)
     test.head()
     ```
 
-### ARIMA'yı Uygulayın
+### ARIMA'yı Uygulama
 
-ARIMA'yı uygulama zamanı geldi! Daha önce yüklediğiniz `statsmodels` kütüphanesini kullanacaksınız.
+Artık ARIMA'yı uygulama zamanı! Daha önce yüklediğiniz `statsmodels` kütüphanesini kullanacaksınız.
 
-Şimdi birkaç adımı takip etmeniz gerekiyor
+Şimdi birkaç adımı takip etmeniz gerekiyor:
 
-   1. Modeli `SARIMAX()` and passing in the model parameters: p, d, and q parameters, and P, D, and Q parameters.
-   2. Prepare the model for the training data by calling the fit() function.
-   3. Make predictions calling the `forecast()` function and specifying the number of steps (the `horizon`) to forecast.
+   1. Modeli tanımlamak için `SARIMAX()` fonksiyonunu çağırın ve model parametrelerini (p, d, q ve P, D, Q parametreleri) geçirin.
+   2. Modeli eğitim verileri için hazırlamak üzere `fit()` fonksiyonunu çağırın.
+   3. Tahmin yapmak için `forecast()` fonksiyonunu çağırın ve tahmin edilecek adım sayısını (`horizon`) belirtin.
 
-> 🎓 What are all these parameters for? In an ARIMA model there are 3 parameters that are used to help model the major aspects of a time series: seasonality, trend, and noise. These parameters are:
+> 🎓 Bu parametreler ne işe yarar? Bir ARIMA modelinde, bir zaman serisinin ana yönlerini modellemeye yardımcı olmak için kullanılan 3 parametre vardır: mevsimsellik, eğilim ve gürültü. Bu parametreler şunlardır:
 
-`p`: the parameter associated with the auto-regressive aspect of the model, which incorporates *past* values.
-`d`: the parameter associated with the integrated part of the model, which affects the amount of *differencing* (🎓 remember differencing 👆?) to apply to a time series.
-`q`: the parameter associated with the moving-average part of the model.
+`p`: Modelin otoregresif yönüyle ilişkili parametre, *geçmiş* değerleri içerir.
+`d`: Modelin entegre yönüyle ilişkili parametre, bir zaman serisine uygulanacak *fark alma* miktarını etkiler (🎓 fark alma 👆 hatırlıyor musunuz?).
+`q`: Modelin hareketli ortalama yönüyle ilişkili parametre.
 
-> Note: If your data has a seasonal aspect - which this one does - , we use a seasonal ARIMA model (SARIMA). In that case you need to use another set of parameters: `P`, `D`, and `Q` which describe the same associations as `p`, `d`, and `q` fonksiyonunu çağırarak tanımlayın, ancak modelin mevsimsel bileşenlerine karşılık gelir.
+> Not: Verilerinizin mevsimsel bir yönü varsa - bu veri setinde olduğu gibi - mevsimsel ARIMA modeli (SARIMA) kullanırız. Bu durumda, `p`, `d` ve `q` ile aynı ilişkileri tanımlayan ancak modelin mevsimsel bileşenlerine karşılık gelen başka bir parametre seti (`P`, `D`, ve `Q`) kullanmanız gerekir.
 
-1. Tercih ettiğiniz ufuk değerini ayarlayarak başlayın. 3 saat deneyelim:
+1. Tercih ettiğiniz horizon değerini ayarlayarak başlayın. 3 saat deneyelim:
 
     ```python
     # Specify the number of steps to forecast ahead
@@ -189,9 +189,9 @@ ARIMA'yı uygulama zamanı geldi! Daha önce yüklediğiniz `statsmodels` kütü
     print('Forecasting horizon:', HORIZON, 'hours')
     ```
 
-    Bir ARIMA modelinin parametreleri için en iyi değerleri seçmek zordur çünkü bu biraz öznel ve zaman alıcıdır. `auto_arima()` function from the [`pyramid` kütüphanesini kullanmayı düşünebilirsiniz.](https://alkaline-ml.com/pmdarima/0.9.0/modules/generated/pyramid.arima.auto_arima.html),
+    Bir ARIMA modelinin parametreleri için en iyi değerleri seçmek zor olabilir çünkü bu biraz öznel ve zaman alıcıdır. [`pyramid` kütüphanesinden](https://alkaline-ml.com/pmdarima/0.9.0/modules/generated/pyramid.arima.auto_arima.html) bir `auto_arima()` fonksiyonu kullanmayı düşünebilirsiniz.
 
-1. Şimdilik iyi bir model bulmak için bazı manuel seçimler deneyin.
+1. Şimdilik iyi bir model bulmak için bazı manuel seçimler yapmayı deneyin.
 
     ```python
     order = (4, 1, 0)
@@ -205,21 +205,21 @@ ARIMA'yı uygulama zamanı geldi! Daha önce yüklediğiniz `statsmodels` kütü
 
     Bir sonuç tablosu yazdırılır.
 
-İlk modelinizi oluşturdunuz! Şimdi onu değerlendirmek için bir yol bulmamız gerekiyor.
+İlk modelinizi oluşturdunuz! Şimdi bunu değerlendirmek için bir yol bulmamız gerekiyor.
 
 ### Modelinizi Değerlendirin
 
-Modelinizi değerlendirmek için, sözde `yürüyen ileri` doğrulama gerçekleştirebilirsiniz. Pratikte, zaman serisi modelleri her yeni veri geldiğinde yeniden eğitilir. Bu, modelin her zaman adımında en iyi tahmini yapmasına olanak tanır.
+Modelinizi değerlendirmek için, `walk forward` doğrulama adı verilen bir yöntem uygulayabilirsiniz. Pratikte, zaman serisi modelleri her yeni veri geldiğinde yeniden eğitilir. Bu, modelin her zaman adımında en iyi tahmini yapmasını sağlar.
 
-Bu tekniği kullanarak zaman serisinin başından başlayarak, modeli eğitim veri setinde eğitin. Ardından bir sonraki zaman adımında tahmin yapın. Tahmin, bilinen değere karşı değerlendirilir. Eğitim seti daha sonra bilinen değeri içerecek şekilde genişletilir ve işlem tekrarlanır.
+Bu teknikle zaman serisinin başından başlayarak, modeli eğitim veri seti üzerinde eğitin. Ardından bir sonraki zaman adımında tahmin yapın. Tahmin, bilinen değerle karşılaştırılır. Eğitim seti, bilinen değeri içerecek şekilde genişletilir ve işlem tekrarlanır.
 
-> Not: Eğitimi daha verimli hale getirmek için eğitim seti penceresini sabit tutmalısınız, böylece her yeni gözlemi eğitim setine eklediğinizde, setin başından gözlemi kaldırırsınız.
+> Not: Daha verimli bir eğitim için eğitim seti penceresini sabit tutmalısınız, böylece her yeni gözlemi eğitim setine eklediğinizde, setin başlangıcındaki gözlemi kaldırırsınız.
 
-Bu süreç, modelin pratikte nasıl performans göstereceğine dair daha sağlam bir tahmin sağlar. Ancak, bu kadar çok model oluşturmanın hesaplama maliyeti vardır. Veri küçükse veya model basitse kabul edilebilir, ancak ölçek büyüdüğünde sorun olabilir.
+Bu işlem, modelin pratikte nasıl performans göstereceğine dair daha sağlam bir tahmin sağlar. Ancak, bu kadar çok model oluşturmanın hesaplama maliyeti vardır. Veri küçükse veya model basitse bu kabul edilebilir, ancak büyük ölçeklerde sorun olabilir.
 
-Yürüyen ileri doğrulama, zaman serisi modeli değerlendirmesinin altın standardıdır ve kendi projelerinizde tavsiye edilir.
+Walk-forward doğrulama, zaman serisi model değerlendirmesinin altın standardıdır ve kendi projelerinizde önerilir.
 
-1. İlk olarak, her HORIZON adımı için bir test veri noktası oluşturun.
+1. Her HORIZON adımı için bir test veri noktası oluşturun.
 
     ```python
     test_shifted = test.copy()
@@ -239,9 +239,9 @@ Yürüyen ileri doğrulama, zaman serisi modeli değerlendirmesinin altın stand
     | 2014-12-30 | 03:00:00 | 0.27 | 0.30   | 0.41   |
     | 2014-12-30 | 04:00:00 | 0.30 | 0.41   | 0.57   |
 
-    Veriler ufuk noktasına göre yatay olarak kaydırılmıştır.
+    Veri, horizon noktasına göre yatay olarak kaydırılır.
 
-1. Test verilerinizde bu kayan pencere yaklaşımını kullanarak bir döngü içinde tahminler yapın:
+1. Test verilerinizde bu kaydırma pencere yaklaşımını kullanarak bir döngü içinde tahminler yapın:
 
     ```python
     %%time
@@ -271,7 +271,7 @@ Yürüyen ileri doğrulama, zaman serisi modeli değerlendirmesinin altın stand
         print(t+1, ': predicted =', yhat, 'expected =', obs)
     ```
 
-    Eğitimin gerçekleştiğini izleyebilirsiniz:
+    Eğitim işlemini izleyebilirsiniz:
 
     ```output
     2014-12-30 00:00:00
@@ -284,7 +284,7 @@ Yürüyen ileri doğrulama, zaman serisi modeli değerlendirmesinin altın stand
     3 : predicted = [0.27 0.28 0.32] expected = [0.2739480752014323, 0.26812891674127126, 0.3025962399283795]
     ```
 
-1. Tahminleri gerçek yükle karşılaştırın:
+1. Tahminleri gerçek yük ile karşılaştırın:
 
     ```python
     eval_df = pd.DataFrame(predictions, columns=['t+'+str(t) for t in range(1, HORIZON+1)])
@@ -304,20 +304,17 @@ Yürüyen ileri doğrulama, zaman serisi modeli değerlendirmesinin altın stand
     | 3   | 2014-12-30 | 03:00:00  | t+1 | 2,917.69   | 2,886.00 |
     | 4   | 2014-12-30 | 04:00:00  | t+1 | 2,946.99   | 2,963.00 |
 
+    Saatlik verilerin tahminini, gerçek yük ile karşılaştırın. Ne kadar doğru?
 
-    Saatlik verilerin tahminini, gerçek yükle karşılaştırın. Ne kadar doğru?
+### Model Doğruluğunu Kontrol Etme
 
-### Model Doğruluğunu Kontrol Edin
-
-Modelinizin doğruluğunu, tüm tahminler üzerindeki ortalama mutlak yüzde hatasını (MAPE) test ederek kontrol edin.
-
+Modelinizin doğruluğunu, tüm tahminler üzerindeki ortalama mutlak yüzde hatası (MAPE) ile test ederek kontrol edin.
 > **🧮 Matematiği Göster**
 >
-> ![MAPE](../../../../translated_images/mape.fd87bbaf4d346846df6af88b26bf6f0926bf9a5027816d5e23e1200866e3e8a4.tr.png)
+> ![MAPE](../../../../7-TimeSeries/2-ARIMA/images/mape.png)
 >
->  [MAPE](https://www.linkedin.com/pulse/what-mape-mad-msd-time-series-allameh-statistics/) tahmin doğruluğunu yukarıdaki formülle tanımlanan bir oran olarak göstermek için kullanılır. Gerçek<sub>t</sub> ve tahmin<sub>t</sub> arasındaki fark, gerçek<sub>t</sub> ile bölünür. "Bu hesaplamadaki mutlak değer her tahmin edilen zaman noktasında toplanır ve uydurulan noktaların sayısına n bölünür." [wikipedia](https://wikipedia.org/wiki/Mean_absolute_percentage_error)
-
-1. Denklemi kodda ifade edin:
+> [MAPE](https://www.linkedin.com/pulse/what-mape-mad-msd-time-series-allameh-statistics/) yukarıdaki formülle tanımlanan bir oran olarak tahmin doğruluğunu göstermek için kullanılır. Gerçek ve tahmin edilen arasındaki fark, gerçeğe bölünür. "Bu hesaplamadaki mutlak değer, her tahmin edilen zaman noktası için toplanır ve uydurulan noktaların sayısına (n) bölünür." [wikipedia](https://wikipedia.org/wiki/Mean_absolute_percentage_error)
+1. Kodda denklemi ifade et:
 
     ```python
     if(HORIZON > 1):
@@ -325,15 +322,15 @@ Modelinizin doğruluğunu, tüm tahminler üzerindeki ortalama mutlak yüzde hat
         print(eval_df.groupby('h')['APE'].mean())
     ```
 
-1. Bir adımın MAPE'sini hesaplayın:
+1. Bir adımın MAPE'sini hesapla:
 
     ```python
     print('One step forecast MAPE: ', (mape(eval_df[eval_df['h'] == 't+1']['prediction'], eval_df[eval_df['h'] == 't+1']['actual']))*100, '%')
     ```
 
-    Bir adım tahmin MAPE'si:  0.5570581332313952 %
+    Bir adım tahmin MAPE:  0.5570581332313952 %
 
-1. Çok adımlı tahmin MAPE'sini yazdırın:
+1. Çok adımlı tahmin MAPE'sini yazdır:
 
     ```python
     print('Multi-step forecast MAPE: ', mape(eval_df['prediction'], eval_df['actual'])*100, '%')
@@ -343,9 +340,9 @@ Modelinizin doğruluğunu, tüm tahminler üzerindeki ortalama mutlak yüzde hat
     Multi-step forecast MAPE:  1.1460048657704118 %
     ```
 
-    Güzel bir düşük sayı en iyisidir: MAPE'si 10 olan bir tahminin %10 hata payı olduğunu düşünün.
+    Düşük bir sayı en iyisidir: Unutmayın, MAPE değeri 10 olan bir tahmin %10 oranında yanlıştır.
 
-1. Ancak her zaman olduğu gibi, bu tür doğruluk ölçümünü görsel olarak görmek daha kolaydır, bu yüzden bunu çizelim:
+1. Ancak her zaman olduğu gibi, bu tür bir doğruluk ölçümünü görsel olarak görmek daha kolaydır, hadi bunu çizelim:
 
     ```python
      if(HORIZON == 1):
@@ -373,25 +370,27 @@ Modelinizin doğruluğunu, tüm tahminler üzerindeki ortalama mutlak yüzde hat
     plt.show()
     ```
 
-    ![bir zaman serisi modeli](../../../../translated_images/accuracy.2c47fe1bf15f44b3656651c84d5e2ba9b37cd929cd2aa8ab6cc3073f50570f4e.tr.png)
+    ![bir zaman serisi modeli](../../../../7-TimeSeries/2-ARIMA/images/accuracy.png)
 
-🏆 Çok güzel bir grafik, iyi doğruluğa sahip bir modeli gösteriyor. Aferin!
+🏆 Çok güzel bir grafik, iyi doğruluğa sahip bir modeli gösteriyor. Tebrikler!
 
 ---
 
 ## 🚀Meydan Okuma
 
-Bir Zaman Serisi Modelinin doğruluğunu test etmenin yollarını inceleyin. Bu derste MAPE'ye değiniyoruz, ancak kullanabileceğiniz başka yöntemler var mı? Onları araştırın ve not edin. Yardımcı bir belgeyi [burada](https://otexts.com/fpp2/accuracy.html) bulabilirsiniz.
+Bir Zaman Serisi Modelinin doğruluğunu test etmenin yollarını araştırın. Bu derste MAPE'ye değindik, ancak kullanabileceğiniz başka yöntemler var mı? Bunları araştırın ve notlar alın. Faydalı bir belge [burada](https://otexts.com/fpp2/accuracy.html) bulunabilir.
 
-## [Ders Sonrası Test](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/44/)
+## [Ders sonrası test](https://ff-quizzes.netlify.app/en/ml/)
 
 ## Gözden Geçirme ve Kendi Kendine Çalışma
 
-Bu ders, ARIMA ile Zaman Serisi Tahmininin yalnızca temel konularına değinmektedir. [Bu depo](https://microsoft.github.io/forecasting/) ve çeşitli model türlerine göz atarak Zaman Serisi modelleri oluşturmanın diğer yollarını öğrenmek için bilginizi derinleştirin.
+Bu ders, ARIMA ile Zaman Serisi Tahmininin yalnızca temel konularına değiniyor. Bilginizi derinleştirmek için [bu depo](https://microsoft.github.io/forecasting/) ve çeşitli model türlerini inceleyerek Zaman Serisi modelleri oluşturmanın diğer yollarını öğrenmek için zaman ayırın.
 
 ## Ödev
 
 [Yeni bir ARIMA modeli](assignment.md)
 
-**Feragatname**:
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki hali yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilmektedir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+---
+
+**Feragatname**:  
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul edilmez.

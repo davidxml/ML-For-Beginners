@@ -16,7 +16,7 @@ Photo by [Peddi Sai hrithik](https://unsplash.com/@shutter_log?utm_source=unspla
 
 1. [Introduction to time series forecasting](1-Introduction/README.md)
 2. [Building ARIMA time series models](2-ARIMA/README.md)
-3. [Building Support Vector Regressor for time series forcasting](3-SVR/README.md)
+3. [Building Support Vector Regressor for time series forecasting](3-SVR/README.md)
 
 ## Credits
 

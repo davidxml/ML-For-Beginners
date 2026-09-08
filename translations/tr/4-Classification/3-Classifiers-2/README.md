@@ -1,44 +1,44 @@
-# Mutfak Sınıflandırıcıları 2
+# Mutfak sınıflandırıcıları 2
 
-Bu ikinci sınıflandırma dersinde, sayısal verileri sınıflandırmanın daha fazla yolunu keşfedeceksiniz. Ayrıca bir sınıflandırıcıyı diğerine tercih etmenin sonuçlarını da öğreneceksiniz.
+Bu ikinci sınıflandırma dersinde, sayısal verileri sınıflandırmanın daha fazla yolunu keşfedeceksiniz. Ayrıca, bir sınıflandırıcıyı diğerine tercih etmenin sonuçlarını öğreneceksiniz.
 
-## [Ders Öncesi Test](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/23/)
+## [Ders öncesi quiz](https://ff-quizzes.netlify.app/en/ml/)
 
-### Ön Koşul
+### Önkoşul
 
-Önceki dersleri tamamladığınızı ve bu 4 derslik klasörün kök dizininde _cleaned_cuisines.csv_ adlı temizlenmiş bir veri kümesine sahip olduğunuzu varsayıyoruz.
+Önceki dersleri tamamladığınızı ve temizlenmiş bir veri setine sahip olduğunuzu varsayıyoruz. Bu veri seti, bu 4 derslik klasörün kökünde `data` klasöründe _cleaned_cuisines.csv_ olarak yer alıyor.
 
 ### Hazırlık
 
-_notebook.ipynb_ dosyanızı temizlenmiş veri kümesiyle yükledik ve model oluşturma sürecine hazır olacak şekilde X ve y veri çerçevelerine böldük.
+_notebook.ipynb_ dosyanız temizlenmiş veri seti ile yüklendi ve model oluşturma süreci için X ve y veri çerçevelerine bölündü.
 
 ## Bir sınıflandırma haritası
 
-Daha önce, Microsoft'un hile sayfasını kullanarak verileri sınıflandırırken sahip olduğunuz çeşitli seçenekleri öğrendiniz. Scikit-learn, tahmincilerinizi (sınıflandırıcılar için başka bir terim) daraltmanıza yardımcı olabilecek benzer ancak daha ayrıntılı bir hile sayfası sunar:
+Önceden, Microsoft'un hızlı başvuru sayfasını kullanarak veri sınıflandırmada sahip olduğunuz çeşitli seçenekler hakkında bilgi edindiniz. Scikit-learn benzer ancak daha ayrıntılı bir hızlı başvuru sunar ve bu, tahmin edicilerinizi (sınıflandırıcıların başka bir terimi) daha da daraltmanıza yardımcı olabilir:
 
-![ML Haritası Scikit-learn'den](../../../../translated_images/map.e963a6a51349425ab107b38f6c7307eb4c0d0c7ccdd2e81a5e1919292bab9ac7.tr.png)
-> İpucu: [bu haritayı çevrimiçi ziyaret edin](https://scikit-learn.org/stable/tutorial/machine_learning_map/) ve belgelere ulaşmak için yol boyunca tıklayın.
+![Scikit-learn'den ML Haritası](../../../../translated_images/tr/map.e963a6a51349425a.webp)
+> İpucu: [bu haritayı çevrimiçi ziyaret edin](https://scikit-learn.org/stable/tutorial/machine_learning_map/) ve dokümantasyona okumak için yol boyunca tıklayın.
 
 ### Plan
 
-Bu harita, verilerinizi net bir şekilde kavradığınızda çok yardımcı olur, çünkü yolları boyunca bir karara 'yürüyebilirsiniz':
+Bu harita, verilerinizi net olarak anladığınızda çok faydalıdır, çünkü karar vermek için yollarında 'yürüyebilirsiniz':
 
 - 50'den fazla örneğimiz var
 - Bir kategori tahmin etmek istiyoruz
-- Etiketlenmiş verilerimiz var
-- 100K'den az örneğimiz var
-- ✨ Bir Linear SVC seçebiliriz
-- Bu işe yaramazsa, çünkü sayısal verilerimiz var
-    - ✨ KNeighbors Classifier deneyebiliriz
-      - Bu da işe yaramazsa, ✨ SVC ve ✨ Ensemble Classifiers deneyin
+- Etiketli verilerimiz var
+- 100K'dan daha az örnek var
+- ✨ Lineer SVC seçebiliriz
+- Eğer bu işe yaramazsa, sayısal verimiz olduğundan
+    - ✨ KNeighbors Sınıflandırıcıyı deneyebiliriz
+      - Eğer bu da işe yaramazsa, ✨ SVC ve ✨ Topluluk Sınıflandırıcılarını deneyin
 
-Bu takip edilmesi gereken çok faydalı bir yoldur.
+Takip etmek için çok faydalı bir yol.
 
-## Egzersiz - verileri bölmek
+## Alıştırma - veriyi böl
 
-Bu yolu izleyerek, kullanmak için bazı kütüphaneleri ithal ederek başlamalıyız.
+Bu yolu izleyerek kullanmak için bazı kütüphaneleri içe aktarmayla başlamalıyız.
 
-1. Gerekli kütüphaneleri ithal edin:
+1. Gerekli kütüphaneleri içe aktarın:
 
     ```python
     from sklearn.neighbors import KNeighborsClassifier
@@ -50,31 +50,31 @@ Bu yolu izleyerek, kullanmak için bazı kütüphaneleri ithal ederek başlamal�
     import numpy as np
     ```
 
-1. Eğitim ve test verilerinizi bölün:
+2. Eğitim ve test verilerinizi bölün:
 
     ```python
-    X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
+    X_train, X_test, y_train, y_test = train_test_split(cuisines_features_df, cuisines_label_df, test_size=0.3)
     ```
 
-## Linear SVC sınıflandırıcı
+## Lineer SVC sınıflandırıcı
 
-Destek-Vektör kümeleme (SVC), Destek-Vektör makineleri ailesinin bir alt kümesidir (aşağıda bunlar hakkında daha fazla bilgi edinin). Bu yöntemde, etiketleri nasıl kümeleyeceğinizi belirlemek için bir 'çekirdek' seçebilirsiniz. 'C' parametresi, parametrelerin etkisini düzenleyen 'düzenleme' anlamına gelir. Çekirdek [birkaç](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC) türden biri olabilir; burada lineer SVC'den yararlanmak için onu 'lineer' olarak ayarlıyoruz. Olasılık varsayılan olarak 'false'dur; burada olasılık tahminleri toplamak için onu 'true' olarak ayarlıyoruz. Verileri karıştırmak için rastgele durumu '0' olarak ayarlıyoruz.
+Destek Vektör Kümeleme (SVC), ML tekniklerinin Destek Vektör makineleri ailesinin bir üyesidir (aşağıda bunlar hakkında daha fazla bilgi edinin). Bu yöntemde, etiketleri nasıl kümeleneceğine karar vermek için bir 'kernel' seçebilirsiniz. 'C' parametresi, parametrelerin etkisini düzenleyen 'regularizasyon'u ifade eder. Kernel [çeşitli](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC) olabilir; burada lineer SVC'den yararlanmak için 'linear' olarak ayarladık. Probability varsayılan olarak 'false' tur; burada olasılık tahminlerini toplamak için 'true' olarak ayarladık. Verileri karıştırmak için random state '0' olarak ayarlandı.
 
-### Egzersiz - bir linear SVC uygulayın
+### Alıştırma - lineer SVC uygula
 
-Bir sınıflandırıcılar dizisi oluşturarak başlayın. Test ettikçe bu diziye kademeli olarak eklemeler yapacaksınız.
+Öncelikle bir sınıflandırıcılar dizisi oluşturun. Test ettikçe bu diziye kademeli olarak ekleme yapacaksınız.
 
-1. Bir Linear SVC ile başlayın:
+1. Lineer SVC ile başlayın:
 
     ```python
     C = 10
-    # Create different classifiers.
+    # Farklı sınıflandırıcılar oluşturun.
     classifiers = {
         'Linear SVC': SVC(kernel='linear', C=C, probability=True,random_state=0)
     }
     ```
 
-2. Linear SVC kullanarak modelinizi eğitin ve bir rapor yazdırın:
+2. Modelinizi Lineer SVC kullanarak eğitin ve bir rapor yazdırın:
 
     ```python
     n_classifiers = len(classifiers)
@@ -105,15 +105,15 @@ Bir sınıflandırıcılar dizisi oluşturarak başlayın. Test ettikçe bu dizi
     weighted avg       0.79      0.79      0.79      1199
     ```
 
-## K-Neighbors sınıflandırıcı
+## K-Komşu sınıflandırıcı
 
-K-Neighbors, hem denetimli hem de denetimsiz öğrenme için kullanılabilen ML yöntemleri ailesinin bir parçasıdır. Bu yöntemde, önceden belirlenmiş sayıda nokta oluşturulur ve bu noktalar etrafında veriler toplanarak veriler için genelleştirilmiş etiketler tahmin edilebilir.
+K-Komşu, hem denetimli hem de denetimsiz öğrenmede kullanılabilen "komşular" ailesinin bir parçasıdır. Bu yöntemde, önceden tanımlanmış sayıda nokta oluşturulur ve veriler bu noktaların etrafında toplanır, böylece veri için genelleştirilmiş etiketler tahmin edilebilir.
 
-### Egzersiz - K-Neighbors sınıflandırıcı uygulayın
+### Alıştırma - K-Komşu sınıflandırıcıyı uygula
 
-Önceki sınıflandırıcı iyiydi ve verilerle iyi çalıştı, ancak belki daha iyi doğruluk elde edebiliriz. Bir K-Neighbors sınıflandırıcı deneyin.
+Önceki sınıflandırıcı iyiydi ve veri ile iyi çalıştı, ancak belki daha iyi doğruluk elde edebiliriz. Bir K-Komşu sınıflandırıcı deneyin.
 
-1. Sınıflandırıcı dizinize bir satır ekleyin (Linear SVC öğesinden sonra bir virgül ekleyin):
+1. Sınıflandırıcı dizinize bir satır ekleyin (Lineer SVC maddesinden sonra virgül koyun):
 
     ```python
     'KNN classifier': KNeighborsClassifier(C),
@@ -138,15 +138,15 @@ K-Neighbors, hem denetimli hem de denetimsiz öğrenme için kullanılabilen ML 
 
     ✅ [K-Neighbors](https://scikit-learn.org/stable/modules/neighbors.html#neighbors) hakkında bilgi edinin
 
-## Support Vector Classifier
+## Destek Vektör Sınıflandırıcı
 
-Support-Vector sınıflandırıcılar, sınıflandırma ve regresyon görevlerinde kullanılan [Support-Vector Machine](https://wikipedia.org/wiki/Support-vector_machine) ailesinin bir parçasıdır. SVM'ler, "eğitim örneklerini iki kategori arasındaki mesafeyi en üst düzeye çıkarmak için uzaydaki noktalara eşler." Sonraki veriler bu uzaya eşlenir, böylece kategorileri tahmin edilebilir.
+Destek Vektör sınıflandırıcıları, sınıflandırma ve regresyon görevleri için kullanılan ML yöntemlerinin [Destek Vektör Makinesi](https://wikipedia.org/wiki/Support-vector_machine) ailesinin bir parçasıdır. SVM'ler "eğitim örneklerini uzaydaki noktalara eşler" ve iki kategori arasındaki mesafeyi maksimize eder. Sonraki veriler bu uzaya eşlenir ve kategorileri tahmin edilir.
 
-### Egzersiz - Support Vector Classifier uygulayın
+### Alıştırma - Destek Vektör Sınıflandırıcı uygula
 
-Biraz daha iyi doğruluk için bir Support Vector Classifier deneyelim.
+Destek Vektör Sınıflandırıcı ile biraz daha iyi doğruluk elde etmeye çalışalım.
 
-1. K-Neighbors öğesinden sonra bir virgül ekleyin ve ardından bu satırı ekleyin:
+1. K-Komşu maddesinden sonra virgül koyun ve sonra bu satırı ekleyin:
 
     ```python
     'SVC': SVC(),
@@ -169,18 +169,18 @@ Biraz daha iyi doğruluk için bir Support Vector Classifier deneyelim.
     weighted avg       0.84      0.83      0.83      1199
     ```
 
-    ✅ [Support-Vectors](https://scikit-learn.org/stable/modules/svm.html#svm) hakkında bilgi edinin
+    ✅ [Destek Vektörler](https://scikit-learn.org/stable/modules/svm.html#svm) hakkında bilgi edinin
 
-## Ensemble Classifiers
+## Topluluk Sınıflandırıcıları
 
-Önceki test oldukça iyi olmasına rağmen, yolun sonuna kadar takip edelim. Özellikle Random Forest ve AdaBoost gibi bazı 'Ensemble Classifiers' deneyelim:
+Önceki test oldukça iyi olmasına rağmen, yolu sonuna kadar takip edelim. Bazı 'Topluluk Sınıflandırıcıları' deneyelim, özellikle Random Forest ve AdaBoost:
 
 ```python
   'RFST': RandomForestClassifier(n_estimators=100),
   'ADA': AdaBoostClassifier(n_estimators=100)
 ```
 
-Sonuç özellikle Random Forest için çok iyi:
+Sonuç çok iyi, özellikle Random Forest için:
 
 ```output
 Accuracy (train) for RFST: 84.5% 
@@ -210,29 +210,33 @@ Accuracy (train) for ADA: 72.4%
 weighted avg       0.73      0.72      0.72      1199
 ```
 
-✅ [Ensemble Classifiers](https://scikit-learn.org/stable/modules/ensemble.html) hakkında bilgi edinin
+✅ [Topluluk Sınıflandırıcıları](https://scikit-learn.org/stable/modules/ensemble.html) hakkında bilgi edinin
 
-Bu Makine Öğrenimi yöntemi, modelin kalitesini artırmak için birkaç temel tahmincinin tahminlerini birleştirir. Örneğimizde, Random Trees ve AdaBoost kullandık.
+Bu Makine Öğrenimi yöntemi, "birkaç temel tahmin edicinin tahminlerini birleştirerek" model kalitesini artırır. Örneğimizde Rastgele Ağaçlar ve AdaBoost kullandık.
 
-- [Random Forest](https://scikit-learn.org/stable/modules/ensemble.html#forest), aşırı uyumu önlemek için rastgelelik ile aşılanmış 'karar ağaçları'ndan oluşan bir 'orman' oluşturur. n_estimators parametresi, ağaç sayısını ayarlar.
+- [Random Forest](https://scikit-learn.org/stable/modules/ensemble.html#forest), bir ortalama yöntemi, aşırı öğrenmeyi önlemek için rastgelelikle donatılmış 'karar ağaçları' 'ormanı' oluşturur. n_estimators parametresi ağaç sayısına ayarlanır.
 
-- [AdaBoost](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html) bir veri kümesine bir sınıflandırıcı uyarlar ve ardından aynı veri kümesine bu sınıflandırıcının kopyalarını uyarlar. Yanlış sınıflandırılan öğelerin ağırlıklarına odaklanır ve bir sonraki sınıflandırıcı için uyumu düzeltmek için ayarlar.
+- [AdaBoost](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html), bir sınıflandırıcıyı verisetine uyar ve sonra bu sınıflandırıcının kopyalarını aynı verisetine uyar. Yanlış sınıflandırılmış öğelerin ağırlıklarına odaklanır ve sonraki sınıflandırıcının uymasını düzeltmek için ayarlar.
 
 ---
 
 ## 🚀Meydan Okuma
 
-Bu tekniklerin her birinin ayarlayabileceğiniz birçok parametresi vardır. Her birinin varsayılan parametrelerini araştırın ve bu parametreleri ayarlamanın modelin kalitesi için ne anlama gelebileceğini düşünün.
+Bu tekniklerin her birinin ayarlanabilecek çok sayıda parametresi vardır. Her birinin varsayılan parametrelerini araştırın ve bu parametrelerin değiştirilmesinin model kalitesi için ne anlama geleceğini düşünün.
 
-## [Ders Sonrası Test](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/24/)
+## [Ders sonrası quiz](https://ff-quizzes.netlify.app/en/ml/)
 
-## Gözden Geçirme ve Kendi Kendine Çalışma
+## Tekrar & Kendi Kendine Çalışma
 
-Bu derslerde çok fazla jargon var, bu yüzden bir dakika ayırarak [bu listeyi](https://docs.microsoft.com/dotnet/machine-learning/resources/glossary?WT.mc_id=academic-77952-leestott) gözden geçirin!
+Bu derslerde çok fazla jargon var, bu yüzden faydalı terimler [bu listeyi](https://docs.microsoft.com/dotnet/machine-learning/resources/glossary?WT.mc_id=academic-77952-leestott) gözden geçirmek için bir dakika ayırın!
 
-## Ödev 
+## Ödev
 
 [Parametre oyunu](assignment.md)
 
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:
-Bu belge, makine tabanlı AI çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen göz önünde bulundurun. Orijinal belge, kendi ana dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

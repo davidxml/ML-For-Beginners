@@ -1,33 +1,14 @@
-# CartPole Pateni
+## Ön Koşullar
 
-Önceki derste çözmekte olduğumuz problem, gerçek hayat senaryolarına pek uygulanabilir olmayan bir oyuncak problem gibi görünebilir. Ancak durum böyle değil, çünkü birçok gerçek dünya problemi de bu senaryoyu paylaşır - Satranç veya Go oynamak da dahil. Bunlar benzerdir çünkü verilen kurallara sahip bir tahtamız ve **ayrık bir durumumuz** vardır.
-
-## [Ders Öncesi Quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/47/)
-
-## Giriş
-
-Bu derste, Q-Öğrenme prensiplerini **sürekli durum** olan bir probleme uygulayacağız, yani bir veya daha fazla gerçek sayı ile verilen bir duruma. Aşağıdaki problemle ilgileneceğiz:
-
-> **Problem**: Peter kurtlardan kaçmak istiyorsa daha hızlı hareket edebilmelidir. Peter'ın kaymayı, özellikle dengeyi korumayı, Q-Öğrenme kullanarak nasıl öğrenebileceğini göreceğiz.
-
-![Büyük kaçış!](../../../../translated_images/escape.18862db9930337e3fce23a9b6a76a06445f229dadea2268e12a6f0a1fde12115.tr.png)
-
-> Peter ve arkadaşları kurtlardan kaçmak için yaratıcı oluyorlar! Görsel: [Jen Looper](https://twitter.com/jenlooper)
-
-Dengelemeyi basitleştirilmiş bir versiyon olan **CartPole** problemi olarak kullanacağız. CartPole dünyasında, sola veya sağa hareket edebilen yatay bir kaydırıcımız var ve amaç, kaydırıcının üstündeki dikey direği dengelemek.
-Ekim 2023'e kadar olan verilere dayalı olarak eğitildiniz.
-
-## Ön Gereksinimler
-
-Bu derste, farklı **ortamları** simüle etmek için **OpenAI Gym** adlı bir kütüphane kullanacağız. Bu dersin kodunu yerel olarak (örneğin, Visual Studio Code'dan) çalıştırabilirsiniz, bu durumda simülasyon yeni bir pencerede açılacaktır. Kodu çevrimiçi çalıştırırken, kodda bazı değişiklikler yapmanız gerekebilir, bu durum [burada](https://towardsdatascience.com/rendering-openai-gym-envs-on-binder-and-google-colab-536f99391cc7) açıklanmıştır.
+Bu derste, farklı **ortamları** simüle etmek için **OpenAI Gym** adlı bir kütüphane kullanacağız. Bu dersin kodunu yerel olarak (örneğin, Visual Studio Code'dan) çalıştırabilirsiniz; bu durumda simülasyon yeni bir pencerede açılacaktır. Kodu çevrimiçi çalıştırırken, [burada](https://towardsdatascience.com/rendering-openai-gym-envs-on-binder-and-google-colab-536f99391cc7) açıklandığı gibi kodda bazı değişiklikler yapmanız gerekebilir.
 
 ## OpenAI Gym
 
-Önceki derste, oyunun kuralları ve durum, kendimiz tanımladığımız `Board` sınıfı tarafından verilmişti. Burada, denge direğinin arkasındaki fiziği simüle edecek özel bir **simülasyon ortamı** kullanacağız. Takviye öğrenme algoritmalarını eğitmek için en popüler simülasyon ortamlarından biri, [OpenAI](https://openai.com/) tarafından sürdürülen [Gym](https://gym.openai.com/) adlı bir ortamdır. Bu gym'i kullanarak, cartpole simülasyonundan Atari oyunlarına kadar farklı **ortamlar** oluşturabiliriz.
+Önceki derste, oyunun kuralları ve durum, kendimiz tanımladığımız `Board` sınıfı tarafından belirlenmişti. Burada, dengeleyen direğin fiziğini simüle edecek özel bir **simülasyon ortamı** kullanacağız. Takviye öğrenme algoritmalarını eğitmek için en popüler simülasyon ortamlarından biri, [Gym](https://gym.openai.com/) olarak adlandırılır ve [OpenAI](https://openai.com/) tarafından geliştirilmiştir. Bu gym'i kullanarak, bir cartpole simülasyonundan Atari oyunlarına kadar farklı **ortamlar** oluşturabiliriz.
 
 > **Not**: OpenAI Gym tarafından sunulan diğer ortamları [buradan](https://gym.openai.com/envs/#classic_control) görebilirsiniz.
 
-İlk olarak, gym'i yükleyelim ve gerekli kütüphaneleri içe aktaralım (kod bloğu 1):
+Öncelikle gym'i yükleyelim ve gerekli kütüphaneleri içe aktaralım (kod bloğu 1):
 
 ```python
 import sys
@@ -39,15 +20,15 @@ import numpy as np
 import random
 ```
 
-## Egzersiz - bir cartpole ortamı başlatma
+## Alıştırma - bir cartpole ortamı başlatma
 
-Cartpole dengeleme problemi ile çalışmak için ilgili ortamı başlatmamız gerekiyor. Her ortam şunlarla ilişkilidir:
+Cartpole dengeleme problemiyle çalışmak için ilgili ortamı başlatmamız gerekiyor. Her ortam şu özelliklere sahiptir:
 
-- **Gözlem alanı**: Ortamdan aldığımız bilgilerin yapısını tanımlar. Cartpole problemi için, direğin konumu, hızı ve bazı diğer değerleri alırız.
+- **Gözlem alanı**: Ortamdan aldığımız bilgilerin yapısını tanımlar. Cartpole probleminde, direğin pozisyonu, hızı ve diğer bazı değerleri alırız.
 
-- **Eylem alanı**: Olası eylemleri tanımlar. Bizim durumumuzda eylem alanı ayrık olup, iki eylemden oluşur - **sol** ve **sağ**. (kod bloğu 2)
+- **Eylem alanı**: Olası eylemleri tanımlar. Bizim durumumuzda eylem alanı ayrık olup iki eylemden oluşur - **sol** ve **sağ**. (kod bloğu 2)
 
-1. Başlatmak için aşağıdaki kodu yazın:
+1. Başlatmak için şu kodu yazın:
 
     ```python
     env = gym.make("CartPole-v1")
@@ -56,11 +37,11 @@ Cartpole dengeleme problemi ile çalışmak için ilgili ortamı başlatmamız g
     print(env.action_space.sample())
     ```
 
-Ortamın nasıl çalıştığını görmek için, 100 adımlık kısa bir simülasyon çalıştıralım. Her adımda, alınacak bir eylemi sağlıyoruz - bu simülasyonda `action_space`'ten rastgele bir eylem seçiyoruz.
+Ortamın nasıl çalıştığını görmek için 100 adımlık kısa bir simülasyon çalıştıralım. Her adımda, yapılacak bir eylemi sağlıyoruz - bu simülasyonda `action_space`'den rastgele bir eylem seçiyoruz.
 
-1. Aşağıdaki kodu çalıştırın ve neye yol açtığını görün.
+1. Aşağıdaki kodu çalıştırın ve ne sonuç verdiğini görün.
 
-    ✅ Bu kodu yerel Python kurulumunda çalıştırmanız tercih edilir! (kod bloğu 3)
+    ✅ Bu kodu yerel bir Python kurulumunda çalıştırmanız önerilir! (kod bloğu 3)
 
     ```python
     env.reset()
@@ -73,9 +54,9 @@ Ortamın nasıl çalıştığını görmek için, 100 adımlık kısa bir simül
 
     Şuna benzer bir şey görmelisiniz:
 
-    ![dengesiz cartpole](../../../../8-Reinforcement/2-Gym/images/cartpole-nobalance.gif)
+    ![dengelemeyen cartpole](../../../../8-Reinforcement/2-Gym/images/cartpole-nobalance.gif)
 
-1. Simülasyon sırasında, nasıl hareket edileceğine karar vermek için gözlemler almamız gerekir. Aslında, step fonksiyonu mevcut gözlemleri, bir ödül fonksiyonunu ve simülasyonun devam edip etmeyeceğini belirten done bayrağını döndürür: (kod bloğu 4)
+1. Simülasyon sırasında, nasıl hareket edeceğimize karar vermek için gözlemler almamız gerekiyor. Aslında, step fonksiyonu mevcut gözlemleri, bir ödül fonksiyonunu ve simülasyona devam etmenin mantıklı olup olmadığını gösteren bir done bayrağını döndürür: (kod bloğu 4)
 
     ```python
     env.reset()
@@ -88,7 +69,7 @@ Ortamın nasıl çalıştığını görmek için, 100 adımlık kısa bir simül
     env.close()
     ```
 
-    Not defterinin çıktısında buna benzer bir şey görmelisiniz:
+    Notebook çıktısında buna benzer bir şey göreceksiniz:
 
     ```text
     [ 0.03403272 -0.24301182  0.02669811  0.2895829 ] -> 1.0
@@ -102,10 +83,10 @@ Ortamın nasıl çalıştığını görmek için, 100 adımlık kısa bir simül
     ```
 
     Simülasyonun her adımında döndürülen gözlem vektörü şu değerleri içerir:
-    - Arabanın konumu
-    - Arabanın hızı
+    - Kartın pozisyonu
+    - Kartın hızı
     - Direğin açısı
-    - Direğin dönme hızı
+    - Direğin dönüş hızı
 
 1. Bu sayıların minimum ve maksimum değerlerini alın: (kod bloğu 5)
 
@@ -114,30 +95,30 @@ Ortamın nasıl çalıştığını görmek için, 100 adımlık kısa bir simül
     print(env.observation_space.high)
     ```
 
-    Ayrıca, her simülasyon adımında ödül değerinin her zaman 1 olduğunu fark edebilirsiniz. Bunun nedeni, amacımızın mümkün olduğunca uzun süre hayatta kalmak, yani direği makul bir dikey pozisyonda en uzun süre tutmaktır.
+    Ayrıca, her simülasyon adımında ödül değerinin her zaman 1 olduğunu fark edebilirsiniz. Bunun nedeni, amacımızın mümkün olduğunca uzun süre hayatta kalmak, yani direği makul bir dikey pozisyonda en uzun süre tutmak olmasıdır.
 
-    ✅ Aslında, CartPole simülasyonu, 100 ardışık denemede 195 ortalama ödül elde etmeyi başardığımızda çözülmüş kabul edilir.
+    ✅ Aslında, CartPole simülasyonu, 100 ardışık deneme boyunca ortalama 195 ödül almayı başardığımızda çözülmüş kabul edilir.
 
-## Durum ayrıklaştırma
+## Durum Ayrıklaştırma
 
-Q-Öğrenme'de, her durumda ne yapacağımızı tanımlayan bir Q-Tablosu oluşturmamız gerekir. Bunu yapabilmek için, durumun **ayrık** olması gerekir, daha kesin olarak, sonlu sayıda ayrık değer içermelidir. Bu nedenle, gözlemlerimizi **ayrıklaştırmamız** ve bunları sonlu bir durum kümesine eşlememiz gerekir.
+Q-Öğrenme'de, her durumda ne yapılacağını tanımlayan bir Q-Tablosu oluşturmamız gerekiyor. Bunu yapabilmek için, durumun **ayrık** olması, daha doğrusu, sonlu sayıda ayrık değer içermesi gerekir. Bu nedenle, gözlemlerimizi bir şekilde **ayrıklaştırmamız**, onları sonlu bir durum kümesine eşlememiz gerekiyor.
 
 Bunu yapmanın birkaç yolu vardır:
 
-- **Kovalar halinde bölme**. Belirli bir değerin aralığını biliyorsak, bu aralığı bir dizi **kovaya** bölebiliriz ve ardından değeri ait olduğu kova numarasıyla değiştirebiliriz. Bu, numpy [`digitize`](https://numpy.org/doc/stable/reference/generated/numpy.digitize.html) yöntemi kullanılarak yapılabilir. Bu durumda, durum boyutunu kesin olarak bileceğiz, çünkü bu, dijitalleştirme için seçtiğimiz kova sayısına bağlı olacaktır.
+- **Aralıklara bölmek**. Belirli bir değerin aralığını biliyorsak, bu aralığı bir dizi **aralığa** bölebilir ve ardından değeri ait olduğu aralık numarasıyla değiştirebiliriz. Bu, numpy [`digitize`](https://numpy.org/doc/stable/reference/generated/numpy.digitize.html) yöntemi kullanılarak yapılabilir. Bu durumda, durum boyutunu kesin olarak bileceğiz, çünkü dijitalleştirme için seçtiğimiz aralık sayısına bağlı olacaktır.
   
-✅ Değerleri belirli bir sonlu aralığa (örneğin, -20'den 20'ye) getirmek için lineer enterpolasyon kullanabiliriz ve ardından sayıları yuvarlayarak tamsayıya dönüştürebiliriz. Bu bize durum boyutu üzerinde biraz daha az kontrol sağlar, özellikle de giriş değerlerinin kesin aralıklarını bilmiyorsak. Örneğin, bizim durumumuzda 4 değerden 2'sinin değerlerinde üst/alt sınırlar yoktur, bu da sonsuz sayıda duruma neden olabilir.
+✅ Değerleri belirli bir sonlu aralığa (örneğin, -20 ile 20 arasında) getirmek için doğrusal interpolasyon kullanabilir ve ardından sayıları yuvarlayarak tam sayılara dönüştürebiliriz. Bu, durum boyutunun büyüklüğü üzerinde biraz daha az kontrol sağlar, özellikle de giriş değerlerinin kesin aralıklarını bilmiyorsak. Örneğin, bizim durumumuzda 4 değerden 2'sinin üst/alt sınırları yoktur, bu da sonsuz sayıda duruma yol açabilir.
 
-Örneğimizde, ikinci yaklaşımı kullanacağız. Daha sonra fark edeceğiniz gibi, tanımlanmamış üst/alt sınırlara rağmen, bu değerler nadiren belirli sonlu aralıkların dışında değerler alır, bu nedenle aşırı değerli durumlar çok nadir olacaktır.
+Bizim örneğimizde ikinci yaklaşımı kullanacağız. Daha sonra fark edeceğiniz gibi, tanımsız üst/alt sınırlara rağmen, bu değerler nadiren belirli sonlu aralıkların dışına çıkar, bu nedenle aşırı değerlerle durumlar çok nadir olacaktır.
 
-1. Modelimizden gözlemi alacak ve 4 tamsayı değerinden oluşan bir demet üretecek fonksiyon burada: (kod bloğu 6)
+1. İşte modelimizden gözlemi alacak ve 4 tam sayı değerinden oluşan bir tuple üretecek fonksiyon: (kod bloğu 6)
 
     ```python
     def discretize(x):
         return tuple((x/np.array([0.25, 0.25, 0.01, 0.1])).astype(np.int))
     ```
 
-1. Kovalar kullanarak başka bir ayrıklaştırma yöntemini de inceleyelim: (kod bloğu 7)
+1. Aralıklar kullanarak başka bir ayrıklaştırma yöntemini de keşfedelim: (kod bloğu 7)
 
     ```python
     def create_bins(i,num):
@@ -153,9 +134,9 @@ Bunu yapmanın birkaç yolu vardır:
         return tuple(np.digitize(x[i],bins[i]) for i in range(4))
     ```
 
-1. Şimdi kısa bir simülasyon çalıştıralım ve bu ayrık ortam değerlerini gözlemleyelim. Hem `discretize` and `discretize_bins` kullanmayı deneyin ve fark olup olmadığını görün.
+1. Şimdi kısa bir simülasyon çalıştıralım ve bu ayrık ortam değerlerini gözlemleyelim. `discretize` ve `discretize_bins` yöntemlerini denemekten çekinmeyin ve aralarında bir fark olup olmadığını görün.
 
-    ✅ discretize_bins, kova numarasını döndürür, bu 0 tabanlıdır. Dolayısıyla, giriş değişkeninin etrafındaki değerler için 0, aralığın ortasındaki numarayı (10) döndürür. Discretize'de, çıktı değerlerinin aralığını önemsemedik, negatif olmalarına izin verdik, bu nedenle durum değerleri kaydırılmamış ve 0, 0'a karşılık gelir. (kod bloğu 8)
+    ✅ discretize_bins, 0 tabanlı olan aralık numarasını döndürür. Bu nedenle, giriş değişkeninin 0 civarındaki değerleri için aralığın ortasındaki numarayı (10) döndürür. Discretize'de, çıktı değerlerinin aralığıyla ilgilenmedik, onların negatif olmasına izin verdik, bu nedenle durum değerleri kaydırılmadı ve 0, 0'a karşılık gelir. (kod bloğu 8)
 
     ```python
     env.reset()
@@ -169,13 +150,13 @@ Bunu yapmanın birkaç yolu vardır:
     env.close()
     ```
 
-    ✅ Ortamın nasıl çalıştığını görmek istiyorsanız env.render ile başlayan satırı yorumdan çıkarın. Aksi takdirde arka planda çalıştırabilirsiniz, bu daha hızlıdır. Q-Öğrenme sürecimiz sırasında bu "görünmez" yürütmeyi kullanacağız.
+    ✅ Ortamın nasıl çalıştığını görmek istiyorsanız, env.render ile başlayan satırı yorumdan çıkarabilirsiniz. Aksi takdirde, bunu arka planda çalıştırabilirsiniz, bu daha hızlıdır. Q-Öğrenme sürecimiz sırasında bu "görünmez" yürütmeyi kullanacağız.
 
-## Q-Tablosu yapısı
+## Q-Tablosu Yapısı
 
-Önceki dersimizde, durum 0'dan 8'e kadar olan basit bir sayı çiftiydi ve bu nedenle Q-Tablosunu 8x8x2 şeklinde bir numpy tensörü ile temsil etmek uygundu. Kovalar ayrıklaştırmasını kullanırsak, durum vektörümüzün boyutu da bilinir, bu yüzden aynı yaklaşımı kullanabiliriz ve durumu 20x20x10x10x2 şeklinde bir dizi ile temsil edebiliriz (burada 2, eylem alanının boyutudur ve ilk boyutlar gözlem alanındaki her parametre için kullanmayı seçtiğimiz kova sayısına karşılık gelir).
+Önceki dersimizde, durum 0'dan 8'e kadar olan basit bir sayı çiftiydi ve bu nedenle Q-Tablosunu 8x8x2 şekline sahip bir numpy tensörü ile temsil etmek uygundu. Aralık ayrıklaştırmasını kullanırsak, durum vektörümüzün boyutu da bilinir, bu nedenle aynı yaklaşımı kullanabilir ve durumu 20x20x10x10x2 şeklinde bir dizi ile temsil edebiliriz (burada 2, eylem alanının boyutudur ve ilk boyutlar gözlem alanındaki her parametre için seçtiğimiz aralık sayısına karşılık gelir).
 
-Ancak, bazen gözlem alanının kesin boyutları bilinmez. `discretize` fonksiyonu durumunda, bazı orijinal değerler bağlanmadığı için durumun belirli sınırlar içinde kaldığından asla emin olamayabiliriz. Bu nedenle, biraz farklı bir yaklaşım kullanacağız ve Q-Tablosunu bir sözlükle temsil edeceğiz. 
+Ancak, bazen gözlem alanının kesin boyutları bilinmez. `discretize` fonksiyonu durumunda, durumumuzun belirli sınırlar içinde kalacağından asla emin olamayabiliriz, çünkü bazı orijinal değerler sınırlı değildir. Bu nedenle, biraz farklı bir yaklaşım kullanacağız ve Q-Tablosunu bir sözlükle temsil edeceğiz.
 
 1. *(state,action)* çiftini sözlük anahtarı olarak kullanın ve değer Q-Tablosu giriş değerine karşılık gelir. (kod bloğu 9)
 
@@ -187,13 +168,13 @@ Ancak, bazen gözlem alanının kesin boyutları bilinmez. `discretize` fonksiyo
         return [Q.get((state,a),0) for a in actions]
     ```
 
-    Burada, belirli bir durum için Q-Tablosu değerlerinin bir listesini döndüren `qvalues()` fonksiyonunu da tanımlıyoruz, bu tüm olası eylemlere karşılık gelir. Giriş Q-Tablosunda mevcut değilse, varsayılan olarak 0 döndüreceğiz.
+    Burada ayrıca, bir duruma karşılık gelen tüm olası eylemler için Q-Tablosu değerlerinin bir listesini döndüren `qvalues()` fonksiyonunu tanımlıyoruz. Giriş Q-Tablosunda mevcut değilse, varsayılan olarak 0 döndüreceğiz.
 
 ## Q-Öğrenmeye Başlayalım
 
 Şimdi Peter'a dengeyi öğretmeye hazırız!
 
-1. İlk olarak, bazı hiperparametreleri ayarlayalım: (kod bloğu 10)
+1. İlk olarak, bazı hiperparametreler belirleyelim: (kod bloğu 10)
 
     ```python
     # hyperparameters
@@ -202,23 +183,23 @@ Ancak, bazen gözlem alanının kesin boyutları bilinmez. `discretize` fonksiyo
     epsilon = 0.90
     ```
 
-    Burada, `alpha` is the **learning rate** that defines to which extent we should adjust the current values of Q-Table at each step. In the previous lesson we started with 1, and then decreased `alpha` to lower values during training. In this example we will keep it constant just for simplicity, and you can experiment with adjusting `alpha` values later.
+    Burada, `alpha`, Q-Tablosunun mevcut değerlerini her adımda ne ölçüde ayarlamamız gerektiğini tanımlayan **öğrenme oranıdır**. Önceki derste 1 ile başladık ve ardından `alpha` değerlerini eğitim sırasında daha düşük değerlere düşürdük. Bu örnekte basitlik adına sabit tutacağız ve daha sonra `alpha` değerlerini ayarlamayı deneyebilirsiniz.
 
-    `gamma` is the **discount factor** that shows to which extent we should prioritize future reward over current reward.
+    `gamma`, gelecekteki ödülü mevcut ödüle göre ne ölçüde önceliklendirmemiz gerektiğini gösteren **indirim faktörüdür**.
 
-    `epsilon` is the **exploration/exploitation factor** that determines whether we should prefer exploration to exploitation or vice versa. In our algorithm, we will in `epsilon` percent of the cases select the next action according to Q-Table values, and in the remaining number of cases we will execute a random action. This will allow us to explore areas of the search space that we have never seen before. 
+    `epsilon`, keşif/istismar faktörüdür ve keşfi mi yoksa istismarı mı tercih etmemiz gerektiğini belirler. Algoritmamızda, `epsilon` yüzdesinde bir sonraki eylemi Q-Tablosu değerlerine göre seçeceğiz ve kalan durumlarda rastgele bir eylem gerçekleştireceğiz. Bu, daha önce hiç görmediğimiz arama alanı bölgelerini keşfetmemizi sağlayacaktır.
 
-    ✅ In terms of balancing - choosing random action (exploration) would act as a random punch in the wrong direction, and the pole would have to learn how to recover the balance from those "mistakes"
+    ✅ Denge açısından - rastgele bir eylem seçmek (keşif), yanlış yönde rastgele bir darbe gibi davranır ve direk bu "hatalardan" dengeyi nasıl kurtaracağını öğrenmek zorunda kalır.
 
-### Improve the algorithm
+### Algoritmayı Geliştirme
 
-We can also make two improvements to our algorithm from the previous lesson:
+Önceki dersten algoritmamıza iki iyileştirme yapabiliriz:
 
-- **Calculate average cumulative reward**, over a number of simulations. We will print the progress each 5000 iterations, and we will average out our cumulative reward over that period of time. It means that if we get more than 195 point - we can consider the problem solved, with even higher quality than required.
-  
-- **Calculate maximum average cumulative result**, `Qmax`, and we will store the Q-Table corresponding to that result. When you run the training you will notice that sometimes the average cumulative result starts to drop, and we want to keep the values of Q-Table that correspond to the best model observed during training.
+- **Ortalama kümülatif ödülü hesaplama**, bir dizi simülasyon boyunca. İlerlemeyi her 5000 iterasyonda yazdıracağız ve kümülatif ödülümüzü bu süre boyunca ortalama alacağız. Bu, 195 puandan fazla alırsak - problemi çözmüş kabul edebiliriz, hatta gereken kaliteden daha yüksek bir şekilde.
 
-1. Collect all cumulative rewards at each simulation at `rewards` vektörünü daha sonra çizim için saklıyoruz. (kod bloğu  11)
+- **Maksimum ortalama kümülatif sonucu hesaplama**, `Qmax`, ve bu sonuca karşılık gelen Q-Tablosunu saklayacağız. Eğitimi çalıştırdığınızda, bazen ortalama kümülatif sonucun düşmeye başladığını fark edeceksiniz ve bu durumda, Q-Tablosunda durumu daha kötü hale getiren değerlerle zaten öğrenilmiş değerleri "bozabiliriz".
+
+1. Her simülasyondaki kümülatif ödülleri `rewards` vektöründe toplayın ve daha sonra grafik çizmek için kullanın. (kod bloğu 11)
 
     ```python
     def probs(v,eps=1e-4):
@@ -261,23 +242,23 @@ We can also make two improvements to our algorithm from the previous lesson:
 
 Bu sonuçlardan fark edebileceğiniz şeyler:
 
-- **Hedefimize yakınız**. 100'den fazla ardışık simülasyon çalıştırmasında 195 kümülatif ödül alma hedefimize çok yakınız veya aslında başardık! Daha küçük sayılar alsak bile, 5000 çalıştırma üzerinden ortalama alıyoruz ve resmi kriterde sadece 100 çalıştırma gereklidir.
-  
-- **Ödül düşmeye başlıyor**. Bazen ödül düşmeye başlar, bu da Q-Tablosunda zaten öğrenilmiş değerleri daha kötü duruma getirenlerle "bozabileceğimiz" anlamına gelir.
+- **Hedefimize çok yakınız**. 100+ ardışık simülasyon çalıştırması boyunca 195 kümülatif ödül alma hedefimize çok yakınız veya aslında bunu başarmış olabiliriz! Daha küçük sayılar alsak bile, hala bilmiyoruz, çünkü 5000 çalıştırma boyunca ortalama alıyoruz ve resmi kriterde yalnızca 100 çalıştırma gerekiyor.
 
-Bu gözlem, eğitim ilerlemesini çizdiğimizde daha net görülür.
+- **Ödül düşmeye başlıyor**. Bazen ödül düşmeye başlar, bu da Q-Tablosunda zaten öğrenilmiş değerleri daha kötü hale getiren değerlerle "bozabileceğimiz" anlamına gelir.
 
-## Eğitim İlerlemesini Çizmek
+Bu gözlem, eğitim ilerlemesini grafikle gösterdiğimizde daha net bir şekilde görülebilir.
 
-Eğitim sırasında, her yinelemede kümülatif ödül değerini `rewards` vektörüne topladık. İşte bunu yineleme sayısına karşı çizdiğimizde nasıl göründüğü:
+## Eğitim İlerlemesini Grafikle Gösterme
+
+Eğitim sırasında, her iterasyondaki kümülatif ödül değerini `rewards` vektörüne topladık. İşte bunu iterasyon numarasına karşı grafikle gösterdiğimizde nasıl göründüğü:
 
 ```python
 plt.plot(rewards)
 ```
 
-![ham ilerleme](../../../../translated_images/train_progress_raw.2adfdf2daea09c596fc786fa347a23e9aceffe1b463e2257d20a9505794823ec.tr.png)
+![ham ilerleme](../../../../8-Reinforcement/2-Gym/images/train_progress_raw.png)
 
-Bu grafikten bir şey anlamak mümkün değil, çünkü stokastik eğitim sürecinin doğası gereği eğitim oturumlarının uzunluğu büyük ölçüde değişir. Bu grafiği daha anlamlı hale getirmek için, örneğin 100 deney üzerinde **hareketli ortalama** hesaplayabiliriz. Bu, `np.convolve` kullanılarak uygun bir şekilde yapılabilir: (kod bloğu 12)
+Bu grafikten bir şey söylemek mümkün değil, çünkü stokastik eğitim sürecinin doğası gereği eğitim oturumlarının uzunluğu büyük ölçüde değişiyor. Bu grafiği daha anlamlı hale getirmek için, bir dizi deney boyunca **hareketli ortalama** hesaplayabiliriz, örneğin 100. Bu, `np.convolve` kullanılarak kolayca yapılabilir: (kod bloğu 12)
 
 ```python
 def running_average(x,window):
@@ -286,23 +267,21 @@ def running_average(x,window):
 plt.plot(running_average(rewards,100))
 ```
 
-![eğitim ilerlemesi](../../../../translated_images/train_progress_runav.c71694a8fa9ab35935aff6f109e5ecdfdbdf1b0ae265da49479a81b5fae8f0aa.tr.png)
+![eğitim ilerlemesi](../../../../8-Reinforcement/2-Gym/images/train_progress_runav.png)
 
 ## Hiperparametreleri Değiştirme
 
-Öğrenmeyi daha kararlı hale getirmek için, eğitim sırasında bazı hiperparametrelerimizi ayarlamak mantıklıdır. Özellikle:
+Öğrenmeyi daha istikrarlı hale getirmek için, eğitim sırasında bazı hiperparametrelerimizi ayarlamak mantıklı olabilir. Özellikle:
 
-- **Öğrenme oranı** için, `alpha`, we may start with values close to 1, and then keep decreasing the parameter. With time, we will be getting good probability values in the Q-Table, and thus we should be adjusting them slightly, and not overwriting completely with new values.
+- **Öğrenme oranı** için, `alpha`, 1'e yakın değerlerle başlayabilir ve ardından bu parametreyi düşürmeye devam edebiliriz. Zamanla, Q-Tablosunda iyi olasılık değerleri elde edeceğiz ve bu nedenle onları hafifçe ayarlamalı, tamamen yeni değerlerle üzerine yazmamalıyız.
 
-- **Increase epsilon**. We may want to increase the `epsilon` slowly, in order to explore less and exploit more. It probably makes sense to start with lower value of `epsilon` ve neredeyse 1'e kadar çıkın.
+- **Epsilon'u artırma**. `epsilon`'u yavaşça artırmak isteyebiliriz, böylece daha az keşif yapıp daha fazla istismar yapabiliriz. Muhtemelen daha düşük bir `epsilon` değeriyle başlamak ve neredeyse 1'e kadar çıkarmak mantıklı olacaktır.
+> **Görev 1**: Hiperparametre değerleriyle oynayın ve daha yüksek toplam ödül elde edip edemeyeceğinizi görün. 195'in üzerine çıkabiliyor musunuz?
+> **Görev 2**: Problemi resmi olarak çözmek için, 100 ardışık çalışmada 195 ortalama ödül almanız gerekiyor. Bunu eğitim sırasında ölçün ve problemi resmi olarak çözdüğünüzden emin olun!
 
-> **Görev 1**: Hiperparametre değerleriyle oynayın ve daha yüksek kümülatif ödül elde edip edemeyeceğinizi görün. 195'in üzerine çıkabiliyor musunuz?
+## Sonucu eylemde görmek
 
-> **Görev 2**: Problemi resmi olarak çözmek için, 100 ardışık çalıştırma boyunca 195 ortalama ödül almanız gerekir. Bunu eğitim sırasında ölçün ve problemi resmi olarak çözdüğünüzden emin olun!
-
-## Sonucu Aksiyon Halinde Görmek
-
-Eğitilmiş modelin nasıl davrandığını görmek ilginç olurdu. Simülasyonu çalıştıralım ve eğitim sırasında olduğu gibi Q-Tablosundaki olasılık dağılımına göre eylem seçme stratejisini izleyelim: (kod bloğu 13)
+Eğitilmiş modelin nasıl davrandığını görmek ilginç olurdu. Simülasyonu çalıştıralım ve eğitim sırasında olduğu gibi aynı eylem seçme stratejisini izleyelim, Q-Tablosundaki olasılık dağılımına göre örnekleme yapalım: (kod bloğu 13)
 
 ```python
 obs = env.reset()
@@ -318,26 +297,28 @@ env.close()
 
 Şuna benzer bir şey görmelisiniz:
 
-![dengeleyen cartpole](../../../../8-Reinforcement/2-Gym/images/cartpole-balance.gif)
+![dengeleyen bir cartpole](../../../../8-Reinforcement/2-Gym/images/cartpole-balance.gif)
 
 ---
 
 ## 🚀Meydan Okuma
 
-> **Görev 3**: Burada, Q-Tablosunun son kopyasını kullandık, bu en iyisi olmayabilir. En iyi performans gösteren Q-Tablosunu `Qbest` variable! Try the same example with the best-performing Q-Table by copying `Qbest` over to `Q` and see if you notice the difference.
+> **Görev 3**: Burada, Q-Tablosunun son kopyasını kullanıyorduk, ancak bu en iyi olanı olmayabilir. Unutmayın ki en iyi performans gösteren Q-Tablosunu `Qbest` değişkenine kaydettik! `Qbest`'i `Q` üzerine kopyalayarak en iyi performans gösteren Q-Tablosuyla aynı örneği deneyin ve farkı fark edip etmediğinizi görün.
 
-> **Task 4**: Here we were not selecting the best action on each step, but rather sampling with corresponding probability distribution. Would it make more sense to always select the best action, with the highest Q-Table value? This can be done by using `np.argmax` fonksiyonunu kullanarak, en yüksek Q-Tablosu değerine karşılık gelen eylem numarasını bulmak için bu stratejiyi uygulayın ve dengelemeyi iyileştirip iyileştirmediğini görün.
+> **Görev 4**: Burada her adımda en iyi eylemi seçmiyorduk, bunun yerine ilgili olasılık dağılımıyla örnekleme yapıyorduk. Her zaman en iyi eylemi, en yüksek Q-Tablosu değerine sahip olanı seçmek daha mantıklı olur mu? Bu, en yüksek Q-Tablosu değerine karşılık gelen eylem numarasını bulmak için `np.argmax` fonksiyonu kullanılarak yapılabilir. Bu stratejiyi uygulayın ve dengelemeyi iyileştirip iyileştirmediğini görün.
 
-## [Ders Sonrası Quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/48/)
+## [Ders sonrası sınav](https://ff-quizzes.netlify.app/en/ml/)
 
 ## Ödev
-[Bir Dağ Arabasını Eğit](assignment.md)
+[Bir Mountain Car Eğitin](assignment.md)
 
 ## Sonuç
 
-Artık ajanları yalnızca oyunun istenen durumunu tanımlayan bir ödül fonksiyonu sağlayarak ve arama alanını zekice keşfetme fırsatı vererek iyi sonuçlar elde etmeyi nasıl eğiteceğimizi öğrendik. Q-Öğrenme algoritmasını ayrık ve sürekli ortamlar durumunda başarıyla uyguladık, ancak ayrık eylemlerle.
+Artık ajanları, oyunun istenen durumunu tanımlayan bir ödül fonksiyonu sağlayarak ve arama alanını akıllıca keşfetme fırsatı vererek iyi sonuçlar elde etmeleri için nasıl eğiteceğimizi öğrendik. Q-Öğrenme algoritmasını, ayrık ve sürekli ortamlar durumunda, ancak ayrık eylemlerle başarıyla uyguladık.
 
-Eylem durumunun da sürekli olduğu ve gözlem alanının çok daha karmaşık olduğu durumları da incelemek önemlidir, örneğin Atari oyun ekranından gelen görüntü gibi. Bu tür problemler, iyi sonuçlar elde etmek için genellikle daha güçlü makine öğrenme teknikleri, örneğin sinir ağları, kullanmamızı gerektirir. Bu daha ileri konular, ileri düzey AI kursumuzun konusudur.
+Eylem durumunun da sürekli olduğu ve gözlem alanının çok daha karmaşık olduğu, örneğin Atari oyun ekranından bir görüntü gibi durumları incelemek de önemlidir. Bu tür problemler için genellikle iyi sonuçlar elde etmek amacıyla daha güçlü makine öğrenimi tekniklerini, örneğin sinir ağlarını kullanmamız gerekir. Bu daha ileri düzey konular, yaklaşan daha gelişmiş AI kursumuzun konusudur.
 
-**Feragatname**:
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki hali yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi tavsiye edilir. Bu çevirinin kullanımından doğabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+---
+
+**Feragatname**:  
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.

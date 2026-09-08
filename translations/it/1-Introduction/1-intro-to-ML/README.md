@@ -1,14 +1,14 @@
 # Introduzione al machine learning
 
-## [Quiz pre-lezione](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/1/)
+## [Quiz pre-lezione](https://ff-quizzes.netlify.app/en/ml/)
 
 ---
 
-[![ML per principianti - Introduzione al Machine Learning per Principianti](https://img.youtube.com/vi/6mSx_KJxcHI/0.jpg)](https://youtu.be/6mSx_KJxcHI "ML per principianti - Introduzione al Machine Learning per Principianti")
+[![ML per principianti - Introduzione al Machine Learning per principianti](https://img.youtube.com/vi/6mSx_KJxcHI/0.jpg)](https://youtu.be/6mSx_KJxcHI "ML per principianti - Introduzione al Machine Learning per principianti")
 
-> 🎥 Clicca sull'immagine sopra per un breve video che esplora questa lezione.
+> 🎥 Clicca sull'immagine sopra per un breve video che descrive questa lezione.
 
-Benvenuto a questo corso sul machine learning classico per principianti! Che tu sia completamente nuovo a questo argomento o un praticante esperto di ML che vuole rinfrescare alcune conoscenze, siamo felici che tu ti unisca a noi! Vogliamo creare un punto di partenza accogliente per il tuo studio del ML e saremmo felici di valutare, rispondere e incorporare i tuoi [feedback](https://github.com/microsoft/ML-For-Beginners/discussions).
+Benvenuto a questo corso sul machine learning classico per principianti! Che tu sia completamente nuovo in questo argomento, o un praticante esperto di ML che vuole ripassare un settore, siamo felici di averti con noi! Vogliamo creare un punto di partenza amichevole per il tuo studio del ML e saremmo felici di valutare, rispondere e incorporare i tuoi [commenti](https://github.com/microsoft/ML-For-Beginners/discussions).
 
 [![Introduzione al ML](https://img.youtube.com/vi/h0e2HAPTGF4/0.jpg)](https://youtu.be/h0e2HAPTGF4 "Introduzione al ML")
 
@@ -17,132 +17,141 @@ Benvenuto a questo corso sul machine learning classico per principianti! Che tu 
 ---
 ## Iniziare con il machine learning
 
-Prima di iniziare con questo curriculum, è necessario configurare il computer e prepararlo per eseguire notebook localmente.
+Prima di iniziare con questo curriculum, devi avere il tuo computer configurato e pronto per eseguire notebook localmente.
 
-- **Configura il tuo computer con questi video**. Utilizza i seguenti link per imparare [come installare Python](https://youtu.be/CXZYvNRIAKM) nel tuo sistema e [configurare un editor di testo](https://youtu.be/EU8eayHWoZg) per lo sviluppo.
-- **Impara Python**. È anche raccomandato avere una comprensione di base di [Python](https://docs.microsoft.com/learn/paths/python-language/?WT.mc_id=academic-77952-leestott), un linguaggio di programmazione utile per i data scientist che utilizziamo in questo corso.
-- **Impara Node.js e JavaScript**. Utilizziamo anche JavaScript alcune volte in questo corso quando costruiamo applicazioni web, quindi sarà necessario avere [node](https://nodejs.org) e [npm](https://www.npmjs.com/) installati, oltre a [Visual Studio Code](https://code.visualstudio.com/) disponibile per lo sviluppo sia in Python che in JavaScript.
-- **Crea un account GitHub**. Dato che ci hai trovato qui su [GitHub](https://github.com), potresti già avere un account, ma se non lo hai, creane uno e poi fork questo curriculum per utilizzarlo da solo. (Sentiti libero di darci una stella, 😊)
-- **Esplora Scikit-learn**. Familiarizza con [Scikit-learn](https://scikit-learn.org/stable/user_guide.html), un insieme di librerie ML che citiamo in queste lezioni.
+- **Configura la tua macchina con questi video**. Usa i seguenti link per imparare [come installare Python](https://youtu.be/CXZYvNRIAKM) nel tuo sistema e [impostare un editor di testo](https://youtu.be/EU8eayHWoZg) per lo sviluppo.
+- **Impara Python**. È anche consigliato avere una conoscenza base di [Python](https://docs.microsoft.com/learn/paths/python-language/?WT.mc_id=academic-77952-leestott), un linguaggio di programmazione utile per i data scientist che usiamo in questo corso.
+- **Impara Node.js e JavaScript**. Usiamo anche JavaScript alcune volte in questo corso nello sviluppo di app web, quindi dovrai avere installati [node](https://nodejs.org) e [npm](https://www.npmjs.com/) e avere a disposizione [Visual Studio Code](https://code.visualstudio.com/) sia per lo sviluppo in Python che in JavaScript.
+- **Crea un account GitHub**. Poiché ci hai trovato qui su [GitHub](https://github.com), potresti già avere un account, ma se no, creane uno e poi fai un fork di questo curriculum per usarlo da te. (Sentiti libero di lasciarci una stella, anche 😊)
+- **Esplora Scikit-learn**. Familiarizza con [Scikit-learn](https://scikit-learn.org/stable/user_guide.html), un insieme di librerie ML che usiamo come riferimento in queste lezioni.
 
 ---
 ## Cos'è il machine learning?
 
-Il termine 'machine learning' è uno dei più popolari e frequentemente utilizzati al giorno d'oggi. È molto probabile che tu abbia sentito questo termine almeno una volta se hai una certa familiarità con la tecnologia, indipendentemente dal settore in cui lavori. La meccanica del machine learning, tuttavia, è un mistero per la maggior parte delle persone. Per un principiante del machine learning, l'argomento può a volte sembrare travolgente. Pertanto, è importante capire cosa sia realmente il machine learning e impararlo passo dopo passo, attraverso esempi pratici.
+Il termine 'machine learning' è uno dei termini più popolari e frequentemente usati oggi. C'è una seria possibilità che tu abbia sentito questo termine almeno una volta se hai qualche familiarità con la tecnologia, indipendentemente dal dominio in cui lavori. Le meccaniche del machine learning, tuttavia, sono un mistero per la maggior parte delle persone. Per un principiante di machine learning, l'argomento può a volte sembrare schiacciante. Perciò, è importante capire cosa sia realmente il machine learning e impararlo passo dopo passo, attraverso esempi pratici.
 
 ---
-## La curva dell'hype
+## La curva dell'entusiasmo
 
-![curva dell'hype del ml](../../../../translated_images/hype.07183d711a17aafe70915909a0e45aa286ede136ee9424d418026ab00fec344c.it.png)
+![curva hype ml](../../../../translated_images/it/hype.07183d711a17aafe.webp)
 
-> Google Trends mostra la recente 'curva dell'hype' del termine 'machine learning'
+> Google Trends mostra la recente 'curva dell'entusiasmo' del termine 'machine learning'
 
 ---
 ## Un universo misterioso
 
-Viviamo in un universo pieno di misteri affascinanti. Grandi scienziati come Stephen Hawking, Albert Einstein e molti altri hanno dedicato la loro vita alla ricerca di informazioni significative che svelino i misteri del mondo che ci circonda. Questa è la condizione umana dell'apprendimento: un bambino umano impara nuove cose e scopre la struttura del suo mondo anno dopo anno mentre cresce fino all'età adulta.
+Viviamo in un universo pieno di affascinanti misteri. Grandi scienziati come Stephen Hawking, Albert Einstein e molti altri hanno dedicato la loro vita alla ricerca di informazioni significative che svelino i misteri del mondo intorno a noi. Questa è la condizione umana dell'apprendimento: un bambino umano impara cose nuove e scopre la struttura del suo mondo anno dopo anno mentre cresce fino all'età adulta.
 
 ---
 ## Il cervello del bambino
 
-Il cervello e i sensi di un bambino percepiscono i fatti del loro ambiente e gradualmente apprendono i modelli nascosti della vita che aiutano il bambino a creare regole logiche per identificare i modelli appresi. Il processo di apprendimento del cervello umano rende gli esseri umani la creatura vivente più sofisticata di questo mondo. Imparare continuamente scoprendo modelli nascosti e poi innovando su quei modelli ci permette di migliorare sempre di più nel corso della nostra vita. Questa capacità di apprendimento e capacità di evoluzione è correlata a un concetto chiamato [plasticità cerebrale](https://www.simplypsychology.org/brain-plasticity.html). Superficialmente, possiamo tracciare alcune somiglianze motivazionali tra il processo di apprendimento del cervello umano e i concetti del machine learning.
+Il cervello e i sensi di un bambino percepiscono i fatti del loro ambiente e gradualmente imparano i modelli nascosti della vita che aiutano il bambino a creare regole logiche per identificare i modelli appresi. Il processo di apprendimento del cervello umano rende gli esseri umani la creatura vivente più sofisticata di questo mondo. Imparare continuamente scoprendo modelli nascosti e poi innovando su quei modelli ci rende migliori e migliori durante tutta la nostra vita. Questa capacità di apprendimento e la capacità di evoluzione sono legate a un concetto chiamato [plasticità cerebrale](https://www.simplypsychology.org/brain-plasticity.html). In superficie, possiamo tracciare alcune similitudini motivazionali tra il processo di apprendimento del cervello umano e i concetti di machine learning.
 
 ---
 ## Il cervello umano
 
-Il [cervello umano](https://www.livescience.com/29365-human-brain.html) percepisce le cose dal mondo reale, elabora le informazioni percepite, prende decisioni razionali e compie determinate azioni in base alle circostanze. Questo è ciò che chiamiamo comportarsi in modo intelligente. Quando programmiamo una copia del processo comportamentale intelligente su una macchina, viene chiamata intelligenza artificiale (AI).
+Il [cervello umano](https://www.livescience.com/29365-human-brain.html) percepisce cose dal mondo reale, elabora le informazioni percepite, prende decisioni razionali e compie determinate azioni basate sulle circostanze. Questo è ciò che chiamiamo comportamento intelligente. Quando programmiamo una versione simile del processo comportamentale intelligente in una macchina, si chiama intelligenza artificiale (AI).
 
 ---
-## Alcuni termini
+## Alcuna terminologia
 
-Sebbene i termini possano essere confusi, il machine learning (ML) è un sottoinsieme importante dell'intelligenza artificiale. **ML si occupa di utilizzare algoritmi specializzati per scoprire informazioni significative e trovare modelli nascosti dai dati percepiti per corroborare il processo decisionale razionale**.
+Sebbene i termini possano essere confusi, il machine learning (ML) è un sottoinsieme importante dell'intelligenza artificiale. **Il ML si occupa di utilizzare algoritmi specializzati per scoprire informazioni significative e trovare modelli nascosti dai dati percepiti per corroborare il processo decisionale razionale**.
 
 ---
 ## AI, ML, Deep Learning
 
-![AI, ML, deep learning, data science](../../../../translated_images/ai-ml-ds.537ea441b124ebf69c144a52c0eb13a7af63c4355c2f92f440979380a2fb08b8.it.png)
+![AI, ML, deep learning, data science](../../../../translated_images/it/ai-ml-ds.537ea441b124ebf6.webp)
 
 > Un diagramma che mostra le relazioni tra AI, ML, deep learning e data science. Infografica di [Jen Looper](https://twitter.com/jenlooper) ispirata da [questa grafica](https://softwareengineering.stackexchange.com/questions/366996/distinction-between-ai-ml-neural-networks-deep-learning-and-data-mining)
 
 ---
-## Concetti da coprire
+## Concetti da trattare
 
-In questo curriculum, copriremo solo i concetti fondamentali del machine learning che un principiante deve conoscere. Copriamo ciò che chiamiamo 'machine learning classico' utilizzando principalmente Scikit-learn, un'ottima libreria che molti studenti utilizzano per imparare le basi. Per comprendere concetti più ampi di intelligenza artificiale o deep learning, è indispensabile una solida conoscenza fondamentale del machine learning, e quindi vorremmo offrirla qui.
+In questo curriculum, copriremo solo i concetti fondamentali del machine learning che un principiante deve conoscere. Tratteremo ciò che chiamiamo 'machine learning classico' principalmente usando Scikit-learn, un'ottima libreria usata da molti studenti per apprendere le basi. Per comprendere concetti più ampi di intelligenza artificiale o deep learning, una solida conoscenza fondamentale del machine learning è indispensabile, e quindi vogliamo offrirla qui.
 
 ---
 ## In questo corso imparerai:
 
-- concetti fondamentali del machine learning
+- i concetti fondamentali del machine learning
 - la storia del ML
 - ML e equità
-- tecniche di regressione ML
-- tecniche di classificazione ML
-- tecniche di clustering ML
-- tecniche di elaborazione del linguaggio naturale ML
-- tecniche di previsione delle serie temporali ML
+- tecniche ML di regressione
+- tecniche ML di classificazione
+- tecniche ML di clustering
+- tecniche ML di elaborazione del linguaggio naturale
+- tecniche ML di previsione di serie temporali
 - apprendimento per rinforzo
-- applicazioni reali per ML
+- applicazioni reali del ML
 
 ---
-## Cosa non copriremo
+## Cosa non tratteremo
 
 - deep learning
 - reti neurali
 - AI
 
-Per migliorare l'esperienza di apprendimento, eviteremo le complessità delle reti neurali, del 'deep learning' - costruzione di modelli a più strati utilizzando reti neurali - e dell'AI, che discuteremo in un curriculum diverso. Offriremo anche un prossimo curriculum di data science per concentrarci su quell'aspetto di questo campo più ampio.
+Per offrire una migliore esperienza di apprendimento, eviteremo le complessità delle reti neurali, del 'deep learning' - costruzione di modelli a molti strati usando reti neurali - e dell'AI, che tratteremo in un curriculum differente. Offriremo anche un prossimo curriculum di data science per focalizzarci su quell'aspetto di questo campo più ampio.
 
 ---
 ## Perché studiare il machine learning?
 
-Il machine learning, da una prospettiva di sistemi, è definito come la creazione di sistemi automatizzati che possono apprendere modelli nascosti dai dati per aiutare a prendere decisioni intelligenti.
+Il machine learning, da una prospettiva sistemica, è definito come la creazione di sistemi automatizzati che possono apprendere modelli nascosti dai dati per aiutare a prendere decisioni intelligenti.
 
-Questa motivazione è vagamente ispirata da come il cervello umano apprende certe cose basate sui dati che percepisce dal mondo esterno.
+Questa motivazione è liberamente ispirata a come il cervello umano impara certe cose basandosi sui dati percepiti dal mondo esterno.
 
-✅ Pensa per un minuto perché un'azienda vorrebbe provare a utilizzare strategie di machine learning rispetto a creare un motore basato su regole codificate.
+✅ Pensa per un attimo al motivo per cui un'azienda vorrebbe usare strategie di machine learning piuttosto che creare un motore basato su regole hard-coded.
+
+---
+## Perché la qualità dei dati è importante
+
+Dati di alta qualità migliorano le prestazioni del modello. Dati scadenti o rumorosi possono portare a previsioni inaccurate, anche usando algoritmi avanzati di machine learning.
 
 ---
 ## Applicazioni del machine learning
 
-Le applicazioni del machine learning sono ora quasi ovunque e sono tanto onnipresenti quanto i dati che fluiscono nelle nostre società, generati dai nostri smartphone, dispositivi connessi e altri sistemi. Considerando l'immenso potenziale degli algoritmi di machine learning all'avanguardia, i ricercatori hanno esplorato la loro capacità di risolvere problemi reali multidimensionali e multidisciplinari con grandi risultati positivi.
+Le applicazioni del machine learning sono ora praticamente ovunque, e sono ubiquitarie come i dati che fluiscono nelle nostre società, generati dai nostri smartphone, dispositivi connessi e altri sistemi. Considerando l'immenso potenziale degli algoritmi di machine learning all'avanguardia, i ricercatori hanno esplorato la loro capacità di risolvere problemi reali multidimensionali e multidisciplinari con ottimi risultati positivi.
 
 ---
 ## Esempi di ML applicato
 
-**Puoi utilizzare il machine learning in molti modi**:
+**Puoi usare il machine learning in molti modi**:
 
-- Per prevedere la probabilità di una malattia dalla storia medica di un paziente o dai rapporti.
-- Per sfruttare i dati meteorologici per prevedere eventi meteorologici.
-- Per comprendere il sentimento di un testo.
-- Per rilevare notizie false per fermare la diffusione della propaganda.
+- Per prevedere la probabilità di malattia dalla storia medica o dai referti di un paziente.
+- Per sfruttare i dati meteo per prevedere eventi meteorologici.
+- Per capire il sentimento di un testo.
+- Per rilevare fake news e fermare la diffusione della propaganda.
 
-Finanza, economia, scienze della terra, esplorazione spaziale, ingegneria biomedica, scienze cognitive e persino campi nelle scienze umane hanno adattato il machine learning per risolvere i problemi ardui e pesanti di elaborazione dei dati del loro settore.
+Finanza, economia, scienze della terra, esplorazione spaziale, ingegneria biomedica, scienze cognitive e persino campi delle scienze umane hanno adattato il machine learning per risolvere i complessi problemi di elaborazione dati dei loro domini.
 
 ---
 ## Conclusione
 
-Il machine learning automatizza il processo di scoperta dei modelli trovando intuizioni significative dai dati reali o generati. Si è dimostrato altamente prezioso in applicazioni aziendali, sanitarie e finanziarie, tra le altre.
+Il machine learning automatizza il processo di scoperta dei modelli trovando intuizioni significative dai dati reali o generati. Si è dimostrato altamente prezioso in ambito aziendale, sanitario e finanziario, tra gli altri.
 
-Nel prossimo futuro, comprendere le basi del machine learning sarà un must per le persone di qualsiasi settore a causa della sua adozione diffusa.
+Nel prossimo futuro, comprendere le basi del machine learning sarà indispensabile per persone di qualsiasi settore a causa della sua diffusione.
 
 ---
 # 🚀 Sfida
 
-Disegna, su carta o utilizzando un'app online come [Excalidraw](https://excalidraw.com/), la tua comprensione delle differenze tra AI, ML, deep learning e data science. Aggiungi alcune idee sui problemi che ciascuna di queste tecniche è brava a risolvere.
+Disegna, su carta o usando un'app online come [Excalidraw](https://excalidraw.com/), la tua comprensione delle differenze tra AI, ML, deep learning e data science. Aggiungi alcune idee su problemi che ciascuna di queste tecniche è adatta a risolvere.
 
-# [Quiz post-lezione](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/2/)
+# [Quiz post-lezione](https://ff-quizzes.netlify.app/en/ml/)
 
 ---
-# Revisione & Studio Autonomo
+# Revisione & Autoapprendimento
 
-Per saperne di più su come puoi lavorare con gli algoritmi ML nel cloud, segui questo [Percorso di Apprendimento](https://docs.microsoft.com/learn/paths/create-no-code-predictive-models-azure-machine-learning/?WT.mc_id=academic-77952-leestott).
+Per imparare di più su come lavorare con algoritmi ML nel cloud, segui questo [Percorso di apprendimento](https://docs.microsoft.com/learn/paths/create-no-code-predictive-models-azure-machine-learning/?WT.mc_id=academic-77952-leestott).
 
-Segui un [Percorso di Apprendimento](https://docs.microsoft.com/learn/modules/introduction-to-machine-learning/?WT.mc_id=academic-77952-leestott) sui fondamenti del ML.
+Segui un [Percorso di apprendimento](https://docs.microsoft.com/learn/modules/introduction-to-machine-learning/?WT.mc_id=academic-77952-leestott) sulle basi del ML.
 
 ---
 # Compito
 
-[Inizia a lavorare](assignment.md)
+[Inizia subito](assignment.md)
 
-**Disclaimer**: 
-Questo documento è stato tradotto utilizzando servizi di traduzione automatizzata basati su intelligenza artificiale. Sebbene ci impegniamo per l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale umana. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall'uso di questa traduzione.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire la precisione, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall’uso di questa traduzione.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

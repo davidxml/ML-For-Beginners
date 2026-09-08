@@ -2,13 +2,15 @@
 
 ## Talimatlar
 
-Artık NLTK kullanarak metne duygu durumu atamayı öğrendiğinize göre, farklı bir veri seti deneyin. Muhtemelen bununla ilgili bazı veri işleme işlemleri yapmanız gerekecek, bu yüzden bir notebook oluşturun ve düşünce sürecinizi belgeleyin. Ne keşfettiniz?
+NLTK kullanarak metne duygu analizi yapmayı öğrendiğinize göre, şimdi farklı bir veri seti deneyin. Muhtemelen veri üzerinde biraz işlem yapmanız gerekecek, bu yüzden bir notebook oluşturun ve düşünce sürecinizi belgeleyin. Ne keşfediyorsunuz?
 
-## Değerlendirme Kriterleri
+## Değerlendirme Ölçütleri
 
-| Kriterler | Mükemmel                                                                                                         | Yeterli                                  | Geliştirme Gerekli      |
-| -------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ---------------------- |
-|          | Duygu durumunun nasıl atandığını açıklayan iyi belgelenmiş hücrelerle eksiksiz bir notebook ve veri seti sunulur | Notebook iyi açıklamalardan yoksundur | Notebook hatalıdır |
+| Kriter   | Örnek Niteliğinde                                                                                                 | Yeterli                                  | Geliştirmeye İhtiyacı Var |
+| -------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | -------------------------- |
+|          | Tam bir notebook ve veri seti sunulmuş, duygu analizinin nasıl yapıldığını açıklayan iyi belgelenmiş hücreler      | Notebook'ta iyi açıklamalar eksik         | Notebook hatalı            |
 
-**Feragatname**: 
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki hali yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilmektedir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+---
+
+**Feragatname**:  
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.

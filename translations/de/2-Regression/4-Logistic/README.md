@@ -1,77 +1,77 @@
 # Logistische Regression zur Vorhersage von Kategorien
 
-![Infografik: Logistische vs. lineare Regression](../../../../translated_images/linear-vs-logistic.ba180bf95e7ee66721ba10ebf2dac2666acbd64a88b003c83928712433a13c7d.de.png)
+![Infografik: Logistische vs. Lineare Regression](../../../../2-Regression/4-Logistic/images/linear-vs-logistic.png)
 
-## [Vorlesungsquiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/15/)
+## [Quiz vor der Lektion](https://ff-quizzes.netlify.app/en/ml/)
 
 > ### [Diese Lektion ist auch in R verfügbar!](../../../../2-Regression/4-Logistic/solution/R/lesson_4.html)
 
 ## Einführung
 
-In dieser letzten Lektion über Regression, eine der grundlegenden _klassischen_ ML-Techniken, werfen wir einen Blick auf die logistische Regression. Diese Technik verwenden Sie, um Muster zur Vorhersage binärer Kategorien zu entdecken. Ist diese Süßigkeit Schokolade oder nicht? Ist diese Krankheit ansteckend oder nicht? Wird dieser Kunde dieses Produkt wählen oder nicht? 
+In dieser letzten Lektion zur Regression, einer der grundlegenden _klassischen_ ML-Techniken, werfen wir einen Blick auf die logistische Regression. Diese Technik wird verwendet, um Muster zu erkennen und binäre Kategorien vorherzusagen. Ist diese Süßigkeit Schokolade oder nicht? Ist diese Krankheit ansteckend oder nicht? Wird dieser Kunde dieses Produkt wählen oder nicht?
 
 In dieser Lektion lernen Sie:
 
-- Eine neue Bibliothek zur Datenvisualisierung
+- Eine neue Bibliothek für Datenvisualisierung
 - Techniken für die logistische Regression
 
-✅ Vertiefen Sie Ihr Verständnis für die Arbeit mit dieser Art von Regression in diesem [Lernmodul](https://docs.microsoft.com/learn/modules/train-evaluate-classification-models?WT.mc_id=academic-77952-leestott)
+✅ Vertiefen Sie Ihr Verständnis für diese Art der Regression in diesem [Learn-Modul](https://docs.microsoft.com/learn/modules/train-evaluate-classification-models?WT.mc_id=academic-77952-leestott)
 
 ## Voraussetzungen
 
-Nachdem wir mit den Kürbis-Daten gearbeitet haben, sind wir nun genug damit vertraut, um zu erkennen, dass es eine binäre Kategorie gibt, mit der wir arbeiten können: `Color`.
+Nachdem wir mit den Kürbisdaten gearbeitet haben, sind wir nun vertraut genug, um zu erkennen, dass es eine binäre Kategorie gibt, mit der wir arbeiten können: `Color`.
 
-Lassen Sie uns ein Modell für die logistische Regression erstellen, um vorherzusagen, _welche Farbe ein gegebener Kürbis wahrscheinlich hat_ (orange 🎃 oder weiß 👻).
+Lassen Sie uns ein Modell der logistischen Regression erstellen, um vorherzusagen, _welche Farbe ein gegebener Kürbis wahrscheinlich hat_ (orange 🎃 oder weiß 👻), basierend auf einigen Variablen.
 
-> Warum sprechen wir in einer Lektion über binäre Klassifizierung im Kontext von Regression? Nur aus sprachlichen Gründen, da die logistische Regression [tatsächlich eine Klassifizierungsmethode](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression) ist, wenn auch eine auf linearer Basis. Lernen Sie in der nächsten Lektion über andere Möglichkeiten, Daten zu klassifizieren.
+> Warum sprechen wir in einer Lektion über Regression über binäre Klassifikation? Nur aus sprachlicher Bequemlichkeit, da die logistische Regression [eigentlich eine Klassifikationsmethode](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression) ist, wenn auch eine lineare. Lernen Sie in der nächsten Lektion weitere Methoden zur Klassifikation von Daten kennen.
 
-## Definieren Sie die Frage
+## Die Frage definieren
 
-Für unsere Zwecke werden wir dies als binär ausdrücken: 'Weiß' oder 'Nicht Weiß'. In unserem Datensatz gibt es auch eine Kategorie 'gestreift', aber es gibt nur wenige Instanzen davon, daher werden wir sie nicht verwenden. Sie verschwindet, sobald wir null-Werte aus dem Datensatz entfernen.
+Für unsere Zwecke formulieren wir dies als Binärfrage: 'Weiß' oder 'Nicht Weiß'. Es gibt auch eine 'gestreifte' Kategorie in unserem Datensatz, aber es gibt nur wenige Instanzen davon, sodass wir sie nicht verwenden. Sie verschwindet ohnehin, sobald wir Nullwerte aus dem Datensatz entfernen.
 
-> 🎃 Interessante Tatsache: Manchmal nennen wir weiße Kürbisse 'Gespenst'-Kürbisse. Sie sind nicht sehr leicht zu schnitzen, daher sind sie nicht so beliebt wie die orangen, aber sie sehen cool aus! Wir könnten unsere Frage also auch umformulieren: 'Gespenst' oder 'Nicht Gespenst'. 👻
+> 🎃 Fun Fact: Weiße Kürbisse werden manchmal als 'Geisterkürbisse' bezeichnet. Sie sind nicht sehr leicht zu schnitzen, daher sind sie nicht so beliebt wie die orangefarbenen, aber sie sehen cool aus! Wir könnten unsere Frage also auch so formulieren: 'Geist' oder 'Nicht Geist'. 👻
 
 ## Über logistische Regression
 
-Die logistische Regression unterscheidet sich in einigen wichtigen Punkten von der linearen Regression, die Sie zuvor gelernt haben.
+Die logistische Regression unterscheidet sich in einigen wichtigen Punkten von der linearen Regression, die Sie zuvor kennengelernt haben.
 
 [![ML für Anfänger - Verständnis der logistischen Regression für maschinelles Lernen](https://img.youtube.com/vi/KpeCT6nEpBY/0.jpg)](https://youtu.be/KpeCT6nEpBY "ML für Anfänger - Verständnis der logistischen Regression für maschinelles Lernen")
 
-> 🎥 Klicken Sie auf das Bild oben für eine kurze Videoübersicht über die logistische Regression.
+> 🎥 Klicken Sie auf das Bild oben für eine kurze Videoübersicht zur logistischen Regression.
 
-### Binäre Klassifizierung
+### Binäre Klassifikation
 
-Die logistische Regression bietet nicht die gleichen Funktionen wie die lineare Regression. Erstere bietet eine Vorhersage über eine binäre Kategorie ("weiß oder nicht weiß"), während letztere in der Lage ist, kontinuierliche Werte vorherzusagen, zum Beispiel, gegeben den Ursprung eines Kürbisses und die Erntezeit, _wie viel sein Preis steigen wird_.
+Die logistische Regression bietet nicht dieselben Funktionen wie die lineare Regression. Erstere liefert eine Vorhersage über eine binäre Kategorie ("weiß oder nicht weiß"), während letztere kontinuierliche Werte vorhersagen kann, z. B. wie stark der Preis eines Kürbisses basierend auf seinem Ursprung und der Erntezeit steigen wird.
 
-![Kürbis-Klassifikationsmodell](../../../../translated_images/pumpkin-classifier.562771f104ad5436b87d1c67bca02a42a17841133556559325c0a0e348e5b774.de.png)
+![Kürbis-Klassifikationsmodell](../../../../2-Regression/4-Logistic/images/pumpkin-classifier.png)
 > Infografik von [Dasani Madipalli](https://twitter.com/dasani_decoded)
 
-### Weitere Klassifikationen
+### Andere Klassifikationen
 
-Es gibt andere Arten von logistischen Regressionen, einschließlich multinomialer und ordinaler:
+Es gibt andere Arten der logistischen Regression, darunter multinomial und ordinal:
 
-- **Multinomial**, die mehr als eine Kategorie umfasst - "Orange, Weiß und Gestreift".
-- **Ordinal**, die geordnete Kategorien umfasst, nützlich, wenn wir unsere Ergebnisse logisch ordnen wollen, wie unsere Kürbisse, die nach einer endlichen Anzahl von Größen (mini, sm, med, lg, xl, xxl) geordnet sind.
+- **Multinomial**, bei der es mehr als eine Kategorie gibt - "Orange, Weiß und Gestreift".
+- **Ordinal**, bei der es geordnete Kategorien gibt, nützlich, wenn wir unsere Ergebnisse logisch ordnen möchten, wie z. B. unsere Kürbisse, die nach einer endlichen Anzahl von Größen (mini, sm, med, lg, xl, xxl) geordnet sind.
 
-![Multinomiale vs. ordinale Regression](../../../../translated_images/multinomial-vs-ordinal.36701b4850e37d86c9dd49f7bef93a2f94dbdb8fe03443eb68f0542f97f28f29.de.png)
+![Multinomiale vs. ordinale Regression](../../../../2-Regression/4-Logistic/images/multinomial-vs-ordinal.png)
 
-### Variablen MÜSSEN nicht korrelieren
+### Variablen MÜSSEN NICHT korrelieren
 
-Erinnern Sie sich, wie die lineare Regression besser mit korrelierten Variablen funktionierte? Die logistische Regression ist das Gegenteil - die Variablen müssen sich nicht anpassen. Das funktioniert für diese Daten, die einigermaßen schwache Korrelationen aufweisen.
+Erinnern Sie sich, wie die lineare Regression mit stärker korrelierten Variablen besser funktionierte? Bei der logistischen Regression ist das Gegenteil der Fall – die Variablen müssen nicht übereinstimmen. Das funktioniert gut für diese Daten, die nur schwache Korrelationen aufweisen.
 
 ### Sie benötigen viele saubere Daten
 
-Die logistische Regression liefert genauere Ergebnisse, wenn Sie mehr Daten verwenden; unser kleiner Datensatz ist für diese Aufgabe nicht optimal, also denken Sie daran.
+Die logistische Regression liefert genauere Ergebnisse, wenn Sie mehr Daten verwenden; unser kleiner Datensatz ist für diese Aufgabe nicht optimal, also behalten Sie das im Hinterkopf.
 
-[![ML für Anfänger - Datenanalyse und -vorbereitung für logistische Regression](https://img.youtube.com/vi/B2X4H9vcXTs/0.jpg)](https://youtu.be/B2X4H9vcXTs "ML für Anfänger - Datenanalyse und -vorbereitung für logistische Regression")
+[![ML für Anfänger - Datenanalyse und Vorbereitung für logistische Regression](https://img.youtube.com/vi/B2X4H9vcXTs/0.jpg)](https://youtu.be/B2X4H9vcXTs "ML für Anfänger - Datenanalyse und Vorbereitung für logistische Regression")
 
-> 🎥 Klicken Sie auf das Bild oben für eine kurze Videoübersicht über die Vorbereitung von Daten für die lineare Regression
+> 🎥 Klicken Sie auf das Bild oben für eine kurze Videoübersicht zur Datenvorbereitung für die lineare Regression.
 
-✅ Denken Sie über die Arten von Daten nach, die sich gut für die logistische Regression eignen würden.
+✅ Überlegen Sie, welche Arten von Daten sich gut für die logistische Regression eignen würden.
 
 ## Übung - Daten bereinigen
 
-Zuerst reinigen Sie die Daten ein wenig, indem Sie null-Werte entfernen und nur einige der Spalten auswählen:
+Bereinigen Sie zunächst die Daten ein wenig, indem Sie Nullwerte entfernen und nur einige der Spalten auswählen:
 
 1. Fügen Sie den folgenden Code hinzu:
 
@@ -83,19 +83,19 @@ Zuerst reinigen Sie die Daten ein wenig, indem Sie null-Werte entfernen und nur 
     pumpkins.dropna(inplace=True)
     ```
 
-    Sie können jederzeit einen Blick auf Ihr neues DataFrame werfen:
+    Sie können sich jederzeit Ihren neuen DataFrame ansehen:
 
     ```python
     pumpkins.info
     ```
 
-### Visualisierung - kategoriales Diagramm
+### Visualisierung - Kategorisches Diagramm
 
-Bis jetzt haben Sie das [Starter-Notebook](../../../../2-Regression/4-Logistic/notebook.ipynb) mit Kürbisdaten erneut geladen und es so bereinigt, dass ein Datensatz mit einigen Variablen, einschließlich `Color`, erhalten bleibt. Lassen Sie uns das DataFrame im Notebook mit einer anderen Bibliothek visualisieren: [Seaborn](https://seaborn.pydata.org/index.html), die auf Matplotlib basiert, das wir zuvor verwendet haben. 
+Bis jetzt haben Sie das [Starter-Notebook](../../../../2-Regression/4-Logistic/notebook.ipynb) mit Kürbisdaten geladen und bereinigt, sodass ein Datensatz mit einigen Variablen, einschließlich `Color`, erhalten bleibt. Lassen Sie uns den DataFrame im Notebook mit einer anderen Bibliothek visualisieren: [Seaborn](https://seaborn.pydata.org/index.html), das auf Matplotlib basiert, das wir zuvor verwendet haben.
 
-Seaborn bietet einige tolle Möglichkeiten, Ihre Daten zu visualisieren. Zum Beispiel können Sie die Verteilungen der Daten für jede `Variety` und `Color` in einem kategorialen Diagramm vergleichen.
+Seaborn bietet einige interessante Möglichkeiten, Ihre Daten zu visualisieren. Zum Beispiel können Sie die Verteilungen der Daten für jede `Variety` und `Color` in einem kategorischen Diagramm vergleichen.
 
-1. Erstellen Sie ein solches Diagramm, indem Sie `catplot` function, using our pumpkin data `pumpkins` verwenden und eine Farbzuordnung für jede Kürbiskategorie (orange oder weiß) angeben:
+1. Erstellen Sie ein solches Diagramm mit der Funktion `catplot`, indem Sie unsere Kürbisdaten `pumpkins` verwenden und eine Farbzuordnung für jede Kürbiskategorie (orange oder weiß) angeben:
 
     ```python
     import seaborn as sns
@@ -111,18 +111,19 @@ Seaborn bietet einige tolle Möglichkeiten, Ihre Daten zu visualisieren. Zum Bei
     )
     ```
 
-    ![Ein Gitter von visualisierten Daten](../../../../translated_images/pumpkins_catplot_1.c55c409b71fea2ecc01921e64b91970542101f90bcccfa4aa3a205db8936f48b.de.png)
+    ![Ein Raster visualisierter Daten](../../../../2-Regression/4-Logistic/images/pumpkins_catplot_1.png)
 
-    Durch die Beobachtung der Daten können Sie sehen, wie die Farb-Daten mit der Sorte zusammenhängt.
+    Durch die Beobachtung der Daten können Sie sehen, wie die Farbdaten mit der Sorte zusammenhängen.
 
-    ✅ Angesichts dieses kategorialen Diagramms, welche interessanten Erkundungen können Sie sich vorstellen?
+    ✅ Welche interessanten Untersuchungen können Sie sich anhand dieses kategorischen Diagramms vorstellen?
 
-### Datenvorverarbeitung: Merkmals- und Label-Codierung
-Unser Kürbis-Datensatz enthält Zeichenfolgenwerte für alle seine Spalten. Mit kategorialen Daten zu arbeiten, ist für Menschen intuitiv, aber nicht für Maschinen. Maschinenlernalgorithmen funktionieren gut mit Zahlen. Daher ist die Codierung ein sehr wichtiger Schritt in der Datenvorverarbeitungsphase, da sie es uns ermöglicht, kategoriale Daten in numerische Daten umzuwandeln, ohne Informationen zu verlieren. Eine gute Codierung führt zum Aufbau eines guten Modells.
+### Datenvorverarbeitung: Feature- und Label-Encoding
 
-Für die Merkmalscodierung gibt es zwei Haupttypen von Codierern:
+Unser Kürbisdatensatz enthält Zeichenkettenwerte für alle Spalten. Mit kategorialen Daten zu arbeiten, ist für Menschen intuitiv, aber nicht für Maschinen. Maschinelle Lernalgorithmen arbeiten gut mit Zahlen. Deshalb ist Encoding ein sehr wichtiger Schritt in der Datenvorverarbeitungsphase, da es uns ermöglicht, kategoriale Daten in numerische Daten umzuwandeln, ohne Informationen zu verlieren. Gutes Encoding führt zu einem guten Modell.
 
-1. Ordinaler Codierer: Er eignet sich gut für ordinale Variablen, bei denen die Daten einer logischen Reihenfolge folgen, wie die Spalte `Item Size` in unserem Datensatz. Er erstellt eine Zuordnung, sodass jede Kategorie durch eine Zahl repräsentiert wird, die der Reihenfolge der Kategorie in der Spalte entspricht.
+Für das Feature-Encoding gibt es zwei Haupttypen von Encodern:
+
+1. Ordinal-Encoder: Er eignet sich gut für ordinale Variablen, also kategoriale Variablen, deren Daten einer logischen Reihenfolge folgen, wie die Spalte `Item Size` in unserem Datensatz. Er erstellt eine Zuordnung, sodass jede Kategorie durch eine Zahl dargestellt wird, die der Reihenfolge der Kategorie in der Spalte entspricht.
 
     ```python
     from sklearn.preprocessing import OrdinalEncoder
@@ -132,7 +133,7 @@ Für die Merkmalscodierung gibt es zwei Haupttypen von Codierern:
     ordinal_encoder = OrdinalEncoder(categories=item_size_categories)
     ```
 
-2. Kategorialer Codierer: Er eignet sich gut für nominale Variablen, bei denen die Daten keiner logischen Reihenfolge folgen, wie alle Merkmale, die nicht `Item Size` in unserem Datensatz sind. Es handelt sich um eine One-Hot-Codierung, was bedeutet, dass jede Kategorie durch eine binäre Spalte repräsentiert wird: Die codierte Variable ist gleich 1, wenn der Kürbis zu dieser Sorte gehört, und 0, andernfalls.
+2. Kategorischer Encoder: Er eignet sich gut für nominale Variablen, also kategoriale Variablen, deren Daten keiner logischen Reihenfolge folgen, wie alle Merkmale außer `Item Size` in unserem Datensatz. Es handelt sich um ein One-Hot-Encoding, was bedeutet, dass jede Kategorie durch eine binäre Spalte dargestellt wird: Die codierte Variable ist gleich 1, wenn der Kürbis zu dieser Sorte gehört, und 0, andernfalls.
 
     ```python
     from sklearn.preprocessing import OneHotEncoder
@@ -140,7 +141,8 @@ Für die Merkmalscodierung gibt es zwei Haupttypen von Codierern:
     categorical_features = ['City Name', 'Package', 'Variety', 'Origin']
     categorical_encoder = OneHotEncoder(sparse_output=False)
     ```
-Dann wird `ColumnTransformer` verwendet, um mehrere Codierer in einem einzigen Schritt zu kombinieren und sie auf die entsprechenden Spalten anzuwenden.
+
+Dann wird `ColumnTransformer` verwendet, um mehrere Encoder in einem einzigen Schritt zu kombinieren und auf die entsprechenden Spalten anzuwenden.
 
 ```python
     from sklearn.compose import ColumnTransformer
@@ -153,7 +155,8 @@ Dann wird `ColumnTransformer` verwendet, um mehrere Codierer in einem einzigen S
     ct.set_output(transform='pandas')
     encoded_features = ct.fit_transform(pumpkins)
 ```
-Andererseits verwenden wir zur Codierung des Labels die `LabelEncoder`-Klasse von Scikit-learn, die eine Hilfsklasse ist, um Labels zu normalisieren, sodass sie nur Werte zwischen 0 und n_classes-1 (hier 0 und 1) enthalten.
+
+Zum Codieren des Labels verwenden wir die `LabelEncoder`-Klasse von Scikit-learn, eine Dienstprogrammsklasse, die dabei hilft, Labels zu normalisieren, sodass sie nur Werte zwischen 0 und n_classes-1 (hier 0 und 1) enthalten.
 
 ```python
     from sklearn.preprocessing import LabelEncoder
@@ -161,17 +164,18 @@ Andererseits verwenden wir zur Codierung des Labels die `LabelEncoder`-Klasse vo
     label_encoder = LabelEncoder()
     encoded_label = label_encoder.fit_transform(pumpkins['Color'])
 ```
-Sobald wir die Merkmale und das Label codiert haben, können wir sie in ein neues DataFrame `encoded_pumpkins` zusammenführen.
+
+Sobald wir die Merkmale und das Label codiert haben, können wir sie in einem neuen DataFrame `encoded_pumpkins` zusammenführen.
 
 ```python
     encoded_pumpkins = encoded_features.assign(Color=encoded_label)
 ```
-✅ Was sind die Vorteile der Verwendung eines ordinalen Codierers für die `Item Size` column?
 
-### Analyse relationships between variables
+✅ Welche Vorteile hat die Verwendung eines Ordinal-Encoders für die Spalte `Item Size`?
 
-Now that we have pre-processed our data, we can analyse the relationships between the features and the label to grasp an idea of how well the model will be able to predict the label given the features.
-The best way to perform this kind of analysis is plotting the data. We'll be using again the Seaborn `catplot` function, to visualize the relationships between `Item Size`,  `Variety` und `Color` in einem kategorialen Diagramm. Um die Daten besser darzustellen, verwenden wir die codierte `Item Size` column and the unencoded `Variety`-Spalte.
+### Beziehungen zwischen Variablen analysieren
+
+Nachdem wir unsere Daten vorverarbeitet haben, können wir die Beziehungen zwischen den Merkmalen und dem Label analysieren, um eine Vorstellung davon zu bekommen, wie gut das Modell das Label anhand der Merkmale vorhersagen kann. Die beste Möglichkeit, diese Art von Analyse durchzuführen, ist das Plotten der Daten. Wir verwenden erneut die Seaborn-Funktion `catplot`, um die Beziehungen zwischen `Item Size`, `Variety` und `Color` in einem kategorischen Diagramm zu visualisieren. Um die Daten besser darzustellen, verwenden wir die codierte Spalte `Item Size` und die nicht codierte Spalte `Variety`.
 
 ```python
     palette = {
@@ -190,15 +194,16 @@ The best way to perform this kind of analysis is plotting the data. We'll be usi
     g.set(xlabel="Item Size", ylabel="").set(xlim=(0,6))
     g.set_titles(row_template="{row_name}")
 ```
-![Ein Kategoriendiagramm von visualisierten Daten](../../../../translated_images/pumpkins_catplot_2.87a354447880b3889278155957f8f60dd63db4598de5a6d0fda91c334d31f9f1.de.png)
 
-### Verwenden Sie ein Schwarmdiagramm
+![Ein kategorisches Diagramm visualisierter Daten](../../../../2-Regression/4-Logistic/images/pumpkins_catplot_2.png)
 
-Da die Farbe eine binäre Kategorie ist (Weiß oder Nicht), benötigt sie 'einen [spezialisierten Ansatz](https://seaborn.pydata.org/tutorial/categorical.html?highlight=bar) zur Visualisierung'. Es gibt andere Möglichkeiten, die Beziehung dieser Kategorie zu anderen Variablen zu visualisieren. 
+### Verwenden Sie einen Swarm-Plot
+
+Da `Color` eine binäre Kategorie (Weiß oder Nicht Weiß) ist, benötigt sie 'einen [spezialisierten Ansatz](https://seaborn.pydata.org/tutorial/categorical.html?highlight=bar) zur Visualisierung'. Es gibt andere Möglichkeiten, die Beziehung dieser Kategorie zu anderen Variablen zu visualisieren.
 
 Sie können Variablen nebeneinander mit Seaborn-Diagrammen visualisieren.
 
-1. Versuchen Sie ein 'Schwarm'-Diagramm, um die Verteilung der Werte anzuzeigen:
+1. Probieren Sie einen 'Swarm'-Plot aus, um die Verteilung der Werte darzustellen:
 
     ```python
     palette = {
@@ -208,27 +213,27 @@ Sie können Variablen nebeneinander mit Seaborn-Diagrammen visualisieren.
     sns.swarmplot(x="Color", y="ord__Item Size", data=encoded_pumpkins, palette=palette)
     ```
 
-    ![Ein Schwarm von visualisierten Daten](../../../../translated_images/swarm_2.efeacfca536c2b577dc7b5f8891f28926663fbf62d893ab5e1278ae734ca104e.de.png)
+    ![Ein Schwarm visualisierter Daten](../../../../2-Regression/4-Logistic/images/swarm_2.png)
 
-**Achtung**: Der obige Code könnte eine Warnung erzeugen, da Seaborn nicht in der Lage ist, eine so große Anzahl von Datenpunkten in einem Schwarmdiagramm darzustellen. Eine mögliche Lösung besteht darin, die Größe des Markers zu verringern, indem Sie den Parameter 'size' verwenden. Seien Sie sich jedoch bewusst, dass dies die Lesbarkeit des Diagramms beeinträchtigt.
+**Achtung**: Der obige Code könnte eine Warnung generieren, da Seaborn Schwierigkeiten hat, eine solche Menge an Datenpunkten in einem Swarm-Plot darzustellen. Eine mögliche Lösung ist, die Größe der Marker mit dem Parameter 'size' zu verringern. Beachten Sie jedoch, dass dies die Lesbarkeit des Diagramms beeinträchtigen kann.
 
 > **🧮 Zeigen Sie mir die Mathematik**
 >
-> Die logistische Regression basiert auf dem Konzept der 'maximalen Wahrscheinlichkeit' unter Verwendung von [Sigmoid-Funktionen](https://wikipedia.org/wiki/Sigmoid_function). Eine 'Sigmoid-Funktion' sieht in einem Diagramm wie eine 'S'-Form aus. Sie nimmt einen Wert und ordnet ihn irgendwo zwischen 0 und 1 zu. Ihre Kurve wird auch als 'logistische Kurve' bezeichnet. Ihre Formel sieht so aus:
+> Die logistische Regression basiert auf dem Konzept der 'Maximum-Likelihood' unter Verwendung von [Sigmoid-Funktionen](https://wikipedia.org/wiki/Sigmoid_function). Eine 'Sigmoid-Funktion' sieht auf einem Diagramm wie eine 'S'-Form aus. Sie nimmt einen Wert und ordnet ihn einem Bereich zwischen 0 und 1 zu. Ihre Kurve wird auch als 'logistische Kurve' bezeichnet. Ihre Formel sieht so aus:
 >
-> ![logistische Funktion](../../../../translated_images/sigmoid.8b7ba9d095c789cf72780675d0d1d44980c3736617329abfc392dfc859799704.de.png)
+> ![logistische Funktion](../../../../2-Regression/4-Logistic/images/sigmoid.png)
 >
-> wobei der Mittelpunkt der Sigmoidfunktion am Punkt 0 von x liegt, L der maximale Wert der Kurve ist und k die Steilheit der Kurve darstellt. Wenn das Ergebnis der Funktion mehr als 0,5 beträgt, erhält das betreffende Label die Klasse '1' der binären Wahl. Andernfalls wird es als '0' klassifiziert.
+> Dabei liegt der Mittelpunkt der Sigmoid-Funktion bei x = 0, L ist der maximale Wert der Kurve, und k ist die Steilheit der Kurve. Wenn das Ergebnis der Funktion größer als 0,5 ist, wird das Label der Klasse '1' der binären Wahl zugeordnet. Andernfalls wird es als '0' klassifiziert.
 
 ## Erstellen Sie Ihr Modell
 
-Ein Modell zu erstellen, um diese binäre Klassifizierung zu finden, ist in Scikit-learn überraschend unkompliziert.
+Ein Modell zu erstellen, um diese binäre Klassifikation zu finden, ist in Scikit-learn überraschend einfach.
 
-[![ML für Anfänger - Logistische Regression zur Klassifizierung von Daten](https://img.youtube.com/vi/MmZS2otPrQ8/0.jpg)](https://youtu.be/MmZS2otPrQ8 "ML für Anfänger - Logistische Regression zur Klassifizierung von Daten")
+[![ML für Anfänger - Logistische Regression zur Klassifikation von Daten](https://img.youtube.com/vi/MmZS2otPrQ8/0.jpg)](https://youtu.be/MmZS2otPrQ8 "ML für Anfänger - Logistische Regression zur Klassifikation von Daten")
 
-> 🎥 Klicken Sie auf das Bild oben für eine kurze Videoübersicht über den Aufbau eines Modells für die lineare Regression
+> 🎥 Klicken Sie auf das Bild oben für eine kurze Videoübersicht zum Erstellen eines linearen Regressionsmodells.
 
-1. Wählen Sie die Variablen aus, die Sie in Ihrem Klassifikationsmodell verwenden möchten, und teilen Sie die Trainings- und Testdaten auf, indem Sie `train_test_split()` aufrufen:
+1. Wählen Sie die Variablen aus, die Sie in Ihrem Klassifikationsmodell verwenden möchten, und teilen Sie die Trainings- und Testdatensätze mit `train_test_split()` auf:
 
     ```python
     from sklearn.model_selection import train_test_split
@@ -240,7 +245,7 @@ Ein Modell zu erstellen, um diese binäre Klassifizierung zu finden, ist in Scik
     
     ```
 
-2. Jetzt können Sie Ihr Modell trainieren, indem Sie `fit()` mit Ihren Trainingsdaten aufrufen und das Ergebnis ausgeben:
+2. Jetzt können Sie Ihr Modell trainieren, indem Sie `fit()` mit Ihren Trainingsdaten aufrufen, und das Ergebnis ausgeben:
 
     ```python
     from sklearn.metrics import f1_score, classification_report 
@@ -255,7 +260,7 @@ Ein Modell zu erstellen, um diese binäre Klassifizierung zu finden, ist in Scik
     print('F1-score: ', f1_score(y_test, predictions))
     ```
 
-    Werfen Sie einen Blick auf die Punktzahl Ihres Modells. Es ist nicht schlecht, wenn man bedenkt, dass Sie nur etwa 1000 Datenzeilen haben:
+    Werfen Sie einen Blick auf die Bewertung Ihres Modells. Es ist nicht schlecht, wenn man bedenkt, dass Sie nur etwa 1000 Datenzeilen haben:
 
     ```output
                        precision    recall  f1-score   support
@@ -276,73 +281,72 @@ Ein Modell zu erstellen, um diese binäre Klassifizierung zu finden, ist in Scik
         F1-score:  0.7457627118644068
     ```
 
-## Bessere Verständlichkeit durch eine Verwirrungsmatrix
+## Bessere Verständlichkeit durch eine Konfusionsmatrix
 
-Während Sie einen Punktbericht über [Begriffe](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html?highlight=classification_report#sklearn.metrics.classification_report) erhalten können, indem Sie die oben genannten Elemente ausdrucken, können Sie Ihr Modell möglicherweise leichter verstehen, indem Sie eine [Verwirrungsmatrix](https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix) verwenden, um zu verstehen, wie das Modell funktioniert.
+Während Sie einen Bewertungsbericht [Begriffe](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html?highlight=classification_report#sklearn.metrics.classification_report) durch die oben genannten Elemente ausgeben können, könnten Sie Ihr Modell leichter verstehen, indem Sie eine [Konfusionsmatrix](https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix) verwenden, um zu analysieren, wie das Modell abschneidet.
 
-> 🎓 Eine '[Verwirrungsmatrix](https://wikipedia.org/wiki/Confusion_matrix)' (oder 'Fehlermatrix') ist eine Tabelle, die die wahren und falschen Positiven und Negativen Ihres Modells ausdrückt und somit die Genauigkeit der Vorhersagen misst.
+> 🎓 Eine '[Konfusionsmatrix](https://wikipedia.org/wiki/Confusion_matrix)' (oder 'Fehlermatrix') ist eine Tabelle, die die tatsächlichen vs. vorhergesagten positiven und negativen Werte Ihres Modells darstellt und so die Genauigkeit der Vorhersagen misst.
 
-1. Um eine Verwirrungsmatrix zu verwenden, rufen Sie `confusion_matrix()` auf:
+1. Um eine Konfusionsmatrix zu verwenden, rufen Sie `confusion_matrix()` auf:
 
     ```python
     from sklearn.metrics import confusion_matrix
     confusion_matrix(y_test, predictions)
     ```
 
-    Werfen Sie einen Blick auf die Verwirrungsmatrix Ihres Modells:
+    Werfen Sie einen Blick auf die Konfusionsmatrix Ihres Modells:
 
     ```output
     array([[162,   4],
            [ 11,  22]])
     ```
 
-In Scikit-learn sind die Zeilen der Verwirrungsmatrix (Achse 0) die tatsächlichen Labels und die Spalten (Achse 1) die vorhergesagten Labels.
+In Scikit-learn sind die Zeilen (Achse 0) die tatsächlichen Labels und die Spalten (Achse 1) die vorhergesagten Labels.
 
 |       |   0   |   1   |
 | :---: | :---: | :---: |
 |   0   |  TN   |  FP   |
 |   1   |  FN   |  TP   |
 
-Was passiert hier? Angenommen, unser Modell wird gebeten, Kürbisse zwischen zwei binären Kategorien zu klassifizieren, Kategorie 'weiß' und Kategorie 'nicht-weiß'.
+Was passiert hier? Angenommen, unser Modell soll Kürbisse zwischen zwei binären Kategorien klassifizieren: Kategorie 'weiß' und Kategorie 'nicht-weiß'.
 
-- Wenn Ihr Modell einen Kürbis als nicht weiß vorhersagt und er tatsächlich zur Kategorie 'nicht-weiß' gehört, nennen wir das ein echtes negatives Ergebnis, dargestellt durch die obere linke Zahl.
-- Wenn Ihr Modell einen Kürbis als weiß vorhersagt und er tatsächlich zur Kategorie 'nicht-weiß' gehört, nennen wir das ein falsches negatives Ergebnis, dargestellt durch die untere linke Zahl. 
-- Wenn Ihr Modell einen Kürbis als nicht weiß vorhersagt und er tatsächlich zur Kategorie 'weiß' gehört, nennen wir das ein falsches positives Ergebnis, dargestellt durch die obere rechte Zahl. 
-- Wenn Ihr Modell einen Kürbis als weiß vorhersagt und er tatsächlich zur Kategorie 'weiß' gehört, nennen wir das ein echtes positives Ergebnis, dargestellt durch die untere rechte Zahl.
+- Wenn Ihr Modell einen Kürbis als nicht weiß vorhersagt und er tatsächlich zur Kategorie 'nicht-weiß' gehört, nennen wir das ein True Negative (TN), dargestellt durch die Zahl oben links.
+- Wenn Ihr Modell einen Kürbis als weiß vorhersagt und er tatsächlich zur Kategorie 'nicht-weiß' gehört, nennen wir das ein False Negative (FN), dargestellt durch die Zahl unten links.
+- Wenn Ihr Modell einen Kürbis als nicht weiß vorhersagt und er tatsächlich zur Kategorie 'weiß' gehört, nennen wir das ein False Positive (FP), dargestellt durch die Zahl oben rechts.
+- Wenn Ihr Modell einen Kürbis als weiß vorhersagt und er tatsächlich zur Kategorie 'weiß' gehört, nennen wir das ein True Positive (TP), dargestellt durch die Zahl unten rechts.
 
-Wie Sie sich vielleicht denken können, ist es besser, eine größere Anzahl echter positiver und negativer Ergebnisse und eine niedrigere Anzahl falscher positiver und negativer Ergebnisse zu haben, was darauf hindeutet, dass das Modell besser abschneidet.
+Wie Sie sich denken können, ist es wünschenswert, eine größere Anzahl von True Positives und True Negatives sowie eine geringere Anzahl von False Positives und False Negatives zu haben, was darauf hinweist, dass das Modell besser abschneidet.
+Wie hängt die Konfusionsmatrix mit Präzision und Recall zusammen? Denken Sie daran, dass der oben gedruckte Klassifikationsbericht eine Präzision von 0,85 und einen Recall von 0,67 zeigte.
 
-Wie steht die Verwirrungsmatrix im Zusammenhang mit Präzision und Rückruf? Denken Sie daran, der oben ausgegebene Klassifikationsbericht zeigte eine Präzision (0.85) und einen Rückruf (0.67).
+Präzision = tp / (tp + fp) = 22 / (22 + 4) = 0,8461538461538461
 
-Präzision = tp / (tp + fp) = 22 / (22 + 4) = 0.8461538461538461
+Recall = tp / (tp + fn) = 22 / (22 + 11) = 0,6666666666666666
 
-Rückruf = tp / (tp + fn) = 22 / (22 + 11) = 0.6666666666666666
+✅ F: Wie hat das Modell laut der Konfusionsmatrix abgeschnitten? A: Gar nicht schlecht; es gibt eine gute Anzahl an True Negatives, aber auch ein paar False Negatives.
 
-✅ Q: Wie hat das Modell laut der Verwirrungsmatrix abgeschnitten? A: Nicht schlecht; es gibt eine gute Anzahl echter negativer Ergebnisse, aber auch einige falsche negative Ergebnisse. 
+Lassen Sie uns die Begriffe, die wir zuvor gesehen haben, mit Hilfe der Zuordnung von TP/TN und FP/FN in der Konfusionsmatrix noch einmal betrachten:
 
-Lassen Sie uns die Begriffe, die wir zuvor gesehen haben, mithilfe der Zuordnung der Verwirrungsmatrix von TP/TN und FP/FN erneut betrachten:
+🎓 Präzision: TP/(TP + FP) Der Anteil relevanter Instanzen unter den abgerufenen Instanzen (z. B. welche Labels korrekt zugeordnet wurden)
 
-🎓 Präzision: TP/(TP + FP) Der Anteil relevanter Instanzen unter den abgerufenen Instanzen (z. B. welche Labels gut gekennzeichnet waren)
+🎓 Recall: TP/(TP + FN) Der Anteil relevanter Instanzen, die abgerufen wurden, unabhängig davon, ob sie korrekt zugeordnet wurden oder nicht
 
-🎓 Rückruf: TP/(TP + FN) Der Anteil relevanter Instanzen, die abgerufen wurden, unabhängig davon, ob sie gut gekennzeichnet waren oder nicht
+🎓 f1-Score: (2 * Präzision * Recall)/(Präzision + Recall) Ein gewichteter Durchschnitt von Präzision und Recall, wobei 1 das Beste und 0 das Schlechteste ist
 
-🎓 f1-Score: (2 * Präzision * Rückruf)/(Präzision + Rückruf) Ein gewichteter Durchschnitt von Präzision und Rückruf, wobei 1 das Beste und 0 das Schlechteste ist
+🎓 Support: Die Anzahl der Vorkommen jedes abgerufenen Labels
 
-🎓 Unterstützung: Die Anzahl der Vorkommen jedes abgerufenen Labels
+🎓 Genauigkeit: (TP + TN)/(TP + TN + FP + FN) Der Prozentsatz der Labels, die für eine Stichprobe korrekt vorhergesagt wurden.
 
-🎓 Genauigkeit: (TP + TN)/(TP + TN + FP + FN) Der Prozentsatz der Labels, die genau für eine Stichprobe vorhergesagt wurden.
+🎓 Makro-Durchschnitt: Die Berechnung des ungewichteten Durchschnitts der Metriken für jedes Label, ohne das Ungleichgewicht der Labels zu berücksichtigen.
 
-🎓 Makro-Durchschnitt: Die Berechnung des ungewichteten Mittelwerts der Metriken für jedes Label, wobei das Ungleichgewicht der Labels nicht berücksichtigt wird.
+🎓 Gewichteter Durchschnitt: Die Berechnung des Durchschnitts der Metriken für jedes Label, wobei das Ungleichgewicht der Labels durch Gewichtung nach ihrem Support (der Anzahl der tatsächlichen Instanzen für jedes Label) berücksichtigt wird.
 
-🎓 Gewichteter Durchschnitt: Die Berechnung des Mittelwerts der Metriken für jedes Label unter Berücksichtigung des Ungleichgewichts der Labels, indem sie nach ihrer Unterstützung (der Anzahl der echten Instanzen für jedes Label) gewichtet werden.
+✅ Können Sie sich vorstellen, welche Metrik Sie beobachten sollten, wenn Sie die Anzahl der False Negatives reduzieren möchten?
 
-✅ Können Sie sich vorstellen, welche Metrik Sie beobachten sollten, wenn Sie möchten, dass Ihr Modell die Anzahl der falschen negativen Ergebnisse reduziert?
+## Visualisierung der ROC-Kurve dieses Modells
 
-## Visualisieren Sie die ROC-Kurve dieses Modells
+[![ML für Anfänger - Analyse der Leistung von logistischer Regression mit ROC-Kurven](https://img.youtube.com/vi/GApO575jTA0/0.jpg)](https://youtu.be/GApO575jTA0 "ML für Anfänger - Analyse der Leistung von logistischer Regression mit ROC-Kurven")
 
-[![ML für Anfänger - Analyse der Leistung der logistischen Regression mit ROC-Kurven](https://img.youtube.com/vi/GApO575jTA0/0.jpg)](https://youtu.be/GApO575jTA0 "ML für Anfänger - Analyse der Leistung der logistischen Regression mit ROC-Kurven")
-
-> 🎥 Klicken Sie auf das Bild oben für eine kurze Videoübersicht über ROC-Kurven
+> 🎥 Klicken Sie auf das obige Bild für eine kurze Videoübersicht zu ROC-Kurven
 
 Lassen Sie uns eine weitere Visualisierung durchführen, um die sogenannte 'ROC'-Kurve zu sehen:
 
@@ -364,7 +368,36 @@ plt.title('ROC Curve')
 plt.show()
 ```
 
-Verwenden Sie Matplotlib, um die [Receiver Operating Characteristic](https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html?highlight=roc) oder ROC des Modells zu zeichnen. ROC-Kurven werden häufig verwendet, um einen Überblick über die Ausgabe eines Klassifizierers in Bezug auf echte vs. falsche positive Ergebnisse zu erhalten. "ROC-Kurven zeigen typischerweise die wahre positive Rate auf der Y-Achse und die falsche positive Rate auf der X-Achse." Daher ist die Steilheit der Kurve und der Abstand zwischen der Mittellinie und der Kurve von Bedeutung: Sie möchten eine Kur
+Verwenden Sie Matplotlib, um die [Receiver Operating Characteristic](https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html?highlight=roc) oder ROC des Modells zu zeichnen. ROC-Kurven werden oft verwendet, um die Ausgabe eines Klassifikators in Bezug auf seine True Positives und False Positives zu betrachten. "ROC-Kurven zeigen typischerweise die True Positive Rate auf der Y-Achse und die False Positive Rate auf der X-Achse." Daher sind die Steilheit der Kurve und der Abstand zwischen der Mittellinie und der Kurve wichtig: Sie möchten eine Kurve, die schnell nach oben und über die Linie verläuft. In unserem Fall gibt es zunächst False Positives, und dann verläuft die Linie korrekt nach oben und darüber:
+
+![ROC](../../../../2-Regression/4-Logistic/images/ROC_2.png)
+
+Verwenden Sie abschließend die [`roc_auc_score` API](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html?highlight=roc_auc#sklearn.metrics.roc_auc_score) von Scikit-learn, um die tatsächliche 'Fläche unter der Kurve' (AUC) zu berechnen:
+
+```python
+auc = roc_auc_score(y_test,y_scores[:,1])
+print(auc)
+```
+Das Ergebnis ist `0.9749908725812341`. Da die AUC von 0 bis 1 reicht, möchten Sie einen hohen Wert erzielen, da ein Modell, das zu 100 % korrekte Vorhersagen trifft, eine AUC von 1 hat; in diesem Fall ist das Modell _ziemlich gut_.
+
+In zukünftigen Lektionen zu Klassifikationen werden Sie lernen, wie Sie iterativ die Werte Ihres Modells verbessern können. Aber für den Moment: Herzlichen Glückwunsch! Sie haben diese Lektionen zur Regression abgeschlossen!
+
+---
+## 🚀Herausforderung
+
+Es gibt noch viel mehr über logistische Regression zu entdecken! Aber der beste Weg zu lernen ist, zu experimentieren. Finden Sie einen Datensatz, der sich für diese Art der Analyse eignet, und erstellen Sie ein Modell damit. Was lernen Sie dabei? Tipp: Probieren Sie [Kaggle](https://www.kaggle.com/search?q=logistic+regression+datasets) für interessante Datensätze aus.
+
+## [Quiz nach der Vorlesung](https://ff-quizzes.netlify.app/en/ml/)
+
+## Rückblick & Selbststudium
+
+Lesen Sie die ersten Seiten [dieses Papiers von Stanford](https://web.stanford.edu/~jurafsky/slp3/5.pdf) über einige praktische Anwendungen der logistischen Regression. Denken Sie über Aufgaben nach, die besser für die eine oder andere Art von Regression geeignet sind, die wir bisher studiert haben. Was würde am besten funktionieren?
+
+## Aufgabe
+
+[Wiederholen Sie diese Regression](assignment.md)
+
+---
 
 **Haftungsausschluss**:  
-Dieses Dokument wurde mit maschinellen KI-Übersetzungsdiensten übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als die maßgebliche Quelle betrachtet werden. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, weisen wir darauf hin, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die durch die Nutzung dieser Übersetzung entstehen.

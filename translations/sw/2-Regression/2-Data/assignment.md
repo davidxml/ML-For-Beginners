@@ -1,11 +1,14 @@
-# Kuchunguza Michoro
+# Kuchunguza Uwasilishaji wa Takwimu
 
-Kuna maktaba kadhaa tofauti zinazopatikana kwa ajili ya uchoraji wa data. Tengeneza michoro kadhaa ukitumia data za Pumpkin katika somo hili na matplotlib na seaborn katika daftari la sampuli. Ni maktaba zipi ni rahisi zaidi kufanya kazi nazo?
+Kuna maktaba kadhaa tofauti zinazopatikana kwa uwasilishaji wa takwimu. Tengeneza uwasilishaji wa takwimu ukitumia data ya Malenge katika somo hili kwa kutumia matplotlib na seaborn kwenye daftari la sampuli. Ni maktaba zipi ni rahisi zaidi kutumia?
+
 ## Rubric
 
-| Vigezo | Bora | Inaridhisha | Inahitaji Kuboresha |
-| ------- | ------- | ------- | ------- |
-| | Daftari linawasilishwa na lina uchunguzi/michoro miwili | Daftari linawasilishwa na lina uchunguzi/mchoro mmoja | Daftari halijawasilishwa |
+| Vigezo | Bora Zaidi | Inayotosheleza | Inahitaji Kuboresha |
+| -------- | --------- | -------- | ----------------- |
+|          | Daftari linawasilishwa likiwa na uchunguzi/uwasilishaji wa takwimu mbili         |   Daftari linawasilishwa likiwa na uchunguzi/uwasilishaji wa takwimu moja       |  Daftari halijawasilishwa                 |
 
-**Onyo**:
-Hati hii imetafsiriwa kwa kutumia huduma za tafsiri za AI za mashine. Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati asilia katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kibinadamu ya kitaalamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+---
+
+**Kanusho**:  
+Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.

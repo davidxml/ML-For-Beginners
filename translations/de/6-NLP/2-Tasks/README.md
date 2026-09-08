@@ -1,46 +1,46 @@
 # Häufige Aufgaben und Techniken der Verarbeitung natürlicher Sprache
 
-Für die meisten Aufgaben der *Verarbeitung natürlicher Sprache* muss der zu verarbeitende Text in kleinere Einheiten zerlegt, analysiert und die Ergebnisse gespeichert oder mit Regeln und Datensätzen abgeglichen werden. Diese Aufgaben ermöglichen es dem Programmierer, die _Bedeutung_ oder _Absicht_ oder nur die _Häufigkeit_ von Begriffen und Wörtern in einem Text abzuleiten.
+Für die meisten Aufgaben der *Verarbeitung natürlicher Sprache* muss der zu verarbeitende Text in kleinere Einheiten zerlegt, analysiert und die Ergebnisse gespeichert oder mit Regeln und Datensätzen abgeglichen werden. Diese Aufgaben ermöglichen es dem Programmierer, die _Bedeutung_ oder _Absicht_ oder lediglich die _Häufigkeit_ von Begriffen und Wörtern in einem Text abzuleiten.
 
-## [Vorlesungsquiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/33/)
+## [Quiz vor der Vorlesung](https://ff-quizzes.netlify.app/en/ml/)
 
-Lass uns gängige Techniken zur Textverarbeitung entdecken. In Kombination mit maschinellem Lernen helfen diese Techniken dabei, große Textmengen effizient zu analysieren. Bevor wir ML auf diese Aufgaben anwenden, lass uns jedoch die Probleme verstehen, mit denen ein NLP-Spezialist konfrontiert ist.
+Lassen Sie uns gängige Techniken zur Verarbeitung von Texten entdecken. In Kombination mit maschinellem Lernen helfen diese Techniken, große Mengen an Text effizient zu analysieren. Bevor wir jedoch ML auf diese Aufgaben anwenden, sollten wir die Probleme verstehen, mit denen ein NLP-Spezialist konfrontiert ist.
 
-## Aufgaben, die in der NLP häufig vorkommen
+## Häufige Aufgaben in der NLP
 
-Es gibt verschiedene Möglichkeiten, einen Text zu analysieren, an dem du arbeitest. Es gibt Aufgaben, die du durchführen kannst, und durch diese Aufgaben kannst du ein Verständnis des Textes gewinnen und Schlussfolgerungen ziehen. Du führst diese Aufgaben normalerweise in einer bestimmten Reihenfolge durch.
+Es gibt verschiedene Möglichkeiten, einen Text zu analysieren, an dem Sie arbeiten. Es gibt Aufgaben, die Sie durchführen können, und durch diese Aufgaben können Sie ein Verständnis für den Text gewinnen und Schlussfolgerungen ziehen. Diese Aufgaben werden in der Regel in einer bestimmten Reihenfolge durchgeführt.
 
 ### Tokenisierung
 
-Wahrscheinlich ist das Erste, was die meisten NLP-Algorithmen tun müssen, den Text in Token oder Wörter zu zerlegen. Obwohl das einfach klingt, kann es schwierig werden, wenn man Satzzeichen und die Wort- und Satztrennzeichen verschiedener Sprachen berücksichtigen muss. Möglicherweise musst du verschiedene Methoden verwenden, um die Abgrenzungen zu bestimmen.
+Wahrscheinlich ist das Erste, was die meisten NLP-Algorithmen tun müssen, den Text in Token oder Wörter zu zerlegen. Obwohl dies einfach klingt, kann es durch die Berücksichtigung von Satzzeichen und unterschiedlichen Wort- und Satzgrenzen in verschiedenen Sprachen kompliziert werden. Es kann erforderlich sein, verschiedene Methoden anzuwenden, um die Abgrenzungen zu bestimmen.
 
-![tokenization](../../../../translated_images/tokenization.1641a160c66cd2d93d4524e8114e93158a9ce0eba3ecf117bae318e8a6ad3487.de.png)
+![Tokenisierung](../../../../6-NLP/2-Tasks/images/tokenization.png)
 > Tokenisierung eines Satzes aus **Stolz und Vorurteil**. Infografik von [Jen Looper](https://twitter.com/jenlooper)
 
 ### Einbettungen
 
-[Worteinbettungen](https://wikipedia.org/wiki/Word_embedding) sind eine Möglichkeit, deine Textdaten numerisch zu konvertieren. Einbettungen werden so durchgeführt, dass Wörter mit ähnlicher Bedeutung oder Wörter, die zusammen verwendet werden, zusammengefasst werden.
+[Wort-Einbettungen](https://wikipedia.org/wiki/Word_embedding) sind eine Möglichkeit, Ihre Textdaten numerisch darzustellen. Einbettungen werden so durchgeführt, dass Wörter mit ähnlicher Bedeutung oder Wörter, die zusammen verwendet werden, in Clustern gruppiert werden.
 
-![word embeddings](../../../../translated_images/embedding.2cf8953c4b3101d188c2f61a5de5b6f53caaa5ad4ed99236d42bc3b6bd6a1fe2.de.png)
-> "Ich habe den höchsten Respekt vor deinen Nerven, sie sind meine alten Freunde." - Worteinbettungen für einen Satz in **Stolz und Vorurteil**. Infografik von [Jen Looper](https://twitter.com/jenlooper)
+![Wort-Einbettungen](../../../../6-NLP/2-Tasks/images/embedding.png)
+> "Ich habe den größten Respekt vor Ihren Nerven, sie sind meine alten Freunde." - Wort-Einbettungen für einen Satz aus **Stolz und Vorurteil**. Infografik von [Jen Looper](https://twitter.com/jenlooper)
 
-✅ Probiere [dieses interessante Tool](https://projector.tensorflow.org/) aus, um mit Worteinbettungen zu experimentieren. Wenn du auf ein Wort klickst, siehst du Cluster ähnlicher Wörter: 'Spielzeug' gruppiert sich mit 'Disney', 'Lego', 'Playstation' und 'Konsole'.
+✅ Probieren Sie [dieses interessante Tool](https://projector.tensorflow.org/) aus, um mit Wort-Einbettungen zu experimentieren. Wenn Sie auf ein Wort klicken, werden Cluster ähnlicher Wörter angezeigt: 'Spielzeug' gruppiert sich mit 'Disney', 'Lego', 'Playstation' und 'Konsole'.
 
 ### Parsing & Part-of-Speech-Tagging
 
-Jedes Wort, das tokenisiert wurde, kann als Teil der Sprache markiert werden - als Substantiv, Verb oder Adjektiv. Der Satz `the quick red fox jumped over the lazy brown dog` könnte als POS getaggt werden: fox = Substantiv, jumped = Verb.
+Jedes tokenisierte Wort kann als Wortart (Part of Speech) markiert werden – z. B. als Substantiv, Verb oder Adjektiv. Der Satz `der schnelle rote Fuchs sprang über den faulen braunen Hund` könnte beispielsweise wie folgt markiert werden: Fuchs = Substantiv, sprang = Verb.
 
-![parsing](../../../../translated_images/parse.d0c5bbe1106eae8fe7d60a183cd1736c8b6cec907f38000366535f84f3036101.de.png)
+![Parsing](../../../../6-NLP/2-Tasks/images/parse.png)
 
 > Parsing eines Satzes aus **Stolz und Vorurteil**. Infografik von [Jen Looper](https://twitter.com/jenlooper)
 
-Parsing bedeutet, zu erkennen, welche Wörter in einem Satz miteinander verbunden sind - zum Beispiel ist `the quick red fox jumped` eine Adjektiv-Substantiv-Verb-Sequenz, die von der `lazy brown dog`-Sequenz getrennt ist.
+Parsing bedeutet, zu erkennen, welche Wörter in einem Satz miteinander in Beziehung stehen – zum Beispiel ist `der schnelle rote Fuchs sprang` eine Adjektiv-Substantiv-Verb-Sequenz, die von der Sequenz `fauler brauner Hund` getrennt ist.
 
 ### Wort- und Phrasenhäufigkeiten
 
-Ein nützlicher Vorgang bei der Analyse eines großen Textkorpus besteht darin, ein Wörterbuch aller interessierenden Wörter oder Phrasen und deren Häufigkeit zu erstellen. Die Phrase `the quick red fox jumped over the lazy brown dog` hat eine Wortfrequenz von 2 für das.
+Ein nützliches Verfahren bei der Analyse eines großen Textkorpus ist der Aufbau eines Wörterbuchs mit allen interessanten Wörtern oder Phrasen und deren Häufigkeit. Die Phrase `der schnelle rote Fuchs sprang über den faulen braunen Hund` hat beispielsweise eine Wortfrequenz von 2 für das Wort "der".
 
-Schauen wir uns ein Beispiel an, in dem wir die Häufigkeit von Wörtern zählen. Rudyard Kiplings Gedicht The Winners enthält die folgende Strophe:
+Schauen wir uns einen Beispieltext an, in dem wir die Häufigkeit von Wörtern zählen. Rudyard Kiplings Gedicht "The Winners" enthält die folgende Strophe:
 
 ```output
 What the moral? Who rides may read.
@@ -51,80 +51,80 @@ Down to Gehenna or up to the Throne,
 He travels the fastest who travels alone.
 ```
 
-Da Phrasenhäufigkeiten je nach Bedarf groß- oder kleinschreibungsempfindlich sein können, hat die Phrase `a friend` has a frequency of 2 and `the` has a frequency of 6, and `travels` eine Häufigkeit von 2.
+Da die Häufigkeit von Phrasen je nach Bedarf groß- und kleinschreibungsempfindlich sein kann, hat die Phrase `a friend` eine Häufigkeit von 2, `the` eine Häufigkeit von 6 und `travels` eine Häufigkeit von 2.
 
 ### N-Gramme
 
-Ein Text kann in Wortfolgen einer festgelegten Länge zerlegt werden, ein einzelnes Wort (Unigramm), zwei Wörter (Bigramm), drei Wörter (Trigramm) oder eine beliebige Anzahl von Wörtern (N-Gramme).
+Ein Text kann in Sequenzen von Wörtern einer bestimmten Länge aufgeteilt werden: ein einzelnes Wort (Unigramm), zwei Wörter (Bigramme), drei Wörter (Trigramme) oder eine beliebige Anzahl von Wörtern (N-Gramme).
 
-Zum Beispiel `the quick red fox jumped over the lazy brown dog` mit einem N-Gramm-Wert von 2 produziert die folgenden N-Gramme:
+Zum Beispiel ergibt `der schnelle rote Fuchs sprang über den faulen braunen Hund` mit einem N-Gramm-Wert von 2 die folgenden N-Gramme:
 
-1. der schnelle 
-2. schnelle rote 
-3. rote Füchse
-4. Fuchs sprang 
-5. sprang über 
-6. über die 
-7. die faulen 
-8. faulen braunen 
-9. braunen Hund
+1. der schnelle  
+2. schnelle rote  
+3. rote Fuchs  
+4. Fuchs sprang  
+5. sprang über  
+6. über den  
+7. den faulen  
+8. faulen braunen  
+9. braunen Hund  
 
-Es könnte einfacher sein, es als ein gleitendes Fenster über den Satz zu visualisieren. Hier ist es für N-Gramme von 3 Wörtern, das N-Gramm ist in jedem Satz fett hervorgehoben:
+Es könnte einfacher sein, dies als ein gleitendes Fenster über den Satz zu visualisieren. Hier ist es für N-Gramme mit 3 Wörtern, wobei das N-Gramm in jedem Satz hervorgehoben ist:
 
-1.   <u>**der schnelle rote**</u> Fuchs sprang über den faulen braunen Hund
-2.   der **<u>schnelle rote Fuchs</u>** sprang über den faulen braunen Hund
-3.   der schnelle **<u>rote Fuchs sprang</u>** über den faulen braunen Hund
-4.   der schnelle rote **<u>Fuchs sprang über</u>** den faulen braunen Hund
-5.   der schnelle rote Fuchs **<u>sprang über den</u>** faulen braunen Hund
-6.   der schnelle rote Fuchs sprang **<u>über den faulen</u>** braunen Hund
-7.   der schnelle rote Fuchs sprang über <u>**den faulen braunen**</u> Hund
-8.   der schnelle rote Fuchs sprang über den **<u>faulen braunen Hund</u>**
+1.   <u>**der schnelle rote**</u> Fuchs sprang über den faulen braunen Hund  
+2.   der **<u>schnelle rote Fuchs</u>** sprang über den faulen braunen Hund  
+3.   der schnelle **<u>rote Fuchs sprang</u>** über den faulen braunen Hund  
+4.   der schnelle rote **<u>Fuchs sprang über</u>** den faulen braunen Hund  
+5.   der schnelle rote Fuchs **<u>sprang über den</u>** faulen braunen Hund  
+6.   der schnelle rote Fuchs sprang **<u>über den faulen</u>** braunen Hund  
+7.   der schnelle rote Fuchs sprang über <u>**den faulen braunen**</u> Hund  
+8.   der schnelle rote Fuchs sprang über den **<u>faulen braunen Hund</u>**  
 
-![n-grams sliding window](../../../../6-NLP/2-Tasks/images/n-grams.gif)
+![N-Gramme gleitendes Fenster](../../../../6-NLP/2-Tasks/images/n-grams.gif)
 
 > N-Gramm-Wert von 3: Infografik von [Jen Looper](https://twitter.com/jenlooper)
 
-### Nomenphrase-Extraktion
+### Extraktion von Nominalphrasen
 
-In den meisten Sätzen gibt es ein Substantiv, das das Subjekt oder Objekt des Satzes ist. Im Englischen ist es oft erkennbar, da es von 'a', 'an' oder 'the' gefolgt wird. Das Subjekt oder Objekt eines Satzes durch 'Extrahieren der Nomenphrase' zu identifizieren, ist eine gängige Aufgabe in der NLP, wenn versucht wird, die Bedeutung eines Satzes zu verstehen.
+In den meisten Sätzen gibt es ein Substantiv, das das Subjekt oder Objekt des Satzes ist. Im Englischen ist es oft daran erkennbar, dass ihm 'a', 'an' oder 'the' vorangestellt ist. Das Identifizieren des Subjekts oder Objekts eines Satzes durch die 'Extraktion der Nominalphrase' ist eine gängige Aufgabe in der NLP, wenn versucht wird, die Bedeutung eines Satzes zu verstehen.
 
-✅ Im Satz "Ich kann mich nicht auf die Stunde, den Ort, den Blick oder die Worte festlegen, die das Fundament gelegt haben. Es ist zu lange her. Ich war in der Mitte, bevor ich wusste, dass ich begonnen hatte.", kannst du die Nomenphrasen identifizieren?
+✅ Im Satz "I cannot fix on the hour, or the spot, or the look or the words, which laid the foundation. It is too long ago. I was in the middle before I knew that I had begun.", können Sie die Nominalphrasen identifizieren?
 
-Im Satz `the quick red fox jumped over the lazy brown dog` gibt es 2 Nomenphrasen: **schneller roter Fuchs** und **fauler brauner Hund**.
+Im Satz `der schnelle rote Fuchs sprang über den faulen braunen Hund` gibt es 2 Nominalphrasen: **schneller roter Fuchs** und **fauler brauner Hund**.
 
 ### Sentiment-Analyse
 
-Ein Satz oder Text kann hinsichtlich seines Sentiments analysiert werden, also wie *positiv* oder *negativ* er ist. Das Sentiment wird in *Polarität* und *Objektivität/Subjektivität* gemessen. Die Polarität wird von -1,0 bis 1,0 (negativ bis positiv) und von 0,0 bis 1,0 (am objektivsten bis am subjektivsten) gemessen.
+Ein Satz oder Text kann auf seine Stimmung analysiert werden, also wie *positiv* oder *negativ* er ist. Die Stimmung wird in *Polarität* und *Objektivität/Subjektivität* gemessen. Die Polarität wird von -1,0 bis 1,0 (negativ bis positiv) und die Objektivität von 0,0 bis 1,0 (am objektivsten bis am subjektivsten) gemessen.
 
-✅ Später wirst du lernen, dass es verschiedene Möglichkeiten gibt, das Sentiment mithilfe von maschinellem Lernen zu bestimmen. Eine Möglichkeit besteht darin, eine Liste von Wörtern und Phrasen zu haben, die von einem menschlichen Experten als positiv oder negativ kategorisiert werden, und dieses Modell auf Texte anzuwenden, um einen Polaritätswert zu berechnen. Kannst du sehen, wie das in einigen Fällen funktioniert und in anderen weniger gut?
+✅ Später lernen Sie, dass es verschiedene Möglichkeiten gibt, die Stimmung mithilfe von maschinellem Lernen zu bestimmen. Eine Möglichkeit besteht jedoch darin, eine Liste von Wörtern und Phrasen zu haben, die von einem menschlichen Experten als positiv oder negativ kategorisiert wurden, und dieses Modell auf Text anzuwenden, um einen Polaritätswert zu berechnen. Können Sie sehen, wie dies in einigen Fällen funktioniert und in anderen weniger gut?
 
 ### Flexion
 
-Flexion ermöglicht es dir, ein Wort in die Einzahl oder Mehrzahl zu bringen.
+Die Flexion ermöglicht es Ihnen, ein Wort zu nehmen und die Einzahl oder Mehrzahl des Wortes zu erhalten.
 
 ### Lemmatisierung
 
-Ein *Lemma* ist das Grund- oder Stammwort für eine Gruppe von Wörtern. Zum Beispiel haben *flog*, *fliegen*, *fliegende* ein Lemma des Verbs *fliegen*.
+Ein *Lemma* ist die Grundform oder das Stammwort für eine Gruppe von Wörtern, zum Beispiel haben *flog*, *fliegt*, *fliegend* das Lemma des Verbs *fliegen*.
 
-Es gibt auch nützliche Datenbanken für den NLP-Forscher, insbesondere:
+Es gibt auch nützliche Datenbanken für NLP-Forscher, insbesondere:
 
 ### WordNet
 
-[WordNet](https://wordnet.princeton.edu/) ist eine Datenbank von Wörtern, Synonymen, Antonymen und vielen anderen Details für jedes Wort in vielen verschiedenen Sprachen. Es ist unglaublich nützlich, wenn man versucht, Übersetzungen, Rechtschreibprüfungen oder Sprachtools jeglicher Art zu erstellen.
+[WordNet](https://wordnet.princeton.edu/) ist eine Datenbank von Wörtern, Synonymen, Antonymen und vielen anderen Details für jedes Wort in vielen verschiedenen Sprachen. Es ist unglaublich nützlich beim Erstellen von Übersetzungen, Rechtschreibprüfungen oder Sprachwerkzeugen jeglicher Art.
 
 ## NLP-Bibliotheken
 
-Glücklicherweise musst du nicht alle diese Techniken selbst entwickeln, da es hervorragende Python-Bibliotheken gibt, die es Entwicklern, die nicht auf die Verarbeitung natürlicher Sprache oder maschinelles Lernen spezialisiert sind, viel zugänglicher machen. Die nächsten Lektionen enthalten weitere Beispiele dafür, aber hier wirst du einige nützliche Beispiele lernen, die dir bei der nächsten Aufgabe helfen.
+Glücklicherweise müssen Sie nicht alle diese Techniken selbst entwickeln, da es ausgezeichnete Python-Bibliotheken gibt, die Entwicklern, die nicht auf die Verarbeitung natürlicher Sprache oder maschinelles Lernen spezialisiert sind, den Zugang erleichtern. In den nächsten Lektionen werden Sie mehr Beispiele dazu sehen, aber hier lernen Sie einige nützliche Beispiele kennen, die Ihnen bei der nächsten Aufgabe helfen.
 
-### Übung - Verwendung von `TextBlob` library
+### Übung - Verwendung der `TextBlob`-Bibliothek
 
-Let's use a library called TextBlob as it contains helpful APIs for tackling these types of tasks. TextBlob "stands on the giant shoulders of [NLTK](https://nltk.org) and [pattern](https://github.com/clips/pattern), and plays nicely with both." It has a considerable amount of ML embedded in its API.
+Lassen Sie uns eine Bibliothek namens TextBlob verwenden, da sie hilfreiche APIs für diese Arten von Aufgaben enthält. TextBlob "steht auf den Schultern von [NLTK](https://nltk.org) und [pattern](https://github.com/clips/pattern) und arbeitet gut mit beiden zusammen." Es enthält eine beträchtliche Menge an ML in seiner API.
 
-> Note: A useful [Quick Start](https://textblob.readthedocs.io/en/dev/quickstart.html#quickstart) guide is available for TextBlob that is recommended for experienced Python developers 
+> Hinweis: Ein nützlicher [Quick Start](https://textblob.readthedocs.io/en/dev/quickstart.html#quickstart)-Leitfaden ist für TextBlob verfügbar und wird erfahrenen Python-Entwicklern empfohlen.
 
-When attempting to identify *noun phrases*, TextBlob offers several options of extractors to find noun phrases. 
+Wenn Sie versuchen, *Nominalphrasen* zu identifizieren, bietet TextBlob mehrere Optionen für Extraktoren, um Nominalphrasen zu finden.
 
-1. Take a look at `ConllExtractor`.
+1. Schauen Sie sich `ConllExtractor` an.
 
     ```python
     from textblob import TextBlob
@@ -138,24 +138,24 @@ When attempting to identify *noun phrases*, TextBlob offers several options of e
     np = user_input_blob.noun_phrases                                    
     ```
 
-    > Was passiert hier? [ConllExtractor](https://textblob.readthedocs.io/en/dev/api_reference.html?highlight=Conll#textblob.en.np_extractors.ConllExtractor) ist "Ein Nomenphrase-Extraktor, der Chunk-Parsing verwendet, das mit dem ConLL-2000-Trainingskorpus trainiert wurde." ConLL-2000 bezieht sich auf die Konferenz 2000 über Computerlinguistik und maschinelles Lernen. Jedes Jahr veranstaltete die Konferenz einen Workshop, um ein schwieriges NLP-Problem anzugehen, und im Jahr 2000 ging es um Nomenchunking. Ein Modell wurde mit dem Wall Street Journal trainiert, wobei "Abschnitte 15-18 als Trainingsdaten (211727 Token) und Abschnitt 20 als Testdaten (47377 Token)" verwendet wurden. Du kannst die verwendeten Verfahren [hier](https://www.clips.uantwerpen.be/conll2000/chunking/) und die [Ergebnisse](https://ifarm.nl/erikt/research/np-chunking.html) einsehen.
+    > Was passiert hier? [ConllExtractor](https://textblob.readthedocs.io/en/dev/api_reference.html?highlight=Conll#textblob.en.np_extractors.ConllExtractor) ist "Ein Nominalphrasen-Extraktor, der Chunk-Parsing verwendet, das mit dem ConLL-2000-Trainingskorpus trainiert wurde." ConLL-2000 bezieht sich auf die Konferenz zur computergestützten Verarbeitung natürlicher Sprache im Jahr 2000. Jedes Jahr veranstaltete die Konferenz einen Workshop, um ein schwieriges NLP-Problem zu lösen, und 2000 war es das Chunking von Nominalphrasen. Ein Modell wurde auf dem Wall Street Journal trainiert, mit "Abschnitten 15-18 als Trainingsdaten (211727 Token) und Abschnitt 20 als Testdaten (47377 Token)". Sie können die verwendeten Verfahren [hier](https://www.clips.uantwerpen.be/conll2000/chunking/) und die [Ergebnisse](https://ifarm.nl/erikt/research/np-chunking.html) einsehen.
 
-### Herausforderung - Verbesserung deines Bots mit NLP
+### Herausforderung - Verbesserung Ihres Bots mit NLP
 
-In der vorherigen Lektion hast du einen sehr einfachen Q&A-Bot erstellt. Jetzt wirst du Marvin etwas sympathischer machen, indem du deine Eingaben auf Sentiment analysierst und eine Antwort druckst, die dem Sentiment entspricht. Du musst auch eine `noun_phrase` identifizieren und danach fragen.
+In der vorherigen Lektion haben Sie einen sehr einfachen Q&A-Bot erstellt. Jetzt machen Sie Marvin etwas einfühlsamer, indem Sie Ihre Eingabe auf Stimmung analysieren und eine passende Antwort ausgeben. Sie müssen auch eine `noun_phrase` identifizieren und dazu weitere Eingaben anfordern.
 
-Deine Schritte beim Erstellen eines besseren Konversationsbots:
+Ihre Schritte beim Erstellen eines besseren Konversationsbots:
 
-1. Drucke Anweisungen aus, die den Benutzer beraten, wie er mit dem Bot interagieren kann
-2. Starte die Schleife 
-   1. Nimm die Benutzereingabe entgegen
-   2. Wenn der Benutzer gefragt hat, zu beenden, beende dann
-   3. Verarbeite die Benutzereingabe und bestimme die geeignete Sentiment-Antwort
-   4. Wenn in der Sentimentanalyse eine Nomenphrase erkannt wird, mache sie plural und frage nach mehr Informationen zu diesem Thema
-   5. Drucke die Antwort
-3. Kehre zu Schritt 2 zurück
+1. Anweisungen ausgeben, die den Benutzer darüber informieren, wie er mit dem Bot interagieren soll.
+2. Schleife starten  
+   1. Benutzereingabe akzeptieren  
+   2. Wenn der Benutzer um Beendigung bittet, dann beenden  
+   3. Benutzereingabe verarbeiten und passende Stimmungsantwort bestimmen  
+   4. Wenn eine Nominalphrase in der Stimmung erkannt wird, diese pluralisieren und weitere Eingaben zu diesem Thema anfordern  
+   5. Antwort ausgeben  
+3. Zurück zu Schritt 2  
 
-Hier ist der Code-Schnipsel zur Bestimmung des Sentiments mit TextBlob. Beachte, dass es nur vier *Gradationen* der Sentimentantwort gibt (du könntest mehr haben, wenn du möchtest):
+Hier ist der Codeausschnitt, um die Stimmung mit TextBlob zu bestimmen. Beachten Sie, dass es nur vier *Abstufungen* der Stimmungsantwort gibt (Sie könnten mehr hinzufügen, wenn Sie möchten):
 
 ```python
 if user_input_blob.polarity <= -0.5:
@@ -168,7 +168,7 @@ elif user_input_blob.polarity <= 1:
   response = "Wow, that sounds great. "
 ```
 
-Hier ist eine Beispielausgabe zur Orientierung (Benutzereingaben stehen in den Zeilen, die mit > beginnen):
+Hier ist eine Beispielausgabe zur Orientierung (Benutzereingaben beginnen mit >):
 
 ```output
 Hello, I am Marvin, the friendly robot.
@@ -187,31 +187,33 @@ Hmm, that's not great. Can you tell me more about old hounddogs?
 It was nice talking to you, goodbye!
 ```
 
-Eine mögliche Lösung für die Aufgabe ist [hier](https://github.com/microsoft/ML-For-Beginners/blob/main/6-NLP/2-Tasks/solution/bot.py)
+Eine mögliche Lösung für die Aufgabe finden Sie [hier](https://github.com/microsoft/ML-For-Beginners/blob/main/6-NLP/2-Tasks/solution/bot.py)
 
 ✅ Wissensüberprüfung
 
-1. Glaubst du, dass die sympathischen Antworten jemanden 'täuschen' würden, dass der Bot sie tatsächlich verstanden hat?
-2. Macht die Identifizierung der Nomenphrase den Bot 'glaubwürdiger'?
-3. Warum wäre es nützlich, eine 'Nomenphrase' aus einem Satz zu extrahieren?
+1. Glauben Sie, dass die einfühlsamen Antworten jemanden dazu bringen könnten, zu denken, dass der Bot sie tatsächlich versteht?  
+2. Macht das Identifizieren der Nominalphrase den Bot glaubwürdiger?  
+3. Warum könnte das Extrahieren einer 'Nominalphrase' aus einem Satz nützlich sein?
 
 ---
 
-Implementiere den Bot in der vorherigen Wissensüberprüfung und teste ihn an einem Freund. Kann er ihn täuschen? Kannst du deinen Bot glaubwürdiger machen?
+Implementieren Sie den Bot aus der vorherigen Wissensüberprüfung und testen Sie ihn mit einem Freund. Kann er sie täuschen? Können Sie Ihren Bot glaubwürdiger machen?
 
 ## 🚀Herausforderung
 
-Nimm eine Aufgabe aus der vorherigen Wissensüberprüfung und versuche, sie umzusetzen. Teste den Bot an einem Freund. Kann er ihn täuschen? Kannst du deinen Bot glaubwürdiger machen?
+Nehmen Sie eine Aufgabe aus der vorherigen Wissensüberprüfung und versuchen Sie, sie zu implementieren. Testen Sie den Bot mit einem Freund. Kann er sie täuschen? Können Sie Ihren Bot glaubwürdiger machen?
 
-## [Nachlesequiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/34/)
+## [Quiz nach der Vorlesung](https://ff-quizzes.netlify.app/en/ml/)
 
-## Überprüfung & Selbststudium
+## Rückblick & Selbststudium
 
-In den nächsten Lektionen wirst du mehr über Sentiment-Analyse lernen. Recherchiere diese interessante Technik in Artikeln wie diesen auf [KDNuggets](https://www.kdnuggets.com/tag/nlp)
+In den nächsten Lektionen werden Sie mehr über Sentiment-Analyse erfahren. Recherchieren Sie diese interessante Technik in Artikeln wie diesen auf [KDNuggets](https://www.kdnuggets.com/tag/nlp).
 
 ## Aufgabe 
 
-[Mach einen Bot, der zurückredet](assignment.md)
+[Bringen Sie einen Bot zum Antworten](assignment.md)
+
+---
 
 **Haftungsausschluss**:  
-Dieses Dokument wurde mithilfe von KI-Übersetzungsdiensten übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als die maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, weisen wir darauf hin, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.

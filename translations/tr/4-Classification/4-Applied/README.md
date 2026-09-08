@@ -1,30 +1,30 @@
-# Bir Mutfak Önerici Web Uygulaması Oluşturma
+# Bir Mutfak Tavsiye Web Uygulaması Oluşturun
 
-Bu derste, önceki derslerde öğrendiğiniz bazı teknikleri kullanarak ve bu seride kullanılan lezzetli mutfak veri seti ile bir sınıflandırma modeli oluşturacaksınız. Ayrıca, kaydedilmiş bir modeli kullanmak için Onnx'in web çalıştırma zamanını kullanarak küçük bir web uygulaması oluşturacaksınız.
+Bu derste, önceki derslerde öğrendiğiniz bazı teknikleri kullanarak ve bu seride kullanılan lezzetli mutfak veri setiyle bir sınıflandırma modeli oluşturacaksınız. Ayrıca, kaydedilmiş bir modeli kullanmak için Onnx'in web çalışma zamanını kullanarak küçük bir web uygulaması geliştireceksiniz.
 
 Makine öğreniminin en faydalı pratik kullanımlarından biri öneri sistemleri oluşturmaktır ve bugün bu yönde ilk adımı atabilirsiniz!
 
-[![Bu web uygulamasını sunma](https://img.youtube.com/vi/17wdM9AHMfg/0.jpg)](https://youtu.be/17wdM9AHMfg "Applied ML")
+[![Bu web uygulamasını sunuyoruz](https://img.youtube.com/vi/17wdM9AHMfg/0.jpg)](https://youtu.be/17wdM9AHMfg "Uygulamalı ML")
 
-> 🎥 Yukarıdaki resme tıklayarak bir video izleyin: Jen Looper, sınıflandırılmış mutfak verilerini kullanarak bir web uygulaması oluşturuyor
+> 🎥 Yukarıdaki görüntüye tıklayın: Jen Looper sınıflandırılmış mutfak verilerini kullanarak bir web uygulaması oluşturuyor
 
-## [Ders Öncesi Quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/25/)
+## [Ders Öncesi Test](https://ff-quizzes.netlify.app/en/ml/)
 
-Bu derste öğrenecekleriniz:
+Bu derste öğreneceksiniz:
 
 - Bir model nasıl oluşturulur ve Onnx modeli olarak nasıl kaydedilir
-- Netron'u kullanarak model nasıl incelenir
-- Bir web uygulamasında model nasıl kullanılır
+- Netron'u kullanarak modeli nasıl inceleyeceğiniz
+- Modelinizi bir web uygulamasında çıkarım için nasıl kullanacağınız
 
 ## Modelinizi Oluşturun
 
-Uygulamalı ML sistemleri oluşturmak, bu teknolojileri iş sistemlerinizde kullanmanın önemli bir parçasıdır. Onnx kullanarak modelleri web uygulamalarınızda kullanabilirsiniz (ve gerektiğinde çevrimdışı bir bağlamda kullanabilirsiniz).
+Uygulamalı ML sistemleri oluşturmak, bu teknolojileri iş sistemlerinizde kullanmanın önemli bir parçasıdır. Onnx kullanarak modelleri web uygulamalarınızda (ve gerekirse çevrimdışı bir bağlamda) kullanabilirsiniz.
 
-[Önceki bir derste](../../3-Web-App/1-Web-App/README.md), UFO gözlemleri hakkında bir Regresyon modeli oluşturmuş, "pickle" etmiş ve bir Flask uygulamasında kullanmıştınız. Bu mimariyi bilmek çok faydalı olsa da, tam yığın bir Python uygulamasıdır ve gereksinimleriniz bir JavaScript uygulamasının kullanımını içerebilir.
+[Önceki bir derste](../../3-Web-App/1-Web-App/README.md), UFO gözlemleri hakkında bir Regresyon modeli oluşturmuş, "pickle" yapmış ve bunu bir Flask uygulamasında kullanmıştınız. Bu mimariyi bilmek çok faydalı olsa da, bu tam yığın bir Python uygulamasıdır ve gereksinimleriniz bir JavaScript uygulamasını kullanmayı içerebilir.
 
-Bu derste, çıkarım için temel bir JavaScript tabanlı sistem oluşturabilirsiniz. Ancak önce, bir model eğitmeniz ve Onnx ile kullanmak üzere dönüştürmeniz gerekiyor.
+Bu derste, çıkarım için temel bir JavaScript tabanlı sistem oluşturabilirsiniz. Ancak önce bir model eğitmeniz ve Onnx ile kullanmak üzere dönüştürmeniz gerekiyor.
 
-## Alıştırma - sınıflandırma modeli eğitme
+## Egzersiz - Sınıflandırma Modeli Eğitin
 
 Öncelikle, kullandığımız temizlenmiş mutfak veri setini kullanarak bir sınıflandırma modeli eğitin.
 
@@ -35,9 +35,9 @@ Bu derste, çıkarım için temel bir JavaScript tabanlı sistem oluşturabilirs
     import pandas as pd 
     ```
 
-    Scikit-learn modelinizi Onnx formatına dönüştürmenize yardımcı olacak '[skl2onnx](https://onnx.ai/sklearn-onnx/)' gerekecek.
+    Scikit-learn modelinizi Onnx formatına dönüştürmeye yardımcı olmak için '[skl2onnx](https://onnx.ai/sklearn-onnx/)' gereklidir.
 
-1. Daha sonra, önceki derslerde yaptığınız gibi bir CSV dosyasını `read_csv()` kullanarak okuyarak verilerinizle çalışın:
+1. Ardından, önceki derslerde yaptığınız gibi bir CSV dosyasını `read_csv()` kullanarak işleyin:
 
     ```python
     data = pd.read_csv('../data/cleaned_cuisines.csv')
@@ -59,9 +59,9 @@ Bu derste, çıkarım için temel bir JavaScript tabanlı sistem oluşturabilirs
     
     ```
 
-### Eğitim rutinine başlayın
+### Eğitim Rutini Başlatın
 
-'SVÇ' kütüphanesini kullanacağız çünkü iyi bir doğruluğa sahiptir.
+'SVC' kütüphanesini kullanacağız çünkü iyi bir doğruluğa sahiptir.
 
 1. Scikit-learn'den uygun kütüphaneleri içe aktarın:
 
@@ -85,7 +85,7 @@ Bu derste, çıkarım için temel bir JavaScript tabanlı sistem oluşturabilirs
     model.fit(X_train,y_train.values.ravel())
     ```
 
-1. Şimdi modelinizi test edin, `predict()` çağrısı yaparak:
+1. Şimdi modelinizi test edin, `predict()` çağırarak:
 
     ```python
     y_pred = model.predict(X_test)
@@ -97,7 +97,7 @@ Bu derste, çıkarım için temel bir JavaScript tabanlı sistem oluşturabilirs
     print(classification_report(y_test,y_pred))
     ```
 
-    Daha önce gördüğümüz gibi, doğruluk iyi:
+    Daha önce gördüğümüz gibi, doğruluk iyidir:
 
     ```output
                     precision    recall  f1-score   support
@@ -113,11 +113,11 @@ Bu derste, çıkarım için temel bir JavaScript tabanlı sistem oluşturabilirs
     weighted avg       0.79      0.79      0.79      1199
     ```
 
-### Modelinizi Onnx'e dönüştürün
+### Modelinizi Onnx'e Dönüştürün
 
-Dönüştürmeyi doğru Tensor numarası ile yapmayı unutmayın. Bu veri setinde 380 malzeme listelenmiştir, bu yüzden `FloatTensorType` içinde bu sayıyı belirtmeniz gerekir:
+Dönüşümü doğru Tensor numarasıyla yaptığınızdan emin olun. Bu veri setinde 380 malzeme listelenmiştir, bu nedenle `FloatTensorType` içinde bu numarayı belirtmeniz gerekir:
 
-1. 380 tensor numarasını kullanarak dönüştürün.
+1. 380 tensor numarası kullanarak dönüştürün.
 
     ```python
     from skl2onnx import convert_sklearn
@@ -127,7 +127,7 @@ Dönüştürmeyi doğru Tensor numarası ile yapmayı unutmayın. Bu veri setind
     options = {id(model): {'nocl': True, 'zipmap': False}}
     ```
 
-1. Onx oluşturun ve **model.onnx** olarak bir dosya olarak saklayın:
+1. Onx oluşturun ve **model.onnx** dosyası olarak kaydedin:
 
     ```python
     onx = convert_sklearn(model, initial_types=initial_type, options=options)
@@ -135,23 +135,23 @@ Dönüştürmeyi doğru Tensor numarası ile yapmayı unutmayın. Bu veri setind
         f.write(onx.SerializeToString())
     ```
 
-    > Not, dönüşüm betiğinizde [seçenekler](https://onnx.ai/sklearn-onnx/parameterized.html) geçebilirsiniz. Bu durumda, 'nocl' True ve 'zipmap' False olarak geçtik. Bu bir sınıflandırma modeli olduğundan, ZipMap'i kaldırma seçeneğiniz vardır, bu da bir sözlük listesi üretir (gerekli değil). `nocl` refers to class information being included in the model. Reduce your model's size by setting `nocl` to 'True'. 
+    > Not: Dönüşüm betiğinizde [seçenekler](https://onnx.ai/sklearn-onnx/parameterized.html) geçirebilirsiniz. Bu durumda, 'nocl' True ve 'zipmap' False olarak ayarlandı. Bu bir sınıflandırma modeli olduğundan, bir liste sözlükleri üreten ZipMap'i kaldırma seçeneğiniz vardır (gerekli değil). `nocl`, sınıf bilgilerinin modele dahil edilmesini ifade eder. Modelinizin boyutunu azaltmak için `nocl`'yi 'True' olarak ayarlayın.
 
-Running the entire notebook will now build an Onnx model and save it to this folder.
+Tüm not defterini çalıştırmak artık bir Onnx modeli oluşturacak ve bu klasöre kaydedecektir.
 
-## View your model
+## Modelinizi Görüntüleyin
 
-Onnx models are not very visible in Visual Studio code, but there's a very good free software that many researchers use to visualize the model to ensure that it is properly built. Download [Netron](https://github.com/lutzroeder/Netron) and  open your model.onnx file. You can see your simple model visualized, with its 380 inputs and classifier listed:
+Onnx modelleri Visual Studio Code'da çok görünür değildir, ancak birçok araştırmacının modeli doğru bir şekilde oluşturulduğundan emin olmak için kullandığı çok iyi bir ücretsiz yazılım vardır. [Netron](https://github.com/lutzroeder/Netron)'u indirin ve model.onnx dosyanızı açın. Basit modelinizi, 380 girdisi ve sınıflandırıcısı ile görselleştirilmiş olarak görebilirsiniz:
 
-![Netron visual](../../../../translated_images/netron.a05f39410211915e0f95e2c0e8b88f41e7d13d725faf660188f3802ba5c9e831.tr.png)
+![Netron görseli](../../../../4-Classification/4-Applied/images/netron.png)
 
-Netron is a helpful tool to view your models.
+Netron, modellerinizi görüntülemek için faydalı bir araçtır.
 
-Now you are ready to use this neat model in a web app. Let's build an app that will come in handy when you look in your refrigerator and try to figure out which combination of your leftover ingredients you can use to cook a given cuisine, as determined by your model.
+Artık bu harika modeli bir web uygulamasında kullanmaya hazırsınız. Buzdolabınıza baktığınızda ve kalan malzemelerinizin hangi kombinasyonunu kullanarak modeliniz tarafından belirlenen bir mutfağı pişirebileceğinizi anlamaya çalıştığınızda işe yarayacak bir uygulama oluşturalım.
 
-## Build a recommender web application
+## Bir Tavsiye Web Uygulaması Oluşturun
 
-You can use your model directly in a web app. This architecture also allows you to run it locally and even offline if needed. Start by creating an `index.html` file in the same folder where you stored your `model.onnx` dosyası.
+Modelinizi doğrudan bir web uygulamasında kullanabilirsiniz. Bu mimari, gerekirse yerel olarak ve hatta çevrimdışı çalıştırmanıza da olanak tanır. `index.html` dosyasını, `model.onnx` dosyanızı kaydettiğiniz aynı klasörde oluşturarak başlayın.
 
 1. Bu dosyada _index.html_, aşağıdaki işaretlemeyi ekleyin:
 
@@ -167,7 +167,7 @@ You can use your model directly in a web app. This architecture also allows you 
     </html>
     ```
 
-1. Şimdi, `body` etiketleri içinde çalışarak, bazı malzemeleri yansıtan bir dizi onay kutusu göstermek için biraz işaretleme ekleyin:
+1. Şimdi, `body` etiketleri içinde, bazı malzemeleri yansıtan bir dizi onay kutusu göstermek için biraz işaretleme ekleyin:
 
     ```html
     <h1>Check your refrigerator. What can you create?</h1>
@@ -212,9 +212,9 @@ You can use your model directly in a web app. This architecture also allows you 
             </div> 
     ```
 
-    Her onay kutusuna bir değer verildiğine dikkat edin. Bu, malzemenin veri setine göre bulunduğu indeksi yansıtır. Örneğin, bu alfabetik listede Elma beşinci sütunu işgal eder, bu yüzden değeri '4' olur çünkü 0'dan saymaya başlarız. Belirli bir malzemenin indeksini keşfetmek için [malzemeler tablosuna](../../../../4-Classification/data/ingredient_indexes.csv) başvurabilirsiniz.
+    Her onay kutusuna bir değer verildiğini fark edin. Bu, veri setine göre malzemenin bulunduğu indeksi yansıtır. Örneğin, elma bu alfabetik listede beşinci sütunu işgal eder, bu nedenle değeri '4' olur çünkü 0'dan saymaya başlıyoruz. Belirli bir malzemenin indeksini keşfetmek için [malzeme elektronik tablosunu](../../../../4-Classification/data/ingredient_indexes.csv) inceleyebilirsiniz.
 
-    index.html dosyasındaki çalışmanızı sürdürerek, modelin çağrıldığı bir script bloğu ekleyin, son kapanış `</div>`'dan sonra.
+    Çalışmanızı index.html dosyasında sürdürerek, son kapanış `</div>` etiketinden sonra bir script bloğu ekleyin.
 
 1. İlk olarak, [Onnx Runtime](https://www.onnxruntime.ai/) içe aktarın:
 
@@ -222,9 +222,9 @@ You can use your model directly in a web app. This architecture also allows you 
     <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.9.0/dist/ort.min.js"></script> 
     ```
 
-    > Onnx Runtime, Onnx modellerinizi geniş bir donanım platformu yelpazesinde çalıştırmanızı sağlamak için kullanılır, optimizasyonlar ve bir API içerir.
+    > Onnx Runtime, Onnx modellerinizi geniş bir donanım platformu yelpazesinde çalıştırmayı sağlamak için optimizasyonlar ve bir API sunar.
 
-1. Çalıştırma zamanı yerinde olduğunda, onu çağırabilirsiniz:
+1. Runtime yerleştirildikten sonra, onu çağırabilirsiniz:
 
     ```html
     <script>
@@ -276,34 +276,35 @@ You can use your model directly in a web app. This architecture also allows you 
     </script>
     ```
 
-Bu kodda, birkaç şey oluyor:
+Bu kodda birkaç şey oluyor:
 
-1. Bir malzeme onay kutusu işaretli olup olmadığına bağlı olarak ayarlanacak ve çıkarım için modele gönderilecek 380 olası değerden (1 veya 0) oluşan bir dizi oluşturdunuz.
-2. Bir dizi onay kutusu ve bunların işaretli olup olmadığını belirlemenin bir yolunu oluşturduğunuz `init` function that is called when the application starts. When a checkbox is checked, the `ingredients` array is altered to reflect the chosen ingredient.
-3. You created a `testCheckboxes` function that checks whether any checkbox was checked.
-4. You use `startInference` function when the button is pressed and, if any checkbox is checked, you start inference.
-5. The inference routine includes:
-   1. Setting up an asynchronous load of the model
-   2. Creating a Tensor structure to send to the model
-   3. Creating 'feeds' that reflects the `float_input` input that you created when training your model (you can use Netron to verify that name)
-   4. Sending these 'feeds' to the model and waiting for a response
+1. Seçilen malzeme onay kutusuna bağlı olarak çıkarım için modele gönderilecek 380 olası değer (1 veya 0) içeren bir dizi oluşturdunuz.
+2. Uygulama başladığında çağrılan bir `init` fonksiyonunda bir dizi onay kutusu ve bunların işaretlenip işaretlenmediğini belirleme yöntemi oluşturdunuz. Bir onay kutusu işaretlendiğinde, `ingredients` dizisi seçilen malzemeyi yansıtacak şekilde değişir.
+3. Herhangi bir onay kutusunun işaretlenip işaretlenmediğini kontrol eden bir `testCheckboxes` fonksiyonu oluşturdunuz.
+4. Bir düğmeye basıldığında `startInference` fonksiyonunu kullanıyorsunuz ve herhangi bir onay kutusu işaretlenmişse çıkarımı başlatıyorsunuz.
+5. Çıkarım rutini şunları içerir:
+   1. Modelin asenkron yüklenmesini ayarlama
+   2. Modele gönderilecek bir Tensor yapısı oluşturma
+   3. Eğitim sırasında oluşturduğunuz `float_input` girdisini yansıtan 'feeds' oluşturma (adı doğrulamak için Netron'u kullanabilirsiniz)
+   4. Bu 'feeds'leri modele gönderme ve bir yanıt bekleme
 
-## Test your application
+## Uygulamanızı Test Edin
 
-Open a terminal session in Visual Studio Code in the folder where your index.html file resides. Ensure that you have [http-server](https://www.npmjs.com/package/http-server) installed globally, and type `http-server` komut isteminde çalıştırın. Bir localhost açılmalı ve web uygulamanızı görüntüleyebilirsiniz. Çeşitli malzemelere göre hangi mutfağın önerildiğini kontrol edin:
+Visual Studio Code'da index.html dosyanızın bulunduğu klasörde bir terminal oturumu açın. [http-server](https://www.npmjs.com/package/http-server)'ın global olarak yüklü olduğundan emin olun ve istemde `http-server` yazın. Bir localhost açılmalı ve web uygulamanızı görüntüleyebilirsiniz. Çeşitli malzemelere göre hangi mutfağın önerildiğini kontrol edin:
 
-![malzeme web uygulaması](../../../../translated_images/web-app.4c76450cabe20036f8ec6d5e05ccc0c1c064f0d8f2fe3304d3bcc0198f7dc139.tr.png)
+![malzeme web uygulaması](../../../../4-Classification/4-Applied/images/web-app.png)
 
-Tebrikler, birkaç alan içeren bir 'öneri' web uygulaması oluşturdunuz. Bu sistemi geliştirmek için biraz zaman ayırın!
+Tebrikler, birkaç alan içeren bir 'tavsiye' web uygulaması oluşturdunuz. Bu sistemi geliştirmek için biraz zaman ayırın!
+
 ## 🚀Meydan Okuma
 
-Web uygulamanız çok minimal, bu yüzden [ingredient_indexes](../../../../4-Classification/data/ingredient_indexes.csv) verilerindeki malzemeler ve indeksleri kullanarak geliştirmeye devam edin. Hangi lezzet kombinasyonları belirli bir ulusal yemeği oluşturur?
+Web uygulamanız oldukça minimal, bu yüzden [ingredient_indexes](../../../../4-Classification/data/ingredient_indexes.csv) verilerinden malzemeleri ve indekslerini kullanarak geliştirmeye devam edin. Hangi lezzet kombinasyonları belirli bir ulusal yemeği oluşturmak için işe yarıyor?
 
-## [Ders Sonrası Quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/26/)
+## [Ders Sonrası Test](https://ff-quizzes.netlify.app/en/ml/)
 
-## Gözden Geçirme & Kendi Kendine Çalışma
+## Gözden Geçirme ve Kendi Kendine Çalışma
 
-Bu ders, yemek malzemeleri için bir öneri sistemi oluşturmanın faydasına sadece değindi, bu ML uygulamaları alanı çok zengin örneklerle doludur. Bu sistemlerin nasıl oluşturulduğu hakkında daha fazla okuyun:
+Bu ders, yemek malzemeleri için bir öneri sistemi oluşturmanın faydasını sadece yüzeysel olarak ele aldı, ancak bu ML uygulamaları alanı örneklerle oldukça zengindir. Bu sistemlerin nasıl oluşturulduğu hakkında daha fazla bilgi edinin:
 
 - https://www.sciencedirect.com/topics/computer-science/recommendation-engine
 - https://www.technologyreview.com/2014/08/25/171547/the-ultimate-challenge-for-recommendation-engines/
@@ -311,7 +312,9 @@ Bu ders, yemek malzemeleri için bir öneri sistemi oluşturmanın faydasına sa
 
 ## Ödev 
 
-[Yeni bir önerici oluşturun](assignment.md)
+[Yeni bir öneri sistemi oluşturun](assignment.md)
 
-**Feragatname**: 
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından doğabilecek yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+---
+
+**Feragatname**:  
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

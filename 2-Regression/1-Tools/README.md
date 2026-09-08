@@ -4,7 +4,7 @@
 
 > Sketchnote by [Tomomi Imura](https://www.twitter.com/girlie_mac)
 
-## [Pre-lecture quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/9/)
+## [Pre-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 
 > ### [This lesson is available in R!](./solution/R/lesson_1.html)
 
@@ -15,7 +15,7 @@ In these four lessons, you will discover how to build regression models. We will
 In this lesson, you will learn how to:
 
 - Configure your computer for local machine learning tasks.
-- Work with Jupyter notebooks.
+- Work with Jupyter Notebooks.
 - Use Scikit-learn, including installation.
 - Explore linear regression with a hands-on exercise.
 
@@ -80,13 +80,13 @@ You can interleaf your code with comments to self-document the notebook.
 
 ## Up and running with Scikit-learn
 
-Now that Python is set up in your local environment, and you are comfortable with Jupyter notebooks, let's get equally comfortable with Scikit-learn (pronounce it `sci` as in `science`). Scikit-learn provides an [extensive API](https://scikit-learn.org/stable/modules/classes.html#api-ref) to help you perform ML tasks.
+Now that Python is set up in your local environment, and you are comfortable with Jupyter Notebooks, let's get equally comfortable with Scikit-learn (pronounce it `sci` as in `science`). Scikit-learn provides an [extensive API](https://scikit-learn.org/stable/modules/classes.html#api-ref) to help you perform ML tasks.
 
 According to their [website](https://scikit-learn.org/stable/getting_started.html), "Scikit-learn is an open source machine learning library that supports supervised and unsupervised learning. It also provides various tools for model fitting, data preprocessing, model selection and evaluation, and many other utilities."
 
 In this course, you will use Scikit-learn and other tools to build machine learning models to perform what we call 'traditional machine learning' tasks. We have deliberately avoided neural networks and deep learning, as they are better covered in our forthcoming 'AI for Beginners' curriculum.
 
-Scikit-learn makes it straightforward to build models and evaluate them for use. It is primarily focused on using numeric data and contains several ready-made datasets for use as learning tools. It also includes pre-built models for students to try. Let's explore the process of loading prepackaged data and using a built in estimator  first ML model with Scikit-learn with some basic data.
+Scikit-learn makes it straightforward to build models and evaluate them for use. It is primarily focused on using numeric data and contains several ready-made datasets for use as learning tools. It also includes pre-built models for students to try. Let's explore the process of loading prepackaged data and using a built-in estimator to create your first ML model with Scikit-learn with some basic data.
 
 ## Exercise - your first Scikit-learn notebook
 
@@ -213,7 +213,7 @@ Congratulations, you built your first linear regression model, created a predict
 ## 🚀Challenge
 
 Plot a different variable from this dataset. Hint: edit this line: `X = X[:,2]`. Given this dataset's target, what are you able to discover about the progression of diabetes as a disease?
-## [Post-lecture quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/10/)
+## [Post-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 
 ## Review & Self Study
 

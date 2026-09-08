@@ -4,7 +4,7 @@
 
 Infographic by [Dasani Madipalli](https://twitter.com/dasani_decoded)
 
-## [Pre-lecture quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/11/)
+## [Pre-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 
 > ### [This lesson is available in R!](./solution/R/lesson_2.html)
 
@@ -16,6 +16,7 @@ In this lesson, you will learn:
 
 - How to prepare your data for model-building.
 - How to use Matplotlib for data visualization.
+- How to use Seaborn for more expressive data visualization.
 
 ## Asking the right question of your data
 
@@ -194,13 +195,87 @@ To get charts to display useful data, you usually need to group the data somehow
 
     This is a more useful data visualization! It seems to indicate that the highest price for pumpkins occurs in September and October. Does that meet your expectation? Why or why not?
 
+## Exercise - experiment with Seaborn
+
+Matplotlib is powerful, but it can take a lot of code to produce a polished chart. [Seaborn](https://seaborn.pydata.org/) is a library built _on top of_ Matplotlib that is designed for statistical data visualization. It works directly with Pandas dataframes, applies attractive default styles, and lets you create informative plots with far less code. Because Seaborn returns Matplotlib objects, you can still use everything you already know about Matplotlib to fine-tune the result.
+
+> If you don't already have Seaborn installed, install it with `pip install seaborn`.
+
+1. Import Seaborn at the top of the notebook, under the other imports. It is conventionally imported as `sns`:
+
+    ```python
+    import seaborn as sns
+    ```
+
+### Scatter plots to show relationships
+
+A big part of exploring data before building a model is looking for _relationships_ between variables. A [scatter plot](https://en.wikipedia.org/wiki/Scatter_plot) is one of the best tools for this: if the points seem to follow a line, the two variables may be correlated, which is a good sign that a linear regression model could work.
+
+1. Recreate the price-to-month scatter plot from before, this time using Seaborn's [`relplot()`](https://seaborn.pydata.org/generated/seaborn.relplot.html) (relational plot), which works directly with your dataframe columns:
+
+    ```python
+    sns.relplot(x="Price", y="Month", data=new_pumpkins)
+    ```
+
+    ![A Seaborn scatterplot showing price to month relationship](./images/relplot.png)
+
+    Notice how you pass the _column names_ and the dataframe, and Seaborn takes care of the axis labels for you.
+
+2. You can switch to a line plot by passing `kind="line"`. Seaborn even draws a shaded band showing the confidence interval around the line:
+
+    ```python
+    sns.relplot(x="Price", y="Month", kind="line", data=new_pumpkins)
+    ```
+
+    ![A Seaborn line plot showing price to month relationship](./images/lineplot.png)
+
+    This particular data is quite noisy, so a line plot isn't the clearest choice here — but it shows how easily you can change chart types in Seaborn.
+
+### Bar charts to show distributions
+
+Earlier you grouped the data by hand to create a bar chart with Matplotlib. Seaborn's [`catplot()`](https://seaborn.pydata.org/generated/seaborn.catplot.html) (categorical plot) can do the grouping and aggregation for you. By default `kind="bar"` shows the mean of each category along with a black line indicating the confidence interval.
+
+1. Create a bar chart of average price per month:
+
+    ```python
+    sns.catplot(x="Month", y="Price", data=new_pumpkins, kind="bar")
+    ```
+
+    ![A Seaborn bar chart showing the price distribution per month](./images/catplot.png)
+
+    This confirms what you saw with Matplotlib — prices peak around September and October — but Seaborn also visualizes how much the price _varies_ within each month.
+
+### Heatmaps to show correlations
+
+Scatter plots compare two variables at a time. When you have several numeric columns, a [heatmap](https://en.wikipedia.org/wiki/Heat_map) lets you view the strength of the relationship between _every_ pair of columns at once. This is a common way to spot which features are most correlated before choosing what to feed into a model (and the same kind of chart is later used to display confusion matrices in classification).
+
+1. Build a correlation matrix with Pandas, then draw it with Seaborn's [`heatmap()`](https://seaborn.pydata.org/generated/seaborn.heatmap.html). The `annot=True` option prints the correlation values on each cell:
+
+    ```python
+    correlations = new_pumpkins[['Month', 'Low Price', 'High Price', 'Price']].corr()
+    sns.heatmap(correlations, annot=True, cmap="coolwarm")
+    ```
+
+    ![A Seaborn heatmap showing correlations between the numeric columns](./images/heatmap.png)
+
+    Values close to `1` (or `-1`) mean the columns are strongly _linearly_ correlated. Notice how `Low Price` and `High Price` are almost perfectly correlated. `Month`, on the other hand, shows only a weak linear correlation with price — even though the bar chart above revealed a clear seasonal peak in September and October. That's an important lesson: the correlation coefficient only measures _straight-line_ relationships, so it can miss seasonal or otherwise non-linear patterns. ✅ Why is it useful to look at both a heatmap *and* charts like the bar chart before deciding which columns to use?
+
+### Matplotlib or Seaborn?
+
+Both libraries are worth knowing:
+
+- **Matplotlib** gives you fine-grained control over every element of a chart and is the foundation almost every other Python plotting library builds on.
+- **Seaborn** provides higher-level functions and attractive defaults for statistical charts, works directly with dataframes, and is often quicker for exploratory data analysis.
+
+A common workflow is to reach for Seaborn to explore your data quickly, then drop down to Matplotlib when you need to customize the details.
+
 ---
 
 ## 🚀Challenge
 
-Explore the different types of visualization that Matplotlib offers. Which types are most appropriate for regression problems?
+Explore the different types of visualization that Matplotlib and Seaborn offer. Which types are most appropriate for regression problems?
 
-## [Post-lecture quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/12/)
+## [Post-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 
 ## Review & Self Study
 

@@ -1,58 +1,58 @@
-# Crear una Aplicación Web para Usar un Modelo de ML
+# Construir una aplicación web para usar un modelo de ML
 
-En esta lección, entrenarás un modelo de ML con un conjunto de datos fuera de este mundo: _Avistamientos de OVNIs durante el último siglo_, obtenidos de la base de datos de NUFORC.
+En esta lección, entrenarás un modelo de ML con un conjunto de datos que es de otro mundo: _avistamientos de OVNIs durante el último siglo_, obtenidos de la base de datos de NUFORC.
 
 Aprenderás:
 
 - Cómo 'pickle' un modelo entrenado
 - Cómo usar ese modelo en una aplicación Flask
 
-Continuaremos usando notebooks para limpiar datos y entrenar nuestro modelo, pero puedes llevar el proceso un paso más allá explorando el uso de un modelo 'en el mundo real', por así decirlo: en una aplicación web.
+Continuaremos utilizando notebooks para limpiar datos y entrenar nuestro modelo, pero puedes llevar el proceso un paso más allá explorando cómo usar un modelo 'en el mundo real', por así decirlo: en una aplicación web.
 
 Para hacer esto, necesitas construir una aplicación web usando Flask.
 
-## [Cuestionario Previo a la Lección](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/17/)
+## [Cuestionario previo a la lección](https://ff-quizzes.netlify.app/en/ml/)
 
-## Construyendo una Aplicación
+## Construyendo una aplicación
 
-Hay varias formas de construir aplicaciones web para consumir modelos de machine learning. Tu arquitectura web puede influir en la forma en que tu modelo está entrenado. Imagina que estás trabajando en una empresa donde el grupo de ciencia de datos ha entrenado un modelo que quieren que uses en una aplicación.
+Existen varias formas de construir aplicaciones web para consumir modelos de aprendizaje automático. La arquitectura de tu aplicación web puede influir en la forma en que se entrena tu modelo. Imagina que trabajas en una empresa donde el grupo de ciencia de datos ha entrenado un modelo que quieren que utilices en una aplicación.
 
 ### Consideraciones
 
-Hay muchas preguntas que necesitas hacer:
+Hay muchas preguntas que debes hacerte:
 
 - **¿Es una aplicación web o una aplicación móvil?** Si estás construyendo una aplicación móvil o necesitas usar el modelo en un contexto de IoT, podrías usar [TensorFlow Lite](https://www.tensorflow.org/lite/) y usar el modelo en una aplicación Android o iOS.
 - **¿Dónde residirá el modelo?** ¿En la nube o localmente?
-- **Soporte offline.** ¿La aplicación tiene que funcionar sin conexión?
+- **Soporte sin conexión.** ¿La aplicación necesita funcionar sin conexión?
 - **¿Qué tecnología se utilizó para entrenar el modelo?** La tecnología elegida puede influir en las herramientas que necesitas usar.
-    - **Usando TensorFlow.** Si estás entrenando un modelo usando TensorFlow, por ejemplo, ese ecosistema proporciona la capacidad de convertir un modelo de TensorFlow para su uso en una aplicación web usando [TensorFlow.js](https://www.tensorflow.org/js/).
-    - **Usando PyTorch.** Si estás construyendo un modelo usando una biblioteca como [PyTorch](https://pytorch.org/), tienes la opción de exportarlo en formato [ONNX](https://onnx.ai/) (Open Neural Network Exchange) para su uso en aplicaciones web JavaScript que pueden usar el [Onnx Runtime](https://www.onnxruntime.ai/). Esta opción será explorada en una lección futura para un modelo entrenado con Scikit-learn.
-    - **Usando Lobe.ai o Azure Custom Vision.** Si estás usando un sistema ML SaaS (Software como Servicio) como [Lobe.ai](https://lobe.ai/) o [Azure Custom Vision](https://azure.microsoft.com/services/cognitive-services/custom-vision-service/?WT.mc_id=academic-77952-leestott) para entrenar un modelo, este tipo de software proporciona formas de exportar el modelo para muchas plataformas, incluyendo la construcción de una API personalizada para ser consultada en la nube por tu aplicación en línea.
+    - **Usando TensorFlow.** Si estás entrenando un modelo usando TensorFlow, por ejemplo, ese ecosistema proporciona la capacidad de convertir un modelo de TensorFlow para usarlo en una aplicación web mediante [TensorFlow.js](https://www.tensorflow.org/js/).
+    - **Usando PyTorch.** Si estás construyendo un modelo usando una biblioteca como [PyTorch](https://pytorch.org/), tienes la opción de exportarlo en formato [ONNX](https://onnx.ai/) (Open Neural Network Exchange) para usarlo en aplicaciones web JavaScript que pueden usar [Onnx Runtime](https://www.onnxruntime.ai/). Esta opción será explorada en una lección futura para un modelo entrenado con Scikit-learn.
+    - **Usando Lobe.ai o Azure Custom Vision.** Si estás utilizando un sistema SaaS (Software como Servicio) de ML como [Lobe.ai](https://lobe.ai/) o [Azure Custom Vision](https://azure.microsoft.com/services/cognitive-services/custom-vision-service/?WT.mc_id=academic-77952-leestott) para entrenar un modelo, este tipo de software proporciona formas de exportar el modelo para muchas plataformas, incluyendo la construcción de una API personalizada para ser consultada en la nube por tu aplicación en línea.
 
-También tienes la oportunidad de construir una aplicación web completa con Flask que sería capaz de entrenar el modelo por sí misma en un navegador web. Esto también se puede hacer usando TensorFlow.js en un contexto JavaScript.
+También tienes la oportunidad de construir una aplicación web completa en Flask que pueda entrenar el modelo directamente en un navegador web. Esto también se puede hacer usando TensorFlow.js en un contexto de JavaScript.
 
-Para nuestros propósitos, ya que hemos estado trabajando con notebooks basados en Python, exploremos los pasos que necesitas seguir para exportar un modelo entrenado desde dicho notebook a un formato legible por una aplicación web construida en Python.
+Para nuestros propósitos, dado que hemos estado trabajando con notebooks basados en Python, exploremos los pasos que necesitas seguir para exportar un modelo entrenado desde dicho notebook a un formato legible por una aplicación web construida en Python.
 
 ## Herramienta
 
-Para esta tarea, necesitas dos herramientas: Flask y Pickle, ambas funcionan en Python.
+Para esta tarea, necesitas dos herramientas: Flask y Pickle, ambas ejecutándose en Python.
 
 ✅ ¿Qué es [Flask](https://palletsprojects.com/p/flask/)? Definido como un 'micro-framework' por sus creadores, Flask proporciona las características básicas de los frameworks web usando Python y un motor de plantillas para construir páginas web. Echa un vistazo a [este módulo de aprendizaje](https://docs.microsoft.com/learn/modules/python-flask-build-ai-web-app?WT.mc_id=academic-77952-leestott) para practicar la construcción con Flask.
 
-✅ ¿Qué es [Pickle](https://docs.python.org/3/library/pickle.html)? Pickle 🥒 es un módulo de Python que serializa y deserializa una estructura de objetos de Python. Cuando 'pickleas' un modelo, serializas o aplastas su estructura para su uso en la web. Ten cuidado: pickle no es intrínsecamente seguro, así que ten cuidado si te piden 'des-picklear' un archivo. Un archivo pickled tiene el sufijo `.pkl`.
+✅ ¿Qué es [Pickle](https://docs.python.org/3/library/pickle.html)? Pickle 🥒 es un módulo de Python que serializa y deserializa una estructura de objetos de Python. Cuando 'pickleas' un modelo, serializas o aplanas su estructura para usarlo en la web. Ten cuidado: pickle no es intrínsecamente seguro, así que ten precaución si se te solicita 'despicklear' un archivo. Un archivo pickled tiene el sufijo `.pkl`.
 
-## Ejercicio - limpiar tus datos
+## Ejercicio - limpia tus datos
 
-En esta lección usarás datos de 80,000 avistamientos de OVNIs, recopilados por [NUFORC](https://nuforc.org) (El Centro Nacional de Informes de OVNIs). Estos datos tienen algunas descripciones interesantes de avistamientos de OVNIs, por ejemplo:
+En esta lección usarás datos de 80,000 avistamientos de OVNIs, recopilados por [NUFORC](https://nuforc.org) (El Centro Nacional de Reportes de OVNIs). Estos datos tienen descripciones interesantes de avistamientos de OVNIs, por ejemplo:
 
-- **Descripción larga de ejemplo.** "Un hombre emerge de un rayo de luz que brilla en un campo de hierba por la noche y corre hacia el estacionamiento de Texas Instruments".
+- **Descripción larga de ejemplo.** "Un hombre emerge de un rayo de luz que ilumina un campo de hierba por la noche y corre hacia el estacionamiento de Texas Instruments".
 - **Descripción corta de ejemplo.** "las luces nos persiguieron".
 
-La hoja de cálculo [ufos.csv](../../../../3-Web-App/1-Web-App/data/ufos.csv) incluye columnas sobre el `city`, `state` y `country` donde ocurrió el avistamiento, el `shape` del objeto y su `latitude` y `longitude`.
+La hoja de cálculo [ufos.csv](../../../../3-Web-App/1-Web-App/data/ufos.csv) incluye columnas sobre la `ciudad`, `estado` y `país` donde ocurrió el avistamiento, la `forma` del objeto y su `latitud` y `longitud`.
 
 En el [notebook](../../../../3-Web-App/1-Web-App/notebook.ipynb) en blanco incluido en esta lección:
 
-1. importa `pandas`, `matplotlib`, y `numpy` como hiciste en lecciones anteriores e importa la hoja de cálculo de ufos. Puedes echar un vistazo a un conjunto de datos de muestra:
+1. Importa `pandas`, `matplotlib` y `numpy` como lo hiciste en lecciones anteriores e importa la hoja de cálculo de ufos. Puedes echar un vistazo a un conjunto de datos de muestra:
 
     ```python
     import pandas as pd
@@ -70,7 +70,7 @@ En el [notebook](../../../../3-Web-App/1-Web-App/notebook.ipynb) en blanco inclu
     ufos.Country.unique()
     ```
 
-1. Ahora, puedes reducir la cantidad de datos que necesitamos manejar eliminando cualquier valor nulo e importando solo avistamientos entre 1-60 segundos:
+1. Ahora, puedes reducir la cantidad de datos con los que necesitamos trabajar eliminando cualquier valor nulo e importando solo avistamientos entre 1-60 segundos:
 
     ```python
     ufos.dropna(inplace=True)
@@ -103,11 +103,11 @@ En el [notebook](../../../../3-Web-App/1-Web-App/notebook.ipynb) en blanco inclu
     24	3.0		3		51.783333	-0.783333
     ```
 
-## Ejercicio - construir tu modelo
+## Ejercicio - construye tu modelo
 
-Ahora puedes prepararte para entrenar un modelo dividiendo los datos en el grupo de entrenamiento y prueba.
+Ahora puedes prepararte para entrenar un modelo dividiendo los datos en grupos de entrenamiento y prueba.
 
-1. Selecciona las tres características que quieres entrenar como tu vector X, y el vector y será el `Country`. You want to be able to input `Seconds`, `Latitude` and `Longitude` y obtén un id de país para devolver.
+1. Selecciona las tres características que deseas entrenar como tu vector X, y el vector y será el `Country`. Quieres poder ingresar `Seconds`, `Latitude` y `Longitude` y obtener un id de país como resultado.
 
     ```python
     from sklearn.model_selection import train_test_split
@@ -134,13 +134,13 @@ Ahora puedes prepararte para entrenar un modelo dividiendo los datos en el grupo
     print('Accuracy: ', accuracy_score(y_test, predictions))
     ```
 
-La precisión no está mal **(alrededor del 95%)**, no es sorprendente, ya que `Country` and `Latitude/Longitude` correlate.
+La precisión no está mal **(alrededor del 95%)**, lo cual no es sorprendente, ya que `Country` y `Latitude/Longitude` están correlacionados.
 
-The model you created isn't very revolutionary as you should be able to infer a `Country` from its `Latitude` and `Longitude`, pero es un buen ejercicio intentar entrenar desde datos en bruto que limpiaste, exportaste y luego usar este modelo en una aplicación web.
+El modelo que creaste no es muy revolucionario, ya que deberías poder inferir un `Country` a partir de su `Latitude` y `Longitude`, pero es un buen ejercicio para intentar entrenar desde datos en bruto que limpiaste, exportaste y luego usar este modelo en una aplicación web.
 
 ## Ejercicio - 'pickle' tu modelo
 
-¡Ahora, es momento de _pickle_ tu modelo! Puedes hacerlo en unas pocas líneas de código. Una vez que esté _pickled_, carga tu modelo pickled y pruébalo contra un array de datos de muestra que contenga valores para segundos, latitud y longitud,
+¡Ahora es momento de _picklear_ tu modelo! Puedes hacerlo en unas pocas líneas de código. Una vez que esté _pickled_, carga tu modelo pickled y pruébalo contra un arreglo de datos de muestra que contenga valores para segundos, latitud y longitud.
 
 ```python
 import pickle
@@ -153,13 +153,13 @@ print(model.predict([[50,44,-12]]))
 
 El modelo devuelve **'3'**, que es el código de país para el Reino Unido. ¡Increíble! 👽
 
-## Ejercicio - construir una aplicación Flask
+## Ejercicio - construye una aplicación Flask
 
-Ahora puedes construir una aplicación Flask para llamar a tu modelo y devolver resultados similares, pero de una manera más visualmente agradable.
+Ahora puedes construir una aplicación Flask para llamar a tu modelo y devolver resultados similares, pero de una manera más visualmente atractiva.
 
 1. Comienza creando una carpeta llamada **web-app** junto al archivo _notebook.ipynb_ donde reside tu archivo _ufo-model.pkl_.
 
-1. En esa carpeta crea tres carpetas más: **static**, con una carpeta **css** dentro, y **templates**. Ahora deberías tener los siguientes archivos y directorios:
+1. En esa carpeta crea tres carpetas más: **static**, con una carpeta **css** dentro de ella, y **templates**. Ahora deberías tener los siguientes archivos y directorios:
 
     ```output
     web-app/
@@ -172,7 +172,7 @@ Ahora puedes construir una aplicación Flask para llamar a tu modelo y devolver 
 
     ✅ Consulta la carpeta de solución para ver la aplicación terminada
 
-1. El primer archivo que debes crear en la carpeta _web-app_ es el archivo **requirements.txt**. Al igual que _package.json_ en una aplicación JavaScript, este archivo lista las dependencias requeridas por la aplicación. En **requirements.txt** agrega las líneas:
+1. El primer archivo que debes crear en la carpeta _web-app_ es el archivo **requirements.txt**. Como _package.json_ en una aplicación JavaScript, este archivo lista las dependencias requeridas por la aplicación. En **requirements.txt** agrega las líneas:
 
     ```text
     scikit-learn
@@ -233,7 +233,7 @@ Ahora puedes construir una aplicación Flask para llamar a tu modelo y devolver 
     }
     ```
 
-1. Luego, construye el archivo _index.html_:
+1. A continuación, construye el archivo _index.html_:
 
     ```html
     <!DOCTYPE html>
@@ -268,11 +268,11 @@ Ahora puedes construir una aplicación Flask para llamar a tu modelo y devolver 
     </html>
     ```
 
-    Echa un vistazo a la plantilla en este archivo. Nota la sintaxis 'mustache' alrededor de las variables que serán proporcionadas por la aplicación, como el texto de predicción: `{{}}`. There's also a form that posts a prediction to the `/predict` route.
+    Observa la plantilla en este archivo. Nota la sintaxis de 'bigotes' alrededor de las variables que serán proporcionadas por la aplicación, como el texto de predicción: `{{}}`. También hay un formulario que envía una predicción a la ruta `/predict`.
 
-    Finally, you're ready to build the python file that drives the consumption of the model and the display of predictions:
+    Finalmente, estás listo para construir el archivo Python que impulsa el consumo del modelo y la visualización de las predicciones:
 
-1. In `app.py` agrega:
+1. En `app.py` agrega:
 
     ```python
     import numpy as np
@@ -309,40 +309,42 @@ Ahora puedes construir una aplicación Flask para llamar a tu modelo y devolver 
         app.run(debug=True)
     ```
 
-    > 💡 Consejo: cuando agregas [`debug=True`](https://www.askpython.com/python-modules/flask/flask-debug-mode) while running the web app using Flask, any changes you make to your application will be reflected immediately without the need to restart the server. Beware! Don't enable this mode in a production app.
+    > 💡 Consejo: cuando agregas [`debug=True`](https://www.askpython.com/python-modules/flask/flask-debug-mode) mientras ejecutas la aplicación web usando Flask, cualquier cambio que hagas en tu aplicación se reflejará inmediatamente sin necesidad de reiniciar el servidor. ¡Cuidado! No habilites este modo en una aplicación de producción.
 
-If you run `python app.py` or `python3 app.py` - your web server starts up, locally, and you can fill out a short form to get an answer to your burning question about where UFOs have been sighted!
+Si ejecutas `python app.py` o `python3 app.py`, tu servidor web se iniciará localmente y podrás completar un formulario corto para obtener una respuesta a tu pregunta sobre dónde se han avistado OVNIs.
 
-Before doing that, take a look at the parts of `app.py`:
+Antes de hacer eso, echa un vistazo a las partes de `app.py`:
 
-1. First, dependencies are loaded and the app starts.
-1. Then, the model is imported.
-1. Then, index.html is rendered on the home route.
+1. Primero, se cargan las dependencias y se inicia la aplicación.
+1. Luego, se importa el modelo.
+1. Después, se renderiza index.html en la ruta principal.
 
-On the `/predict` route, several things happen when the form is posted:
+En la ruta `/predict`, suceden varias cosas cuando se envía el formulario:
 
-1. The form variables are gathered and converted to a numpy array. They are then sent to the model and a prediction is returned.
-2. The Countries that we want displayed are re-rendered as readable text from their predicted country code, and that value is sent back to index.html to be rendered in the template.
+1. Las variables del formulario se recopilan y se convierten en un arreglo numpy. Luego se envían al modelo y se devuelve una predicción.
+2. Los países que queremos mostrar se vuelven a renderizar como texto legible a partir de su código de país predicho, y ese valor se envía de vuelta a index.html para ser renderizado en la plantilla.
 
-Using a model this way, with Flask and a pickled model, is relatively straightforward. The hardest thing is to understand what shape the data is that must be sent to the model to get a prediction. That all depends on how the model was trained. This one has three data points to be input in order to get a prediction.
+Usar un modelo de esta manera, con Flask y un modelo pickled, es relativamente sencillo. Lo más difícil es entender qué forma deben tener los datos que se deben enviar al modelo para obtener una predicción. Todo depende de cómo se entrenó el modelo. Este tiene tres puntos de datos que deben ingresarse para obtener una predicción.
 
-In a professional setting, you can see how good communication is necessary between the folks who train the model and those who consume it in a web or mobile app. In our case, it's only one person, you!
+En un entorno profesional, puedes ver cómo es necesaria una buena comunicación entre las personas que entrenan el modelo y las que lo consumen en una aplicación web o móvil. En nuestro caso, ¡es solo una persona, tú!
 
 ---
 
-## 🚀 Challenge
+## 🚀 Desafío
 
-Instead of working in a notebook and importing the model to the Flask app, you could train the model right within the Flask app! Try converting your Python code in the notebook, perhaps after your data is cleaned, to train the model from within the app on a route called `train`. ¿Cuáles son los pros y los contras de seguir este método?
+En lugar de trabajar en un notebook e importar el modelo a la aplicación Flask, podrías entrenar el modelo directamente dentro de la aplicación Flask. Intenta convertir tu código Python en el notebook, tal vez después de que tus datos estén limpios, para entrenar el modelo desde dentro de la aplicación en una ruta llamada `train`. ¿Cuáles son las ventajas y desventajas de seguir este método?
 
-## [Cuestionario Posterior a la Lección](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/18/)
+## [Cuestionario posterior a la lección](https://ff-quizzes.netlify.app/en/ml/)
 
-## Revisión y Autoestudio
+## Repaso y autoestudio
 
-Hay muchas formas de construir una aplicación web para consumir modelos de ML. Haz una lista de las formas en que podrías usar JavaScript o Python para construir una aplicación web que aproveche el machine learning. Considera la arquitectura: ¿debería el modelo permanecer en la aplicación o vivir en la nube? Si es lo último, ¿cómo lo accederías? Dibuja un modelo arquitectónico para una solución web aplicada de ML.
+Existen muchas formas de construir una aplicación web para consumir modelos de ML. Haz una lista de las formas en que podrías usar JavaScript o Python para construir una aplicación web que aproveche el aprendizaje automático. Considera la arquitectura: ¿debería el modelo permanecer en la aplicación o vivir en la nube? Si es lo último, ¿cómo lo accederías? Dibuja un modelo arquitectónico para una solución web de ML aplicada.
 
 ## Tarea
 
 [Prueba un modelo diferente](assignment.md)
 
-        **Descargo de responsabilidad**: 
-        Este documento ha sido traducido utilizando servicios de traducción automática basados en IA. Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción humana profesional. No somos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+---
+
+**Descargo de responsabilidad**:  
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

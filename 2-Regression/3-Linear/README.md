@@ -1,8 +1,14 @@
 # Build a regression model using Scikit-learn: regression four ways
 
+## Beginner Note
+
+Linear regression is used when we want to predict a **numerical value** (for example, house price, temperature, or sales).
+It works by finding a straight line that best represents the relationship between input features and the output.
+
+In this lesson, we focus on understanding the concept before exploring more advanced regression techniques.
 ![Linear vs polynomial regression infographic](./images/linear-polynomial.png)
 > Infographic by [Dasani Madipalli](https://twitter.com/dasani_decoded)
-## [Pre-lecture quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/13/)
+## [Pre-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 
 > ### [This lesson is available in R!](./solution/R/lesson_3.html)
 ### Introduction 
@@ -43,9 +49,15 @@ As you learned in Lesson 1, the goal of a linear regression exercise is to be ab
 - **Show variable relationships**. Show the relationship between variables
 - **Make predictions**. Make accurate predictions on where a new datapoint would fall in relationship to that line. 
  
-It is typical of **Least-Squares Regression** to draw this type of line. The term 'least-squares' means that all the datapoints surrounding the regression line are squared and then added up. Ideally, that final sum is as small as possible, because we want a low number of errors, or `least-squares`. 
+It is typical of **Least-Squares Regression** to draw this type of line. The term "Least-Squares" refers to the process of minimizing the total error in our model. For every data point, we measure the vertical distance (called a residual) between the actual point and our regression line.  
 
-We do so since we want to model a line that has the least cumulative distance from all of our data points. We also square the terms before adding them since we are concerned with its magnitude rather than its direction.
+We square these distances for two main reasons:  
+
+1. **Magnitude over Direction:** We want to treat an error of -5 the same as an error of +5. Squaring turns all values positive.  
+
+2. **Penalizing Outliers:** Squaring gives more weight to larger errors, forcing the line to stay closer to points that are far away.  
+
+We then add all these squared values together. Our goal is to find the specific line where this final sum is at its least (the smallest possible value)—hence the name "Least-Squares".  
 
 > **🧮 Show me the math** 
 > 
@@ -118,7 +130,7 @@ print(new_pumpkins['Month'].corr(new_pumpkins['Price']))
 print(new_pumpkins['DayOfYear'].corr(new_pumpkins['Price']))
 ```
 
-It looks like the correlation is pretty small, -0.15 by `Month` and -0.17 by the `DayOfMonth`, but there could be another important relationship. It looks like there are different clusters of prices corresponding to different pumpkin varieties. To confirm this hypothesis, let's plot each pumpkin category using a different color. By passing an `ax` parameter to the `scatter` plotting function we can plot all points on the same graph:
+It looks like the correlation is pretty small, -0.15 by `Month` and -0.17 by the `DayOfYear`, but there could be another important relationship. It looks like there are different clusters of prices corresponding to different pumpkin varieties. To confirm this hypothesis, let's plot each pumpkin category using a different color. By passing an `ax` parameter to the `scatter` plotting function we can plot all points on the same graph:
 
 ```python
 ax=None
@@ -195,13 +207,13 @@ lin_reg.fit(X_train,y_train)
 
 The `LinearRegression` object after `fit`-ting contains all the coefficients of the regression, which can be accessed using `.coef_` property. In our case, there is just one coefficient, which should be around `-0.017`. It means that prices seem to drop a bit with time, but not too much, around 2 cents per day. We can also access the intersection point of the regression with Y-axis using `lin_reg.intercept_` - it will be around `21` in our case, indicating the price at the beginning of the year.
 
-To see how accurate our model is, we can predict prices on a test dataset, and then measure how close our predictions are to the expected values. This can be done using mean square error (MSE) metrics, which is the mean of all squared differences between expected and predicted value.
+To see how accurate our model is, we can predict prices on a test dataset, and then measure how close our predictions are to the expected values. This can be done using root mean square error (RMSE) metrics, which is the root of the mean of all squared differences between expected and predicted value.
 
 ```python
 pred = lin_reg.predict(X_test)
 
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
 ```
 
 Our error seems to be around 2 points, which is ~17%. Not too good. Another indicator of model quality is the **coefficient of determination**, which can be obtained like this:
@@ -246,11 +258,33 @@ pipeline.fit(X_train,y_train)
 
 Using `PolynomialFeatures(2)` means that we will include all second-degree polynomials from the input data. In our case it will just mean `DayOfYear`<sup>2</sup>, but given two input variables X and Y, this will add X<sup>2</sup>, XY and Y<sup>2</sup>. We may also use higher degree polynomials if we want.
 
-Pipelines can be used in the same manner as the original `LinearRegression` object, i.e. we can `fit` the pipeline, and then use `predict` to get the prediction results. Here is the graph showing test data, and the approximation curve:
+Pipelines can be used in the same manner as the original `LinearRegression` object, i.e. we can `fit` the pipeline, and then use `predict` to get the prediction results:
+
+```python
+pred = pipeline.predict(X_test)
+
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
+
+score = pipeline.score(X_train,y_train)
+print('Model determination: ', score)
+```
+
+To plot the smooth approximation curve, we use `np.linspace` to create a uniform range of input values, rather than plotting directly on the unordered test data (which would produce a zigzag line):
+
+```python
+X_range = np.linspace(X_test.min(), X_test.max(), 100).reshape(-1,1)
+y_range = pipeline.predict(X_range)
+
+plt.scatter(X_test, y_test)
+plt.plot(X_range, y_range)
+```
+
+Here is the graph showing test data, and the approximation curve:
 
 <img alt="Polynomial regression" src="images/poly-results.png" width="50%" />
 
-Using Polynomial Regression, we can get slightly lower MSE and higher determination, but not significantly. We need to take into account other features!
+Using Polynomial Regression, we can get slightly lower RMSE and higher determination, but not significantly. We need to take into account other features!
 
 > You can see that the minimal pumpkin prices are observed somewhere around Halloween. How can you explain this? 
 
@@ -307,7 +341,7 @@ X = pd.get_dummies(new_pumpkins['Variety']) \
 y = new_pumpkins['Price']
 ```
 
-Here we also take into account `City` and `Package` type, which gives us MSE 2.84 (10%), and determination 0.94!
+Here we also take into account `City` and `Package` type, which gives us RMSE 2.84 (10.5%), and determination 0.94!
 
 ## Putting it all together
 
@@ -331,17 +365,17 @@ pipeline.fit(X_train,y_train)
 # predict results for test data
 pred = pipeline.predict(X_test)
 
-# calculate MSE and determination
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+# calculate RMSE and determination
+rmse = mean_squared_error(y_test, pred, squared=False)
+print(f'RMSE: {rmse:3.3} ({rmse/pred.mean()*100:3.3}%)')
 
 score = pipeline.score(X_train,y_train)
 print('Model determination: ', score)
 ```
 
-This should give us the best determination coefficient of almost 97%, and MSE=2.23 (~8% prediction error).
+This should give us the best determination coefficient of almost 97%, and RMSE=2.23 (~8% prediction error).
 
-| Model | MSE | Determination |
+| Model | RMSE | Determination |
 |-------|-----|---------------|
 | `DayOfYear` Linear | 2.77 (17.2%) | 0.07 |
 | `DayOfYear` Polynomial | 2.73 (17.0%) | 0.08 |
@@ -356,7 +390,7 @@ This should give us the best determination coefficient of almost 97%, and MSE=2.
 
 Test several different variables in this notebook to see how correlation corresponds to model accuracy.
 
-## [Post-lecture quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/14/)
+## [Post-lecture quiz](https://ff-quizzes.netlify.app/en/ml/)
 
 ## Review & Self Study
 

@@ -1,148 +1,157 @@
-# Einführung in das maschinelle Lernen
+# Einführung in maschinelles Lernen
 
-## [Vorlesungsquiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/1/)
+## [Pre-Vorlesungsquiz](https://ff-quizzes.netlify.app/en/ml/)
 
 ---
 
-[![ML für Anfänger - Einführung in das maschinelle Lernen für Anfänger](https://img.youtube.com/vi/6mSx_KJxcHI/0.jpg)](https://youtu.be/6mSx_KJxcHI "ML für Anfänger - Einführung in das maschinelle Lernen für Anfänger")
+[![ML für Anfänger - Einführung in maschinelles Lernen für Anfänger](https://img.youtube.com/vi/6mSx_KJxcHI/0.jpg)](https://youtu.be/6mSx_KJxcHI "ML für Anfänger - Einführung in maschinelles Lernen für Anfänger")
 
-> 🎥 Klicken Sie auf das obige Bild für ein kurzes Video, das diese Lektion durchgeht.
+> 🎥 Klicke auf das Bild oben für ein kurzes Video, das diese Lektion durchgeht.
 
-Willkommen zu diesem Kurs über klassisches maschinelles Lernen für Anfänger! Egal, ob Sie völlig neu in diesem Thema sind oder ein erfahrener ML-Praktiker, der sein Wissen auffrischen möchte, wir freuen uns, dass Sie dabei sind! Wir möchten einen freundlichen Ausgangspunkt für Ihr ML-Studium schaffen und freuen uns über Ihr [Feedback](https://github.com/microsoft/ML-For-Beginners/discussions).
+Willkommen zu diesem Kurs über klassisches maschinelles Lernen für Anfänger! Egal, ob du völlig neu auf diesem Gebiet bist oder ein erfahrener ML-Praktiker, der sein Wissen in einem Bereich auffrischen möchte – wir freuen uns, dass du dabei bist! Wir möchten einen freundlichen Ausgangspunkt für dein ML-Studium schaffen und sind gerne bereit, dein [Feedback](https://github.com/microsoft/ML-For-Beginners/discussions) zu bewerten, zu beantworten und einzubeziehen.
 
 [![Einführung in ML](https://img.youtube.com/vi/h0e2HAPTGF4/0.jpg)](https://youtu.be/h0e2HAPTGF4 "Einführung in ML")
 
-> 🎥 Klicken Sie auf das obige Bild für ein Video: MITs John Guttag stellt das maschinelle Lernen vor.
+> 🎥 Klicke auf das Bild oben für ein Video: John Guttag vom MIT stellt maschinelles Lernen vor
 
 ---
-## Erste Schritte mit maschinellem Lernen
+## Einstieg in maschinelles Lernen
 
-Bevor Sie mit diesem Lehrplan beginnen, müssen Sie Ihren Computer einrichten und bereit machen, Notebooks lokal auszuführen.
+Bevor du mit diesem Lehrplan beginnst, musst du deinen Computer einrichten und bereit machen, um Notebooks lokal auszuführen.
 
-- **Konfigurieren Sie Ihre Maschine mit diesen Videos**. Verwenden Sie die folgenden Links, um zu lernen, [wie Sie Python](https://youtu.be/CXZYvNRIAKM) auf Ihrem System installieren und [einen Texteditor](https://youtu.be/EU8eayHWoZg) für die Entwicklung einrichten.
-- **Lernen Sie Python**. Es wird auch empfohlen, ein grundlegendes Verständnis von [Python](https://docs.microsoft.com/learn/paths/python-language/?WT.mc_id=academic-77952-leestott) zu haben, einer Programmiersprache, die für Datenwissenschaftler nützlich ist und die wir in diesem Kurs verwenden.
-- **Lernen Sie Node.js und JavaScript**. Wir verwenden auch JavaScript einige Male in diesem Kurs, wenn wir Webanwendungen erstellen. Daher müssen Sie [node](https://nodejs.org) und [npm](https://www.npmjs.com/) installiert haben sowie [Visual Studio Code](https://code.visualstudio.com/) für die Entwicklung in Python und JavaScript verfügbar haben.
-- **Erstellen Sie ein GitHub-Konto**. Da Sie uns hier auf [GitHub](https://github.com) gefunden haben, haben Sie möglicherweise bereits ein Konto. Wenn nicht, erstellen Sie eines und forken Sie dann diesen Lehrplan, um ihn selbst zu verwenden. (Fühlen Sie sich auch frei, uns einen Stern zu geben 😊)
-- **Erforschen Sie Scikit-learn**. Machen Sie sich mit [Scikit-learn](https://scikit-learn.org/stable/user_guide.html) vertraut, einer Sammlung von ML-Bibliotheken, auf die wir in diesen Lektionen verweisen.
+- **Konfiguriere deine Maschine mit diesen Videos**. Nutze die folgenden Links, um zu lernen, [wie man Python installiert](https://youtu.be/CXZYvNRIAKM) und einen [Texteditor einrichtet](https://youtu.be/EU8eayHWoZg) für die Entwicklung.
+- **Lerne Python**. Es wird außerdem empfohlen, grundlegende Kenntnisse in [Python](https://docs.microsoft.com/learn/paths/python-language/?WT.mc_id=academic-77952-leestott) zu haben, einer Programmiersprache, die für Datenwissenschaftler nützlich ist und die wir in diesem Kurs verwenden.
+- **Lerne Node.js und JavaScript**. Wir verwenden JavaScript auch einige Male in diesem Kurs beim Erstellen von Web-Apps, daher benötigst du [node](https://nodejs.org) und [npm](https://www.npmjs.com/) installiert sowie [Visual Studio Code](https://code.visualstudio.com/) für die Python- und JavaScript-Entwicklung.
+- **Erstelle ein GitHub-Konto**. Da du uns hier auf [GitHub](https://github.com) gefunden hast, hast du vielleicht schon eins, aber falls nicht, erstelle eins und forke diesen Lehrplan, um ihn selbst zu verwenden. (Gib uns gerne auch einen Stern 😊)
+- **Erkunde Scikit-learn**. Mache dich mit [Scikit-learn](https://scikit-learn.org/stable/user_guide.html) vertraut, einem Satz von ML-Bibliotheken, die wir in diesen Lektionen referenzieren.
 
 ---
 ## Was ist maschinelles Lernen?
 
-Der Begriff 'maschinelles Lernen' ist einer der beliebtesten und häufig verwendeten Begriffe von heute. Es besteht eine nicht unerhebliche Wahrscheinlichkeit, dass Sie diesen Begriff zumindest einmal gehört haben, wenn Sie irgendeine Art von Vertrautheit mit Technologie haben, unabhängig davon, in welchem Bereich Sie tätig sind. Die Mechanik des maschinellen Lernens bleibt jedoch für die meisten Menschen ein Rätsel. Für einen Anfänger im maschinellen Lernen kann das Thema manchmal überwältigend erscheinen. Daher ist es wichtig zu verstehen, was maschinelles Lernen tatsächlich ist und es Schritt für Schritt durch praktische Beispiele zu lernen.
+Der Begriff „maschinelles Lernen“ ist einer der populärsten und am häufigsten verwendeten Begriffe heute. Es ist sehr wahrscheinlich, dass du diesen Begriff zumindest einmal gehört hast, wenn du irgendeine Vertrautheit mit Technologie hast, unabhängig davon, in welchem Bereich du arbeitest. Die Mechanik des maschinellen Lernens ist jedoch für die meisten Menschen ein Rätsel. Für einen ML-Anfänger kann das Thema manchmal überwältigend wirken. Daher ist es wichtig, zu verstehen, was maschinelles Lernen tatsächlich ist, und es Schritt für Schritt durch praktische Beispiele kennenzulernen.
 
 ---
 ## Die Hype-Kurve
 
-![ml hype curve](../../../../translated_images/hype.07183d711a17aafe70915909a0e45aa286ede136ee9424d418026ab00fec344c.de.png)
+![ml hype curve](../../../../translated_images/de/hype.07183d711a17aafe.webp)
 
-> Google Trends zeigt die aktuelle 'Hype-Kurve' des Begriffs 'maschinelles Lernen'
+> Google Trends zeigt die aktuelle „Hype-Kurve“ des Begriffs „machine learning“
 
 ---
 ## Ein geheimnisvolles Universum
 
-Wir leben in einem Universum voller faszinierender Geheimnisse. Große Wissenschaftler wie Stephen Hawking, Albert Einstein und viele andere haben ihr Leben der Suche nach bedeutungsvoller Information gewidmet, die die Geheimnisse der Welt um uns herum enthüllt. Dies ist die menschliche Bedingung des Lernens: Ein menschliches Kind lernt neue Dinge und entdeckt Jahr für Jahr die Struktur seiner Welt, während es zum Erwachsenen heranwächst.
+Wir leben in einem Universum voller faszinierender Geheimnisse. Große Wissenschaftler wie Stephen Hawking, Albert Einstein und viele weitere haben ihr Leben der Suche nach bedeutungsvollen Informationen gewidmet, die die Geheimnisse der Welt um uns herum enthüllen. Das ist der menschliche Zustand des Lernens: Ein Kind lernt Jahr für Jahr neue Dinge und entdeckt die Struktur seiner Welt, während es zum Erwachsenen heranwächst.
 
 ---
 ## Das Gehirn des Kindes
 
-Das Gehirn und die Sinne eines Kindes nehmen die Fakten ihrer Umgebung wahr und lernen allmählich die verborgenen Muster des Lebens, die dem Kind helfen, logische Regeln zu entwickeln, um erlernte Muster zu identifizieren. Der Lernprozess des menschlichen Gehirns macht den Menschen zu dem anspruchsvollsten Lebewesen dieser Welt. Kontinuierliches Lernen durch Entdecken verborgener Muster und anschließendes Innovieren auf diesen Mustern ermöglicht es uns, uns im Laufe unseres Lebens immer weiter zu verbessern. Diese Lernfähigkeit und die Fähigkeit zur Weiterentwicklung stehen im Zusammenhang mit einem Konzept namens [Gehirnplastizität](https://www.simplypsychology.org/brain-plasticity.html). Oberflächlich betrachtet können wir einige motivierende Ähnlichkeiten zwischen dem Lernprozess des menschlichen Gehirns und den Konzepten des maschinellen Lernens ziehen.
+Das Gehirn und die Sinne eines Kindes nehmen die Fakten seiner Umgebung wahr und lernen allmählich die verborgenen Muster des Lebens, die dem Kind helfen, logische Regeln zu erstellen, um gelernte Muster zu erkennen. Der Lernprozess des menschlichen Gehirns macht den Menschen zum anspruchsvollsten Lebewesen auf dieser Welt. Indem wir kontinuierlich lernen, versteckte Muster entdecken und diese dann innovativ weiterentwickeln, können wir uns im Laufe unseres Lebens immer weiter verbessern. Diese Lernfähigkeit und sich entwickelnde Kapazität steht im Zusammenhang mit einem Konzept namens [Gehirnplastizität](https://www.simplypsychology.org/brain-plasticity.html). Oberflächlich betrachtet kann man einige motivierende Ähnlichkeiten zwischen dem Lernprozess des menschlichen Gehirns und den Konzepten des maschinellen Lernens ziehen.
 
 ---
 ## Das menschliche Gehirn
 
-Das [menschliche Gehirn](https://www.livescience.com/29365-human-brain.html) nimmt Dinge aus der realen Welt wahr, verarbeitet die wahrgenommenen Informationen, trifft rationale Entscheidungen und führt bestimmte Handlungen basierend auf den Umständen aus. Das ist es, was wir als intelligentes Verhalten bezeichnen. Wenn wir ein Abbild des intelligenten Verhaltensprozesses in eine Maschine programmieren, nennt man das künstliche Intelligenz (KI).
+Das [menschliche Gehirn](https://www.livescience.com/29365-human-brain.html) nimmt Dinge aus der realen Welt wahr, verarbeitet die wahrgenommenen Informationen, trifft rationale Entscheidungen und führt je nach Situation bestimmte Handlungen aus. Dies nennen wir intelligentes Verhalten. Wenn wir einen Nachbau dieses intelligenten Verhaltensprozesses in eine Maschine programmieren, nennt man das künstliche Intelligenz (KI).
 
 ---
-## Einige Begriffe
+## Einige Begriffserklärungen
 
-Obwohl die Begriffe verwechselt werden können, ist maschinelles Lernen (ML) ein wichtiger Teilbereich der künstlichen Intelligenz. **ML befasst sich mit der Verwendung spezialisierter Algorithmen, um bedeutungsvolle Informationen zu entdecken und verborgene Muster aus wahrgenommenen Daten zu finden, um den rationalen Entscheidungsprozess zu unterstützen**.
+Obwohl die Begriffe verwechselt werden können, ist maschinelles Lernen (ML) ein wichtiger Teilbereich der künstlichen Intelligenz. **ML beschäftigt sich damit, spezialisierte Algorithmen zu verwenden, um bedeutungsvolle Informationen zu entdecken und verborgene Muster aus wahrgenommenen Daten zu finden, um den rationalen Entscheidungsprozess zu unterstützen**.
 
 ---
 ## KI, ML, Deep Learning
 
-![KI, ML, Deep Learning, Datenwissenschaft](../../../../translated_images/ai-ml-ds.537ea441b124ebf69c144a52c0eb13a7af63c4355c2f92f440979380a2fb08b8.de.png)
+![AI, ML, deep learning, data science](../../../../translated_images/de/ai-ml-ds.537ea441b124ebf6.webp)
 
-> Ein Diagramm, das die Beziehungen zwischen KI, ML, Deep Learning und Datenwissenschaft zeigt. Infografik von [Jen Looper](https://twitter.com/jenlooper), inspiriert von [dieser Grafik](https://softwareengineering.stackexchange.com/questions/366996/distinction-between-ai-ml-neural-networks-deep-learning-and-data-mining)
-
----
-## Konzepte, die behandelt werden
-
-In diesem Lehrplan werden wir nur die Kernkonzepte des maschinellen Lernens behandeln, die ein Anfänger kennen muss. Wir behandeln das, was wir als 'klassisches maschinelles Lernen' bezeichnen, hauptsächlich unter Verwendung von Scikit-learn, einer ausgezeichneten Bibliothek, die viele Studenten nutzen, um die Grundlagen zu lernen. Um breitere Konzepte der künstlichen Intelligenz oder des Deep Learning zu verstehen, ist ein starkes Fundament des maschinellen Lernens unerlässlich, und daher möchten wir es hier anbieten.
+> Ein Diagramm, das die Beziehungen zwischen KI, ML, Deep Learning und Data Science zeigt. Infografik von [Jen Looper](https://twitter.com/jenlooper) inspiriert von [dieser Grafik](https://softwareengineering.stackexchange.com/questions/366996/distinction-between-ai-ml-neural-networks-deep-learning-and-data-mining)
 
 ---
-## In diesem Kurs lernen Sie:
+## Zu behandelnde Konzepte
+
+In diesem Lehrplan behandeln wir nur die Kernkonzepte des maschinellen Lernens, die ein Anfänger kennen muss. Wir decken das an, was wir als „klassisches maschinelles Lernen“ bezeichnen, hauptsächlich mit Scikit-learn, einer ausgezeichneten Bibliothek, die viele Studenten verwenden, um die Grundlagen zu lernen. Um breitere Konzepte der künstlichen Intelligenz oder des Deep Learnings zu verstehen, ist ein starkes Grundwissen im maschinellen Lernen unverzichtbar, und daher möchten wir es hier anbieten.
+
+---
+## In diesem Kurs lernst du:
 
 - Kernkonzepte des maschinellen Lernens
 - Die Geschichte des ML
 - ML und Fairness
 - Regressions-ML-Techniken
 - Klassifikations-ML-Techniken
-- Cluster-ML-Techniken
+- Clustering-ML-Techniken
 - Natürliche Sprachverarbeitung-ML-Techniken
-- Zeitreihenprognose-ML-Techniken
+- Zeitreihen-Prognose-ML-Techniken
 - Verstärkendes Lernen
-- Anwendungsbeispiele für ML in der realen Welt
+- Anwendungen von ML in der Praxis
 
 ---
-## Was wir nicht behandeln werden
+## Was wir nicht behandeln
 
 - Deep Learning
 - Neuronale Netzwerke
 - KI
 
-Um ein besseres Lernerlebnis zu schaffen, werden wir die Komplexität von neuronalen Netzwerken, 'Deep Learning' - mehrschichtige Modellierung mit neuronalen Netzwerken - und KI vermeiden, die wir in einem anderen Lehrplan behandeln werden. Wir werden auch einen bevorstehenden Lehrplan zur Datenwissenschaft anbieten, um diesen Aspekt dieses größeren Feldes zu fokussieren.
+Um ein besseres Lernerlebnis zu ermöglichen, vermeiden wir die Komplexität von neuronalen Netzwerken, „Deep Learning“ – vielschichtige Modellbildung mittels neuronalen Netzwerken – und KI, die wir in einem anderen Lehrplan besprechen werden. Wir werden außerdem einen zukünftigen Lehrplan zu Data Science anbieten, der sich auf diesen Aspekt dieses größeren Fachgebiets konzentriert.
 
 ---
 ## Warum maschinelles Lernen studieren?
 
-Maschinelles Lernen wird aus einer Systemperspektive als die Schaffung automatisierter Systeme definiert, die verborgene Muster aus Daten lernen können, um intelligente Entscheidungen zu treffen.
+Maschinelles Lernen wird aus Systemsicht als die Erstellung automatisierter Systeme definiert, die verborgene Muster aus Daten lernen können, um intelligente Entscheidungen zu unterstützen.
 
-Diese Motivation ist lose inspiriert von der Art und Weise, wie das menschliche Gehirn bestimmte Dinge basierend auf den Daten, die es aus der Außenwelt wahrnimmt, lernt.
+Diese Motivation ist lose inspiriert davon, wie das menschliche Gehirn bestimmte Dinge basierend auf Daten lernt, die es aus der Außenwelt wahrnimmt.
 
-✅ Denken Sie eine Minute darüber nach, warum ein Unternehmen versuchen würde, maschinelles Lernen zu nutzen, anstatt einen fest codierten, regelbasierten Motor zu erstellen.
+✅ Überlege einen Moment, warum ein Unternehmen versuchen würde, maschinelle Lernstrategien zu verwenden, anstatt eine regelbasierte Hard-Coded-Engine zu erstellen.
+
+---
+## Warum Datenqualität wichtig ist
+
+Hochwertige Daten verbessern die Modellleistung. Schlechte oder verrauschte Daten können zu ungenauen Vorhersagen führen, selbst bei der Verwendung fortschrittlicher maschineller Lernalgorithmen.
 
 ---
 ## Anwendungen des maschinellen Lernens
 
-Anwendungen des maschinellen Lernens sind mittlerweile fast überall und so allgegenwärtig wie die Daten, die durch unsere Gesellschaften fließen, generiert von unseren Smartphones, vernetzten Geräten und anderen Systemen. Angesichts des immensen Potenzials modernster Algorithmen des maschinellen Lernens haben Forscher deren Fähigkeit untersucht, multidimensionale und multidisziplinäre Probleme des realen Lebens mit großartigen positiven Ergebnissen zu lösen.
+Anwendungen des maschinellen Lernens sind inzwischen fast überall zu finden und ebenso allgegenwärtig wie die Daten, die unsere Gesellschaften durchströmen, erzeugt von unseren Smartphones, vernetzten Geräten und anderen Systemen. Angesichts des enormen Potenzials moderner maschineller Lernalgorithmen erforschen Forscher deren Fähigkeit, multidimensionale und multidisziplinäre reale Probleme mit großartigen positiven Ergebnissen zu lösen.
 
 ---
-## Beispiele für angewandtes ML
+## Beispiele angewandten ML
 
-**Sie können maschinelles Lernen auf viele Arten nutzen**:
+**Maschinelles Lernen kann auf viele Arten genutzt werden**:
 
-- Um die Wahrscheinlichkeit einer Erkrankung aus der medizinischen Vorgeschichte oder Berichten eines Patienten vorherzusagen.
+- Um die Wahrscheinlichkeit einer Krankheit aus der medizinischen Vorgeschichte oder Berichten eines Patienten vorherzusagen.
 - Um Wetterdaten zu nutzen, um Wetterereignisse vorherzusagen.
-- Um die Stimmung eines Textes zu verstehen.
-- Um Fake News zu erkennen, um die Verbreitung von Propaganda zu stoppen.
+- Um die Stimmung eines Texts zu verstehen.
+- Um Fake-News zu erkennen, um die Verbreitung von Propaganda zu stoppen.
 
-Finanzen, Wirtschaft, Erdwissenschaften, Weltraumforschung, biomedizinische Ingenieurwissenschaften, kognitive Wissenschaften und sogar Bereiche der Geisteswissenschaften haben maschinelles Lernen angepasst, um die mühsamen, datenintensiven Probleme ihres Bereichs zu lösen.
+Finanzen, Wirtschaft, Geowissenschaften, Raumfahrt, Biomedizintechnik, Kognitionswissenschaft und sogar Fachgebiete der Geisteswissenschaften haben maschinelles Lernen adaptiert, um die schwierigen, datenverarbeitungsintensiven Probleme ihres Bereichs zu lösen.
 
 ---
 ## Fazit
 
-Maschinelles Lernen automatisiert den Prozess der Musterentdeckung, indem es bedeutungsvolle Einblicke aus realen oder generierten Daten findet. Es hat sich als äußerst wertvoll in Geschäft, Gesundheit und Finanzanwendungen erwiesen, unter anderem.
+Maschinelles Lernen automatisiert den Prozess der Mustererkennung, indem es bedeutungsvolle Erkenntnisse aus realen oder generierten Daten findet. Es hat sich im Geschäfts-, Gesundheits- und Finanzwesen als äußerst wertvoll erwiesen, unter anderem.
 
-In naher Zukunft wird es für Menschen aus jedem Bereich notwendig sein, die Grundlagen des maschinellen Lernens zu verstehen, aufgrund seiner weitverbreiteten Anwendung.
+In naher Zukunft wird das Verstehen der Grundlagen des maschinellen Lernens für Menschen aus allen Bereichen ein Muss sein, wegen seiner weit verbreiteten Anwendung.
 
 ---
 # 🚀 Herausforderung
 
-Skizzieren Sie auf Papier oder mit einer Online-App wie [Excalidraw](https://excalidraw.com/) Ihr Verständnis der Unterschiede zwischen KI, ML, Deep Learning und Datenwissenschaft. Fügen Sie einige Ideen zu Problemen hinzu, die jede dieser Techniken gut lösen kann.
+Skizziere auf Papier oder mit einer Online-App wie [Excalidraw](https://excalidraw.com/) dein Verständnis der Unterschiede zwischen KI, ML, Deep Learning und Data Science. Füge einige Ideen über Probleme hinzu, die jede dieser Techniken gut lösen kann.
 
-# [Nachlesequiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/2/)
+# [Post-Vorlesungsquiz](https://ff-quizzes.netlify.app/en/ml/)
 
 ---
-# Überprüfung & Selbststudium
+# Rückblick & Selbststudium
 
-Um mehr darüber zu erfahren, wie Sie mit ML-Algorithmen in der Cloud arbeiten können, folgen Sie diesem [Lernpfad](https://docs.microsoft.com/learn/paths/create-no-code-predictive-models-azure-machine-learning/?WT.mc_id=academic-77952-leestott).
+Um mehr darüber zu lernen, wie du mit ML-Algorithmen in der Cloud arbeiten kannst, folge diesem [Learning Path](https://docs.microsoft.com/learn/paths/create-no-code-predictive-models-azure-machine-learning/?WT.mc_id=academic-77952-leestott).
 
-Nehmen Sie an einem [Lernpfad](https://docs.microsoft.com/learn/modules/introduction-to-machine-learning/?WT.mc_id=academic-77952-leestott) über die Grundlagen des ML teil.
+Mache einen [Learning Path](https://docs.microsoft.com/learn/modules/introduction-to-machine-learning/?WT.mc_id=academic-77952-leestott) zu den Grundlagen des ML.
 
 ---
 # Aufgabe
 
-[Starten Sie durch](assignment.md)
+[Starte und loslegen](assignment.md)
 
-**Haftungsausschluss**:  
-Dieses Dokument wurde mit maschinellen KI-Übersetzungsdiensten übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als die maßgebliche Quelle betrachtet werden. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

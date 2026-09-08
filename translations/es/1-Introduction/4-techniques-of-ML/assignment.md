@@ -2,13 +2,15 @@
 
 ## Instrucciones
 
-En tu empresa, en un grupo de usuarios, o entre tus amigos o compañeros de estudio, habla con alguien que trabaje profesionalmente como científico de datos. Escribe un breve artículo (500 palabras) sobre sus ocupaciones diarias. ¿Son especialistas o trabajan en 'full stack'?
+En tu empresa, en un grupo de usuarios, o entre tus amigos o compañeros de estudio, habla con alguien que trabaje profesionalmente como científico de datos. Escribe un breve ensayo (500 palabras) sobre sus ocupaciones diarias. ¿Son especialistas o trabajan en un enfoque 'full stack'?
 
-## Rubrica
+## Rúbrica
 
-| Criterios | Ejemplar                                                                             | Adecuado                                                           | Necesita Mejora       |
-| --------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------ | --------------------- |
-|           | Un ensayo de la longitud correcta, con fuentes atribuidas, presentado como un archivo .doc | El ensayo está mal atribuido o es más corto de lo requerido        | No se presenta ensayo |
+| Criterios | Ejemplar                                                                            | Adecuado                                                           | Necesita Mejorar      |
+| --------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------ | --------------------- |
+|           | Se presenta un ensayo con la longitud correcta, con fuentes atribuidas, en formato .doc | El ensayo tiene atribuciones deficientes o es más corto de lo requerido | No se presenta un ensayo |
 
-        **Descargo de responsabilidad**:
-        Este documento ha sido traducido utilizando servicios de traducción automatizada por IA. Si bien nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda la traducción humana profesional. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+---
+
+**Descargo de responsabilidad**:  
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

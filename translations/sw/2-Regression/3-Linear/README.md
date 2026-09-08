@@ -1,124 +1,136 @@
-# Jenga modeli ya regression kwa kutumia Scikit-learn: regression kwa njia nne
+# Jenga mfano wa urekebishaji ukitumia Scikit-learn: urekebishaji kwa njia nne
 
-![Picha ya taarifa kuhusu regression ya mstari na polynomial](../../../../translated_images/linear-polynomial.5523c7cb6576ccab0fecbd0e3505986eb2d191d9378e785f82befcf3a578a6e7.sw.png)
-> Picha ya taarifa na [Dasani Madipalli](https://twitter.com/dasani_decoded)
-## [Quiz kabla ya somo](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/13/)
+## Kumbuka kwa Mwanafunzi Mwanzo
 
-> ### [Somo hili linapatikana katika R!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)
-### Utangulizi
+Urekebishaji wa mstari hutumiwa tunapotaka kutabiri **thamani ya nambari** (kwa mfano, bei ya nyumba, halijoto, au mauzo).
+Hufanya kazi kwa kupata mstari wa moja kwa moja unaowakilisha vyema uhusiano kati ya vipengele vya ingizo na matokeo.
 
-Hadi sasa umechunguza regression ni nini kwa kutumia data za sampuli zilizokusanywa kutoka kwa seti ya data ya bei za malenge ambayo tutatumia katika somo hili lote. Pia umeweza kuiona kwa kutumia Matplotlib.
+Katika somo hili, tunazingatia kuelewa dhana kabla ya kuchunguza mbinu za urekebishaji za juu zaidi.
+![Linear vs polynomial regression infographic](../../../../translated_images/sw/linear-polynomial.5523c7cb6576ccab.webp)
+> Infografiki na [Dasani Madipalli](https://twitter.com/dasani_decoded)
+## [Jaribio kabla ya somo](https://ff-quizzes.netlify.app/en/ml/)
 
-Sasa uko tayari kuingia zaidi kwenye regression kwa ML. Wakati visualization inakuruhusu kuelewa data, nguvu halisi ya Machine Learning inatoka kwenye _kufundisha mifano_. Mifano inafundishwa kwenye data za kihistoria ili kunasa moja kwa moja utegemezi wa data, na hukuruhusu kutabiri matokeo kwa data mpya, ambayo mfano haujaiona kabla.
+> ### [Somo hili linapatikana kwa R!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)
+### Utangulizi 
 
-Katika somo hili, utajifunza zaidi kuhusu aina mbili za regression: _basic linear regression_ na _polynomial regression_, pamoja na baadhi ya hisabati inayohusiana na mbinu hizi. Mifano hii itatuwezesha kutabiri bei za malenge kulingana na data tofauti za pembejeo.
+Hadi sasa umechunguza nini urekebishaji kwa kutumia sampuli za data zilizokusanywa kutoka kwenye dataset ya bei za malenge ambayo tutatumia katika somo hili. Pia umeonyesha kwa kutumia Matplotlib.
 
-[![ML kwa wanaoanza - Kuelewa Linear Regression](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "ML kwa wanaoanza - Kuelewa Linear Regression")
+Sasa uko tayari kuzama zaidi katika urekebishaji kwa ML. Wakati uonyeshaji unaoruhusu kuelewa data, nguvu halisi ya Kujifunza kwa Mashine hutokana na _mafunzo ya mifano_. Mifano hufunzwa kwa data ya kihistoria ili moja kwa moja kushika utegemezi wa data, na huruhusu kutabiri matokeo kwa data mpya, ambayo mfano haujawahi kuona kabla.
 
-> 🎥 Bofya picha hapo juu kwa muhtasari mfupi wa video kuhusu linear regression.
+Katika somo hili, utajifunza zaidi kuhusu aina mbili za urekebishaji: _urekebishaji wa mstari wa msingi_ na _urekebishaji wa polynomial_, pamoja na baadhi ya hesabu zinazohusiana na mbinu hizi. Mifano hiyo itatuwezesha kutabiri bei za malenge kulingana na data mbalimbali za ingizo. 
 
-> Katika mtaala huu, tunadhania kuwa na maarifa ya chini ya hisabati, na tunalenga kuifanya ipatikane kwa wanafunzi wanaotoka katika nyanja nyingine, hivyo angalia maelezo, 🧮 callouts, michoro, na zana zingine za kujifunza kusaidia kuelewa.
+[![ML kwa wanaoanza - Kuelewa Urekebishaji wa Mstari](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "ML kwa wanaoanza - Kuelewa Urekebishaji wa Mstari")
 
-### Mahitaji
+> 🎥 Bonyeza picha hapo juu kwa video fupi inayotoa muhtasari wa urekebishaji wa mstari.
 
-Unapaswa kuwa na ufahamu sasa na muundo wa data ya malenge tunayochunguza. Unaweza kuipata ikiwa imepakiwa na kusafishwa katika faili ya _notebook.ipynb_ ya somo hili. Katika faili, bei ya malenge inaonyeshwa kwa bushel katika fremu mpya ya data. Hakikisha unaweza kuendesha hizi notebooks katika kernels katika Visual Studio Code.
+> Katika mtaala huu mzima, tunadhani maarifa madogo ya hesabu, na tunalenga kuufanya ufikike kwa wanafunzi kutoka nyanja nyingine, hivyo angalia kwa makini noti, 🧮 maelezo ya ziada, michoro, na zana nyingine za kujifunzia kusaidia kuelewa.
+
+### Msingi
+
+Unapaswa kuwa umezoea sasa muundo wa data ya malenge tunayoichunguza. Unaweza kuipata tayari imepandishwa na kusafishwa kwenye faili la _notebook.ipynb_ la somo hili. Katika faili hiyo, bei ya malenge inaonyeshwa kwa kila kikapu katika fremu mpya ya data. Hakikisha unaweza kuendesha daftari hizi kwenye kernels za Visual Studio Code.
 
 ### Maandalizi
 
-Kama ukumbusho, unapakia data hii ili uweze kuuliza maswali yake.
+Kama ukumbusho, unapakua data hii ili kuiuliza maswali.
 
-- Ni wakati gani mzuri wa kununua malenge?
-- Ninaweza kutarajia bei gani ya kasha la malenge madogo?
-- Je, ninunue kwa vikapu vya nusu bushel au kwa sanduku la bushel 1 1/9?
-Tuendelee kuchimba data hii.
+- Ni wakati gani bora wa kununua malenge? 
+- Bei gani naweza kutegemea kwa kesi ya malenge madogo?
+- Je, ninapaswa kuyununua katika vikapu vya nusu kikapu au sanduku la 1 1/9 kikapu?
+Baki tuchunguze data hii zaidi.
 
-Katika somo lililopita, uliunda fremu ya data ya Pandas na kuijaza na sehemu ya seti ya data ya awali, ukistandardisha bei kwa bushel. Kwa kufanya hivyo, hata hivyo, uliweza tu kukusanya takriban pointi 400 za data na kwa miezi ya msimu wa vuli tu.
+Katika somo la awali, ulitengeneza fremu ya data ya Pandas na kuijaza na sehemu ya dataset ya awali, ukibadilisha bei kwa mujibu wa kikapu. Hata hivyo, kwa kufanya hivyo, uliweza kukusanya takriban pointi 400 za data tu na kwa miezi ya vuli tu.
 
-Angalia data ambayo tulipakia katika notebook inayosindikiza somo hili. Data imepakiwa na scatterplot ya awali imechorwa kuonyesha data ya mwezi. Labda tunaweza kupata maelezo zaidi kuhusu asili ya data kwa kuisafisha zaidi.
+Tazama data ambayo tumepandisha tayari katika daftari la somo hili linaloambatana. Data imepandishwa tayari na mchoro wa awali wa pointi umepangwa kuonyesha data ya mwezi. Labda tunaweza kupata maelezo zaidi kuhusu asili ya data kwa kuisafisha zaidi.
 
-## Mstari wa regression ya mstari
+## Mstari wa urekebishaji wa mstari
 
-Kama ulivyojifunza katika Somo la 1, lengo la zoezi la regression ya mstari ni kuweza kuchora mstari ili:
+Kama ulivyojifunza katika Somo la 1, lengo la zoezi la urekebishaji wa mstari ni kupata uwezo wa kuchora mstari ili:
 
-- **Kuonyesha uhusiano wa vigezo**. Kuonyesha uhusiano kati ya vigezo
-- **Kufanya utabiri**. Kufanya utabiri sahihi wa mahali ambapo pointi mpya ya data ingeingia kwa uhusiano na mstari huo.
+- **Kuonyesha uhusiano wa tofauti.** Onyesha uhusiano kati ya tofauti
+- **Kutabiri.** Tengeneza utabiri sahihi wa mahali ambapo nukta mpya itapangwa kulingana na mstari huo.
 
-Ni kawaida kwa **Least-Squares Regression** kuchora aina hii ya mstari. Neno 'least-squares' linamaanisha kwamba pointi zote za data zinazozunguka mstari wa regression zimetolewaz na kisha kuongezwa. Kwa hali nzuri, jumla ya mwisho ni ndogo iwezekanavyo, kwa sababu tunataka idadi ndogo ya makosa, au `least-squares`.
+Ni kawaida kwa **Urekebishaji wa Sqare Ndogo** kuvuta mstari huu. Neno "Least-Squares" linahusu mchakato wa kupunguza jumla ya makosa katika mfano wetu. Kwa kila nukta ya data, tunapima umbali wima (ujulikanayo kama resti) kati ya nukta halisi na mstari wetu wa urekebishaji.
 
-Tunafanya hivyo kwa sababu tunataka kuunda mstari ambao una umbali wa chini kabisa kutoka kwa pointi zote za data zetu. Pia tunazitoa maneno kabla ya kuyaongeza kwa sababu tunajali ukubwa wake badala ya mwelekeo wake.
+Tunapanga mraba umbali huu kwa sababu mbili kuu:
 
-> **🧮 Nionyeshe hisabati**
->
-> Mstari huu, unaoitwa _line of best fit_ unaweza kuonyeshwa na [mchoro](https://en.wikipedia.org/wiki/Simple_linear_regression):
->
+1. **Ukubwa juu ya Mwelekeo:** Tunataka kushughulikia kosa la -5 sawa na kosa la +5. Kufanya mraba kunafanya thamani zote kuwa chanya.
+
+2. **Kuweka adhabu kwa Tofauti Kubwa:** Kufanya mraba kunatoa uzito zaidi kwa makosa makubwa, na kulazimisha mstari kubaki karibu na pointi zilizo mbali.
+
+Kisha tunaongeza thamani hizi za mraba pamoja. Lengo letu ni kupata mstari maalum ambapo jumla hii ni ndogo zaidi (thamani ndogo kabisa) - ndio maana linaitwa "Least-Squares".
+
+> **🧮 Nionyeshe hesabu** 
+> 
+> Mstari huu, unaoitwa _mstari wa kufaa vyema_ unaweza kuonyeshwa kwa [mlinganyo](https://en.wikipedia.org/wiki/Simple_linear_regression): 
+> 
 > ```
 > Y = a + bX
 > ```
 >
-> `X` is the 'explanatory variable'. `Y` is the 'dependent variable'. The slope of the line is `b` and `a` is the y-intercept, which refers to the value of `Y` when `X = 0`. 
+> `X` ni ‘tofauti ya kuelezea’. `Y` ni ‘tofauti inayotegemea’. Pembe ya mstari ni `b` na `a` ni kitovu cha y, kinachoashiria thamani ya `Y` wakati `X = 0`.
 >
->![calculate the slope](../../../../translated_images/slope.f3c9d5910ddbfcf9096eb5564254ba22c9a32d7acd7694cab905d29ad8261db3.sw.png)
+>![hesabu ya pembe](../../../../translated_images/sw/slope.f3c9d5910ddbfcf9.webp)
 >
-> First, calculate the slope `b`. Infographic by [Jen Looper](https://twitter.com/jenlooper)
+> Kwanza, hesabu pembe `b`. Infografiki na [Jen Looper](https://twitter.com/jenlooper)
 >
-> In other words, and referring to our pumpkin data's original question: "predict the price of a pumpkin per bushel by month", `X` would refer to the price and `Y` would refer to the month of sale. 
+> Kwa maneno mengine na kurejelea swali la asili la data yetu ya malenge: "tabiri bei ya malenge kwa kila kikapu kwa mwezi", `X` itarejelea bei na `Y` itarejelea mwezi wa mauzo. 
 >
->![complete the equation](../../../../translated_images/calculation.a209813050a1ddb141cdc4bc56f3af31e67157ed499e16a2ecf9837542704c94.sw.png)
+>![kamilisha mlinganyo](../../../../translated_images/sw/calculation.a209813050a1ddb1.webp)
 >
-> Calculate the value of Y. If you're paying around $4, it must be April! Infographic by [Jen Looper](https://twitter.com/jenlooper)
+> Hesabu thamani ya Y. Ikiwa unalipa karibu $4, lazima iwe Aprili! Infografiki na [Jen Looper](https://twitter.com/jenlooper)
 >
-> The math that calculates the line must demonstrate the slope of the line, which is also dependent on the intercept, or where `Y` is situated when `X = 0`.
+> Hesabu inayoonyesha mstari lazima ionyeshe pembe ya mstari, ambayo pia inategemea kitovu, au mahali `Y` ilipo wakati `X = 0`.
 >
-> You can observe the method of calculation for these values on the [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html) web site. Also visit [this Least-squares calculator](https://www.mathsisfun.com/data/least-squares-calculator.html) to watch how the numbers' values impact the line.
+> Unaweza kuona njia ya hesabu ya thamani hizi kwenye tovuti ya [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html). Pia tembelea [kalkuleta ya least-squares](https://www.mathsisfun.com/data/least-squares-calculator.html) ili kuona jinsi thamani za nambari zinavyoathiri mstari.
 
-## Correlation
+## Uhusiano (Correlation)
 
-One more term to understand is the **Correlation Coefficient** between given X and Y variables. Using a scatterplot, you can quickly visualize this coefficient. A plot with datapoints scattered in a neat line have high correlation, but a plot with datapoints scattered everywhere between X and Y have a low correlation.
+Neno moja zaidi la kuelewa ni **Kiwango cha Uhusiano** kati ya tofauti za X na Y. Ukiweka mchoro wa pointi, unaweza haraka kuona kiwango hiki. Mchoro wenye pointi zilizo pangiliwa kwenye mstari mzuri una uhusiano mkubwa, lakini mchoro wenye pointi zilizoenea kila mahali kati ya X na Y una uhusiano mdogo.
 
-A good linear regression model will be one that has a high (nearer to 1 than 0) Correlation Coefficient using the Least-Squares Regression method with a line of regression.
+Mfano mzuri wa urekebishaji wa mstari utakuwa ule wenye Kiwango cha Uhusiano kwa kiwango cha juu (karibu 1 badala ya 0) ukitumia Mbinu ya Least-Squares Regression na mstari wa urekebishaji.
 
-✅ Run the notebook accompanying this lesson and look at the Month to Price scatterplot. Does the data associating Month to Price for pumpkin sales seem to have high or low correlation, according to your visual interpretation of the scatterplot? Does that change if you use more fine-grained measure instead of `Month`, eg. *day of the year* (i.e. number of days since the beginning of the year)?
+✅ Endesha daftari la mazoezi linaloambatana na somo hili na tazama mchoro wa Month to Price scatterplot. Je, data inayounganisha Mwezi na Bei kwa mauzo ya malenge inaonekana kuwa na uhusiano mkubwa au mdogo, kulingana na tafsiri yako ya kuona ya scatterplot? Je, hiyo hubadilika ikiwa unatumia kipimo cha kina zaidi badala ya `Month`, kwa mfano *siku ya mwaka* (yaani idadi ya siku tangu mwanzo wa mwaka)?
 
-In the code below, we will assume that we have cleaned up the data, and obtained a data frame called `new_pumpkins`, similar to the following:
+Katika msimbo hapa chini, tutadhani kwamba tumesafisha data, na kupata fremu ya data inayoitwa `new_pumpkins`, zinazofanana na yafuatayo:
 
-ID | Month | DayOfYear | Variety | City | Package | Low Price | High Price | Price
----|-------|-----------|---------|------|---------|-----------|------------|-------
-70 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
-71 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636
-72 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636
-73 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 17.0 | 17.0 | 15.454545
-74 | 10 | 281 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
+ID | Mwezi | SikuYaMwaka | Aina | Jiji | Pakiti | Bei Ndogo | Bei Kubwa | Bei
+---|-------|-------------|-------|------|---------|-----------|-----------|------
+70 | 9 | 267 | AINA YA PIE | BALTIMORE | 1 1/9 kartoni za kikapu | 15.0 | 15.0 | 13.636364
+71 | 9 | 267 | AINA YA PIE | BALTIMORE | 1 1/9 kartoni za kikapu | 18.0 | 18.0 | 16.363636
+72 | 10 | 274 | AINA YA PIE | BALTIMORE | 1 1/9 kartoni za kikapu | 18.0 | 18.0 | 16.363636
+73 | 10 | 274 | AINA YA PIE | BALTIMORE | 1 1/9 kartoni za kikapu | 17.0 | 17.0 | 15.454545
+74 | 10 | 281 | AINA YA PIE | BALTIMORE | 1 1/9 kartoni za kikapu | 15.0 | 15.0 | 13.636364
 
-> The code to clean the data is available in [`notebook.ipynb`](../../../../2-Regression/3-Linear/notebook.ipynb). We have performed the same cleaning steps as in the previous lesson, and have calculated `DayOfYear` kwa kutumia usemi ufuatao:
+> Msimbo wa kusafisha data upo katika [`notebook.ipynb`](notebook.ipynb). Tumefanya hatua sawa za usafi kama katika somo lililopita, na tumekokotoa safu ya `DayOfYear` kwa kutumia maelezo ifuatayo:
 
 ```python
 day_of_year = pd.to_datetime(pumpkins['Date']).apply(lambda dt: (dt-datetime(dt.year,1,1)).days)
 ```
 
-Sasa kwa kuwa unaelewa hisabati nyuma ya regression ya mstari, hebu tuunde mfano wa Regression kuona kama tunaweza kutabiri ni kifurushi gani cha malenge kitakuwa na bei bora za malenge. Mtu anayenunua malenge kwa ajili ya shamba la malenge la likizo anaweza kutaka habari hii ili aweze kuboresha manunuzi yake ya vifurushi vya malenge kwa shamba hilo.
+Sasa kwamba unaelewa hesabu nyuma ya urekebishaji wa mstari, hebu tujenge Mfano wa Urekebishaji kuona kama tunaweza kutabiri pakiti ambayo ya malenge itakuwa na bei bora za malenge. Mtu anayenunua malenge kwa ajili ya shamba la malenge ya sikukuu anaweza kutaka taarifa hii ili aweze kuboresha ununuzi wao wa pakiti za malenge kwa shamba.
 
 ## Kutafuta Uhusiano
 
-[![ML kwa wanaoanza - Kutafuta Uhusiano: Muhimu kwa Regression ya Mstari](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "ML kwa wanaoanza - Kutafuta Uhusiano: Muhimu kwa Regression ya Mstari")
+[![ML kwa wanaoanza - Kutafuta Uhusiano: Ufunguo wa Urekebishaji wa Mstari](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "ML kwa wanaoanza - Kutafuta Uhusiano: Ufunguo wa Urekebishaji wa Mstari")
 
-> 🎥 Bofya picha hapo juu kwa muhtasari mfupi wa video kuhusu uhusiano.
+> 🎥 Bonyeza picha hapo juu kwa video fupi inayotoa muhtasari wa uhusiano.
 
-Kutoka somo lililopita labda umeona kuwa bei ya wastani kwa miezi tofauti inaonekana kama hii:
+Kutoka somo lililopita huenda umeona kuwa bei ya wastani kwa miezi tofauti inaonekana kama hii:
 
-<img alt="Bei ya wastani kwa mwezi" src="../2-Data/images/barchart.png" width="50%"/>
+<img alt="Bei ya wastani kwa mwezi" src="../../../../translated_images/sw/barchart.a833ea9194346d76.webp" width="50%"/>
 
-Hii inapendekeza kwamba kunaweza kuwa na uhusiano fulani, na tunaweza kujaribu kufundisha mfano wa regression ya mstari kutabiri uhusiano kati ya `Month` and `Price`, or between `DayOfYear` and `Price`. Here is the scatter plot that shows the latter relationship:
+Hii inaonyesha kwamba kunapaswa kuwepo na uhusiano fulani, na tunaweza jaribu kufunza mfano wa urekebishaji wa mstari kutabiri uhusiano kati ya `Month` na `Price`, au kati ya `DayOfYear` na `Price`. Hapa kuna mchoro wa pointi unaonyesha uhusiano wa mwisho:
 
-<img alt="Scatter plot of Price vs. Day of Year" src="images/scatter-dayofyear.png" width="50%" /> 
+<img alt="Mchoro wa Pointi wa Bei dhidi ya Siku ya Mwaka" src="../../../../translated_images/sw/scatter-dayofyear.bc171c189c9fd553.webp" width="50%" /> 
 
-Let's see if there is a correlation using the `corr` kazi:
+Tuchunguze kama kuna uhusiano kutumia kipengele cha `corr`:
 
 ```python
 print(new_pumpkins['Month'].corr(new_pumpkins['Price']))
 print(new_pumpkins['DayOfYear'].corr(new_pumpkins['Price']))
 ```
 
-Inaonekana kama uhusiano ni mdogo, -0.15 kwa `Month` and -0.17 by the `DayOfMonth`, but there could be another important relationship. It looks like there are different clusters of prices corresponding to different pumpkin varieties. To confirm this hypothesis, let's plot each pumpkin category using a different color. By passing an `ax` parameter to the `scatter` kazi ya kuchora tunaweza kuchora pointi zote kwenye grafu moja:
+Inaonekana kama uhusiano ni mdogo, -0.15 kwa `Month` na -0.17 kwa `DayOfYear`, lakini kunaweza kuwa na uhusiano mwingine muhimu. Inaonekana kuna makundi tofauti ya bei yanayohusiana na aina tofauti za malenge. Ili kuthibitisha dhana hii, tuchore kila aina ya malenge kwa rangi tofauti. Kwa kupitisha parameter ya `ax` kwenye kazi ya kuchora `scatter` tunaweza kuchora pointi zote kwenye mchoro mmoja:
 
 ```python
 ax=None
@@ -128,42 +140,42 @@ for i,var in enumerate(new_pumpkins['Variety'].unique()):
     ax = df.plot.scatter('DayOfYear','Price',ax=ax,c=colors[i],label=var)
 ```
 
-<img alt="Scatter plot ya Bei vs. Siku ya Mwaka" src="images/scatter-dayofyear-color.png" width="50%" />
+<img alt="Mchoro wa Pointi wa Bei dhidi ya Siku ya Mwaka" src="../../../../translated_images/sw/scatter-dayofyear-color.65790faefbb9d54f.webp" width="50%" /> 
 
-Uchunguzi wetu unapendekeza kwamba aina ina athari zaidi kwenye bei ya jumla kuliko tarehe halisi ya kuuza. Tunaweza kuona hili kwa grafu ya bar:
+Uchunguzi wetu unaonyesha kwamba aina ina athari zaidi kwenye bei kwa ujumla kuliko tarehe halisi ya mauzo. Tunaweza kuona hili kwa chati ya barua:
 
 ```python
 new_pumpkins.groupby('Variety')['Price'].mean().plot(kind='bar')
 ```
 
-<img alt="Grafu ya bar ya bei vs aina" src="images/price-by-variety.png" width="50%" />
+<img alt="Chati ya barua ya bei dhidi ya aina" src="../../../../translated_images/sw/price-by-variety.744a2f9925d9bcb4.webp" width="50%" /> 
 
-Tujikite kwa sasa kwenye aina moja tu ya malenge, 'aina ya pie', na tuone athari ya tarehe kwenye bei:
+Tuzingatie kwa sasa aina moja tu ya malenge, aina ya 'pie', na tuone athari ya tarehe kwenye bei:
 
 ```python
 pie_pumpkins = new_pumpkins[new_pumpkins['Variety']=='PIE TYPE']
 pie_pumpkins.plot.scatter('DayOfYear','Price') 
 ```
-<img alt="Scatter plot ya Bei vs. Siku ya Mwaka" src="images/pie-pumpkins-scatter.png" width="50%" />
+<img alt="Mchoro wa Pointi wa Bei dhidi ya Siku ya Mwaka" src="../../../../translated_images/sw/pie-pumpkins-scatter.d14f9804a53f927e.webp" width="50%" /> 
 
-Ikiwa sasa tutahesabu uhusiano kati ya `Price` and `DayOfYear` using `corr` function, we will get something like `-0.27` - ambayo inamaanisha kwamba kufundisha mfano wa kutabiri ina maana.
+Kama sasa tutapima uhusiano kati ya `Price` na `DayOfYear` kwa kutumia kipengele cha `corr`, tutapata kitu kama `-0.27` - ambayo inamaanisha kwamba kufunza mfano wa utabiri kuna mantiki.
 
-> Kabla ya kufundisha mfano wa regression ya mstari, ni muhimu kuhakikisha kuwa data yetu ni safi. Regression ya mstari haifanyi kazi vizuri na thamani zilizokosekana, hivyo ina maana kuondoa seli zote tupu:
+> Kabla ya kufunza mfano wa urekebishaji wa mstari, ni muhimu kuhakikisha data yetu ni safi. Urekebishaji wa mstari hauendani vizuri na thamani zisizokuwepo, hivyo ni busara kuondoa seli zote tupu:
 
 ```python
 pie_pumpkins.dropna(inplace=True)
 pie_pumpkins.info()
 ```
 
-Njia nyingine itakuwa kujaza thamani hizo tupu na thamani za wastani kutoka kwenye safu inayolingana.
+Njia nyingine itakuwa kujaza thamani hizo tupu na thamani za wastani kutoka safu husika.
 
-## Regression ya Mstari Rahisi
+## Urekebishaji wa Mstari Msingi
 
-[![ML kwa wanaoanza - Regression ya Mstari na Polynomial kwa kutumia Scikit-learn](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "ML kwa wanaoanza - Regression ya Mstari na Polynomial kwa kutumia Scikit-learn")
+[![ML kwa wanaoanza - Urekebishaji wa Mstari na Polynomial ukitumia Scikit-learn](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "ML kwa wanaoanza - Urekebishaji wa Mstari na Polynomial ukitumia Scikit-learn")
 
-> 🎥 Bofya picha hapo juu kwa muhtasari mfupi wa video kuhusu regression ya mstari na polynomial.
+> 🎥 Bonyeza picha hapo juu kwa video fupi inayotoa muhtasari wa urekebishaji wa mstari na polynomial.
 
-Ili kufundisha mfano wetu wa Regression ya Mstari, tutatumia maktaba ya **Scikit-learn**.
+Ili kufunza Mfano wetu wa Urekebishaji wa Mstari, tutatumia maktaba ya **Scikit-learn**.
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -171,69 +183,69 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 ```
 
-Tunanza kwa kutenganisha thamani za pembejeo (vipengele) na matokeo yanayotarajiwa (label) kwenye arrays tofauti za numpy:
+Tunaanza kwa kutenganisha thamani za ingizo (vipengele) na matokeo yanayotarajiwa (lebeli) katika safu za numpy tofauti:
 
 ```python
 X = pie_pumpkins['DayOfYear'].to_numpy().reshape(-1,1)
 y = pie_pumpkins['Price']
 ```
 
-> Kumbuka kwamba tulilazimika kufanya `reshape` kwenye data ya pembejeo ili kifurushi cha Regression ya Mstari kiielewe kwa usahihi. Regression ya Mstari inatarajia array ya 2D kama pembejeo, ambapo kila safu ya array inalingana na vector ya vipengele vya pembejeo. Katika kesi yetu, kwa kuwa tuna pembejeo moja tu - tunahitaji array yenye umbo N×1, ambapo N ni saizi ya seti ya data.
+> Kumbuka tulilazimika kufanya `reshape` kwa data ya ingizo ili kifurushi cha Urekebishaji wa Mstari kiielewe ipasavyo. Urekebishaji wa Mstari unatarajia safu ya 2D kama ingizo, ambapo kila safu ya safu ni vekta ya vipengele vya ingizo. Katika kesi yetu, kwa kuwa tuna ingizo moja tu - tunahitaji safu yenye umbo N×1, ambapo N ni ukubwa wa dataset.
 
-Kisha, tunahitaji kugawanya data katika seti za mafunzo na majaribio, ili tuweze kuthibitisha mfano wetu baada ya mafunzo:
+Kisha, tunapaswa kugawanya data kuwa sehemu ya mafunzo na sehemu ya majaribio, ili tuweze kuthibitisha mfano wetu baada ya mafunzo:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 ```
 
-Hatimaye, kufundisha mfano halisi wa Regression ya Mstari kunachukua mistari miwili tu ya msimbo. Tunafafanua `LinearRegression` object, and fit it to our data using the `fit` njia:
+Mwishowe, kufunza mfano halisi wa Urekebishaji wa Mstari huchukua mistari miwili tu ya msimbo. Tunafafanua kitu cha `LinearRegression`, na kuifunga kwenye data yetu kwa kutumia njia ya `fit`:
 
 ```python
 lin_reg = LinearRegression()
 lin_reg.fit(X_train,y_train)
 ```
 
-`LinearRegression` object after `fit`-ting contains all the coefficients of the regression, which can be accessed using `.coef_` property. In our case, there is just one coefficient, which should be around `-0.017`. It means that prices seem to drop a bit with time, but not too much, around 2 cents per day. We can also access the intersection point of the regression with Y-axis using `lin_reg.intercept_` - it will be around `21` katika kesi yetu, kuashiria bei mwanzoni mwa mwaka.
+Kitu cha `LinearRegression` baada ya `fit`-ting kina coefficients zote za regression, ambazo zinaweza kupatikana kwa kutumia mali ya `.coef_`. Katika kesi yetu, kuna coefficient moja tu, ambayo inapaswa kuwa karibu na `-0.017`. Hii ina maana kuwa bei zinaonekana kushuka kidogo kwa muda, lakini sio kwa kiasi kikubwa, karibu senti 2 kwa siku. Tunaweza pia kupata kituo cha mkusanyiko wa regression na mhimili wa Y kwa kutumia `lin_reg.intercept_` - itakuwa karibu na `21` katika kesi yetu, ikiashiria bei mwanzoni mwa mwaka.
 
-Ili kuona jinsi mfano wetu ulivyo sahihi, tunaweza kutabiri bei kwenye seti ya data ya majaribio, na kisha kupima jinsi utabiri wetu ulivyo karibu na thamani zinazotarajiwa. Hii inaweza kufanywa kwa kutumia metrics ya mean square error (MSE), ambayo ni wastani wa tofauti zote zilizotolewa kati ya thamani inayotarajiwa na inayotabiriwa.
+Ili kuona usahihi wa mfano wetu, tunaweza kutabiri bei kwenye seti ya majaribio, kisha kupima jinsi makisio yetu yanavyokaribia thamani zinazotarajiwa. Hii inaweza kufanywa kwa kutumia kipimo cha root mean square error (RMSE), ambayo ni mzizi wa wastani wa tofauti zote zilizopangwa mraba kati ya thamani zinazotarajiwa na zinazotabiriwa.
 
 ```python
 pred = lin_reg.predict(X_test)
 
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
 ```
 
-Kosa letu linaonekana kuwa karibu na pointi 2, ambayo ni ~17%. Sio nzuri sana. Kiashiria kingine cha ubora wa mfano ni **coefficient of determination**, ambayo inaweza kupatikana kama hii:
+Kosa letu linaonekana kuwa karibu na pointi 2, ambayo ni ~17%. Siyo nzuri sana. Kiashiria kingine cha ubora wa mfano ni **coefficient of determination**, ambacho kinaweza kupatikana hivi:
 
 ```python
 score = lin_reg.score(X_train,y_train)
 print('Model determination: ', score)
 ```
-Ikiwa thamani ni 0, inamaanisha kwamba mfano hauzingatii data ya pembejeo, na hufanya kama *mtabiri mbaya zaidi wa mstari*, ambayo ni wastani wa thamani ya matokeo. Thamani ya 1 inamaanisha kwamba tunaweza kutabiri kwa usahihi matokeo yote yanayotarajiwa. Katika kesi yetu, coefficient ni karibu 0.06, ambayo ni ya chini kabisa.
+Ikiwa thamani ni 0, ina maana kuwa mfano hauzingatii data ya pembejeo, na hutenda kama *mtabiri mbaya kabisa wa mstari*, ambaye ni thamani ya wastani tu ya matokeo. Thamani ya 1 ina maana kwamba tunaweza kutabiri vyema matokeo yote yanayotarajiwa. Katika kesi yetu, coefficient ni karibu 0.06, ambayo ni ya chini kabisa.
 
-Tunaweza pia kuchora data ya majaribio pamoja na mstari wa regression ili kuona vizuri jinsi regression inavyofanya kazi katika kesi yetu:
+Tunaweza pia kuchora data za majaribio pamoja na mstari wa regression kuona bora jinsi regression inavyofanya kazi katika kesi yetu:
 
 ```python
 plt.scatter(X_test,y_test)
 plt.plot(X_test,pred)
 ```
 
-<img alt="Regression ya mstari" src="images/linear-results.png" width="50%" />
+<img alt="Linear regression" src="../../../../translated_images/sw/linear-results.f7c3552c85b0ed1c.webp" width="50%" />
 
-## Regression ya Polynomial
+## Polynomial Regression
 
-Aina nyingine ya Regression ya Mstari ni Regression ya Polynomial. Wakati mwingine kuna uhusiano wa mstari kati ya vigezo - kadri malenge yanavyokuwa kubwa kwa ujazo, ndivyo bei inavyoongezeka - wakati mwingine uhusiano huu hauwezi kuchorwa kama ndege au mstari wa moja kwa moja.
+Aina nyingine ya Linear Regression ni Polynomial Regression. Ingawa wakati mwingine kuna uhusiano wa mstari kati ya vigezo - kadri buibui linavyokuwa kubwa kwa kiasi, ndivyo bei inavyokuwa juu - wakati mwingine uhusiano huu hauwezi kuchorwa kama usawa au mstari wa moja kwa moja.
 
-✅ Hapa kuna [mifano zaidi](https://online.stat.psu.edu/stat501/lesson/9/9.8) ya data ambayo inaweza kutumia Regression ya Polynomial
+✅ Hapa kuna [mifano zaidi](https://online.stat.psu.edu/stat501/lesson/9/9.8) ya data ambayo inaweza kutumia Polynomial Regression
 
-Angalia tena uhusiano kati ya Tarehe na Bei. Je, scatterplot hii inaonekana kama inapaswa kuchambuliwa na mstari wa moja kwa moja? Je, bei haziwezi kubadilika? Katika kesi hii, unaweza kujaribu regression ya polynomial.
+Tazama tena uhusiano kati ya Tarehe na Bei. Je, mchoro huu wa points unaonekana kama unapaswa kuchambuliwa kwa kutumia mstari wa moja kwa moja? Je, bei hasi zinaweza kubadilika? Katika kesi hii, unaweza kujaribu polynomial regression.
 
-✅ Polynomials ni misemo ya hisabati ambayo inaweza kuwa na moja au zaidi ya vigezo na coefficients
+✅ Polynomials ni maelezo ya kihesabu ambayo yanaweza kuwa na variables moja au zaidi na coefficients
 
-Regression ya polynomial huunda mstari uliopinda ili kutoshea data isiyo ya mstari vizuri. Katika kesi yetu, ikiwa tutajumuisha variable ya `DayOfYear` iliyotolewa kwenye data ya pembejeo, tunapaswa kuweza kutoshea data yetu na curve ya parabolic, ambayo itakuwa na kiwango cha chini katika hatua fulani ndani ya mwaka.
+Polynomial regression huunda mstari wa mviringo ili kufaa vizuri data zisizo za mstari. Katika kesi yetu, ikiwa tutajumuisha `DayOfYear` kwa mraba kuwa variable ya pembejeo, tunapaswa kuweza kufaa data zetu na mviringo wa parabolic, ambao utakuwa na chini ya thamani mahali fulani ndani ya mwaka.
 
-Scikit-learn inajumuisha [API ya pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) kusaidia kuunganisha hatua tofauti za usindikaji wa data pamoja. **Pipeline** ni mnyororo wa **estimators**. Katika kesi yetu, tutaunda pipeline ambayo kwanza inaongeza vipengele vya polynomial kwenye mfano wetu, na kisha kufundisha regression:
+Scikit-learn inajumuisha API yenye msaada ya [pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) kuunganisha hatua tofauti za usindikaji data pamoja. **pipeline** ni mnyororo wa **estimators**. Katika kesi yetu, tutaunda pipeline ambayo kwanza itaongeza sifa za polynomial kwenye mfano wetu, kisha itafunza regression:
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
@@ -244,36 +256,58 @@ pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 pipeline.fit(X_train,y_train)
 ```
 
-Kutumia `PolynomialFeatures(2)` means that we will include all second-degree polynomials from the input data. In our case it will just mean `DayOfYear`<sup>2</sup>, but given two input variables X and Y, this will add X<sup>2</sup>, XY and Y<sup>2</sup>. We may also use higher degree polynomials if we want.
+Kutumia `PolynomialFeatures(2)` kunamaanisha kwamba tutajumuisha polynomials zote za daraja la pili kutoka kwenye data za pembejeo. Katika kesi yetu itamaanisha tu `DayOfYear`<sup>2</sup>, lakini ikitolewa variables mbili za pembejeo X na Y, hii itaongeza X<sup>2</sup>, XY na Y<sup>2</sup>. Tunaweza pia kutumia polynomials za daraja kubwa zaidi ikiwa tunataka.
 
-Pipelines can be used in the same manner as the original `LinearRegression` object, i.e. we can `fit` the pipeline, and then use `predict` to get the prediction results. Here is the graph showing test data, and the approximation curve:
+Pipelines zinaweza kutumika kwa njia ile ile kama kitu cha awali cha `LinearRegression`, yaani tunaweza `fit` pipeline, na kisha kutumia `predict` kupata matokeo ya utabiri:
 
-<img alt="Polynomial regression" src="images/poly-results.png" width="50%" />
+```python
+pred = pipeline.predict(X_test)
 
-Using Polynomial Regression, we can get slightly lower MSE and higher determination, but not significantly. We need to take into account other features!
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
 
-> You can see that the minimal pumpkin prices are observed somewhere around Halloween. How can you explain this? 
+score = pipeline.score(X_train,y_train)
+print('Model determination: ', score)
+```
 
-🎃 Congratulations, you just created a model that can help predict the price of pie pumpkins. You can probably repeat the same procedure for all pumpkin types, but that would be tedious. Let's learn now how to take pumpkin variety into account in our model!
+Ili kuchora mviringo laini wa makadirio, tunatumia `np.linspace` kuunda safu sawa ya thamani za pembejeo, badala ya kuchora moja kwa moja kwenye data za majaribio zisizo na mpangilio (ambazo zingetengeneza mstari wa mviringo-mviringo):
 
-## Categorical Features
+```python
+X_range = np.linspace(X_test.min(), X_test.max(), 100).reshape(-1,1)
+y_range = pipeline.predict(X_range)
 
-In the ideal world, we want to be able to predict prices for different pumpkin varieties using the same model. However, the `Variety` column is somewhat different from columns like `Month`, because it contains non-numeric values. Such columns are called **categorical**.
+plt.scatter(X_test, y_test)
+plt.plot(X_range, y_range)
+```
 
-[![ML for beginners - Categorical Feature Predictions with Linear Regression](https://img.youtube.com/vi/DYGliioIAE0/0.jpg)](https://youtu.be/DYGliioIAE0 "ML for beginners - Categorical Feature Predictions with Linear Regression")
+Hapa ni mchoro unaoonyesha data za majaribio, na mviringo wa makadirio:
 
-> 🎥 Click the image above for a short video overview of using categorical features.
+<img alt="Polynomial regression" src="../../../../translated_images/sw/poly-results.ee587348f0f1f60b.webp" width="50%" />
 
-Here you can see how average price depends on variety:
+Kutumia Polynomial Regression, tunaweza kupata RMSE kidogo chini na coefficient ya determination kubwa zaidi, lakini si kwa kiasi kikubwa. Tunahitaji kuzingatia sifa zingine pia!
 
-<img alt="Average price by variety" src="images/price-by-variety.png" width="50%" />
+> Unaweza kuona kuwa bei ndogo za buibui hupatikana karibu na Halloween. Unaelewaje hili?
 
-To take variety into account, we first need to convert it to numeric form, or **encode** it. There are several way we can do it:
+🎃 Hongera, umeunda mfano unaoweza kusaidia kutabiri bei ya buibui za pie. Huenda ukaweza kurudia hatua hii kwa aina zote za buibui, lakini hiyo itakuwa ngumu. Hebu tujifunze sasa jinsi ya kuzingatia aina ya buibui katika mfano wetu!
 
-* Simple **numeric encoding** will build a table of different varieties, and then replace the variety name by an index in that table. This is not the best idea for linear regression, because linear regression takes the actual numeric value of the index, and adds it to the result, multiplying by some coefficient. In our case, the relationship between the index number and the price is clearly non-linear, even if we make sure that indices are ordered in some specific way.
-* **One-hot encoding** will replace the `Variety` column by 4 different columns, one for each variety. Each column will contain `1` if the corresponding row is of a given variety, and `0` vinginevyo. Hii inamaanisha kwamba kutakuwa na coefficients nne katika regression ya mstari, moja kwa kila aina ya malenge, inayohusika na "bei ya kuanzia" (au badala "bei ya ziada") kwa aina hiyo maalum.
+## Sifa za Kategorikali
 
-Msimbo hapa chini unaonyesha jinsi tunavyoweza one-hot encode aina:
+Katika dunia bora, tunataka kuwa na uwezo wa kutabiri bei za aina tofauti za buibui kwa kutumia mfano mmoja. Hata hivyo, safu ya `Variety` ni tofauti kidogo na safu kama `Month`, kwa sababu inajumuisha thamani zisizo za nambari. Safu kama hizi huitwa **kategorikali**.
+
+[![ML kwa waanzilishi - Utabiri wa Sifa za Kategorikali kwa Linear Regression](https://img.youtube.com/vi/DYGliioIAE0/0.jpg)](https://youtu.be/DYGliioIAE0 "ML kwa waanzilishi - Utabiri wa Sifa za Kategorikali kwa Linear Regression")
+
+> 🎥 Bonyeza picha hapo juu kwa muhtasari mfupi wa video kuhusu kutumia sifa za kategorikali.
+
+Hapa unaweza kuona jinsi bei ya wastani inavyotegemea aina:
+
+<img alt="Average price by variety" src="../../../../translated_images/sw/price-by-variety.744a2f9925d9bcb4.webp" width="50%" />
+
+Ili kuzingatia aina, kwanza tunahitaji kuibadilisha kuwa nambari, au **kuandika msimbo**. Kuna njia kadhaa za kufanya hivyo:
+
+* **Kuandika msimbo wa nambari wa kawaida** kutaunda jedwali la aina tofauti, kisha kubadilisha jina la aina kuwa nambari katika jedwali hilo. Hii si wazo bora kwa regression ya mstari, kwa sababu regression ya mstari huchukua thamani halisi ya nambari ya index, na kuiongeza matokeo, ikizidishwa na coefficient fulani. Katika kesi yetu, uhusiano kati ya nambari ya index na bei ni wazi si mstari, hata kama tunahakikisha kwamba indices zipo kwa mpangilio maalum.
+* **One-hot encoding** itabadilisha safu ya `Variety` kuwa safu 4 tofauti, moja kwa kila aina. Kila safu itakuwa na `1` ikiwa safu husika ni ya aina hiyo, na `0` vinginevyo. Hii ina maana kuwa kutakuwa na coefficients nne katika regression ya mstari, moja kwa kila aina ya buibui, inayohusika na "bei ya kuanzia" (au badala yake "bei ya ziada") kwa aina hiyo.
+
+Msimbo hapa chini unaonyesha jinsi ya kufanya one-hot encode kwa aina:
 
 ```python
 pd.get_dummies(new_pumpkins['Variety'])
@@ -290,14 +324,14 @@ pd.get_dummies(new_pumpkins['Variety'])
 1741 | 0 | 1 | 0 | 0
 1742 | 0 | 1 | 0 | 0
 
-Ili kufundisha regression ya mstari kwa kutumia aina iliyowekwa one-hot encoded kama pembejeo, tunahitaji tu kuanzisha `X` and `y` data kwa usahihi:
+Ili kufunza regression ya mstari kwa kutumia aina iliyowekwa one-hot encoded kama data ya pembejeo, tunahitaji tu kuanzisha data za `X` na `y` kwa usahihi:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety'])
 y = new_pumpkins['Price']
 ```
 
-Sehemu iliyobaki ya msimbo ni sawa na tuliyotumia hapo juu kufundisha Regression ya Mstari. Ikiwa utaijaribu, utaona kwamba mean square error ni karibu sawa, lakini tunapata coefficient ya juu zaidi ya determination (~77%). Ili kupata utabiri sahihi zaidi, tunaweza kuzingatia vipengele zaidi vya kategoria, pamoja na vipengele vya nambari, kama `Month` or `DayOfYear`. To get one large array of features, we can use `join`:
+Msimbo wa ziada ni ule ule tulioitumia hapo juu kufunza Linear Regression. Ukijaribu, utaona kuwa msemo wa wastani wa makosa ya mraba ni karibu sawa, lakini tunapata coefficient ya determination ya juu zaidi (~77%). Ili kupata makadirio sahihi zaidi, tunaweza kuzingatia sifa za kategorikali zaidi, pamoja na sifa za nambari kama `Month` au `DayOfYear`. Ili kupata safu kubwa ya sifa, tunaweza kutumia `join`:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety']) \
@@ -307,64 +341,68 @@ X = pd.get_dummies(new_pumpkins['Variety']) \
 y = new_pumpkins['Price']
 ```
 
-Hapa pia tunazingatia `City` and `Package` type, ambayo inatupa MSE 2.84 (10%), na determination 0.94!
+Hapa pia tunazingatia `City` na aina ya `Package`, ambayo hutoa RMSE 2.84 (10.5%), na determination 0.94!
 
-## Kuweka yote pamoja
+## Kuweka yote Pamoja
 
-Ili kufanya mfano bora zaidi, tunaweza kutumia data iliyochanganywa (one-hot encoded categorical + numeric) kutoka mfano hapo juu pamoja na Regression ya Polynomial. Hapa kuna msimbo kamili kwa urahisi wako:
+Ili kutengeneza mfano bora zaidi, tunaweza kutumia data zilizojumuishwa (sifa za kategorikali zilizowekwa one-hot encoded + sifa za nambari) kutoka mfano wa juu pamoja na Polynomial Regression. Hapa ni msimbo kamili kwa urahisi wako:
 
 ```python
-# set up training data
+# andaa data ya mafunzo
 X = pd.get_dummies(new_pumpkins['Variety']) \
         .join(new_pumpkins['Month']) \
         .join(pd.get_dummies(new_pumpkins['City'])) \
         .join(pd.get_dummies(new_pumpkins['Package']))
 y = new_pumpkins['Price']
 
-# make train-test split
+# fanya mgawanyo wa mafunzo-na-mtihani
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-# setup and train the pipeline
+# andaa na fundisha mchakato
 pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 pipeline.fit(X_train,y_train)
 
-# predict results for test data
+# tabiri matokeo kwa data ya mtihani
 pred = pipeline.predict(X_test)
 
-# calculate MSE and determination
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+# hesabu RMSE na uamuzi
+rmse = mean_squared_error(y_test, pred, squared=False)
+print(f'RMSE: {rmse:3.3} ({rmse/pred.mean()*100:3.3}%)')
 
 score = pipeline.score(X_train,y_train)
 print('Model determination: ', score)
 ```
 
-Hii inapaswa kutupa coefficient bora ya determination ya karibu 97%, na MSE=2.23 (~8% prediction error).
+Hii inapaswa kutuletea coefficient bora zaidi ya determination karibu 97%, na RMSE=2.23 (~8% kosa la utabiri).
 
-| Model | MSE | Determination |
+| Mfano | RMSE | Determination |
 |-------|-----|---------------|
 | `DayOfYear` Linear | 2.77 (17.2%) | 0.07 |
 | `DayOfYear` Polynomial | 2.73 (17.0%) | 0.08 |
 | `Variety` Linear | 5.24 (19.7%) | 0.77 |
-| All features Linear | 2.84 (10.5%) | 0.94 |
-| All features Polynomial | 2.23 (8.25%) | 0.97 |
+| Sifa Zote Linear | 2.84 (10.5%) | 0.94 |
+| Sifa Zote Polynomial | 2.23 (8.25%) | 0.97 |
 
-🏆 Umefanya vizuri! Umeunda mifano minne ya Regression katika somo moja, na kuboresha ubora wa mfano hadi 97%. Katika sehemu ya mwisho ya Regression, utajifunza kuhusu Logistic Regression ili kubaini kategoria.
+🏆 Hongera! Umeunda mifano minne ya Regression katika somo moja, na kuboresha ubora wa mfano hadi 97%. Katika sehemu ya mwisho kuhusu Regression, utajifunza kuhusu Logistic Regression kuamua makundi.
 
 ---
 ## 🚀Changamoto
 
-Jaribu vigezo tofauti kadhaa katika notebook hii kuona jinsi uhusiano unavyolingana na usahihi wa mfano.
+Jaribu vigezo tofauti katika daftari hili kuona jinsi uhusiano unavyohusiana na usahihi wa mfano.
 
-## [Quiz baada ya somo](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/14/)
+## [Mtihani baada ya somo](https://ff-quizzes.netlify.app/en/ml/)
 
-## Mapitio na Kujisomea
+## Mapitio na Kujifunza Binafsi
 
-Katika somo hili tulijifunza kuhusu Regression ya Mstari. Kuna aina nyingine muhimu za Regression. Soma kuhusu mbinu za Stepwise, Ridge, Lasso na Elasticnet. Kozi nzuri ya kusoma kujifunza zaidi ni [Kozi ya Stanford ya Statistical Learning](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
+Katika somo hili tulijifunza kuhusu Linear Regression. Kuna aina nyingine muhimu za Regression. Soma kuhusu mbinu za Stepwise, Ridge, Lasso na Elasticnet. Kozi nzuri ya kusoma zaidi ni [kozi ya Stanford Statistical Learning](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
 
-## Kazi
+## Kazi ya Nyumbani
 
-[Jenga Modeli](assignment.md)
+[Jenga Mfano](assignment.md)
 
-**Kanusho**: 
-Hati hii imetafsiriwa kwa kutumia huduma za tafsiri za AI za mashine. Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya kiasili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa habari muhimu, tafsiri ya kibinadamu ya kitaalamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kiaruhusi cha kutokuwa na dhamana**:  
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kwamba tafsiri za moja kwa moja zinaweza kuwa na makosa au kasoro. Hati ya asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatuwajibiki kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

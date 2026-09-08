@@ -1,6 +1,6 @@
 # Introduction to machine learning
 
-In this section of the curriculum, you will be introduced to the base concepts underlying the field of machine learning, what it is, and learn about its history and the techniques researchers use to work with it.  Let's explore this new world of ML together!
+In this section of the curriculum, you will be introduced to the fundamental concepts of machine learning, including what it is, its history, and the techniques researchers use to apply it in real-world scenarios. Let's explore this exciting world of ML together!
 
 ![globe](images/globe.jpg)
 > Photo by <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bill Oxford</a> on <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
@@ -19,4 +19,4 @@ In this section of the curriculum, you will be introduced to the base concepts u
 
 "Fairness and Machine Learning" was written with ♥️ by [Tomomi Imura](https://twitter.com/girliemac) 
 
-"Techniques of Machine Learning" was written with ♥️ by [Jen Looper](https://twitter.com/jenlooper) and [Chris Noring](https://twitter.com/softchris) 
+"Techniques of Machine Learning" was written with ♥️ by [Jen Looper](https://twitter.com/jenlooper) and [Chris Noring](https://twitter.com/softchris)

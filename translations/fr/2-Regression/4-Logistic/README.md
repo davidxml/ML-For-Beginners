@@ -1,14 +1,14 @@
 # Régression logistique pour prédire des catégories
 
-![Infographie sur la régression logistique vs. régression linéaire](../../../../translated_images/linear-vs-logistic.ba180bf95e7ee66721ba10ebf2dac2666acbd64a88b003c83928712433a13c7d.fr.png)
+![Infographie sur la régression logistique vs linéaire](../../../../2-Regression/4-Logistic/images/linear-vs-logistic.png)
 
-## [Quiz avant le cours](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/15/)
+## [Quiz avant le cours](https://ff-quizzes.netlify.app/en/ml/)
 
 > ### [Cette leçon est disponible en R !](../../../../2-Regression/4-Logistic/solution/R/lesson_4.html)
 
 ## Introduction
 
-Dans cette dernière leçon sur la régression, l'une des techniques ML _classiques_ de base, nous allons examiner la régression logistique. Vous utiliseriez cette technique pour découvrir des motifs afin de prédire des catégories binaires. Ce bonbon est-il en chocolat ou non ? Cette maladie est-elle contagieuse ou non ? Ce client choisira-t-il ce produit ou non ?
+Dans cette dernière leçon sur la régression, l'une des techniques de base _classiques_ en apprentissage automatique, nous allons examiner la régression logistique. Vous utiliseriez cette technique pour découvrir des modèles permettant de prédire des catégories binaires. Ce bonbon est-il au chocolat ou non ? Cette maladie est-elle contagieuse ou non ? Ce client choisira-t-il ce produit ou non ?
 
 Dans cette leçon, vous apprendrez :
 
@@ -19,59 +19,59 @@ Dans cette leçon, vous apprendrez :
 
 ## Prérequis
 
-Ayant travaillé avec les données sur les citrouilles, nous sommes maintenant suffisamment familiarisés avec celles-ci pour réaliser qu'il y a une catégorie binaire avec laquelle nous pouvons travailler : `Color`.
+Après avoir travaillé avec les données sur les citrouilles, nous sommes maintenant suffisamment familiers avec elles pour réaliser qu'il existe une catégorie binaire sur laquelle nous pouvons travailler : `Color`.
 
-Construisons un modèle de régression logistique pour prédire, étant donné certaines variables, _de quelle couleur une citrouille donnée est susceptible d'être_ (orange 🎃 ou blanche 👻).
+Construisons un modèle de régression logistique pour prédire, en fonction de certaines variables, _quelle couleur une citrouille donnée est susceptible d'avoir_ (orange 🎃 ou blanche 👻).
 
-> Pourquoi parlons-nous de classification binaire dans un groupe de leçons sur la régression ? Seulement pour des raisons linguistiques, car la régression logistique est [réellement une méthode de classification](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression), bien qu'elle soit basée sur une approche linéaire. Découvrez d'autres façons de classer les données dans le prochain groupe de leçons.
+> Pourquoi parlons-nous de classification binaire dans une leçon sur la régression ? C'est uniquement pour des raisons linguistiques, car la régression logistique est [en réalité une méthode de classification](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression), bien qu'elle soit basée sur des modèles linéaires. Découvrez d'autres façons de classifier les données dans le prochain groupe de leçons.
 
 ## Définir la question
 
-Pour nos besoins, nous allons l'exprimer sous forme binaire : 'Blanc' ou 'Pas Blanc'. Il y a aussi une catégorie 'rayée' dans notre ensemble de données, mais il y a peu d'instances, donc nous ne l'utiliserons pas. De toute façon, elle disparaît une fois que nous avons supprimé les valeurs nulles de l'ensemble de données.
+Pour nos besoins, nous exprimerons cela comme une binaire : 'Blanche' ou 'Non blanche'. Il existe également une catégorie 'rayée' dans notre ensemble de données, mais elle contient peu d'exemples, donc nous ne l'utiliserons pas. Elle disparaît de toute façon une fois que nous supprimons les valeurs nulles de l'ensemble de données.
 
-> 🎃 Fait amusant, nous appelons parfois les citrouilles blanches des citrouilles 'fantômes'. Elles ne sont pas très faciles à sculpter, donc elles ne sont pas aussi populaires que les oranges, mais elles sont vraiment belles ! Nous pourrions donc également reformuler notre question comme suit : 'Fantôme' ou 'Pas Fantôme'. 👻
+> 🎃 Fait amusant : nous appelons parfois les citrouilles blanches des citrouilles 'fantômes'. Elles ne sont pas très faciles à sculpter, donc elles ne sont pas aussi populaires que les citrouilles oranges, mais elles ont un look cool ! Nous pourrions donc reformuler notre question ainsi : 'Fantôme' ou 'Non fantôme'. 👻
 
 ## À propos de la régression logistique
 
-La régression logistique diffère de la régression linéaire, que vous avez étudiée précédemment, de plusieurs manières importantes.
+La régression logistique diffère de la régression linéaire, que vous avez apprise précédemment, de plusieurs façons importantes.
 
 [![ML pour débutants - Comprendre la régression logistique pour la classification en apprentissage automatique](https://img.youtube.com/vi/KpeCT6nEpBY/0.jpg)](https://youtu.be/KpeCT6nEpBY "ML pour débutants - Comprendre la régression logistique pour la classification en apprentissage automatique")
 
-> 🎥 Cliquez sur l'image ci-dessus pour une courte vidéo d'introduction à la régression logistique.
+> 🎥 Cliquez sur l'image ci-dessus pour une courte vidéo sur la régression logistique.
 
 ### Classification binaire
 
-La régression logistique n'offre pas les mêmes fonctionnalités que la régression linéaire. La première fournit une prédiction sur une catégorie binaire ("blanc ou pas blanc"), tandis que la seconde est capable de prédire des valeurs continues, par exemple, étant donné l'origine d'une citrouille et le moment de la récolte, _quel sera l'augmentation de son prix_.
+La régression logistique n'offre pas les mêmes fonctionnalités que la régression linéaire. La première propose une prédiction sur une catégorie binaire ("blanche ou non blanche"), tandis que la seconde est capable de prédire des valeurs continues, par exemple, en fonction de l'origine d'une citrouille et du moment de la récolte, _de combien son prix augmentera_.
 
-![Modèle de classification des citrouilles](../../../../translated_images/pumpkin-classifier.562771f104ad5436b87d1c67bca02a42a17841133556559325c0a0e348e5b774.fr.png)
+![Modèle de classification des citrouilles](../../../../2-Regression/4-Logistic/images/pumpkin-classifier.png)
 > Infographie par [Dasani Madipalli](https://twitter.com/dasani_decoded)
 
 ### Autres classifications
 
-Il existe d'autres types de régression logistique, y compris multinomiale et ordinale :
+Il existe d'autres types de régression logistique, notamment multinomiale et ordinale :
 
-- **Multinomiale**, qui implique d'avoir plus d'une catégorie - "Orange, Blanc et Rayé".
-- **Ordinale**, qui implique des catégories ordonnées, utile si nous voulons ordonner nos résultats logiquement, comme nos citrouilles qui sont classées par un nombre fini de tailles (mini, sm, med, lg, xl, xxl).
+- **Multinomiale**, qui implique d'avoir plus d'une catégorie - "Orange, Blanche et Rayée".
+- **Ordinale**, qui implique des catégories ordonnées, utile si nous voulons ordonner nos résultats de manière logique, comme nos citrouilles classées par un nombre fini de tailles (mini, sm, med, lg, xl, xxl).
 
-![Régression multinomiale vs ordinale](../../../../translated_images/multinomial-vs-ordinal.36701b4850e37d86c9dd49f7bef93a2f94dbdb8fe03443eb68f0542f97f28f29.fr.png)
+![Régression multinomiale vs ordinale](../../../../2-Regression/4-Logistic/images/multinomial-vs-ordinal.png)
 
-### Les variables N'ONT PAS besoin de corréler
+### Les variables n'ont PAS besoin d'être corrélées
 
-Rappelez-vous comment la régression linéaire fonctionnait mieux avec des variables plus corrélées ? La régression logistique est l'opposée - les variables n'ont pas besoin de s'aligner. Cela fonctionne pour ces données qui présentent des corrélations relativement faibles.
+Vous vous souvenez de la façon dont la régression linéaire fonctionnait mieux avec des variables plus corrélées ? La régression logistique est l'opposé - les variables n'ont pas besoin d'être alignées. Cela fonctionne pour ces données qui ont des corrélations relativement faibles.
 
 ### Vous avez besoin de beaucoup de données propres
 
-La régression logistique donnera des résultats plus précis si vous utilisez plus de données ; notre petit ensemble de données n'est pas optimal pour cette tâche, alors gardez cela à l'esprit.
+La régression logistique donnera des résultats plus précis si vous utilisez davantage de données ; notre petit ensemble de données n'est pas optimal pour cette tâche, donc gardez cela à l'esprit.
 
 [![ML pour débutants - Analyse et préparation des données pour la régression logistique](https://img.youtube.com/vi/B2X4H9vcXTs/0.jpg)](https://youtu.be/B2X4H9vcXTs "ML pour débutants - Analyse et préparation des données pour la régression logistique")
 
-> 🎥 Cliquez sur l'image ci-dessus pour une courte vidéo d'introduction à la préparation des données pour la régression linéaire
+> 🎥 Cliquez sur l'image ci-dessus pour une courte vidéo sur la préparation des données pour la régression linéaire.
 
-✅ Pensez aux types de données qui se prêteraient bien à la régression logistique.
+✅ Réfléchissez aux types de données qui se prêtent bien à la régression logistique.
 
 ## Exercice - nettoyer les données
 
-Tout d'abord, nettoyez un peu les données, en supprimant les valeurs nulles et en sélectionnant seulement certaines colonnes :
+Tout d'abord, nettoyez un peu les données en supprimant les valeurs nulles et en sélectionnant uniquement certaines colonnes :
 
 1. Ajoutez le code suivant :
 
@@ -83,19 +83,19 @@ Tout d'abord, nettoyez un peu les données, en supprimant les valeurs nulles et 
     pumpkins.dropna(inplace=True)
     ```
 
-    Vous pouvez toujours jeter un œil à votre nouveau dataframe :
+    Vous pouvez toujours jeter un coup d'œil à votre nouveau dataframe :
 
     ```python
     pumpkins.info
     ```
 
-### Visualisation - graphique catégorique
+### Visualisation - graphique catégoriel
 
-À ce stade, vous avez à nouveau chargé le [carnet de démarrage](../../../../2-Regression/4-Logistic/notebook.ipynb) avec les données sur les citrouilles et l'avez nettoyé afin de préserver un ensemble de données contenant quelques variables, y compris `Color`. Visualisons le dataframe dans le carnet en utilisant une autre bibliothèque : [Seaborn](https://seaborn.pydata.org/index.html), qui est construite sur Matplotlib que nous avons utilisée précédemment.
+À ce stade, vous avez chargé le [notebook de départ](../../../../2-Regression/4-Logistic/notebook.ipynb) avec les données sur les citrouilles et les avez nettoyées pour conserver un ensemble de données contenant quelques variables, y compris `Color`. Visualisons le dataframe dans le notebook en utilisant une bibliothèque différente : [Seaborn](https://seaborn.pydata.org/index.html), qui est construite sur Matplotlib que nous avons utilisé précédemment.
 
-Seaborn propose des moyens intéressants de visualiser vos données. Par exemple, vous pouvez comparer les distributions des données pour chaque `Variety` et `Color` dans un graphique catégorique.
+Seaborn offre des moyens intéressants de visualiser vos données. Par exemple, vous pouvez comparer les distributions des données pour chaque `Variety` et `Color` dans un graphique catégoriel.
 
-1. Créez un tel graphique en utilisant le `catplot` function, using our pumpkin data `pumpkins`, et en spécifiant un mappage des couleurs pour chaque catégorie de citrouille (orange ou blanche) :
+1. Créez un tel graphique en utilisant la fonction `catplot`, avec nos données sur les citrouilles `pumpkins`, et en spécifiant une correspondance de couleurs pour chaque catégorie de citrouilles (orange ou blanche) :
 
     ```python
     import seaborn as sns
@@ -111,18 +111,19 @@ Seaborn propose des moyens intéressants de visualiser vos données. Par exemple
     )
     ```
 
-    ![Une grille de données visualisées](../../../../translated_images/pumpkins_catplot_1.c55c409b71fea2ecc01921e64b91970542101f90bcccfa4aa3a205db8936f48b.fr.png)
+    ![Une grille de données visualisées](../../../../2-Regression/4-Logistic/images/pumpkins_catplot_1.png)
 
     En observant les données, vous pouvez voir comment les données de couleur se rapportent à la variété.
 
-    ✅ Étant donné ce graphique catégorique, quelles explorations intéressantes pouvez-vous envisager ?
+    ✅ À partir de ce graphique catégoriel, quelles explorations intéressantes pouvez-vous envisager ?
 
 ### Prétraitement des données : encodage des caractéristiques et des étiquettes
-Notre ensemble de données sur les citrouilles contient des valeurs de chaîne pour toutes ses colonnes. Travailler avec des données catégorielles est intuitif pour les humains mais pas pour les machines. Les algorithmes d'apprentissage automatique fonctionnent bien avec des chiffres. C'est pourquoi l'encodage est une étape très importante dans la phase de prétraitement des données, car il nous permet de transformer les données catégorielles en données numériques, sans perdre d'informations. Un bon encodage conduit à la construction d'un bon modèle.
+
+Notre ensemble de données sur les citrouilles contient des valeurs de chaîne pour toutes ses colonnes. Travailler avec des données catégorielles est intuitif pour les humains mais pas pour les machines. Les algorithmes d'apprentissage automatique fonctionnent bien avec des nombres. C'est pourquoi l'encodage est une étape très importante dans la phase de prétraitement des données, car il nous permet de transformer les données catégorielles en données numériques, sans perdre aucune information. Un bon encodage permet de construire un bon modèle.
 
 Pour l'encodage des caractéristiques, il existe deux principaux types d'encodeurs :
 
-1. Encodeur ordinal : il convient bien aux variables ordinales, qui sont des variables catégorielles dont les données suivent un ordre logique, comme la colonne `Item Size` dans notre ensemble de données. Il crée un mappage tel que chaque catégorie est représentée par un nombre, qui est l'ordre de la catégorie dans la colonne.
+1. Encodeur ordinal : il convient bien aux variables ordinales, qui sont des variables catégorielles dont les données suivent un ordre logique, comme la colonne `Item Size` dans notre ensemble de données. Il crée une correspondance de sorte que chaque catégorie soit représentée par un nombre, qui est l'ordre de la catégorie dans la colonne.
 
     ```python
     from sklearn.preprocessing import OrdinalEncoder
@@ -132,7 +133,7 @@ Pour l'encodage des caractéristiques, il existe deux principaux types d'encodeu
     ordinal_encoder = OrdinalEncoder(categories=item_size_categories)
     ```
 
-2. Encodeur catégorique : il convient bien aux variables nominales, qui sont des variables catégorielles dont les données ne suivent pas un ordre logique, comme toutes les caractéristiques différentes de `Item Size` dans notre ensemble de données. C'est un encodage one-hot, ce qui signifie que chaque catégorie est représentée par une colonne binaire : la variable encodée est égale à 1 si la citrouille appartient à cette variété et 0 sinon.
+2. Encodeur catégoriel : il convient bien aux variables nominales, qui sont des variables catégorielles dont les données ne suivent pas un ordre logique, comme toutes les caractéristiques différentes de `Item Size` dans notre ensemble de données. Il s'agit d'un encodage one-hot, ce qui signifie que chaque catégorie est représentée par une colonne binaire : la variable encodée est égale à 1 si la citrouille appartient à cette variété et à 0 sinon.
 
     ```python
     from sklearn.preprocessing import OneHotEncoder
@@ -153,7 +154,7 @@ Ensuite, `ColumnTransformer` est utilisé pour combiner plusieurs encodeurs en u
     ct.set_output(transform='pandas')
     encoded_features = ct.fit_transform(pumpkins)
 ```
-D'autre part, pour encoder l'étiquette, nous utilisons la classe `LabelEncoder` de scikit-learn, qui est une classe utilitaire pour aider à normaliser les étiquettes afin qu'elles ne contiennent que des valeurs comprises entre 0 et n_classes-1 (ici, 0 et 1).
+D'autre part, pour encoder l'étiquette, nous utilisons la classe `LabelEncoder` de scikit-learn, qui est une classe utilitaire pour normaliser les étiquettes de sorte qu'elles contiennent uniquement des valeurs entre 0 et n_classes-1 (ici, 0 et 1).
 
 ```python
     from sklearn.preprocessing import LabelEncoder
@@ -166,12 +167,12 @@ Une fois que nous avons encodé les caractéristiques et l'étiquette, nous pouv
 ```python
     encoded_pumpkins = encoded_features.assign(Color=encoded_label)
 ```
-✅ Quels sont les avantages d'utiliser un encodeur ordinal pour le `Item Size` column?
+✅ Quels sont les avantages d'utiliser un encodeur ordinal pour la colonne `Item Size` ?
 
-### Analyse relationships between variables
+### Analyser les relations entre les variables
 
-Now that we have pre-processed our data, we can analyse the relationships between the features and the label to grasp an idea of how well the model will be able to predict the label given the features.
-The best way to perform this kind of analysis is plotting the data. We'll be using again the Seaborn `catplot` function, to visualize the relationships between `Item Size`,  `Variety` et `Color` dans un graphique catégorique. Pour mieux tracer les données, nous utiliserons la colonne encodée `Item Size` column and the unencoded `Variety`.
+Maintenant que nous avons prétraité nos données, nous pouvons analyser les relations entre les caractéristiques et l'étiquette pour avoir une idée de la capacité du modèle à prédire l'étiquette en fonction des caractéristiques.
+La meilleure façon de réaliser ce type d'analyse est de tracer les données. Nous utiliserons à nouveau la fonction `catplot` de Seaborn pour visualiser les relations entre `Item Size`, `Variety` et `Color` dans un graphique catégoriel. Pour mieux tracer les données, nous utiliserons la colonne encodée `Item Size` et la colonne non encodée `Variety`.
 
 ```python
     palette = {
@@ -190,15 +191,15 @@ The best way to perform this kind of analysis is plotting the data. We'll be usi
     g.set(xlabel="Item Size", ylabel="").set(xlim=(0,6))
     g.set_titles(row_template="{row_name}")
 ```
-![Un catplot de données visualisées](../../../../translated_images/pumpkins_catplot_2.87a354447880b3889278155957f8f60dd63db4598de5a6d0fda91c334d31f9f1.fr.png)
+![Un catplot de données visualisées](../../../../2-Regression/4-Logistic/images/pumpkins_catplot_2.png)
 
 ### Utiliser un graphique en essaim
 
-Puisque la couleur est une catégorie binaire (Blanc ou Pas Blanc), elle nécessite 'une [approche spécialisée](https://seaborn.pydata.org/tutorial/categorical.html?highlight=bar) pour la visualisation'. Il existe d'autres façons de visualiser la relation de cette catégorie avec d'autres variables.
+Étant donné que Color est une catégorie binaire (Blanche ou Non), elle nécessite 'une [approche spécialisée](https://seaborn.pydata.org/tutorial/categorical.html?highlight=bar) pour la visualisation'. Il existe d'autres façons de visualiser la relation de cette catégorie avec d'autres variables.
 
-Vous pouvez visualiser les variables côte à côte avec les graphiques Seaborn.
+Vous pouvez visualiser les variables côte à côte avec des graphiques Seaborn.
 
-1. Essayez un graphique 'en essaim' pour montrer la distribution des valeurs :
+1. Essayez un graphique en 'essaim' pour montrer la distribution des valeurs :
 
     ```python
     palette = {
@@ -208,25 +209,25 @@ Vous pouvez visualiser les variables côte à côte avec les graphiques Seaborn.
     sns.swarmplot(x="Color", y="ord__Item Size", data=encoded_pumpkins, palette=palette)
     ```
 
-    ![Un essaim de données visualisées](../../../../translated_images/swarm_2.efeacfca536c2b577dc7b5f8891f28926663fbf62d893ab5e1278ae734ca104e.fr.png)
+    ![Un essaim de données visualisées](../../../../2-Regression/4-Logistic/images/swarm_2.png)
 
-**Attention** : le code ci-dessus pourrait générer un avertissement, car seaborn échoue à représenter une telle quantité de points de données dans un graphique en essaim. Une solution possible consiste à diminuer la taille du marqueur, en utilisant le paramètre 'size'. Cependant, soyez conscient que cela affecte la lisibilité du graphique.
+**Attention** : le code ci-dessus pourrait générer un avertissement, car Seaborn échoue à représenter une telle quantité de points de données dans un graphique en essaim. Une solution possible est de réduire la taille du marqueur, en utilisant le paramètre 'size'. Cependant, soyez conscient que cela affecte la lisibilité du graphique.
 
-> **🧮 Montrez-moi les mathématiques**
+> **🧮 Montrez-moi les maths**
 >
-> La régression logistique repose sur le concept de 'vraisemblance maximale' utilisant des [fonctions sigmoïdes](https://wikipedia.org/wiki/Sigmoid_function). Une 'Fonction Sigmoïde' sur un graphique ressemble à une forme en 'S'. Elle prend une valeur et la mappe quelque part entre 0 et 1. Sa courbe est également appelée 'courbe logistique'. Sa formule ressemble à ceci :
+> La régression logistique repose sur le concept de 'maximum de vraisemblance' en utilisant des [fonctions sigmoïdes](https://wikipedia.org/wiki/Sigmoid_function). Une 'fonction sigmoïde' sur un graphique ressemble à une forme en 'S'. Elle prend une valeur et la mappe entre 0 et 1. Sa courbe est également appelée 'courbe logistique'. Sa formule ressemble à ceci :
 >
-> ![fonction logistique](../../../../translated_images/sigmoid.8b7ba9d095c789cf72780675d0d1d44980c3736617329abfc392dfc859799704.fr.png)
+> ![fonction logistique](../../../../2-Regression/4-Logistic/images/sigmoid.png)
 >
-> où le point médian de la sigmoïde se trouve au point 0 des x, L est la valeur maximale de la courbe, et k est la pente de la courbe. Si le résultat de la fonction est supérieur à 0,5, l'étiquette en question sera classée comme '1' de la choix binaire. Sinon, elle sera classée comme '0'.
+> où le point médian de la sigmoïde se trouve au point 0 de x, L est la valeur maximale de la courbe, et k est la pente de la courbe. Si le résultat de la fonction est supérieur à 0,5, l'étiquette en question sera attribuée à la classe '1' du choix binaire. Sinon, elle sera classée comme '0'.
 
 ## Construisez votre modèle
 
-Construire un modèle pour trouver ces classifications binaires est étonnamment simple dans Scikit-learn.
+Construire un modèle pour trouver ces classifications binaires est étonnamment simple avec Scikit-learn.
 
 [![ML pour débutants - Régression logistique pour la classification des données](https://img.youtube.com/vi/MmZS2otPrQ8/0.jpg)](https://youtu.be/MmZS2otPrQ8 "ML pour débutants - Régression logistique pour la classification des données")
 
-> 🎥 Cliquez sur l'image ci-dessus pour une courte vidéo d'introduction à la construction d'un modèle de régression linéaire
+> 🎥 Cliquez sur l'image ci-dessus pour une courte vidéo sur la construction d'un modèle de régression linéaire.
 
 1. Sélectionnez les variables que vous souhaitez utiliser dans votre modèle de classification et divisez les ensembles d'entraînement et de test en appelant `train_test_split()` :
 
@@ -240,7 +241,7 @@ Construire un modèle pour trouver ces classifications binaires est étonnamment
     
     ```
 
-2. Maintenant, vous pouvez entraîner votre modèle, en appelant `fit()` avec vos données d'entraînement, et imprimez son résultat :
+2. Maintenant, vous pouvez entraîner votre modèle, en appelant `fit()` avec vos données d'entraînement, et afficher son résultat :
 
     ```python
     from sklearn.metrics import f1_score, classification_report 
@@ -255,7 +256,7 @@ Construire un modèle pour trouver ces classifications binaires est étonnamment
     print('F1-score: ', f1_score(y_test, predictions))
     ```
 
-    Jetez un œil au tableau de bord de votre modèle. Ce n'est pas mal, étant donné que vous avez seulement environ 1000 lignes de données :
+    Regardez le tableau de bord de votre modèle. Ce n'est pas mal, compte tenu du fait que vous avez seulement environ 1000 lignes de données :
 
     ```output
                        precision    recall  f1-score   support
@@ -278,9 +279,9 @@ Construire un modèle pour trouver ces classifications binaires est étonnamment
 
 ## Meilleure compréhension via une matrice de confusion
 
-Bien que vous puissiez obtenir un rapport de score [termes](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html?highlight=classification_report#sklearn.metrics.classification_report) en imprimant les éléments ci-dessus, vous pourriez être en mesure de comprendre votre modèle plus facilement en utilisant une [matrice de confusion](https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix) pour nous aider à comprendre comment le modèle fonctionne.
+Bien que vous puissiez obtenir un rapport de tableau de bord [termes](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html?highlight=classification_report#sklearn.metrics.classification_report) en imprimant les éléments ci-dessus, vous pourriez mieux comprendre votre modèle en utilisant une [matrice de confusion](https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix) pour nous aider à comprendre comment le modèle fonctionne.
 
-> 🎓 Une '[matrice de confusion](https://wikipedia.org/wiki/Confusion_matrix)' (ou 'matrice d'erreur') est un tableau qui exprime les vrais positifs et négatifs et les faux positifs de votre modèle, permettant ainsi d'évaluer la précision des prédictions.
+> 🎓 Une '[matrice de confusion](https://wikipedia.org/wiki/Confusion_matrix)' (ou 'matrice d'erreur') est un tableau qui exprime les vrais positifs et négatifs de votre modèle par rapport aux faux positifs et négatifs, évaluant ainsi la précision des prédictions.
 
 1. Pour utiliser une matrice de confusion, appelez `confusion_matrix()` :
 
@@ -289,62 +290,69 @@ Bien que vous puissiez obtenir un rapport de score [termes](https://scikit-learn
     confusion_matrix(y_test, predictions)
     ```
 
-    Jetez un œil à la matrice de confusion de votre modèle :
+    Regardez la matrice de confusion de votre modèle :
 
     ```output
     array([[162,   4],
            [ 11,  22]])
     ```
 
-Dans Scikit-learn, les lignes de la matrice de confusion (axe 0) sont les étiquettes réelles et les colonnes (axe 1) sont les étiquettes prédites.
+Dans Scikit-learn, les lignes (axe 0) sont les étiquettes réelles et les colonnes (axe 1) sont les étiquettes prédites.
 
 |       |   0   |   1   |
 | :---: | :---: | :---: |
 |   0   |  TN   |  FP   |
 |   1   |  FN   |  TP   |
 
-Que se passe-t-il ici ? Supposons que notre modèle soit chargé de classifier des citrouilles entre deux catégories binaires, la catégorie 'blanche' et la catégorie 'non-blanche'.
+Que se passe-t-il ici ? Disons que notre modèle est chargé de classer les citrouilles entre deux catégories binaires, catégorie 'blanche' et catégorie 'non blanche'.
 
-- Si votre modèle prédit qu'une citrouille n'est pas blanche et qu'elle appartient en réalité à la catégorie 'non-blanche', nous l'appelons un vrai négatif, représenté par le nombre en haut à gauche.
-- Si votre modèle prédit qu'une citrouille est blanche et qu'elle appartient en réalité à la catégorie 'non-blanche', nous l'appelons un faux négatif, représenté par le nombre en bas à gauche.
-- Si votre modèle prédit qu'une citrouille n'est pas blanche et qu'elle appartient en réalité à la catégorie 'blanche', nous l'appelons un faux positif, représenté par le nombre en haut à droite.
-- Si votre modèle prédit qu'une citrouille est blanche et qu'elle appartient en réalité à la catégorie 'blanche', nous l'appelons un vrai positif, représenté par le nombre en bas à droite.
+- Si votre modèle prédit qu'une citrouille n'est pas blanche et qu'elle appartient à la catégorie 'non blanche' en réalité, nous appelons cela un vrai négatif, indiqué par le nombre en haut à gauche.
+- Si votre modèle prédit qu'une citrouille est blanche et qu'elle appartient à la catégorie 'non blanche' en réalité, nous appelons cela un faux négatif, indiqué par le nombre en bas à gauche.
+- Si votre modèle prédit qu'une citrouille n'est pas blanche et qu'elle appartient à la catégorie 'blanche' en réalité, nous appelons cela un faux positif, indiqué par le nombre en haut à droite.
+- Si votre modèle prédit qu'une citrouille est blanche et qu'elle appartient à la catégorie 'blanche' en réalité, nous appelons cela un vrai positif, indiqué par le nombre en bas à droite.
 
-Comme vous l'avez peut-être deviné, il est préférable d'avoir un plus grand nombre de vrais positifs et de vrais négatifs et un nombre plus faible de faux positifs et de faux négatifs, ce qui implique que le modèle fonctionne mieux.
-
-Comment la matrice de confusion est-elle liée à la précision et au rappel ? Rappelez-vous, le rapport de classification imprimé ci-dessus montrait la précision (0,85) et le rappel (0,67).
+Comme vous l'avez probablement deviné, il est préférable d'avoir un plus grand nombre de vrais positifs et de vrais négatifs et un plus petit nombre de faux positifs et de faux négatifs, ce qui implique que le modèle fonctionne mieux.
+Comment la matrice de confusion est-elle liée à la précision et au rappel ? Rappelez-vous, le rapport de classification imprimé ci-dessus montrait une précision (0,85) et un rappel (0,67).
 
 Précision = tp / (tp + fp) = 22 / (22 + 4) = 0,8461538461538461
 
 Rappel = tp / (tp + fn) = 22 / (22 + 11) = 0,6666666666666666
 
-✅ Q : Selon la matrice de confusion, comment le modèle a-t-il fonctionné ? R : Pas mal ; il y a un bon nombre de vrais négatifs mais aussi quelques faux négatifs.
+✅ Q : Selon la matrice de confusion, comment le modèle s'en est-il sorti ?  
+A : Pas mal ; il y a un bon nombre de vrais négatifs mais aussi quelques faux négatifs.
 
-Revisitons les termes que nous avons vus plus tôt avec l'aide du mappage de la matrice de confusion TP/TN et FP/FN :
+Revisitons les termes que nous avons vus précédemment à l'aide de la cartographie TP/TN et FP/FN de la matrice de confusion :
 
-🎓 Précision : TP/(TP + FP) La fraction d'instances pertinentes parmi les instances récupérées (par exemple, quelles étiquettes étaient bien étiquetées)
+🎓 Précision : TP/(TP + FP)  
+La fraction des instances pertinentes parmi les instances récupérées (par exemple, quelles étiquettes ont été bien classées).
 
-🎓 Rappel : TP/(TP + FN) La fraction d'instances pertinentes qui ont été récupérées, qu'elles soient bien étiquetées ou non
+🎓 Rappel : TP/(TP + FN)  
+La fraction des instances pertinentes qui ont été récupérées, qu'elles soient bien classées ou non.
 
-🎓 f1-score : (2 * précision * rappel)/(précision + rappel) Une moyenne pondérée de la précision et du rappel, avec 1 étant le meilleur et 0 étant le pire
+🎓 f1-score : (2 * précision * rappel)/(précision + rappel)  
+Une moyenne pondérée de la précision et du rappel, avec un score maximal de 1 et minimal de 0.
 
-🎓 Support : Le nombre d'occurrences de chaque étiquette récupérée
+🎓 Support :  
+Le nombre d'occurrences de chaque étiquette récupérée.
 
-🎓 Précision : (TP + TN)/(TP + TN + FP + FN) Le pourcentage d'étiquettes prédites avec précision pour un échantillon.
+🎓 Exactitude : (TP + TN)/(TP + TN + FP + FN)  
+Le pourcentage d'étiquettes prédites correctement pour un échantillon.
 
-🎓 Moyenne Macro : Le calcul de la moyenne non pondérée des métriques pour chaque étiquette, sans tenir compte du déséquilibre des étiquettes.
+🎓 Macro Moyenne :  
+Le calcul de la moyenne non pondérée des métriques pour chaque étiquette, sans tenir compte du déséquilibre des étiquettes.
 
-🎓 Moyenne Pondérée : Le calcul de la moyenne des métriques pour chaque étiquette, en tenant compte du déséquilibre des étiquettes en les pondérant par leur support (le nombre d'instances réelles pour chaque étiquette).
+🎓 Moyenne Pondérée :  
+Le calcul de la moyenne des métriques pour chaque étiquette, en tenant compte du déséquilibre des étiquettes en les pondérant par leur support (le nombre d'instances réelles pour chaque étiquette).
 
-✅ Pouvez-vous penser à la métrique que vous devriez surveiller si vous souhaitez que votre modèle réduise le nombre de faux négatifs ?
+✅ Pouvez-vous réfléchir à quel métrique surveiller si vous voulez que votre modèle réduise le nombre de faux négatifs ?
 
-## Visualisez la courbe ROC de ce modèle
+## Visualiser la courbe ROC de ce modèle
 
-[![ML pour débutants - Analyser la performance de la régression logistique avec les courbes ROC](https://img.youtube.com/vi/GApO575jTA0/0.jpg)](https://youtu.be/GApO575jTA0 "ML pour débutants - Analyser la performance de la régression logistique avec les courbes ROC")
+[![ML pour débutants - Analyse de la performance de la régression logistique avec les courbes ROC](https://img.youtube.com/vi/GApO575jTA0/0.jpg)](https://youtu.be/GApO575jTA0 "ML pour débutants - Analyse de la performance de la régression logistique avec les courbes ROC")
 
-> 🎥 Cliquez sur l'image ci-dessus pour une courte vidéo d'introduction aux courbes ROC
+> 🎥 Cliquez sur l'image ci-dessus pour une courte vidéo sur les courbes ROC.
 
-Faisons une visualisation supplémentaire pour voir la fameuse courbe 'ROC' :
+Faisons une dernière visualisation pour voir la fameuse courbe 'ROC' :
 
 ```python
 from sklearn.metrics import roc_curve, roc_auc_score
@@ -364,7 +372,36 @@ plt.title('ROC Curve')
 plt.show()
 ```
 
-En utilisant Matplotlib, tracez le [Caractéristique de fonctionnement du récepteur](https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html?highlight=roc) ou ROC. Les courbes ROC sont souvent utilisées pour obtenir une vue de la sortie d'un classificateur en termes de vrais vs faux positifs. "Les courbes ROC présentent généralement le taux de vrais positifs sur l'axe Y et le
+En utilisant Matplotlib, tracez la [caractéristique de fonctionnement du récepteur](https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html?highlight=roc) ou ROC du modèle. Les courbes ROC sont souvent utilisées pour obtenir une vue d'ensemble des résultats d'un classificateur en termes de vrais positifs vs faux positifs. "Les courbes ROC présentent généralement le taux de vrais positifs sur l'axe Y et le taux de faux positifs sur l'axe X." Ainsi, la pente de la courbe et l'espace entre la ligne médiane et la courbe sont importants : vous voulez une courbe qui monte rapidement et dépasse la ligne. Dans notre cas, il y a des faux positifs au départ, puis la ligne monte correctement :
+
+![ROC](../../../../2-Regression/4-Logistic/images/ROC_2.png)
+
+Enfin, utilisez l'API [`roc_auc_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html?highlight=roc_auc#sklearn.metrics.roc_auc_score) de Scikit-learn pour calculer la véritable 'Surface sous la courbe' (AUC) :
+
+```python
+auc = roc_auc_score(y_test,y_scores[:,1])
+print(auc)
+```  
+Le résultat est `0,9749908725812341`. Étant donné que l'AUC varie de 0 à 1, vous voulez un score élevé, car un modèle qui est correct à 100 % dans ses prédictions aura une AUC de 1 ; dans ce cas, le modèle est _plutôt bon_.
+
+Dans les prochaines leçons sur les classifications, vous apprendrez comment itérer pour améliorer les scores de votre modèle. Mais pour l'instant, félicitations ! Vous avez terminé ces leçons sur la régression !
+
+---
+## 🚀Défi
+
+Il y a beaucoup plus à découvrir sur la régression logistique ! Mais la meilleure façon d'apprendre est d'expérimenter. Trouvez un jeu de données qui se prête à ce type d'analyse et construisez un modèle avec celui-ci. Qu'apprenez-vous ? Astuce : essayez [Kaggle](https://www.kaggle.com/search?q=logistic+regression+datasets) pour des jeux de données intéressants.
+
+## [Quiz post-lecture](https://ff-quizzes.netlify.app/en/ml/)
+
+## Révision & Étude personnelle
+
+Lisez les premières pages de [cet article de Stanford](https://web.stanford.edu/~jurafsky/slp3/5.pdf) sur quelques utilisations pratiques de la régression logistique. Réfléchissez aux tâches qui conviennent mieux à l'un ou l'autre type de tâches de régression que nous avons étudiées jusqu'à présent. Qu'est-ce qui fonctionnerait le mieux ?
+
+## Devoir
+
+[Reprendre cette régression](assignment.md)
+
+---
 
 **Avertissement** :  
-Ce document a été traduit à l'aide de services de traduction automatisée basés sur l'IA. Bien que nous nous efforçons d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant autorité. Pour des informations critiques, une traduction humaine professionnelle est recommandée. Nous ne sommes pas responsables des malentendus ou des interprétations erronées découlant de l'utilisation de cette traduction.
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.

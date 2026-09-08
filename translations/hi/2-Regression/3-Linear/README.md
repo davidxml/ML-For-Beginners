@@ -1,85 +1,97 @@
-# Scikit-learn का उपयोग करके एक रिग्रेशन मॉडल बनाएं: रिग्रेशन के चार तरीके
+# Scikit-learn का उपयोग करके एक प्रतिगमन मॉडल बनाएं: प्रतिगमन के चार तरीके
 
-![Linear vs polynomial regression infographic](../../../../translated_images/linear-polynomial.5523c7cb6576ccab0fecbd0e3505986eb2d191d9378e785f82befcf3a578a6e7.hi.png)
-> Infographic by [Dasani Madipalli](https://twitter.com/dasani_decoded)
-## [Pre-lecture quiz](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/13/)
+## शुरुआती नोट
+
+रैखिक प्रतिगमन का उपयोग तब किया जाता है जब हम एक **संख्यात्मक मान** का पूर्वानुमान लगाना चाहते हैं (उदाहरण के लिए, घर का मूल्य, तापमान, या बिक्री)।
+यह इनपुट विशेषताओं और आउटपुट के बीच के संबंध का सबसे अच्छा प्रतिनिधित्व करने वाली एक सीधी रेखा खोजकर काम करता है।
+
+इस पाठ में, हम अधिक उन्नत प्रतिगमन तकनीकों का पता लगाने से पहले अवधारणा को समझने पर ध्यान केंद्रित करते हैं।
+![रैखिक बनाम बहुपद प्रतिगमन इन्फोग्राफिक](../../../../translated_images/hi/linear-polynomial.5523c7cb6576ccab.webp)
+> इन्फोग्राफिक [Dasani Madipalli](https://twitter.com/dasani_decoded) द्वारा
+## [प्री-लेक्चर क्विज़](https://ff-quizzes.netlify.app/en/ml/)
 
 > ### [यह पाठ R में उपलब्ध है!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)
 ### परिचय
 
-अब तक आपने इस पाठ में उपयोग किए जाने वाले कद्दू मूल्य निर्धारण डेटासेट से एकत्र किए गए नमूना डेटा के साथ रिग्रेशन क्या है, इसका पता लगाया है। आपने इसे Matplotlib का उपयोग करके भी विज़ुअलाइज़ किया है।
+अब तक आपने प्रतिगमन क्या है, इसे कद्दू के मूल्य निर्धारण डेटासेट से लिए गए नमूना डेटा के साथ एक्सप्लोर किया है, जिसे हम इस पाठ में लगातार उपयोग करेंगे। आपने इसे Matplotlib का उपयोग करके विज़ुअलाइज़ भी किया है।
 
-अब आप एमएल के लिए रिग्रेशन में गहराई से गोता लगाने के लिए तैयार हैं। जबकि विज़ुअलाइज़ेशन आपको डेटा को समझने की अनुमति देता है, मशीन लर्निंग की वास्तविक शक्ति _मॉडल प्रशिक्षण_ से आती है। मॉडल ऐतिहासिक डेटा पर प्रशिक्षित होते हैं ताकि डेटा निर्भरताओं को स्वचालित रूप से कैप्चर किया जा सके, और वे आपको नए डेटा के लिए परिणामों की भविष्यवाणी करने की अनुमति देते हैं, जिसे मॉडल ने पहले नहीं देखा है।
+अब आप एमएल के लिए प्रतिगमन में गहराई से उतरने के लिए तैयार हैं। जबकि विज़ुअलाइज़ेशन आपको डेटा को समझने में मदद करता है, मशीन लर्निंग की असली ताकत _मॉडल का प्रशिक्षण_ है। मॉडल को ऐतिहासिक डेटा पर प्रशिक्षित किया जाता है ताकि वे स्वतः डेटा की निर्भरताओं को पकड़ सकें, और ये आपको नए डेटा के लिए पूर्वानुमान लगाने की अनुमति देते हैं, जिसे मॉडल ने पहले नहीं देखा होता।
 
-इस पाठ में, आप दो प्रकार के रिग्रेशन के बारे में अधिक जानेंगे: _बेसिक लीनियर रिग्रेशन_ और _पोलिनोमियल रिग्रेशन_, साथ ही इन तकनीकों के अंतर्निहित गणित के कुछ पहलू। ये मॉडल हमें विभिन्न इनपुट डेटा के आधार पर कद्दू की कीमतों की भविष्यवाणी करने की अनुमति देंगे।
+इस पाठ में, आप दो प्रकार के प्रतिगमन के बारे में अधिक सीखेंगे: _मूलभूत रैखिक प्रतिगमन_ और _बहुपद प्रतिगमन_, साथ ही इन तकनीकों के पीछे कुछ गणित। ये मॉडल हमें अलग-अलग इनपुट डेटा पर निर्भर करके कद्दू की कीमतों का पूर्वानुमान लगाने की अनुमति देंगे।
 
-[![ML for beginners - Understanding Linear Regression](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "ML for beginners - Understanding Linear Regression")
+[![शुरुआती के लिए ML - रैखिक प्रतिगमन को समझना](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "शुरुआती के लिए ML - रैखिक प्रतिगमन को समझना")
 
-> 🎥 ऊपर दी गई छवि पर क्लिक करें लीनियर रिग्रेशन का एक संक्षिप्त वीडियो अवलोकन देखने के लिए।
+> 🎥 रैखिक प्रतिगमन का संक्षिप्त वीडियो अवलोकन देखने के लिए ऊपर की छवि पर क्लिक करें।
 
-> इस पाठ्यक्रम के दौरान, हम गणित का न्यूनतम ज्ञान मानते हैं और अन्य क्षेत्रों से आने वाले छात्रों के लिए इसे सुलभ बनाने का प्रयास करते हैं, इसलिए समझ में सहायता के लिए नोट्स, 🧮 कॉलआउट्स, आरेख और अन्य शिक्षण उपकरण देखें।
+> इस पाठ्यक्रम में, हम न्यूनतम गणितीय ज्ञान की कल्पना करते हैं, और अन्य क्षेत्रों से आने वाले छात्रों के लिए इसे सुलभ बनाने का प्रयास करते हैं, इसलिए नोट्स, 🧮 कॉलआउट्स, आरेख, और अन्य शिक्षण उपकरणों पर ध्यान दें।
 
-### आवश्यकताएँ
+### पूर्व आवश्यकताएँ
 
-अब तक आपको कद्दू डेटा की संरचना से परिचित होना चाहिए जिसे हम जांच रहे हैं। आप इसे इस पाठ के _notebook.ipynb_ फ़ाइल में पहले से लोड और पहले से साफ़ कर सकते हैं। फ़ाइल में, कद्दू की कीमत एक नए डेटा फ्रेम में प्रति बुशल प्रदर्शित होती है। सुनिश्चित करें कि आप इन नोटबुक्स को Visual Studio Code के कर्नेल्स में चला सकते हैं।
+अब तक आप उस कद्दू डेटा की संरचना से परिचित होनी चाहिए जिसे हम देख रहे हैं। इसे इस पाठ के _notebook.ipynb_ फ़ाइल में प्रीलोडेड और प्री-क्लीन किया गया है। इस फ़ाइल में, कद्दू की कीमत प्रति बुशल नई डेटा फ्रेम में प्रदर्शित है। सुनिश्चित करें कि आप इन नोटबुक्स को Visual Studio Code के कर्नेल्स में चला सकते हैं।
 
 ### तैयारी
 
-याद दिलाने के लिए, आप इस डेटा को लोड कर रहे हैं ताकि इससे सवाल पूछ सकें।
+एक अनुस्मारक के रूप में, आप इस डेटा को लोड कर रहे हैं ताकि आप इससे प्रश्न पूछ सकें।
 
 - कद्दू खरीदने का सबसे अच्छा समय कब है?
-- एक मिनिएचर कद्दू के केस की कीमत कितनी हो सकती है?
-- क्या मुझे उन्हें आधे-बुशल बास्केट में खरीदना चाहिए या 1 1/9 बुशल बॉक्स में?
+- एक केस मिनिएचर कद्दू की कीमत क्या हो सकती है?
+- क्या मुझे उन्हें आधे बुशल बास्केट में खरीदना चाहिए या 1 1/9 बुशल बॉक्स के अनुसार?
 आइए इस डेटा में और गहराई से जांच करें।
 
-पिछले पाठ में, आपने एक Pandas डेटा फ्रेम बनाया और इसे मूल डेटासेट के एक हिस्से से आबाद किया, बुशल द्वारा मूल्य निर्धारण को मानकीकृत किया। ऐसा करने से, हालांकि, आप केवल लगभग 400 डेटा पॉइंट्स एकत्र करने में सक्षम थे और केवल पतझड़ के महीनों के लिए।
+पिछले पाठ में, आपने एक Pandas डेटा फ्रेम बनाया था और मूल डेटासेट के एक हिस्से से इसे भर दिया था, इस प्रकार कीमत को बुशल द्वारा मानकीकृत किया था। हालांकि ऐसा करने के बाद, आप केवल लगभग 400 डेटा पॉइंट्स इकट्ठा कर पाए और वे भी केवल गिरावट के महीनों के लिए।
 
-इस पाठ के साथ आने वाली नोटबुक में हमने जो डेटा पहले से लोड किया है, उस पर एक नज़र डालें। डेटा पहले से लोड है और एक प्रारंभिक बिखराव प्लॉट महीने के डेटा को दिखाने के लिए चार्ट किया गया है। हो सकता है कि हम इसे और अधिक साफ करके डेटा की प्रकृति के बारे में थोड़ी अधिक जानकारी प्राप्त कर सकें।
+इस पाठ के साथ आई नोटबुक में हमने जो डेटा प्रीलोड किया है, उस पर एक नज़र डालें। डेटा पूर्व लोडेड है और एक प्रारंभिक स्कैटरप्लॉट बनाया गया है जो महीने के डेटा को दिखाता है। शायद हम इसे और साफ़ करके डेटा की प्रकृति के बारे में थोड़ा अधिक जान सकें।
 
-## एक लीनियर रिग्रेशन रेखा
+## एक रैखिक प्रतिगमन रेखा
 
-जैसा कि आपने पाठ 1 में सीखा, लीनियर रिग्रेशन अभ्यास का लक्ष्य एक रेखा को प्लॉट करने में सक्षम होना है:
+जैसा कि आपने पाठ 1 में सीखा, रैखिक प्रतिगमन अभ्यास का उद्देश्य एक रेखा को प्लॉट करना है ताकि:
 
-- **चर संबंध दिखाएं**। चर के बीच संबंध दिखाएं
-- **भविष्यवाणियाँ करें**। यह भविष्यवाणी करें कि एक नया डेटा पॉइंट उस रेखा के संबंध में कहाँ गिर सकता है।
+- **चर संबंध दिखाना**। चर के बीच के संबंध को दिखाएं।  
+- **पूर्वानुमान बनाना**। यह सही पूर्वानुमान लगाना कि कोई नया डेटा पॉइंट उस रेखा के संबंध में कहां आएगा।
 
-इस प्रकार की रेखा खींचने के लिए **लीस्ट-स्क्वेर्स रिग्रेशन** का उपयोग किया जाता है। 'लीस्ट-स्क्वेर्स' शब्द का अर्थ है कि रिग्रेशन रेखा के चारों ओर के सभी डेटा पॉइंट्स को वर्गाकार किया जाता है और फिर जोड़ा जाता है। आदर्श रूप से, वह अंतिम योग जितना संभव हो उतना छोटा होता है, क्योंकि हम कम संख्या में त्रुटियों, या `least-squares` चाहते हैं।
+यह **Least-Squares Regression** का सामान्य अभ्यास है कि इस प्रकार की रेखा बनाएं। "Least-Squares" शब्द हमारे मॉडल में कुल त्रुटि को न्यूनतम करने की प्रक्रिया को दर्शाता है। हर डेटा पॉइंट के लिए, हम रेखा और वास्तविक पॉइंट के बीच लंबवत दूरी को मापते हैं (जिसे 'अवशेष' कहा जाता है)।
 
-हम ऐसा इसलिए करते हैं क्योंकि हम एक ऐसी रेखा को मॉडल बनाना चाहते हैं जिसमें हमारे सभी डेटा पॉइंट्स से सबसे कम संचयी दूरी हो। हम उन्हें जोड़ने से पहले शब्दों को वर्गाकार भी करते हैं क्योंकि हम इसकी दिशा के बजाय इसके परिमाण से चिंतित हैं।
+हम इन दूरीयों को दो मुख्य कारणों से वर्ग करते हैं:
 
-> **🧮 गणित दिखाएं**
+1. **परिमाण दिशा से अधिक महत्वपूर्ण:** हम -5 की त्रुटि को +5 की त्रुटि के समान समझना चाहते हैं। वर्गीकरण सभी मानों को सकारात्मक कर देता है।
+
+2. **आउटलेयर्स को दंडित करना:** वर्ग करने से बड़ी त्रुटियों को अधिक वजन मिलता है, जो रेखा को दूर के पॉइंट्स के करीब बनाए रखता है।
+
+फिर हम इन वर्गीकृत मूल्यों को एक साथ जोड़ते हैं। हमारा लक्ष्य वह विशिष्ट रेखा ढूंढ़ना है जहां यह अंतिम योग सबसे कम (सबसे छोटा संभव मान) होता है—इसीलिए इसे "Least-Squares" कहा जाता है।
+
+> **🧮 मुझे गणित दिखाइए**  
 > 
-> इस रेखा को, जिसे _सबसे अच्छा फिट_ कहा जाता है, [एक समीकरण](https://en.wikipedia.org/wiki/Simple_linear_regression) द्वारा व्यक्त किया जा सकता है:
+> इस रेखा, जिसे _लाइन ऑफ बेस्ट फिट_ कहा जाता है, को [एक समीकरण](https://en.wikipedia.org/wiki/Simple_linear_regression) द्वारा व्यक्त किया जा सकता है:
 > 
 > ```
 > Y = a + bX
 > ```
 >
-> `X` is the 'explanatory variable'. `Y` is the 'dependent variable'. The slope of the line is `b` and `a` is the y-intercept, which refers to the value of `Y` when `X = 0`. 
+> `X` 'व्याख्यात्मक चर' है। `Y` 'निर्भर चर' है। रेखा का उतार `b` है और `a` y-अवरोध है, जो उस समय `Y` का मान दर्शाता है जब `X = 0` होता है।  
 >
->![calculate the slope](../../../../translated_images/slope.f3c9d5910ddbfcf9096eb5564254ba22c9a32d7acd7694cab905d29ad8261db3.hi.png)
+>![ढलान की गणना](../../../../translated_images/hi/slope.f3c9d5910ddbfcf9.webp)
 >
-> First, calculate the slope `b`. Infographic by [Jen Looper](https://twitter.com/jenlooper)
+> सबसे पहले, ढलान `b` की गणना करें। इन्फोग्राफिक [Jen Looper](https://twitter.com/jenlooper) द्वारा
 >
-> In other words, and referring to our pumpkin data's original question: "predict the price of a pumpkin per bushel by month", `X` would refer to the price and `Y` would refer to the month of sale. 
+> दूसरे शब्दों में, और हमारे कद्दू डेटा के मूल प्रश्न की ओर इशारा करते हुए: "महीने के अनुसार प्रति बुशल कद्दू की कीमत का पूर्वानुमान लगाएं", `X` कीमत को संदर्भित करेगा और `Y` बिक्री के महीने को।  
 >
->![complete the equation](../../../../translated_images/calculation.a209813050a1ddb141cdc4bc56f3af31e67157ed499e16a2ecf9837542704c94.hi.png)
+>![समीकरण पूर्ण करें](../../../../translated_images/hi/calculation.a209813050a1ddb1.webp)
 >
-> Calculate the value of Y. If you're paying around $4, it must be April! Infographic by [Jen Looper](https://twitter.com/jenlooper)
+> Y का मान निकालें। यदि आप लगभग $4 दे रहे हैं, तो यह अप्रैल होना चाहिए! इन्फोग्राफिक [Jen Looper](https://twitter.com/jenlooper) द्वारा
 >
-> The math that calculates the line must demonstrate the slope of the line, which is also dependent on the intercept, or where `Y` is situated when `X = 0`.
+> गणित जो रेखा की गणना करता है, उस रेखा का ढलान दिखाना होगा, जो अवरोध पर भी निर्भर करता है, या जहां `Y` स्थित होता है जब `X = 0` होता है।
 >
-> You can observe the method of calculation for these values on the [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html) web site. Also visit [this Least-squares calculator](https://www.mathsisfun.com/data/least-squares-calculator.html) to watch how the numbers' values impact the line.
+> आप इन मानों की गणना की विधि को [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html) वेबसाइट पर देख सकते हैं। साथ ही इस [Least-squares कैलक्युलेटर](https://www.mathsisfun.com/data/least-squares-calculator.html) पर जाकर देख सकते हैं कि नंबरों के मान लाइन को कैसे प्रभावित करते हैं।
 
-## Correlation
+## सहसंबंध
 
-One more term to understand is the **Correlation Coefficient** between given X and Y variables. Using a scatterplot, you can quickly visualize this coefficient. A plot with datapoints scattered in a neat line have high correlation, but a plot with datapoints scattered everywhere between X and Y have a low correlation.
+एक और शब्द जिसे समझना जरूरी है वह है दिया गया X और Y चर के बीच **सहसंबंध गुणांक**। एक स्कैटरप्लॉट का उपयोग करके, आप जल्दी से इस गुणांक को विज़ुअलाइज़ कर सकते हैं। एक ऐसा प्लॉट जिसमें डेटा पॉइंट्स एक साफ रेखा में फैले हों, उसका सहसंबंध उच्च होता है, लेकिन जो प्लॉट सभी जगह फैले डेटा पॉइंट्स दिखाता है, उसका सहसंबंध कम होता है।
 
-A good linear regression model will be one that has a high (nearer to 1 than 0) Correlation Coefficient using the Least-Squares Regression method with a line of regression.
+एक अच्छा रैखिक प्रतिगमन मॉडल वह होगा जिसका सहसंबंध गुणांक उच्च (0 के बजाय 1 के करीब) हो, और जो Least-Squares Regression पद्धति के साथ प्रतिगमन रेखा रखता हो।
 
-✅ Run the notebook accompanying this lesson and look at the Month to Price scatterplot. Does the data associating Month to Price for pumpkin sales seem to have high or low correlation, according to your visual interpretation of the scatterplot? Does that change if you use more fine-grained measure instead of `Month`, eg. *day of the year* (i.e. number of days since the beginning of the year)?
+✅ इस पाठ के साथ आई नोटबुक चलाएं और महीने से मूल्य के स्कैटरप्लॉट को देखें। कद्दू बिक्री के लिए महीने और मूल्य को जोड़ने वाला डेटा आपकी स्कैटरप्लॉट की दृश्य व्याख्या के अनुसार उच्च या निम्न सहसंबंध दिखाता है? यदि आप `Month` के बजाय अधिक सूक्ष्म माप जैसे *वर्ष का दिन* (अर्थात वर्ष की शुरुआत से दिनों की संख्या) का उपयोग करते हैं, तो क्या यह परिवर्तन होता है?
 
-In the code below, we will assume that we have cleaned up the data, and obtained a data frame called `new_pumpkins`, similar to the following:
+नीचे दिए गए कोड में, हम मानते हैं कि हमने डेटा साफ किया है, और `new_pumpkins` नामक एक डेटा फ्रेम प्राप्त किया है, जो निम्नानुसार है:
 
 ID | Month | DayOfYear | Variety | City | Package | Low Price | High Price | Price
 ---|-------|-----------|---------|------|---------|-----------|------------|-------
@@ -89,36 +101,36 @@ ID | Month | DayOfYear | Variety | City | Package | Low Price | High Price | Pri
 73 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 17.0 | 17.0 | 15.454545
 74 | 10 | 281 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
 
-> The code to clean the data is available in [`notebook.ipynb`](../../../../2-Regression/3-Linear/notebook.ipynb). We have performed the same cleaning steps as in the previous lesson, and have calculated `DayOfYear` कॉलम का उपयोग करके निम्नलिखित अभिव्यक्ति के साथ:
+> डेटा साफ करने के लिए कोड [`notebook.ipynb`](notebook.ipynb) में उपलब्ध है। हमने पिछले पाठ की तरह ही सफाई के कदम उठाए हैं, और निम्नलिखित अभिव्यक्ति का उपयोग करके `DayOfYear` कॉलम की गणना की है:
 
 ```python
 day_of_year = pd.to_datetime(pumpkins['Date']).apply(lambda dt: (dt-datetime(dt.year,1,1)).days)
 ```
 
-अब जब आपके पास लीनियर रिग्रेशन के पीछे के गणित की समझ है, तो आइए एक रिग्रेशन मॉडल बनाएं यह देखने के लिए कि हम कौन सा कद्दू पैकेज सबसे अच्छी कद्दू कीमतों के साथ भविष्यवाणी कर सकते हैं। कोई व्यक्ति जो छुट्टी के कद्दू पैच के लिए कद्दू खरीद रहा है, वह इस जानकारी को कद्दू पैच के लिए कद्दू पैकेजों की खरीद को अनुकूलित करने के लिए उपयोग करना चाह सकता है।
+अब जब आपके पास रैखिक प्रतिगमन के पीछे के गणित की समझ है, तो चलिए एक प्रतिगमन मॉडल बनाते हैं ताकि देखें कि क्या हम यह पूर्वानुमान लगा सकते हैं कि कद्दू के किस पैकेज की कीमत सबसे अच्छी होगी। कोई ऐसा व्यक्ति जो छुट्टियों के कद्दू पैच के लिए कद्दू खरीद रहा हो, उसे अपने खरीदारी को अनुकूलित करने के लिए यह जानकारी चाहिए होगी।
 
-## सहसंबंध की तलाश में
+## सहसंबंध की तलाश
 
-[![ML for beginners - Looking for Correlation: The Key to Linear Regression](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "ML for beginners - Looking for Correlation: The Key to Linear Regression")
+[![शुरुआती के लिए ML - सहसंबंध की तलाश: रैखिक प्रतिगमन की कुंजी](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "शुरुआती के लिए ML - सहसंबंध की तलाश: रैखिक प्रतिगमन की कुंजी")
 
-> 🎥 ऊपर दी गई छवि पर क्लिक करें सहसंबंध का एक संक्षिप्त वीडियो अवलोकन देखने के लिए।
+> 🎥 सहसंबंध का संक्षिप्त वीडियो अवलोकन देखने के लिए ऊपर की छवि पर क्लिक करें।
 
-पिछले पाठ से आपने शायद देखा है कि विभिन्न महीनों के लिए औसत कीमत इस प्रकार दिखती है:
+पिछले पाठ से आपने संभवतः देखा होगा कि अलग-अलग महीनों के लिए औसत कीमत कुछ इस प्रकार दिखती है:
 
-<img alt="Average price by month" src="../2-Data/images/barchart.png" width="50%"/>
+<img alt="महीने के अनुसार औसत कीमत" src="../../../../translated_images/hi/barchart.a833ea9194346d76.webp" width="50%"/>
 
-यह सुझाव देता है कि कुछ सहसंबंध होना चाहिए, और हम `Month` and `Price`, or between `DayOfYear` and `Price`. Here is the scatter plot that shows the latter relationship:
+यह सुझाव देता है कि वहाँ कुछ सहसंबंध होना चाहिए, और हम यह प्रयास कर सकते हैं कि `Month` और `Price` या `DayOfYear` और `Price` के बीच संबंध का पूर्वानुमान लगाने के लिए रैखिक प्रतिगमन मॉडल प्रशिक्षण दें। यह रहा वह स्कैटरप्लॉट जो बाद वाले संबंध को दिखाता है:
 
-<img alt="Scatter plot of Price vs. Day of Year" src="images/scatter-dayofyear.png" width="50%" /> 
+<img alt="मूल्य बनाम वर्ष का दिन का स्कैटर प्लॉट" src="../../../../translated_images/hi/scatter-dayofyear.bc171c189c9fd553.webp" width="50%" />
 
-Let's see if there is a correlation using the `corr` फ़ंक्शन का उपयोग करके `Month` and `Price` के बीच संबंध की भविष्यवाणी करने के लिए लीनियर रिग्रेशन मॉडल को प्रशिक्षित करने का प्रयास कर सकते हैं:
+आइए `corr` फ़ंक्शन का उपयोग करके देखें कि सहसंबंध कितना है:
 
 ```python
 print(new_pumpkins['Month'].corr(new_pumpkins['Price']))
 print(new_pumpkins['DayOfYear'].corr(new_pumpkins['Price']))
 ```
 
-ऐसा लगता है कि सहसंबंध काफी छोटा है, -0.15 `Month` and -0.17 by the `DayOfMonth`, but there could be another important relationship. It looks like there are different clusters of prices corresponding to different pumpkin varieties. To confirm this hypothesis, let's plot each pumpkin category using a different color. By passing an `ax` parameter to the `scatter` प्लॉटिंग फ़ंक्शन का उपयोग करके हम सभी पॉइंट्स को एक ही ग्राफ पर प्लॉट कर सकते हैं:
+ऐसा लगता है कि सहसंबंध काफी छोटा है, `Month` के अनुसार -0.15 और `DayOfYear` के अनुसार -0.17, लेकिन एक और महत्वपूर्ण संबंध हो सकता है। ऐसा लगता है कि कीमतों के विभिन्न समूह हैं जो विभिन्न कद्दू किस्मों से संबंधित हैं। इस अनुमान की पुष्टि के लिए, आइए प्रत्येक कद्दू श्रेणी को अलग रंग में प्लॉट करें। `scatter` प्लॉटिंग फ़ंक्शन को एक `ax` पैरामीटर पास करके हम सभी पॉइंट्स को एक ही ग्राफ पर प्लॉट कर सकते हैं:
 
 ```python
 ax=None
@@ -128,42 +140,42 @@ for i,var in enumerate(new_pumpkins['Variety'].unique()):
     ax = df.plot.scatter('DayOfYear','Price',ax=ax,c=colors[i],label=var)
 ```
 
-<img alt="Scatter plot of Price vs. Day of Year" src="images/scatter-dayofyear-color.png" width="50%" /> 
+<img alt="मूल्य बनाम वर्ष के दिन का रंगीन स्कैटर प्लॉट" src="../../../../translated_images/hi/scatter-dayofyear-color.65790faefbb9d54f.webp" width="50%" />
 
-हमारी जांच से पता चलता है कि विविधता का वास्तविक बिक्री तिथि की तुलना में समग्र मूल्य पर अधिक प्रभाव है। हम इसे एक बार ग्राफ के साथ देख सकते हैं:
+हमारी जांच से पता चलता है कि किस्म का समग्र कीमत पर वास्तविक बिक्री की तारीख की तुलना में अधिक प्रभाव है। हम इसे बार ग्राफ के साथ देख सकते हैं:
 
 ```python
 new_pumpkins.groupby('Variety')['Price'].mean().plot(kind='bar')
 ```
 
-<img alt="Bar graph of price vs variety" src="images/price-by-variety.png" width="50%" /> 
+<img alt="कीमत बनाम किस्म का बार ग्राफ" src="../../../../translated_images/hi/price-by-variety.744a2f9925d9bcb4.webp" width="50%" />
 
-आइए फिलहाल केवल एक कद्दू की किस्म, 'पाई प्रकार', पर ध्यान केंद्रित करें और देखें कि तारीख का मूल्य पर क्या प्रभाव पड़ता है:
+हम इस समय केवल एक कद्दू किस्म, 'pie type' पर ध्यान केंद्रित करते हैं, और देखते हैं कि तारीख का कीमत पर क्या प्रभाव है:
 
 ```python
 pie_pumpkins = new_pumpkins[new_pumpkins['Variety']=='PIE TYPE']
 pie_pumpkins.plot.scatter('DayOfYear','Price') 
 ```
-<img alt="Scatter plot of Price vs. Day of Year" src="images/pie-pumpkins-scatter.png" width="50%" /> 
+<img alt="मूल्य बनाम वर्ष के दिन का स्कैटर प्लॉट" src="../../../../translated_images/hi/pie-pumpkins-scatter.d14f9804a53f927e.webp" width="50%" />
 
-यदि हम अब `Price` and `DayOfYear` using `corr` function, we will get something like `-0.27` के बीच सहसंबंध की गणना करते हैं - जिसका अर्थ है कि भविष्यवाणी मॉडल को प्रशिक्षित करना समझ में आता है।
+यदि हम अब `Price` और `DayOfYear` के बीच सहसंबंध की गणना `corr` फ़ंक्शन का उपयोग करके करते हैं, तो मान लगभग `-0.27` होगा - जिसका अर्थ है कि एक पूर्वानुमान मॉडल का प्रशिक्षण करना समझ में आता है।
 
-> एक लीनियर रिग्रेशन मॉडल को प्रशिक्षित करने से पहले, यह सुनिश्चित करना महत्वपूर्ण है कि हमारा डेटा साफ़ है। लीनियर रिग्रेशन लापता मूल्यों के साथ अच्छी तरह से काम नहीं करता है, इसलिए सभी खाली कोशिकाओं से छुटकारा पाना समझ में आता है:
+> एक रैखिक प्रतिगमन मॉडल को प्रशिक्षण देने से पहले, यह सुनिश्चित करना महत्वपूर्ण है कि हमारा डेटा साफ़ है। रैखिक प्रतिगमन गायब मानों के साथ अच्छा काम नहीं करता, इसलिए सभी खाली कोशिकाओं को हटाना समझदारी है:
 
 ```python
 pie_pumpkins.dropna(inplace=True)
 pie_pumpkins.info()
 ```
 
-एक और दृष्टिकोण यह होगा कि उन खाली मूल्यों को संबंधित कॉलम से औसत मानों से भर दिया जाए।
+एक और तरीका होगा कि उन खाली मूल्यों को संबंधित कॉलम के औसत मान से भर दिया जाए।
 
-## सरल लीनियर रिग्रेशन
+## सरल रैखिक प्रतिगमन
 
-[![ML for beginners - Linear and Polynomial Regression using Scikit-learn](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "ML for beginners - Linear and Polynomial Regression using Scikit-learn")
+[![शुरुआती के लिए ML - Scikit-learn का उपयोग करके रैखिक और बहुपद प्रतिगमन](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "शुरुआती के लिए ML - Scikit-learn का उपयोग करके रैखिक और बहुपद प्रतिगमन")
 
-> 🎥 ऊपर दी गई छवि पर क्लिक करें लीनियर और पोलिनोमियल रिग्रेशन का एक संक्षिप्त वीडियो अवलोकन देखने के लिए।
+> 🎥 रैखिक और बहुपद प्रतिगमन का संक्षिप्त वीडियो अवलोकन देखने के लिए ऊपर की छवि पर क्लिक करें।
 
-हमारे लीनियर रिग्रेशन मॉडल को प्रशिक्षित करने के लिए, हम **Scikit-learn** लाइब्रेरी का उपयोग करेंगे।
+हमारा रैखिक प्रतिगमन मॉडल प्रशिक्षित करने के लिए, हम **Scikit-learn** पुस्तकालय का उपयोग करेंगे।
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -171,69 +183,69 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 ```
 
-हम इनपुट मानों (फीचर्स) और अपेक्षित आउटपुट (लेबल) को अलग-अलग numpy arrays में अलग करके शुरू करते हैं:
+हम इनपुट मानों (विशेषताएँ) और अपेक्षित आउटपुट (लेबल) को अलग-अलग numpy ऐरे में अलग करते हैं:
 
 ```python
 X = pie_pumpkins['DayOfYear'].to_numpy().reshape(-1,1)
 y = pie_pumpkins['Price']
 ```
 
-> ध्यान दें कि हमें इनपुट डेटा पर `reshape` करना पड़ा ताकि लीनियर रिग्रेशन पैकेज इसे सही ढंग से समझ सके। लीनियर रिग्रेशन एक इनपुट के रूप में 2D-array की अपेक्षा करता है, जहां array की प्रत्येक पंक्ति इनपुट फीचर्स के वेक्टर के अनुरूप होती है। हमारे मामले में, चूंकि हमारे पास केवल एक इनपुट है - हमें आकार N×1 के साथ एक array की आवश्यकता है, जहां N डेटासेट का आकार है।
+> ध्यान दें कि हमें इनपुट डेटा पर `reshape` करने की आवश्यकता पड़ी ताकि Linear Regression पैकेज इसे सही ढंग से समझ सके। Linear Regression 2D ऐरे को इनपुट के रूप में अपेक्षित करता है, जिसमें ऐरे की प्रत्येक पंक्ति एक इनपुट फीचर के वेक्टर के अनुरूप होती है। हमारे मामले में, क्योंकि हमारे पास केवल एक इनपुट है - हमें N×1 आकार का ऐरे चाहिए, जहां N डेटासेट का आकार है।
 
-फिर, हमें डेटा को ट्रेन और टेस्ट डेटासेट्स में विभाजित करने की आवश्यकता है, ताकि हम प्रशिक्षण के बाद अपने मॉडल को मान्य कर सकें:
+फिर, हमें मॉडल के प्रशिक्षण के बाद इसे मान्य करने के लिए डेटा को प्रशिक्षण और परीक्षण डेटा सेट में विभाजित करना होगा:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 ```
 
-अंत में, वास्तविक लीनियर रिग्रेशन मॉडल को प्रशिक्षित करना केवल दो पंक्तियों का कोड लेता है। हम `LinearRegression` object, and fit it to our data using the `fit` मेथड को परिभाषित करते हैं:
+अंत में, वास्तविक Linear Regression मॉडल को प्रशिक्षित करना केवल दो कोड लाइन लेता है। हम `LinearRegression` ऑब्जेक्ट परिभाषित करते हैं, और `fit` मेथड का उपयोग करके इसे हमारे डेटा पर फिट करते हैं:
 
 ```python
 lin_reg = LinearRegression()
 lin_reg.fit(X_train,y_train)
 ```
 
-`LinearRegression` object after `fit`-ting contains all the coefficients of the regression, which can be accessed using `.coef_` property. In our case, there is just one coefficient, which should be around `-0.017`. It means that prices seem to drop a bit with time, but not too much, around 2 cents per day. We can also access the intersection point of the regression with Y-axis using `lin_reg.intercept_` - it will be around `21` हमारे मामले में, वर्ष की शुरुआत में कीमत को इंगित करता है।
+`fit` करने के बाद `LinearRegression` ऑब्जेक्ट में सभी रिग्रेशन के सहगुण होते हैं, जिन्हें `.coef_` प्रॉपर्टी का उपयोग करके एक्सेस किया जा सकता है। हमारे मामले में, केवल एक सहगुण है, जो लगभग `-0.017` होना चाहिए। इसका मतलब है कि कीमतें समय के साथ थोड़ा गिरती दिखती हैं, लेकिन ज्यादा नहीं, लगभग 2 सेंट प्रति दिन। हम रिग्रेशन के Y-अक्ष के साथ मिलने वाले इंटरसेप्शन पॉइंट को भी `lin_reg.intercept_` का उपयोग करके एक्सेस कर सकते हैं - यह हमारे मामले में लगभग `21` होगा, जो वर्ष की शुरुआत में कीमत को दर्शाता है।
 
-यह देखने के लिए कि हमारा मॉडल कितना सटीक है, हम एक टेस्ट डेटासेट पर कीमतों की भविष्यवाणी कर सकते हैं, और फिर यह माप सकते हैं कि हमारी भविष्यवाणियाँ अपेक्षित मानों के कितने करीब हैं। यह मीन स्क्वायर एरर (MSE) मेट्रिक्स का उपयोग करके किया जा सकता है, जो अपेक्षित और भविष्यवाणी किए गए मूल्य के बीच सभी वर्गाकार अंतरों का औसत है।
+देखने के लिए कि हमारा मॉडल कितना सटीक है, हम टेस्ट डेटासेट पर कीमतें अनुमानित कर सकते हैं, और फिर यह माप सकते हैं कि हमारे अनुमान अपेक्षित मूल्यों के कितने करीब हैं। इसे रूट मीन स्क्वायर एरर (RMSE) मीट्रिक का उपयोग करके किया जा सकता है, जो अपेक्षित और अनुमानित मानों के बीच सभी वर्गीकृत अंतरों का माध्य का वर्गमूल होता है।
 
 ```python
 pred = lin_reg.predict(X_test)
 
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
 ```
 
-हमारी त्रुटि लगभग 2 अंक के आसपास लगती है, जो ~17% है। मॉडल गुणवत्ता का एक और संकेतक **निर्धारण का गुणांक** है, जिसे इस तरह से प्राप्त किया जा सकता है:
+हमारी त्रुटि लगभग 2 पॉइंट के आसपास लगती है, जो लगभग 17% है। यह बहुत अच्छी नहीं है। मॉडल गुणवत्ता का एक अन्य संकेतक है **निर्धारण का सहगुणांक**, जिसे इस तरह से प्राप्त किया जा सकता है:
 
 ```python
 score = lin_reg.score(X_train,y_train)
 print('Model determination: ', score)
 ```
-यदि मान 0 है, तो इसका मतलब है कि मॉडल इनपुट डेटा को ध्यान में नहीं रखता है, और *सबसे खराब लीनियर प्रेडिक्टर* के रूप में कार्य करता है, जो परिणाम का केवल एक औसत मान है। मान 1 का अर्थ है कि हम सभी अपेक्षित आउटपुट को पूरी तरह से भविष्यवाणी कर सकते हैं। हमारे मामले में, गुणांक लगभग 0.06 है, जो काफी कम है।
+यदि मान 0 है, तो इसका मतलब है कि मॉडल इनपुट डेटा को ध्यान में नहीं लेता है, और *सबसे खराब रैखिक भविष्यवक्ता* के रूप में कार्य करता है, जो बस परिणाम का औसत मान है। मान 1 का अर्थ है कि हम सभी अपेक्षित आउटपुट को पूरी तरह सही अनुमानित कर सकते हैं। हमारे मामले में, सहगुणांक लगभग 0.06 है, जो काफी कम है।
 
-हम परीक्षण डेटा को रिग्रेशन लाइन के साथ प्लॉट भी कर सकते हैं ताकि यह बेहतर तरीके से देखा जा सके कि हमारे मामले में रिग्रेशन कैसे काम करता है:
+हम टेस्ट डाटा को रिग्रेशन लाइन के साथ प्लॉट भी कर सकते हैं ताकि बेहतर तरीके से देख सकें कि रिग्रेशन हमारे मामले में कैसे काम करती है:
 
 ```python
 plt.scatter(X_test,y_test)
 plt.plot(X_test,pred)
 ```
 
-<img alt="Linear regression" src="images/linear-results.png" width="50%" />
+<img alt="Linear regression" src="../../../../translated_images/hi/linear-results.f7c3552c85b0ed1c.webp" width="50%" />
 
-## पोलिनोमियल रिग्रेशन
+## पॉलीनॉमियल रिग्रेशन
 
-लीनियर रिग्रेशन का एक और प्रकार पोलिनोमियल रिग्रेशन है। जबकि कभी-कभी चर के बीच एक लीनियर संबंध होता है - कद्दू का आकार जितना बड़ा होता है, कीमत उतनी ही अधिक होती है - कभी-कभी इन संबंधों को एक विमान या सीधी रेखा के रूप में प्लॉट नहीं किया जा सकता है।
+रैखिक रिग्रेशन का एक अन्य प्रकार पॉलीनॉमियल रिग्रेशन है। जबकि कभी-कभी चर के बीच रैखिक संबंध होता है - जैसे कद्दू का आकार बड़ा होने पर कीमत अधिक होती है - कभी-कभी ये संबंध प्लेन या सीधे रेखा के रूप में प्रदर्शित नहीं किए जा सकते।
 
-✅ यहां [कुछ और उदाहरण](https://online.stat.psu.edu/stat501/lesson/9/9.8) हैं जिनमें पोलिनोमियल रिग्रेशन का उपयोग किया जा सकता है।
+✅ यहाँ [कुछ और उदाहरण](https://online.stat.psu.edu/stat501/lesson/9/9.8) हैं जिनमें पॉलीनॉमियल रिग्रेशन का उपयोग किया जा सकता है।
 
-डेट और कीमत के बीच संबंध पर फिर से एक नज़र डालें। क्या यह बिखराव प्लॉट ऐसा लगता है कि इसे सीधे रेखा द्वारा विश्लेषित किया जाना चाहिए? क्या कीमतें नहीं बदल सकतीं? इस मामले में, आप पोलिनोमियल रिग्रेशन का प्रयास कर सकते हैं।
+डेट और कीमत के बीच संबंध पर एक बार फिर ध्यान दें। क्या यह स्कैटरप्लॉट ऐसी रेखा से विश्लेषण किया जाना चाहिए? क्या कीमतें स्थिर नहीं रह सकतीं? इस स्थिति में, आप पॉलीनॉमियल रिग्रेशन कोशिश कर सकते हैं।
 
-✅ पोलिनोमियल गणितीय अभिव्यक्तियाँ हैं जिनमें एक या अधिक चर और गुणांक शामिल हो सकते हैं
+✅ पॉलीनॉमियल गणितीय अभिव्यक्तियाँ हैं जो एक या अधिक चर और सहगुणों से मिलकर बनती हैं।
 
-पोलिनोमियल रिग्रेशन एक घुमावदार रेखा बनाता है ताकि गैर-लीनियर डेटा को बेहतर तरीके से फिट किया जा सके। हमारे मामले में, यदि हम इनपुट डेटा में एक वर्गीय `DayOfYear` चर शामिल करते हैं, तो हमें अपने डेटा को एक परवलयिक वक्र के साथ फिट करने में सक्षम होना चाहिए, जिसमें वर्ष के एक निश्चित बिंदु पर न्यूनतम होगा।
+पॉलीनॉमियल रिग्रेशन गैर-रैखिक डेटा के लिए बेहतर फिटिंग के लिए एक घुमावदार रेखा बनाता है। हमारे मामले में, यदि हम इनपुट डेटा में `DayOfYear` के वर्ग को शामिल करते हैं, तो हमें अपने डेटा को एक परवलयाकार वक्र से फिट करने में सक्षम होना चाहिए, जिसके वर्ष की एक निश्चित बिंदु पर न्यूनतम होगा।
 
-Scikit-learn में विभिन्न डेटा प्रोसेसिंग चरणों को एक साथ संयोजित करने के लिए एक उपयोगी [pipeline API](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) शामिल है। एक **pipeline** **अनुमानकों** की एक श्रृंखला है। हमारे मामले में, हम एक pipeline बनाएंगे जो पहले हमारे मॉडल में पोलिनोमियल फीचर्स जोड़ता है, और फिर रिग्रेशन को प्रशिक्षित करता है:
+Scikit-learn में विभिन्न डेटा प्रोसेसिंग चरणों को संयोजित करने के लिए एक सहायक [पाइपलाइन API](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) शामिल है। एक **पाइपलाइन** **एस्टिमेटरों** की श्रृंखला होती है। हमारे मामले में, हम एक पाइपलाइन बनाएंगे जो पहले हमारे मॉडल में पॉलीनॉमियल फीचर्स जोड़ती है, और फिर रिग्रेशन को प्रशिक्षित करती है:
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
@@ -244,36 +256,58 @@ pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 pipeline.fit(X_train,y_train)
 ```
 
-`PolynomialFeatures(2)` means that we will include all second-degree polynomials from the input data. In our case it will just mean `DayOfYear`<sup>2</sup>, but given two input variables X and Y, this will add X<sup>2</sup>, XY and Y<sup>2</sup>. We may also use higher degree polynomials if we want.
+`PolynomialFeatures(2)` का उपयोग करने का मतलब है कि हम इनपुट डेटा से सभी द्वितीय-डिग्री पॉलीनॉमियल को शामिल करेंगे। हमारे मामले में यह केवल `DayOfYear`<sup>2</sup> होगा, लेकिन यदि हमारे पास दो इनपुट चर X और Y हैं, तो यह X<sup>2</sup>, XY और Y<sup>2</sup> जोड़ेगा। हम यदि चाहें तो उच्च डिग्री पॉलीनॉमियल का भी उपयोग कर सकते हैं।
 
-Pipelines can be used in the same manner as the original `LinearRegression` object, i.e. we can `fit` the pipeline, and then use `predict` to get the prediction results. Here is the graph showing test data, and the approximation curve:
+पाइपलाइनों का उपयोग मूल `LinearRegression` ऑब्जेक्ट की तरह ही किया जा सकता है, यानी हम पाइपलाइन को `fit` कर सकते हैं, और फिर `predict` का उपयोग करके पूर्वानुमान परिणाम प्राप्त कर सकते हैं:
 
-<img alt="Polynomial regression" src="images/poly-results.png" width="50%" />
+```python
+pred = pipeline.predict(X_test)
 
-Using Polynomial Regression, we can get slightly lower MSE and higher determination, but not significantly. We need to take into account other features!
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
 
-> You can see that the minimal pumpkin prices are observed somewhere around Halloween. How can you explain this? 
+score = pipeline.score(X_train,y_train)
+print('Model determination: ', score)
+```
 
-🎃 Congratulations, you just created a model that can help predict the price of pie pumpkins. You can probably repeat the same procedure for all pumpkin types, but that would be tedious. Let's learn now how to take pumpkin variety into account in our model!
+स्मूद अप्रोक्सिमेशन कर्व को प्लॉट करने के लिए, हम `np.linspace` का उपयोग करते हैं ताकि इनपुट मानों की एक समान श्रेणी बनाई जा सके, बजाय सीधे अनऑर्डर किए गए टेस्ट डेटा पर प्लॉट करने के (जो एक ज़िगज़ैग रेखा उत्पन्न करेगा):
 
-## Categorical Features
+```python
+X_range = np.linspace(X_test.min(), X_test.max(), 100).reshape(-1,1)
+y_range = pipeline.predict(X_range)
 
-In the ideal world, we want to be able to predict prices for different pumpkin varieties using the same model. However, the `Variety` column is somewhat different from columns like `Month`, because it contains non-numeric values. Such columns are called **categorical**.
+plt.scatter(X_test, y_test)
+plt.plot(X_range, y_range)
+```
+
+यहाँ ग्राफ दिखा रहा है टेस्ट डेटा और अपरोक्ष कर्व:
+
+<img alt="Polynomial regression" src="../../../../translated_images/hi/poly-results.ee587348f0f1f60b.webp" width="50%" />
+
+पॉलीनॉमियल रिग्रेशन का उपयोग करते हुए, हम थोड़ा कम RMSE और उच्च निर्धारण प्राप्त कर सकते हैं, लेकिन काफी हद तक नहीं। हमें अन्य विशेषताओं को ध्यान में रखना होगा!
+
+> आप देख सकते हैं कि न्यूनतम कद्दू की कीमतें कहीं हैलोवीन के आसपास देखी गई हैं। आप इसे कैसे समझाएंगे?
+
+🎃 बधाई हो, आपने एक ऐसा मॉडल बनाया है जो पाई कद्दू की कीमत अनुमानित करने में मदद कर सकता है। आप शायद सभी कद्दू प्रकारों के लिए वही प्रक्रिया दोहरा सकते हैं, लेकिन यह थकाऊ हो सकता है। अब चलिए सीखते हैं कि हमारी मॉडल में कद्दू की किस्म को कैसे ध्यान में रखा जाए!
+
+## श्रेणीगत विशेषताएँ
+
+आदर्श दुनिया में, हम चाहते हैं कि हम एक ही मॉडल का उपयोग करके विभिन्न कद्दू किस्मों के लिए कीमतें अनुमानित कर सकें। हालांकि, `Variety` कॉलम `Month` जैसे कॉलम से थोड़ा अलग है, क्योंकि यह गैर-सांख्यिक मान होते हैं। ऐसे कॉलम को **श्रेणीगत** कहा जाता है।
 
 [![ML for beginners - Categorical Feature Predictions with Linear Regression](https://img.youtube.com/vi/DYGliioIAE0/0.jpg)](https://youtu.be/DYGliioIAE0 "ML for beginners - Categorical Feature Predictions with Linear Regression")
 
-> 🎥 Click the image above for a short video overview of using categorical features.
+> 🎥 ऊपर की छवि पर क्लिक करें श्रेणीगत विशेषताओं के उपयोग पर संक्षिप्त वीडियो अवलोकन के लिए।
 
-Here you can see how average price depends on variety:
+यहाँ आप देख सकते हैं कि औसत कीमत किस्म पर कैसे निर्भर करती है:
 
-<img alt="Average price by variety" src="images/price-by-variety.png" width="50%" />
+<img alt="Average price by variety" src="../../../../translated_images/hi/price-by-variety.744a2f9925d9bcb4.webp" width="50%" />
 
-To take variety into account, we first need to convert it to numeric form, or **encode** it. There are several way we can do it:
+किस्म को ध्यान में लेने के लिए, हमें इसे पहले संख्यात्मक रूप में परिवर्तित करना होगा, या इसे **कोडित** करना होगा। इसके कई तरीके हैं:
 
-* Simple **numeric encoding** will build a table of different varieties, and then replace the variety name by an index in that table. This is not the best idea for linear regression, because linear regression takes the actual numeric value of the index, and adds it to the result, multiplying by some coefficient. In our case, the relationship between the index number and the price is clearly non-linear, even if we make sure that indices are ordered in some specific way.
-* **One-hot encoding** will replace the `Variety` column by 4 different columns, one for each variety. Each column will contain `1` if the corresponding row is of a given variety, and `0` अन्यथा। इसका मतलब है कि लीनियर रिग्रेशन में चार गुणांक होंगे, प्रत्येक कद्दू की किस्म के लिए एक, जो उस विशेष किस्म के लिए "शुरुआती कीमत" (या बल्कि "अतिरिक्त कीमत") के लिए जिम्मेदार है।
+* सरल **संख्यात्मक कोडिंग** विभिन्न किस्मों की एक तालिका बनाएगी, और फिर किस्म के नाम को उस तालिका में उसके अनुक्रमांक द्वारा बदल देगी। यह रैखिक रिग्रेशन के लिए सबसे अच्छी विधि नहीं है, क्योंकि रैखिक रिग्रेशन अनुक्रमांक के वास्तविक संख्यात्मक मान को लेता है, और इसे कुछ सहगुणक से गुणा करके परिणाम में जोड़ता है। हमारे मामले में, अनुक्रमांक संख्या और कीमत के बीच संबंध स्पष्ट रूप से गैर-रैखिक है, भले ही हम यह सुनिश्चित करें कि अनुक्रमांक किसी विशिष्ट तरीके से क्रमबद्ध हों।
+* **वन-हॉट एन्कोडिंग** `Variety` कॉलम को 4 अलग-अलग कॉलम में बदल देगा, हर एक किस्म के लिए एक। प्रत्येक कॉलम में `1` होगा यदि संबंधित पंक्ति उस किस्म की है, और अन्यथा `0` होगा। इसका मतलब है कि रैखिक रिग्रेशन में चार सहगुण होंगे, हर कद्दू किस्म के लिए एक, जो उस विशेष किस्म के "शुरुआती मूल्य" (या बल्कि "अतिरिक्त मूल्य") के लिए जिम्मेदार होगा।
 
-नीचे दिया गया कोड दिखाता है कि हम एक वेराइटी को कैसे वन-हॉट एन्कोड कर सकते हैं:
+निम्नलिखित कोड दिखाता है कि हम किस तरह वन-हॉट एन्कोडिंग कर सकते हैं:
 
 ```python
 pd.get_dummies(new_pumpkins['Variety'])
@@ -290,14 +324,14 @@ pd.get_dummies(new_pumpkins['Variety'])
 1741 | 0 | 1 | 0 | 0
 1742 | 0 | 1 | 0 | 0
 
-वन-हॉट एन्कोड वेराइटी का उपयोग करके लीनियर रिग्रेशन को प्रशिक्षित करने के लिए, हमें बस `X` and `y` डेटा को सही ढंग से प्रारंभ करने की आवश्यकता है:
+वन-हॉट एन्कोडेड किस्म का उपयोग करके रैखिक रिग्रेशन को प्रशिक्षित करने के लिए, हमें केवल `X` और `y` डेटा को सही तरीके से इनीशियलाइज करना होगा:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety'])
 y = new_pumpkins['Price']
 ```
 
-बाकी कोड वही है जो हमने लीनियर रिग्रेशन को प्रशिक्षित करने के लिए ऊपर उपयोग किया था। यदि आप इसे आजमाते हैं, तो आप देखेंगे कि मीन स्क्वायर एरर लगभग समान है, लेकिन हमें बहुत अधिक निर्धारण गुणांक (~77%) मिलता है। और अधिक सटीक भविष्यवाणियाँ प्राप्त करने के लिए, हम अधिक श्रेणीबद्ध फीचर्स को ध्यान में रख सकते हैं, साथ ही संख्यात्मक फीचर्स, जैसे `Month` or `DayOfYear`. To get one large array of features, we can use `join`:
+बाकी कोड वही है जो हमने ऊपर रैखिक रिग्रेशन को प्रशिक्षित करने के लिए उपयोग किया। अगर आप इसे आजमाएंगे, तो आप देखेंगे कि मीन स्क्वायर्ड एरर लगभग समान है, लेकिन हामी अधिक उच्च निर्धारण (लगभग 77%) प्राप्त कर लेते हैं। और अधिक सटीक पूर्वानुमान प्राप्त करने के लिए, हम और श्रेणीगत विशेषताओं के साथ-साथ संख्यात्मक विशेषताओं, जैसे `Month` या `DayOfYear` को भी ध्यान में ले सकते हैं। एक बड़ा फीचर्स ऐरे बनाने के लिए, हम `join` का उपयोग कर सकते हैं:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety']) \
@@ -307,43 +341,68 @@ X = pd.get_dummies(new_pumpkins['Variety']) \
 y = new_pumpkins['Price']
 ```
 
-यहां हम `City` and `Package` प्रकार को भी ध्यान में रखते हैं, जो हमें MSE 2.84 (10%) और निर्धारण 0.94 देता है!
+यहाँ हम `City` और `Package` प्रकार को भी ध्यान में लेते हैं, जो हमें RMSE 2.84 (10.5%) और निर्धारण 0.94 देता है!
 
 ## सब कुछ एक साथ रखना
 
-सर्वश्रेष्ठ मॉडल बनाने के लिए, हम ऊपर दिए गए उदाहरण से संयुक्त (वन-हॉट एन्कोड श्रेणीबद्ध + संख्यात्मक) डेटा का उपयोग पोलिनोमियल रिग्रेशन के साथ कर सकते हैं। आपकी सुविधा के लिए यहां पूरा कोड दिया गया है:
+सबसे अच्छा मॉडल बनाने के लिए, हम ऊपर के उदाहरण से मिले संयुक्त (वन-हॉट एन्कोडेड श्रेणीगत + संख्यात्मक) डेटा का उपयोग पॉलीनॉमियल रिग्रेशन के साथ कर सकते हैं। आपकी सुविधा के लिए यहां पूर्ण कोड है:
 
 ```python
-# set up training data
+# प्रशिक्षण डेटा सेट करें
 X = pd.get_dummies(new_pumpkins['Variety']) \
         .join(new_pumpkins['Month']) \
         .join(pd.get_dummies(new_pumpkins['City'])) \
         .join(pd.get_dummies(new_pumpkins['Package']))
 y = new_pumpkins['Price']
 
-# make train-test split
+# ट्रेन-टेस्ट स्प्लिट करें
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-# setup and train the pipeline
+# पाइपलाइन सेटअप और प्रशिक्षण करें
 pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 pipeline.fit(X_train,y_train)
 
-# predict results for test data
+# परीक्षण डेटा के लिए परिणाम अनुमानित करें
 pred = pipeline.predict(X_test)
 
-# calculate MSE and determination
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+# RMSE और निर्धारण गणना करें
+rmse = mean_squared_error(y_test, pred, squared=False)
+print(f'RMSE: {rmse:3.3} ({rmse/pred.mean()*100:3.3}%)')
 
 score = pipeline.score(X_train,y_train)
 print('Model determination: ', score)
 ```
 
-यह हमें लगभग 97% का सर्वोत्तम निर्धारण गुणांक और MSE=2.23 (~8% भविष्यवाणी त्रुटि) देना चाहिए।
+यह हमें लगभग 97% का सर्वोत्तम निर्धारण सहगुण और RMSE=2.23 (~8% पूर्वानुमान त्रुटि) देगा।
 
-| मॉडल | MSE | निर्धारण |
+| Model | RMSE | Determination |
 |-------|-----|---------------|
-| `DayOfYear@@INLINE_CODE
+| `DayOfYear` Linear | 2.77 (17.2%) | 0.07 |
+| `DayOfYear` Polynomial | 2.73 (17.0%) | 0.08 |
+| `Variety` Linear | 5.24 (19.7%) | 0.77 |
+| All features Linear | 2.84 (10.5%) | 0.94 |
+| All features Polynomial | 2.23 (8.25%) | 0.97 |
 
-**अस्वीकरण**:
-यह दस्तावेज़ मशीन-आधारित एआई अनुवाद सेवाओं का उपयोग करके अनुवादित किया गया है। जबकि हम सटीकता के लिए प्रयासरत हैं, कृपया ध्यान दें कि स्वचालित अनुवादों में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। इसकी मूल भाषा में मूल दस्तावेज़ को प्राधिकृत स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए, पेशेवर मानव अनुवाद की सिफारिश की जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए हम उत्तरदायी नहीं हैं।
+🏆 बहुत बढ़िया! आपने एक पाठ में चार रिग्रेशन मॉडल बनाए, और मॉडल गुणवत्ता को 97% तक सुधार दिया। अंतिम खंड में, आप वर्ग निर्धारित करने के लिए लॉजिस्टिक रिग्रेशन के बारे में जानेंगे।
+
+---
+## 🚀चुनौती
+
+इस नोटबुक में कई अलग-अलग चर का परीक्षण करें ताकि देखें कि सहसंबंध मॉडल की सटीकता से कैसे मेल खाता है।
+
+## [पाठ के बाद क्विज़](https://ff-quizzes.netlify.app/en/ml/)
+
+## समीक्षा एवं स्वअध्ययन
+
+इस पाठ में हमने रैखिक रिग्रेशन के बारे में जाना। अन्य महत्वपूर्ण प्रकार के रिग्रेशन भी हैं। स्टेपवाइज, रिज, लैसो और इलास्टिकनेट तकनीकों के बारे में पढ़ें। अधिक जानने के लिए एक अच्छा कोर्स है [Stanford Statistical Learning course](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
+
+## असाइनमेंट
+
+[मॉडल बनाएँ](assignment.md)
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**अस्वीकरण**:  
+इस दस्तावेज़ का अनुवाद AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) का उपयोग करके किया गया है। जबकि हम सटीकता के लिए प्रयासरत हैं, कृपया ध्यान दें कि स्वचालित अनुवादों में त्रुटियां या असंगतियाँ हो सकती हैं। मूल दस्तावेज़ अपनी मातृ भाषा में ही प्रामाणिक स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए, पेशेवर मानव अनुवाद की सिफारिश की जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए हम जिम्मेदार नहीं हैं।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

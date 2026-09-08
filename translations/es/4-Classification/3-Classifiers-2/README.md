@@ -1,36 +1,36 @@
 # Clasificadores de cocina 2
 
-En esta segunda lección de clasificación, explorarás más formas de clasificar datos numéricos. También aprenderás sobre las implicaciones de elegir un clasificador sobre otro.
+En esta segunda lección de clasificación, explorarás más formas de clasificar datos numéricos. También aprenderás sobre las ramificaciones de elegir un clasificador sobre otro.
 
-## [Cuestionario previo a la lección](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/23/)
+## [Cuestionario previo a la lección](https://ff-quizzes.netlify.app/en/ml/)
 
-### Requisito previo
+### Prerrequisito
 
-Asumimos que has completado las lecciones anteriores y tienes un conjunto de datos limpiado en tu carpeta `data` llamado _cleaned_cuisines.csv_ en la raíz de esta carpeta de 4 lecciones.
+Asumimos que has completado las lecciones anteriores y tienes un conjunto de datos limpio en tu carpeta `data` llamado _cleaned_cuisines.csv_ en la raíz de esta carpeta de 4 lecciones.
 
 ### Preparación
 
-Hemos cargado tu archivo _notebook.ipynb_ con el conjunto de datos limpiado y lo hemos dividido en dataframes X e y, listos para el proceso de construcción del modelo.
+Hemos cargado tu archivo _notebook.ipynb_ con el conjunto de datos limpio y lo hemos dividido en dataframes X e y, listos para el proceso de construcción del modelo.
 
 ## Un mapa de clasificación
 
-Anteriormente, aprendiste sobre las diversas opciones que tienes al clasificar datos usando la hoja de trucos de Microsoft. Scikit-learn ofrece una hoja de trucos similar, pero más granular, que puede ayudarte a reducir aún más tus estimadores (otro término para clasificadores):
+Anteriormente, aprendiste sobre las distintas opciones que tienes al clasificar datos usando la hoja de referencia rápida de Microsoft. Scikit-learn ofrece una hoja de referencia similar, pero más detallada, que puede ayudarte aún más a delimitar tus estimadores (otro término para clasificadores):
 
-![Mapa de ML de Scikit-learn](../../../../translated_images/map.e963a6a51349425ab107b38f6c7307eb4c0d0c7ccdd2e81a5e1919292bab9ac7.es.png)
-> Tip: [visita este mapa en línea](https://scikit-learn.org/stable/tutorial/machine_learning_map/) y haz clic a lo largo del camino para leer la documentación.
+![ML Map from Scikit-learn](../../../../translated_images/es/map.e963a6a51349425a.webp)
+> Consejo: [visita este mapa en línea](https://scikit-learn.org/stable/tutorial/machine_learning_map/) y haz clic a lo largo del camino para leer la documentación.
 
 ### El plan
 
-Este mapa es muy útil una vez que tienes un claro entendimiento de tus datos, ya que puedes 'caminar' por sus caminos hacia una decisión:
+Este mapa es muy útil una vez que tienes una comprensión clara de tus datos, ya que puedes 'caminar' a lo largo de sus caminos hacia una decisión:
 
 - Tenemos >50 muestras
 - Queremos predecir una categoría
 - Tenemos datos etiquetados
 - Tenemos menos de 100K muestras
 - ✨ Podemos elegir un Linear SVC
-- Si eso no funciona, ya que tenemos datos numéricos
-    - Podemos intentar un ✨ KNeighbors Classifier 
-      - Si eso no funciona, prueba con ✨ SVC y ✨ Ensemble Classifiers
+- Si eso no funciona, dado que tenemos datos numéricos
+    - Podemos probar un ✨ Clasificador KNeighbors
+      - Si eso no funciona, probar ✨ SVC y ✨ Clasificadores Ensemble
 
 Este es un camino muy útil a seguir.
 
@@ -50,31 +50,31 @@ Siguiendo este camino, deberíamos comenzar importando algunas bibliotecas para 
     import numpy as np
     ```
 
-1. Divide tus datos de entrenamiento y prueba:
+1. Divide tus datos en entrenamiento y prueba:
 
     ```python
-    X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisines_label_df, test_size=0.3)
+    X_train, X_test, y_train, y_test = train_test_split(cuisines_features_df, cuisines_label_df, test_size=0.3)
     ```
 
 ## Clasificador Linear SVC
 
-El clustering de vectores de soporte (SVC) es un miembro de la familia de técnicas de ML de máquinas de vectores de soporte (aprende más sobre estas a continuación). En este método, puedes elegir un 'kernel' para decidir cómo agrupar las etiquetas. El parámetro 'C' se refiere a 'regularización', que regula la influencia de los parámetros. El kernel puede ser uno de [varios](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC); aquí lo configuramos en 'linear' para asegurar que aprovechamos el Linear SVC. La probabilidad por defecto es 'false'; aquí la configuramos en 'true' para obtener estimaciones de probabilidad. Configuramos el estado aleatorio en '0' para mezclar los datos y obtener probabilidades.
+Support-Vector clustering (SVC) es una rama de la familia de técnicas de Máquinas de Vectores de Soporte (aprende más sobre estas más abajo). En este método, puedes elegir un 'kernel' para decidir cómo agrupar las etiquetas. El parámetro 'C' se refiere a la 'regularización' que regula la influencia de los parámetros. El kernel puede ser uno de [varios](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC); aquí lo configuramos como 'linear' para garantizar que aprovechemos el Linear SVC. La probabilidad por defecto es 'false'; aquí lo configuramos a 'true' para obtener estimaciones de probabilidad. Establecemos el estado aleatorio a '0' para mezclar los datos y obtener probabilidades.
 
-### Ejercicio - aplicar un Linear SVC
+### Ejercicio - aplica un Linear SVC
 
-Comienza creando un array de clasificadores. Irás agregando progresivamente a este array a medida que probamos.
+Comienza creando un array de clasificadores. Los agregarás progresivamente a este array conforme hagamos pruebas.
 
 1. Comienza con un Linear SVC:
 
     ```python
     C = 10
-    # Create different classifiers.
+    # Crear diferentes clasificadores.
     classifiers = {
         'Linear SVC': SVC(kernel='linear', C=C, probability=True,random_state=0)
     }
     ```
 
-2. Entrena tu modelo usando el Linear SVC e imprime un informe:
+2. Entrena tu modelo usando el Linear SVC e imprime un reporte:
 
     ```python
     n_classifiers = len(classifiers)
@@ -107,11 +107,11 @@ Comienza creando un array de clasificadores. Irás agregando progresivamente a e
 
 ## Clasificador K-Neighbors
 
-K-Neighbors es parte de la familia de métodos de ML "neighbors", que pueden usarse tanto para aprendizaje supervisado como no supervisado. En este método, se crea un número predefinido de puntos y se recopilan datos alrededor de estos puntos para que se puedan predecir etiquetas generalizadas para los datos.
+K-Neighbors es parte de la familia de métodos ML "vecinos", que pueden usarse tanto para aprendizaje supervisado como no supervisado. En este método, se crea un número predefinido de puntos y los datos se agrupan alrededor de estos puntos de manera que se puedan predecir etiquetas generalizadas para los datos.
 
-### Ejercicio - aplicar el clasificador K-Neighbors
+### Ejercicio - aplica el clasificador K-Neighbors
 
-El clasificador anterior fue bueno y funcionó bien con los datos, pero tal vez podamos obtener mejor precisión. Prueba con un clasificador K-Neighbors.
+El clasificador previo fue bueno y funcionó bien con los datos, pero tal vez podamos obtener mejor precisión. Prueba un clasificador K-Neighbors.
 
 1. Agrega una línea a tu array de clasificadores (agrega una coma después del elemento Linear SVC):
 
@@ -138,15 +138,15 @@ El clasificador anterior fue bueno y funcionó bien con los datos, pero tal vez 
 
     ✅ Aprende sobre [K-Neighbors](https://scikit-learn.org/stable/modules/neighbors.html#neighbors)
 
-## Clasificador de vectores de soporte
+## Clasificador Support Vector
 
-Los clasificadores de vectores de soporte son parte de la familia de métodos de ML [Support-Vector Machine](https://wikipedia.org/wiki/Support-vector_machine) que se usan para tareas de clasificación y regresión. Los SVM "mapean ejemplos de entrenamiento a puntos en el espacio" para maximizar la distancia entre dos categorías. Los datos subsecuentes se mapean en este espacio para que se pueda predecir su categoría.
+Los clasificadores Support-Vector son parte de la familia de métodos de [Máquinas de Vectores de Soporte](https://wikipedia.org/wiki/Support-vector_machine) que se usan para tareas de clasificación y regresión. Las SVM "mapean ejemplos de entrenamiento a puntos en el espacio" para maximizar la distancia entre dos categorías. Los datos posteriores se mapean en este espacio para que su categoría pueda ser predicha.
 
-### Ejercicio - aplicar un clasificador de vectores de soporte
+### Ejercicio - aplica un Clasificador Support Vector
 
-Vamos a intentar obtener una mejor precisión con un clasificador de vectores de soporte.
+Intentemos obtener un poco mejor precisión con un clasificador Support Vector.
 
-1. Agrega una coma después del elemento K-Neighbors, y luego agrega esta línea:
+1. Agrega una coma después del elemento K-Neighbors, y luego añade esta línea:
 
     ```python
     'SVC': SVC(),
@@ -173,7 +173,7 @@ Vamos a intentar obtener una mejor precisión con un clasificador de vectores de
 
 ## Clasificadores Ensemble
 
-Sigamos el camino hasta el final, aunque la prueba anterior fue bastante buena. Probemos algunos 'Clasificadores Ensemble', específicamente Random Forest y AdaBoost:
+Sigamos el camino hasta el final, aunque la prueba previa fue bastante buena. Probemos algunos 'Clasificadores Ensemble', específicamente Random Forest y AdaBoost:
 
 ```python
   'RFST': RandomForestClassifier(n_estimators=100),
@@ -212,27 +212,31 @@ weighted avg       0.73      0.72      0.72      1199
 
 ✅ Aprende sobre [Clasificadores Ensemble](https://scikit-learn.org/stable/modules/ensemble.html)
 
-Este método de Machine Learning "combina las predicciones de varios estimadores base" para mejorar la calidad del modelo. En nuestro ejemplo, usamos Random Trees y AdaBoost. 
+Este método de Aprendizaje Automático "combina las predicciones de varios estimadores base" para mejorar la calidad del modelo. En nuestro ejemplo, usamos Random Trees y AdaBoost.
 
-- [Random Forest](https://scikit-learn.org/stable/modules/ensemble.html#forest), un método de promediado, construye un 'bosque' de 'árboles de decisión' infundidos con aleatoriedad para evitar el sobreajuste. El parámetro n_estimators se establece en el número de árboles.
+- [Random Forest](https://scikit-learn.org/stable/modules/ensemble.html#forest), un método de promediado, construye un "bosque" de "árboles de decisión" infundidos con aleatoriedad para evitar sobreajuste. El parámetro n_estimators se ajusta al número de árboles.
 
-- [AdaBoost](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html) ajusta un clasificador a un conjunto de datos y luego ajusta copias de ese clasificador al mismo conjunto de datos. Se enfoca en los pesos de los elementos clasificados incorrectamente y ajusta el ajuste para el siguiente clasificador para corregir.
+- [AdaBoost](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html) ajusta un clasificador a un conjunto de datos y luego ajusta copias de ese clasificador al mismo conjunto. Se enfoca en los pesos de los ítems mal clasificados y ajusta el ajuste para el siguiente clasificador para corregir.
 
 ---
 
 ## 🚀Desafío
 
-Cada una de estas técnicas tiene una gran cantidad de parámetros que puedes ajustar. Investiga los parámetros predeterminados de cada uno y piensa en lo que significaría ajustar estos parámetros para la calidad del modelo.
+Cada una de estas técnicas tiene un gran número de parámetros que puedes modificar. Investiga los parámetros por defecto de cada uno y piensa qué significaría modificar estos parámetros para la calidad del modelo.
 
-## [Cuestionario posterior a la lección](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/24/)
+## [Cuestionario posterior a la lección](https://ff-quizzes.netlify.app/en/ml/)
 
-## Revisión y autoestudio
+## Repaso y autoestudio
 
-Hay mucho argot en estas lecciones, así que tómate un minuto para revisar [esta lista](https://docs.microsoft.com/dotnet/machine-learning/resources/glossary?WT.mc_id=academic-77952-leestott) de terminología útil.
+Hay mucha jerga en estas lecciones, así que tómate un minuto para repasar [esta lista](https://docs.microsoft.com/dotnet/machine-learning/resources/glossary?WT.mc_id=academic-77952-leestott) de terminología útil.
 
-## Tarea
+## Tarea 
 
-[Juego de parámetros](assignment.md)
+[Jugar con parámetros](assignment.md)
 
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Descargo de responsabilidad**:
-Este documento ha sido traducido utilizando servicios de traducción automática basados en inteligencia artificial. Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda la traducción profesional humana. No somos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda la traducción profesional por humanos. No nos responsabilizamos por malentendidos o interpretaciones erróneas derivadas del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

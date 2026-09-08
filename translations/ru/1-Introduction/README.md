@@ -1,26 +1,29 @@
 # Введение в машинное обучение
 
-В этом разделе учебного плана вы познакомитесь с основными концепциями, лежащими в основе области машинного обучения, узнаете, что это такое, а также изучите его историю и техники, которые используют исследователи для работы с ним. Давайте вместе исследовать этот новый мир ML!
+В этом разделе учебной программы вас познакомят с основными понятиями машинного обучения, включая что это такое, его историю и методы, которые исследователи используют для применения в реальных сценариях. Давайте вместе исследовать этот захватывающий мир МО!
 
-![глобус](../../../translated_images/globe.59f26379ceb40428672b4d9a568044618a2bf6292ecd53a5c481b90e3fa805eb.ru.jpg)
-> Фото от <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bill Oxford</a> на <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-
+![globe](../../../translated_images/ru/globe.59f26379ceb40428.webp)
+> Фото <a href="https://unsplash.com/@bill_oxford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Билла Оксфорда</a> на <a href="https://unsplash.com/s/photos/globe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
 ### Уроки
 
 1. [Введение в машинное обучение](1-intro-to-ML/README.md)
 1. [История машинного обучения и ИИ](2-history-of-ML/README.md)
 1. [Справедливость и машинное обучение](3-fairness/README.md)
 1. [Техники машинного обучения](4-techniques-of-ML/README.md)
-
 ### Авторы
 
-"Введение в машинное обучение" было написано с ♥️ командой, в которую входят [Muhammad Sakib Khan Inan](https://twitter.com/Sakibinan), [Ornella Altunyan](https://twitter.com/ornelladotcom) и [Jen Looper](https://twitter.com/jenlooper)
+«Введение в машинное обучение» было написано с ♥️ командой, включающей [Мухаммада Сакиба Хана Инаана](https://twitter.com/Sakibinan), [Орнеллу Алтунян](https://twitter.com/ornelladotcom) и [Джен Лупер](https://twitter.com/jenlooper)
 
-"История машинного обучения" было написано с ♥️ [Jen Looper](https://twitter.com/jenlooper) и [Amy Boyd](https://twitter.com/AmyKateNicho)
+«История машинного обучения» была написана с ♥️ [Джен Лупер](https://twitter.com/jenlooper) и [Эми Бойд](https://twitter.com/AmyKateNicho)
 
-"Справедливость и машинное обучение" было написано с ♥️ [Tomomi Imura](https://twitter.com/girliemac)
+«Справедливость и машинное обучение» была написана с ♥️ [Томоми Имурой](https://twitter.com/girliemac)
 
-"Техники машинного обучения" было написано с ♥️ [Jen Looper](https://twitter.com/jenlooper) и [Chris Noring](https://twitter.com/softchris)
+«Техники машинного обучения» были написаны с ♥️ [Джен Лупер](https://twitter.com/jenlooper) и [Крисом Норингом](https://twitter.com/softchris)
 
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Отказ от ответственности**:  
-Этот документ был переведен с использованием услуг машинного перевода на основе ИИ. Хотя мы стремимся к точности, пожалуйста, имейте в виду, что автоматические переводы могут содержать ошибки или неточности. Оригинальный документ на его родном языке должен считаться авторитетным источником. Для критически важной информации рекомендуется профессиональный человеческий перевод. Мы не несем ответственности за любые недоразумения или неправильные толкования, возникающие в результате использования этого перевода.
+Этот документ был переведен с помощью сервиса автоматического перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Несмотря на наши усилия по обеспечению точности, пожалуйста, имейте в виду, что автоматические переводы могут содержать ошибки или неточности. Оригинальный документ на его родном языке следует считать авторитетным источником. Для важной информации рекомендуется использовать профессиональный перевод, выполненный человеком. Мы не несём ответственности за любые недоразумения или неверные толкования, возникшие в результате использования данного перевода.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

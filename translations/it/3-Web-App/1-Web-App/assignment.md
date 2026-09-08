@@ -2,13 +2,15 @@
 
 ## Istruzioni
 
-Ora che hai costruito una web app utilizzando un modello di regressione addestrato, usa uno dei modelli di una lezione precedente sulla regressione per rifare questa web app. Puoi mantenere lo stile o progettarla diversamente per riflettere i dati sulla zucca. Fai attenzione a cambiare gli input per riflettere il metodo di addestramento del tuo modello.
+Ora che hai creato un'app web utilizzando un modello di Regressione addestrato, utilizza uno dei modelli di una lezione precedente sulla Regressione per rifare questa app web. Puoi mantenere lo stile o progettarlo in modo diverso per riflettere i dati delle zucche. Fai attenzione a modificare gli input per riflettere il metodo di addestramento del tuo modello.
 
 ## Rubrica
 
-| Criteri                    | Esemplare                                                 | Adeguato                                                  | Da migliorare                          |
-| -------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | -------------------------------------- |
-| | La web app funziona come previsto ed è distribuita nel cloud | La web app contiene errori o presenta risultati inaspettati | La web app non funziona correttamente  |
+| Criteri                   | Esemplare                                                 | Adeguato                                                  | Da Migliorare                          |
+| -------------------------- | -------------------------------------------------------- | --------------------------------------------------------- | -------------------------------------- |
+| | L'app web funziona come previsto ed è distribuita nel cloud | L'app web presenta difetti o risultati inaspettati        | L'app web non funziona correttamente   |
 
-**Disclaimer**: 
-Questo documento è stato tradotto utilizzando servizi di traduzione automatica basati su AI. Sebbene ci impegniamo per garantire l'accuratezza, si prega di essere consapevoli che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua madre dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione umana professionale. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.
+---
+
+**Disclaimer**:  
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.

@@ -1,148 +1,157 @@
-# Utangulizi wa ujifunzaji wa mashine
+# Utangulizi wa kujifunza mashine
 
-## [Jaribio la kabla ya muhadhara](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/1/)
+## [Mtihani kabla ya somo](https://ff-quizzes.netlify.app/en/ml/)
 
 ---
 
-[![ML kwa wanaoanza - Utangulizi wa Ujifunzaji wa Mashine kwa Wanaoanza](https://img.youtube.com/vi/6mSx_KJxcHI/0.jpg)](https://youtu.be/6mSx_KJxcHI "ML kwa wanaoanza - Utangulizi wa Ujifunzaji wa Mashine kwa Wanaoanza")
+[![ML kwa wanaoanza - Utangulizi wa Kujifunza Mashine kwa Waanzisha](https://img.youtube.com/vi/6mSx_KJxcHI/0.jpg)](https://youtu.be/6mSx_KJxcHI "ML kwa wanaoanza - Utangulizi wa Kujifunza Mashine kwa Waanzisha")
 
-> 🎥 Bonyeza picha hapo juu kwa video fupi inayofanya kazi kupitia somo hili.
+> 🎥 Bonyeza picha hapo juu kuona video fupi inayofundisha somo hili.
 
-Karibu kwenye kozi hii ya ujifunzaji wa mashine ya kiasili kwa wanaoanza! Ikiwa wewe ni mgeni kabisa kwenye mada hii, au ni mtaalamu wa ML mwenye uzoefu anayetafuta kuboresha eneo fulani, tunafurahi kuwa na wewe! Tunataka kuunda sehemu rafiki ya kuanzisha masomo yako ya ML na tutafurahi kutathmini, kujibu, na kujumuisha [maoni yako](https://github.com/microsoft/ML-For-Beginners/discussions).
+Karibu katika kozi hii ya kujifunza mashine za kale kwa wanaoanza! Iwe wewe ni mpya kabisa kwenye mada hii, au mtaalamu wa ML mwenye uzoefu anayetaka kukagua eneo fulani, tunafurahi kuwa na wewe! Tunataka kuunda mahali pazuri pa kuanza kwa kujifunza ML na tungefurahi kupokea, kujibu, na kuingiza [maoni yako](https://github.com/microsoft/ML-For-Beginners/discussions).
 
 [![Utangulizi wa ML](https://img.youtube.com/vi/h0e2HAPTGF4/0.jpg)](https://youtu.be/h0e2HAPTGF4 "Utangulizi wa ML")
 
-> 🎥 Bonyeza picha hapo juu kwa video: John Guttag wa MIT anatambulisha ujifunzaji wa mashine
+> 🎥 Bonyeza picha hapo juu kuona video: John Guttag wa MIT anatoa utangulizi wa kujifunza mashine
 
 ---
-## Kuanza na ujifunzaji wa mashine
+## Kuanzia na kujifunza mashine
 
-Kabla ya kuanza na mtaala huu, unahitaji kuwa na kompyuta yako imewekwa na tayari kuendesha vitabu vya maelezo (notebooks) kwa ndani.
+Kabla ya kuanza na mtaala huu, unahitaji kuwa na kompyuta yako imesanidiwa na iko tayari kuendesha daftari za kumbukumbu kwa ndani.
 
-- **Sanidi kompyuta yako na video hizi**. Tumia viungo vifuatavyo kujifunza [jinsi ya kusakinisha Python](https://youtu.be/CXZYvNRIAKM) kwenye mfumo wako na [kuweka mhariri wa maandishi](https://youtu.be/EU8eayHWoZg) kwa ajili ya maendeleo.
-- **Jifunze Python**. Pia inashauriwa kuwa na uelewa wa msingi wa [Python](https://docs.microsoft.com/learn/paths/python-language/?WT.mc_id=academic-77952-leestott), lugha ya programu inayofaa kwa wanasayansi wa data ambayo tunatumia katika kozi hii.
-- **Jifunze Node.js na JavaScript**. Pia tunatumia JavaScript mara kadhaa katika kozi hii tunapojenga programu za wavuti, kwa hivyo utahitaji kuwa na [node](https://nodejs.org) na [npm](https://www.npmjs.com/) zimesakinishwa, pamoja na [Visual Studio Code](https://code.visualstudio.com/) inayopatikana kwa ajili ya maendeleo ya Python na JavaScript.
-- **Unda akaunti ya GitHub**. Kwa kuwa umetuona hapa kwenye [GitHub](https://github.com), unaweza tayari kuwa na akaunti, lakini kama huna, unda moja na kisha nakili mtaala huu kutumia wewe mwenyewe. (Usisite kutupa nyota, pia 😊)
-- **Chunguza Scikit-learn**. Jijulishe na [Scikit-learn](https://scikit-learn.org/stable/user_guide.html), seti ya maktaba za ML ambazo tunazirejelea katika masomo haya.
-
----
-## Ujifunzaji wa mashine ni nini?
-
-Neno 'ujifunzaji wa mashine' ni moja ya maneno maarufu na yanayotumika mara nyingi siku hizi. Kuna uwezekano mkubwa kwamba umesikia neno hili angalau mara moja ikiwa una aina fulani ya ufahamu wa teknolojia, bila kujali unafanya kazi katika uwanja gani. Mitambo ya ujifunzaji wa mashine, hata hivyo, ni fumbo kwa watu wengi. Kwa mwanzilishi wa ujifunzaji wa mashine, somo hili linaweza kuhisi kuwa gumu wakati mwingine. Kwa hiyo, ni muhimu kuelewa ujifunzaji wa mashine ni nini hasa, na kujifunza kuhusu hilo hatua kwa hatua, kupitia mifano ya vitendo.
+- **Sanidi kifaa chako kwa kutumia video hizi**. Tumia viungo vifuatavyo kujifunza [jinsi ya kusakinisha Python](https://youtu.be/CXZYvNRIAKM) kwenye mfumo wako na [kusanidi mhariri wa maandishi](https://youtu.be/EU8eayHWoZg) kwa maendeleo.
+- **Jifunze Python**. Pia inashauriwa kuwa na uelewa wa msingi wa [Python](https://docs.microsoft.com/learn/paths/python-language/?WT.mc_id=academic-77952-leestott), lugha ya programu inayotumika na wanasayansi wa data ambayo tunatumia katika kozi hii.
+- **Jifunze Node.js na JavaScript**. Tunatumia JavaScript mara kadhaa katika kozi hii tunapotengeneza programu za mtandao, hivyo utahitaji kuwa na [node](https://nodejs.org) na [npm](https://www.npmjs.com/) vimesakinishwa, pamoja na [Visual Studio Code](https://code.visualstudio.com/) kwa maendeleo ya Python na JavaScript.
+- **Tengeneza akaunti ya GitHub**. Kwa kuwa ulinipata hapa kwenye [GitHub](https://github.com), unaweza kuwa tayari una akaunti, lakini kama huna, tengeneza moja kisha foka mtaala huu kutumia kwa ajili yako binafsi. (Pia jisikie huru kutupa nyota 😊)
+- **Chunguza Scikit-learn**. Jadiliana na [Scikit-learn](https://scikit-learn.org/stable/user_guide.html), seti ya maktaba za ML tunayorejelea katika masomo haya.
 
 ---
-## Mchoro wa hype
+## Nini maana ya kujifunza mashine?
 
-![ml hype curve](../../../../translated_images/hype.07183d711a17aafe70915909a0e45aa286ede136ee9424d418026ab00fec344c.sw.png)
+Neno 'kujifunza mashine' ni mojawapo ya maneno maarufu zaidi na yanayotumika mara nyingi leo. Kuna uwezekano mkubwa kuwa umewahi kusikia neno hili angalau mara moja ikiwa una ujuzi fulani na teknolojia, haijalishi unafanya kazi katika sekta gani. Hata hivyo, mienendo ya kujifunza mashine ni fumbo kwa wengi. Kwa mwanzilishi wa kujifunza mashine, mada inaweza mara nyingine kujisikia kuzidi uwezo. Kwa hiyo, ni muhimu kuelewa kweli ni nini kujifunza mashine, na kujifunza hatua kwa hatua, kwa mfano wa vitendo.
 
-> Google Trends inaonyesha 'mchoro wa hype' wa hivi karibuni wa neno 'ujifunzaji wa mashine'
+---
+## Msururu wa hango ya shauku
+
+![ml hype curve](../../../../translated_images/sw/hype.07183d711a17aafe.webp)
+
+> Google Trends inaonyesha 'msururu wa hango ya shauku' wa neno 'kujifunza mashine' hivi karibuni
 
 ---
 ## Ulimwengu wa fumbo
 
-Tunaishi katika ulimwengu uliojaa fumbo za kuvutia. Wanasayansi wakubwa kama Stephen Hawking, Albert Einstein, na wengine wengi wamejitolea maisha yao kutafuta habari za maana ambazo zinagundua fumbo za ulimwengu unaotuzunguka. Hii ni hali ya binadamu ya kujifunza: mtoto wa binadamu hujifunza mambo mapya na kugundua muundo wa ulimwengu wao mwaka baada ya mwaka wanapokua hadi utu uzima.
+Tunaishi katika ulimwengu uliojaa mafumbo ya kuvutia. Wanasayansi wakubwa kama Stephen Hawking, Albert Einstein, na wengine wengi wamejitoa kutafuta taarifa zenye maana zinazoifunua fumbo za dunia inayotuzunguka. Hali hii ni hali ya kibinadamu ya kujifunza: mtoto wa binadamu hujifunza mambo mapya na kugundua muundo wa dunia yao mwaka baada ya mwaka wanapokua hadi kufikia utu uzima.
 
 ---
 ## Ubongo wa mtoto
 
-Ubongo wa mtoto na hisia zake hutambua ukweli wa mazingira yao na taratibu hujifunza mifumo iliyofichwa ya maisha ambayo husaidia mtoto kuunda sheria za kimantiki za kutambua mifumo iliyojifunza. Mchakato wa kujifunza wa ubongo wa binadamu hufanya wanadamu kuwa viumbe vyenye ustadi zaidi duniani. Kujifunza mfululizo kwa kugundua mifumo iliyofichwa na kisha kubuni kwenye mifumo hiyo hutuwezesha kujiboresha zaidi na zaidi katika maisha yetu yote. Uwezo huu wa kujifunza na uwezo wa kubadilika unahusiana na dhana inayoitwa [ubongo plastiki](https://www.simplypsychology.org/brain-plasticity.html). Kwa juu juu, tunaweza kuchora baadhi ya mfanano wa motisha kati ya mchakato wa kujifunza wa ubongo wa binadamu na dhana za ujifunzaji wa mashine.
+Ubongo na hisia za mtoto hugundua matukio ya mazingira yao na polepole hujifunza mifumo iliyofichwa ya maisha ambayo huwasaidia watoto kutengeneza sheria za mantiki za kutambua mifumo waliyojifunza. Mchakato wa kujifunza wa ubongo wa binadamu unawafanya wanadamu viumbe wenye werevu zaidi duniani. Kujifunza kwa kuendelea kugundua mifumo iliyofichwa na kisha kuiboresha kunaturuhusu kuboresha maisha yetu kila wakati tunapozidi kukua. Uwezo huu wa kujifunza na kuendelea una uhusiano na dhana inayojulikana kama [ubadilika wa ubongo](https://www.simplypsychology.org/brain-plasticity.html). Kwa sura, tunaweza kuchora ulinganifu wa kuhamasisha kati ya mchakato wa kujifunza wa ubongo wa binadamu na dhana za kujifunza mashine.
 
 ---
 ## Ubongo wa binadamu
 
-[Ubongo wa binadamu](https://www.livescience.com/29365-human-brain.html) hutambua mambo kutoka ulimwengu wa kweli, huchakata habari iliyotambuliwa, hufanya maamuzi ya kimantiki, na hufanya vitendo fulani kulingana na hali. Hii ndio tunaita kujiendesha kwa akili. Tunapopanga nakala ya mchakato wa tabia ya akili kwa mashine, inaitwa akili ya bandia (AI).
+[Ubongo wa binadamu](https://www.livescience.com/29365-human-brain.html) hugundua mambo kutoka kwa ulimwengu halisi, hufanyia kazi taarifa zilizogunduliwa, hufanya maamuzi ya mantiki, na kutekeleza vitendo fulani kulingana na hali. Hii ndio tunaiita tabia ya werevu. Tunapompprograma mashine kupiga mfano wa mchakato wa tabia ya werevu, huitwa akili bandia (AI).
 
 ---
 ## Baadhi ya istilahi
 
-Ingawa maneno yanaweza kuchanganywa, ujifunzaji wa mashine (ML) ni sehemu muhimu ya akili ya bandia. **ML inahusu kutumia algoriti maalum kugundua habari za maana na kupata mifumo iliyofichwa kutoka kwa data iliyotambuliwa ili kuthibitisha mchakato wa kufanya maamuzi ya kimantiki**.
+Ingawa maneno haya yanaweza kuchanganywa, kujifunza mashine (ML) ni sehemu muhimu ya akili bandia. **ML inahusiana na kutumia algoriti maalum kugundua taarifa zenye maana na kupata mifumo iliyofichwa kutoka kwa data iliyogunduliwa ili kuimarisha mchakato wa kufanya maamuzi ya mantiki**.
 
 ---
-## AI, ML, Kujifunza kwa kina
+## AI, ML, Kujifunza kwa Kina
 
-![AI, ML, deep learning, data science](../../../../translated_images/ai-ml-ds.537ea441b124ebf69c144a52c0eb13a7af63c4355c2f92f440979380a2fb08b8.sw.png)
+![AI, ML, deep learning, data science](../../../../translated_images/sw/ai-ml-ds.537ea441b124ebf6.webp)
 
-> Mchoro unaoonyesha uhusiano kati ya AI, ML, kujifunza kwa kina, na sayansi ya data. Picha ya [Jen Looper](https://twitter.com/jenlooper) iliyochochewa na [picha hii](https://softwareengineering.stackexchange.com/questions/366996/distinction-between-ai-ml-neural-networks-deep-learning-and-data-mining)
+> Mchoro unaoonyesha uhusiano kati ya AI, ML, kujifunza kwa kina, na sayansi ya data. Infographics na [Jen Looper](https://twitter.com/jenlooper) iliyoongozwa na [graphic hii](https://softwareengineering.stackexchange.com/questions/366996/distinction-between-ai-ml-neural-networks-deep-learning-and-data-mining)
 
 ---
 ## Dhana za kufunika
 
-Katika mtaala huu, tutaangazia tu dhana za msingi za ujifunzaji wa mashine ambazo mwanzilishi lazima azijue. Tunashughulikia kile tunachokiita 'ujifunzaji wa mashine wa kiasili' hasa kwa kutumia Scikit-learn, maktaba bora ambayo wanafunzi wengi hutumia kujifunza misingi. Ili kuelewa dhana pana za akili ya bandia au kujifunza kwa kina, maarifa thabiti ya msingi ya ujifunzaji wa mashine ni muhimu, na hivyo tungependa kuyatoa hapa.
+Katika mtaala huu, tutashughulikia tu dhana za msingi za kujifunza mashine ambazo mwanzilishi anapaswa kujua. Tunashughulikia kile tunachokiita 'kujifunza mashine za kale' hasa kwa kutumia Scikit-learn, maktaba bora ambayo wanafunzi wengi hutumia kujifunza misingi. Ili kuelewa dhana pana za akili bandia au kujifunza kwa kina, uelewa thabiti wa msingi wa kujifunza mashine ni muhimu, na hivyo tunapenda kutoa hapa.
 
 ---
 ## Katika kozi hii utajifunza:
 
-- dhana za msingi za ujifunzaji wa mashine
+- dhana za msingi za kujifunza mashine
 - historia ya ML
 - ML na usawa
 - mbinu za ML za regression
 - mbinu za ML za uainishaji
-- mbinu za ML za clustering
+- mbinu za ML za kuyasanya makundi
 - mbinu za ML za usindikaji wa lugha asilia
 - mbinu za ML za utabiri wa mfululizo wa wakati
-- ujifunzaji wa kuimarisha
+- kujifunza kwa kuimarisha
 - matumizi halisi ya ML
 
 ---
-## Kile hatutafunika
+## Kile ambacho hatutashughulikia
 
 - kujifunza kwa kina
 - mitandao ya neva
 - AI
 
-Ili kufanya uzoefu wa kujifunza kuwa bora, tutakwepa ugumu wa mitandao ya neva, 'kujifunza kwa kina' - ujenzi wa mifano yenye tabaka nyingi kwa kutumia mitandao ya neva - na AI, ambayo tutajadili katika mtaala tofauti. Pia tutatoa mtaala ujao wa sayansi ya data ili kuzingatia kipengele hicho cha uwanja huu mkubwa.
+Ili kupata uzoefu bora wa kujifunza, tutaepuka mchanganyiko wa mitandao ya neva, 'kujifunza kwa kina' - ujenzi wa modeli zenye tabaka nyingi kwa kutumia mitandao ya neva - na AI, ambayo tutajadili katika mtaala mwingine. Pia tutatoa mtaala mtarajiwa wa sayansi ya data kulenga upande huo wa fani hii kubwa.
 
 ---
-## Kwa nini ujifunze ujifunzaji wa mashine?
+## Kwanini kujifunza kujifunza mashine?
 
-Ujifunzaji wa mashine, kutoka mtazamo wa mifumo, unafafanuliwa kama uundaji wa mifumo ya kiotomatiki inayoweza kujifunza mifumo iliyofichwa kutoka kwa data ili kusaidia kufanya maamuzi ya akili.
+Kujifunza mashine, kwa mtazamo wa mifumo, huwekwa kama uundaji wa mifumo ya moja kwa moja inayoweza kujifunza mifumo iliyofichwa kutoka kwa data kusaidia kufanya maamuzi ya werevu.
 
-Motisha hii imechochewa kwa kiasi fulani na jinsi ubongo wa binadamu unavyojifunza mambo fulani kulingana na data inayotambuliwa kutoka ulimwengu wa nje.
+Mmotisho huu umeongozwa kwa sehemu na jinsi ubongo wa binadamu unavyojifunza mambo fulani kwa msingi wa data inayogunduliwa kutoka kwa ulimwengu wa nje.
 
-✅ Fikiria kwa dakika moja kwa nini biashara ingependa kujaribu kutumia mikakati ya ujifunzaji wa mashine dhidi ya kuunda injini ya sheria zilizowekwa ngumu.
+✅ Fikiria kwa sekunde kwa nini biashara itataka kutumia mbinu za kujifunza mashine badala ya kuunda injini ya sheria ngumu.
 
 ---
-## Matumizi ya ujifunzaji wa mashine
+## Kwanini ubora wa data ni muhimu
 
-Matumizi ya ujifunzaji wa mashine sasa yako karibu kila mahali, na ni kama data inayoenea katika jamii zetu, inayozalishwa na simu zetu mahiri, vifaa vilivyounganishwa, na mifumo mingine. Kwa kuzingatia uwezo mkubwa wa algoriti za kisasa za ujifunzaji wa mashine, watafiti wamekuwa wakichunguza uwezo wao wa kutatua matatizo ya maisha ya kila siku yenye vipimo vingi na taaluma nyingi na matokeo mazuri.
+Data yenye ubora wa juu huongeza utendaji wa modeli. Data duni au yenye kelele inaweza kusababisha utabiri usio sahihi, hata wakati unatumia algoriti za kujifunza mashine za hali ya juu.
+
+---
+## Matumizi ya kujifunza mashine
+
+Matumizi ya kujifunza mashine sasa karibu kila mahali, na ni kama data zinazotiririka katika jamii zetu, zinazozalishwa na simu zetu smart, vifaa vilivyowekwa mtandaoni, na mifumo mingine. Kwa kuzingatia uwezo mkubwa wa algoriti za kujifunza mashine za kisasa, watafiti wamekuwa wakichunguza uwezo wao kutatua matatizo ya maisha halisi yenye vipimo vingi na taaluma nyingi kwa matokeo mazuri sana.
 
 ---
 ## Mifano ya ML iliyotumika
 
-**Unaweza kutumia ujifunzaji wa mashine kwa njia nyingi**:
+**Unaweza kutumia kujifunza mashine kwa njia nyingi**:
 
-- Kutabiri uwezekano wa ugonjwa kutoka historia ya matibabu ya mgonjwa au ripoti.
+- Kutabiri uwezekano wa ugonjwa kutoka kwa historia ya matibabu au ripoti za mgonjwa.
 - Kutumia data ya hali ya hewa kutabiri matukio ya hali ya hewa.
-- Kuelewa hisia ya maandishi.
-- Kugundua habari za uongo ili kuzuia kuenea kwa propaganda.
+- Kuelewa hisia za maandishi.
+- Kugundua habari za uongo kuzuia kusambaa kwa propaganda.
 
-Fedha, uchumi, sayansi ya dunia, uchunguzi wa anga, uhandisi wa biomedical, sayansi ya utambuzi, na hata nyanja za sayansi ya jamii zimechukua ujifunzaji wa mashine kutatua matatizo magumu ya uchakataji wa data katika maeneo yao.
+Fedha, uchumi, sayansi ya dunia, uchunguzi wa anga, uhandisi wa biomedical, sayansi ya fahamu, na hata nyanja za wanadamu wamekubali kujifunza mashine kutatua matatizo magumu ya usanifu wa data katika fani zao.
 
 ---
 ## Hitimisho
 
-Ujifunzaji wa mashine unaotomatisha mchakato wa kugundua mifumo kwa kupata maarifa ya maana kutoka kwa data halisi au data iliyotengenezwa. Imejidhihirisha kuwa na thamani kubwa katika biashara, afya, na matumizi ya kifedha, kati ya mengine.
+Kujifunza mashine huendesha mchakato wa kugundua mifumo kwa kupata maarifa yenye maana kutoka kwa data halisi au inayotengenezwa. Imethibitisha kuwa ni ya thamani kubwa katika biashara, afya, na matumizi ya kifedha, miongoni mwa mengine.
 
-Katika siku za usoni, kuelewa misingi ya ujifunzaji wa mashine kutakuwa lazima kwa watu kutoka fani yoyote kutokana na kuenea kwake.
+Katika siku zijazo za karibu, kuelewa misingi ya kujifunza mashine kutakuwa lazima kwa watu kutoka nyanja yoyote kutokana na matumizi yake makubwa.
 
 ---
 # 🚀 Changamoto
 
-Chora, kwenye karatasi au kwa kutumia programu ya mtandaoni kama [Excalidraw](https://excalidraw.com/), uelewa wako wa tofauti kati ya AI, ML, kujifunza kwa kina, na sayansi ya data. Ongeza baadhi ya mawazo ya matatizo ambayo kila moja ya mbinu hizi ni nzuri katika kutatua.
+Chora, kwa karatasi au ukitumia programu mtandaoni kama [Excalidraw](https://excalidraw.com/), uelewa wako wa tofauti kati ya AI, ML, kujifunza kwa kina, na sayansi ya data. Ongeza mawazo ya matatizo ambayo kila moja ya mbinu hizi ni nzuri kuyatatua.
 
-# [Jaribio la baada ya muhadhara](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/2/)
+# [Mtihani baada ya somo](https://ff-quizzes.netlify.app/en/ml/)
 
 ---
-# Mapitio & Kujisomea
+# Mapitio & Kujifunza Binafsi
 
-Ili kujifunza zaidi kuhusu jinsi unavyoweza kufanya kazi na algoriti za ML kwenye wingu, fuata [Njia ya Kujifunza](https://docs.microsoft.com/learn/paths/create-no-code-predictive-models-azure-machine-learning/?WT.mc_id=academic-77952-leestott).
+Ili kujifunza zaidi kuhusu jinsi unavyoweza kufanya kazi na algoriti za ML katika wingu, fuata [Njia ya Kujifunza](https://docs.microsoft.com/learn/paths/create-no-code-predictive-models-azure-machine-learning/?WT.mc_id=academic-77952-leestott).
 
 Chukua [Njia ya Kujifunza](https://docs.microsoft.com/learn/modules/introduction-to-machine-learning/?WT.mc_id=academic-77952-leestott) kuhusu misingi ya ML.
 
 ---
-# Kazi
+# Kazi ya nyumbani
 
-[Anza na kukimbia](assignment.md)
+[Pata kuanza na kuendeshwa](assignment.md)
 
-**Kanusho**: 
-Hati hii imetafsiriwa kwa kutumia huduma za tafsiri za AI za mashine. Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa habari muhimu, tafsiri ya kibinadamu ya kitaalamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

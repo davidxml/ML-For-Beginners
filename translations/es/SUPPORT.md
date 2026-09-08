@@ -1,15 +1,20 @@
 # Soporte
 ## Cómo reportar problemas y obtener ayuda  
 
-Este proyecto utiliza GitHub Issues para rastrear errores y solicitudes de características. Por favor, busca en los 
-problemas existentes antes de reportar nuevos problemas para evitar duplicados. Para nuevos problemas, reporta tu error o 
-solicitud de característica como un nuevo Issue.
+Antes de reportar un problema, consulta nuestra [Guía de Solución de Problemas](TROUBLESHOOTING.md) para encontrar soluciones a problemas comunes relacionados con la instalación, configuración y ejecución de las lecciones.
 
-Para obtener ayuda y preguntas sobre el uso de este proyecto, reporta un issue.
+Este proyecto utiliza GitHub Issues para rastrear errores y solicitudes de características. Por favor, busca entre los problemas existentes antes de reportar uno nuevo para evitar duplicados. Para nuevos problemas, reporta tu error o solicitud de característica como un nuevo Issue.
+
+Para obtener ayuda y resolver dudas sobre el uso de este proyecto, también puedes:
+- Consultar la [Guía de Solución de Problemas](TROUBLESHOOTING.md)
+- Visitar nuestro [canal de Discord Discussions #ml-for-beginners](https://aka.ms/foundry/discord)
+- Reportar un problema
 
 ## Política de Soporte de Microsoft  
 
-El soporte para este repositorio se limita a los recursos listados arriba.
+El soporte para este repositorio se limita a los recursos mencionados anteriormente.
 
-**Descargo de responsabilidad**:
-Este documento ha sido traducido utilizando servicios de traducción automatizada por IA. Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda la traducción humana profesional. No nos hacemos responsables de cualquier malentendido o interpretación errónea que surja del uso de esta traducción.
+---
+
+**Descargo de responsabilidad**:  
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por garantizar la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.

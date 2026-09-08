@@ -8,149 +8,242 @@
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/ML-For-Beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/ML-For-Beginners/network/)
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/ML-For-Beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/ML-For-Beginners/stargazers/)
 
-[![](https://dcbadge.vercel.app/api/server/ByRwuEEgH4)](https://discord.gg/zxKYvhSnVp?WT.mc_id=academic-000002-leestott)
+### 🌐 多言語対応
 
-# 初心者のための機械学習 - カリキュラム
+#### GitHub Actionを介してサポート（自動かつ常に最新）
 
-> 🌍 世界中を旅しながら、世界の文化を通じて機械学習を学びましょう 🌍
+<!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](./README.md) | [Kannada](../kn/README.md) | [Khmer](../km/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 
-MicrosoftのCloud Advocatesは、**機械学習**に関する12週間、26レッスンのカリキュラムを提供します。このカリキュラムでは、主にScikit-learnライブラリを使用して、**クラシックな機械学習**と呼ばれることもある技術を学びます。ディープラーニングは含まれていませんが、それについては[AI for Beginners' カリキュラム](https://aka.ms/ai4beginners)で学ぶことができます。このレッスンを['データサイエンス初心者向けカリキュラム'](https://aka.ms/ds4beginners)と組み合わせることもお勧めします。
+> **ローカルにクローンすることを好みますか？**
+>
+> このリポジトリには 50 以上の言語翻訳が含まれており、ダウンロードサイズが大幅に増加します。翻訳なしでクローンするには、スパースチェックアウトを使用してください：
+>
+> **Bash / macOS / Linux:**
+> ```bash
+> git clone --filter=blob:none --sparse https://github.com/microsoft/ML-For-Beginners.git
+> cd ML-For-Beginners
+> git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
+> ```
+>
+> **CMD (Windows):**
+> ```cmd
+> git clone --filter=blob:none --sparse https://github.com/microsoft/ML-For-Beginners.git
+> cd ML-For-Beginners
+> git sparse-checkout set --no-cone "/*" "!translations" "!translated_images"
+> ```
+>
+> これにより、コースを完了するために必要なすべてのものがはるかに高速なダウンロードで得られます。
+<!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
-世界各地のデータを使って、クラシックな技術を適用しながら一緒に学びましょう。各レッスンには、事前・事後のクイズ、レッスンを完了するための書面による指示、解答、課題などが含まれています。プロジェクトベースの教育方法により、学びながら実践することで新しいスキルが定着しやすくなります。
+#### コミュニティに参加しよう
 
-**✍️ 著者の皆さんに心からの感謝を** Jen Looper, Stephen Howell, Francesca Lazzeri, Tomomi Imura, Cassie Breviu, Dmitry Soshnikov, Chris Noring, Anirban Mukherjee, Ornella Altunyan, Ruth Yakubu, Amy Boyd
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-**🎨 イラストレーターの皆さんにも感謝を** Tomomi Imura, Dasani Madipalli, Jen Looper
+当コミュニティでは Discord の AI シリーズ学習を開催中です。詳細や参加は [Learn with AI Series](https://aka.ms/learnwithai/discord) にて、2025年9月18日～30日開催。GitHub Copilot を使ったデータサイエンスのコツとテクニックをご紹介します。
 
-**🙏 特別な感謝 🙏 Microsoft Student Ambassadorの著者、レビューアー、コンテンツ貢献者の皆さんに、特に Rishit Dagli, Muhammad Sakib Khan Inan, Rohan Raj, Alexandru Petrescu, Abhishek Jaiswal, Nawrin Tabassum, Ioan Samuila, Snigdha Agarwal
+![Learn with AI series](../../translated_images/ja/3.9b58fd8d6c373c20.webp)
 
-**🤩 Rレッスンに関して、Microsoft Student Ambassadorsの Eric Wanjau, Jasleen Sondhi, Vidushi Gupta に特別な感謝を！**
+# 初心者向け機械学習 - カリキュラム
 
-# 始めに
+> 🌍 世界各地の文化と言語を通じて機械学習を学びましょう 🌍
+
+Microsoft のクラウドアドボケートチームは、12週間、26レッスンからなる <strong>機械学習</strong> に関するカリキュラムを提供しています。このカリキュラムでは、主に Scikit-learn ライブラリを用いた、いわゆる <strong>古典的機械学習</strong> を学習します。ディープラーニングは当社の [初心者向けAIカリキュラム](https://aka.ms/ai4beginners)で扱っています。さらに、当カリキュラムは ['初心者向けデータサイエンス'カリキュラム](https://aka.ms/ds4beginners) と組み合わせて受講できます。
+
+世界各地のデータを用いながら、古典的な手法を適用して旅をしましょう。各レッスンには事前・事後クイズ、説明資料、解答例、課題などが含まれています。実践型の教育法により、学びながら制作することで新しいスキルが定着しやすくなっています。
+
+**✍️ 執筆者の皆さまに心から感謝申し上げます** Jen Looper, Stephen Howell, Francesca Lazzeri, Tomomi Imura, Cassie Breviu, Dmitry Soshnikov, Chris Noring, Anirban Mukherjee, Ornella Altunyan, Ruth Yakubu, Amy Boyd
+
+**🎨 イラストレーターにも感謝** Tomomi Imura, Dasani Madipalli, Jen Looper
+
+**🙏 Microsoft Student Ambassador 執筆者、レビュアー、コンテンツ貢献者の皆さまに特に感謝** Rishit Dagli, Muhammad Sakib Khan Inan, Rohan Raj, Alexandru Petrescu, Abhishek Jaiswal, Nawrin Tabassum, Ioan Samuila, Snigdha Agarwal
+
+**🤩 R 言語レッスン担当の Microsoft Student Ambassadors Eric Wanjau, Jasleen Sondhi, Vidushi Gupta に特別感謝！**
+
+# 始め方
 
 以下の手順に従ってください：
-1. **リポジトリをフォークする**: このページの右上にある「Fork」ボタンをクリックします。
-2. **リポジトリをクローンする**: `git clone https://github.com/microsoft/ML-For-Beginners.git`
+1. <strong>リポジトリをフォークする</strong>: このページの右上にある「Fork」ボタンをクリックします。
+2. <strong>リポジトリをクローンする</strong>:   `git clone https://github.com/microsoft/ML-For-Beginners.git`
 
-> [このコースの追加リソースはMicrosoft Learnコレクションにあります](https://learn.microsoft.com/en-us/collections/qrqzamz1nn2wx3?WT.mc_id=academic-77952-bethanycheum)
+> [Microsoft Learnコレクションでコースの追加リソースをすべて見つける](https://learn.microsoft.com/en-us/collections/qrqzamz1nn2wx3?WT.mc_id=academic-77952-bethanycheum)
 
-**[学生の皆さん](https://aka.ms/student-page)**、このカリキュラムを使用するには、リポジトリ全体を自分のGitHubアカウントにフォークし、自分でまたはグループで演習を完了してください：
+> 🔧 **困ったときは？** [トラブルシューティングガイド](TROUBLESHOOTING.md) を参照し、インストール、セットアップ、レッスン実行時の一般的な問題に対処してください。
 
-- レクチャー前のクイズから始めます。
-- レクチャーを読み、各知識チェックで一時停止し、反省します。
-- 解答コードを実行するのではなく、レッスンを理解しながらプロジェクトを作成してみてください。ただし、そのコードは各プロジェクト指向のレッスンの`/solution`フォルダーにあります。
-- レクチャー後のクイズを受けます。
-- チャレンジを完了します。
-- 課題を完了します。
-- レッスングループを完了した後、[ディスカッションボード](https://github.com/microsoft/ML-For-Beginners/discussions)にアクセスし、適切なPATルーブリックを記入して「声に出して学ぶ」ことをお勧めします。PATは進捗評価ツールで、学習を深めるために記入するルーブリックです。他のPATに反応することもでき、一緒に学びましょう。
 
-> さらなる学習のために、これらの[Microsoft Learn](https://docs.microsoft.com/en-us/users/jenlooper-2911/collections/k7o7tg1gp306q4?WT.mc_id=academic-77952-leestott)モジュールと学習パスをお勧めします。
+**[学生の皆さん](https://aka.ms/student-page)**、このカリキュラムを利用するには、リポジトリ全体を自分のGitHubアカウントにフォークし、個人またはグループで演習を完了してください：
 
-**教師の皆さん**、このカリキュラムの使用方法について[いくつかの提案](for-teachers.md)を含めています。
+- 事前講義クイズから始めましょう。
+- 講義を読み、各知識確認で一時停止しながら活動を完了してください。
+- 解答コードを実行するのではなく、理解してプロジェクトを作成することを目指しましょう。ただし解答コードは関連プロジェクトの `/solution` フォルダにあります。
+- 講義後クイズを受けましょう。
+- チャレンジをクリアしましょう。
+- 課題を完了しましょう。
+- レッスングループを完了したら、[ディスカッションボード](https://github.com/microsoft/ML-For-Beginners/discussions) を訪れ、対応する PAT ルーブリックを記入して「学びを声に出しましょう」。'PAT' は進歩評価ツールの略で、学習を促進するためのルーブリックです。他の人のPATにも反応して、一緒に学びましょう。
+
+> さらなる学習には、[Microsoft Learn](https://docs.microsoft.com/en-us/users/jenlooper-2911/collections/k7o7tg1gp306q4?WT.mc_id=academic-77952-leestott) のモジュールや学習パスをおすすめします。
+
+<strong>教師の方へ</strong>、このカリキュラムの使い方に関する[提案](for-teachers.md)を用意しています。
 
 ---
 
-## ビデオウォークスルー
+## 動画ウォークスルー
 
-いくつかのレッスンは短い形式のビデオとして提供されています。これらはレッスン内にインラインで見つけることができます。または、Microsoft Developer YouTubeチャンネルの[ML for Beginnersプレイリスト](https://aka.ms/ml-beginners-videos)で画像をクリックして視聴できます。
+一部のレッスンは短い動画で提供されています。レッスン内または[Microsoft Developer YouTube チャンネルの ML for Beginners プレイリスト](https://aka.ms/ml-beginners-videos)からご覧いただけます。下の画像をクリックしてください。
 
-[![ML for beginners banner](../../translated_images/ml-for-beginners-video-banner.279f2a268d2130758668f4044f8c252d42f7c0a141c2cb56294c1ccc157cdd1c.ja.png)](https://aka.ms/ml-beginners-videos)
+[![ML for beginners banner](../../translated_images/ja/ml-for-beginners-video-banner.63f694a100034bc6.webp)](https://aka.ms/ml-beginners-videos)
 
 ---
 
 ## チーム紹介
 
-[![Promo video](../../ml.gif)](https://youtu.be/Tj1XWrDSYJU "Promo video")
+[![Promo video](../../images/ml.gif)](https://youtu.be/Tj1XWrDSYJU)
 
-**Gif by** [Mohit Jaisal](https://linkedin.com/in/mohitjaisal)
+**Gif 制作** [Mohit Jaisal](https://linkedin.com/in/mohitjaisal)
 
-> 🎥 上の画像をクリックして、プロジェクトと作成者についてのビデオをご覧ください！
+> 🎥 上の画像をクリックすると、プロジェクトと制作チームの動画をご覧いただけます！
 
 ---
 
-## 教育方法
+## 教育方針
 
-このカリキュラムを作成する際に、2つの教育的な原則を選びました：それが実践的な**プロジェクトベース**であることと、**頻繁なクイズ**を含むことです。さらに、このカリキュラムには一貫性を持たせるための共通の**テーマ**があります。
+このカリキュラム作成にあたり、以下2つの教育理念を選びました：実践的な <strong>プロジェクトベース</strong> であることと、<strong>頻繁なクイズ</strong> を含むことです。さらに、本カリキュラムには一貫性を持たせるため、共通の <strong>テーマ</strong> を設けています。
 
-プロジェクトに合わせてコンテンツを整えることで、学習者にとってより魅力的なプロセスとなり、概念の定着が強化されます。また、クラス前の低リスクのクイズは、学習者の意図をトピックに向けさせ、クラス後の2回目のクイズはさらなる定着を確保します。このカリキュラムは柔軟で楽しいものとして設計されており、全体または一部を受講することができます。プロジェクトは小さなものから始まり、12週間のサイクルの終わりまでに徐々に複雑になります。また、このカリキュラムには、MLの実世界での応用に関する後書きが含まれており、追加のクレジットやディスカッションの基礎として使用できます。
+内容をプロジェクトに合わせることで、学習のモチベーションを高め、理解の定着を強化しています。授業前の軽いクイズは学生の学習意欲を促し、授業後のクイズは理解を深める役割を果たします。本カリキュラムは柔軟で楽しく、全体または一部を受講できます。プロジェクトは小規模から始まり、12週間の終了時には複雑さを増します。また、実世界での機械学習応用に関する追記も含まれており、追加学習内容や議論の素材として利用可能です。
 
-> [行動規範](CODE_OF_CONDUCT.md)、[貢献](CONTRIBUTING.md)、および[翻訳](TRANSLATIONS.md)ガイドラインをご覧ください。建設的なフィードバックを歓迎します！
+> [行動規範](CODE_OF_CONDUCT.md)、[貢献ガイド](CONTRIBUTING.md)、[翻訳](..)、[トラブルシューティング](TROUBLESHOOTING.md) ガイドラインもご覧ください。建設的なフィードバックをお待ちしています！
 
-## 各レッスンには以下が含まれます
+## 各レッスンに含まれるもの
 
-- オプションのスケッチノート
-- オプションの補足ビデオ
-- ビデオウォークスルー（いくつかのレッスンのみ）
-- レクチャー前のウォームアップクイズ
-- 書面によるレッスン
-- プロジェクトベースのレッスンの場合、プロジェクトを構築するためのステップバイステップガイド
-- 知識チェック
+- 任意のスケッチノート
+- 任意の補足動画
+- 動画ウォークスルー（一部レッスンのみ）
+- [講義前ウォームアップクイズ](https://ff-quizzes.netlify.app/en/ml/)
+- 講義本文
+- プロジェクトベースのレッスンでは、ステップバイステップのプロジェクト完成ガイド
+- 知識確認問題
 - チャレンジ
-- 補足読書
+- 補足読書資料
 - 課題
-- レクチャー後のクイズ
+- [講義後クイズ](https://ff-quizzes.netlify.app/en/ml/)
+> <strong>言語についての注意</strong>: これらのレッスンは主にPythonで書かれていますが、多くはRでも提供されています。Rのレッスンを完了するには、`/solution`フォルダーに移動してRレッスンを探してください。そこには<strong>R Markdown</strong>ファイルを表す.rmd拡張子が付いています。これは`コードチャンク`（Rやその他の言語の）と`YAMLヘッダー`（PDFなどの出力フォーマットのガイド）を`Markdownドキュメント`に埋め込んだものと簡単に定義できます。そのため、コード、その出力、そして考えをMarkdownで記述することで結合できるため、データサイエンスの優れた著述フレームワークとして機能します。さらに、R MarkdownドキュメントはPDF、HTML、Wordなどの出力形式にレンダリングすることができます。
 
-> **言語に関する注意**: これらのレッスンは主にPythonで書かれていますが、多くはRでも利用可能です。Rレッスンを完了するには、`/solution`フォルダーに移動し、Rレッスンを探してください。それらには.rmd拡張子が含まれており、`code chunks`（Rまたは他の言語の）と`YAML header`（PDFなどの出力をフォーマットする方法を指示する）を`Markdown document`に埋め込んだものと簡単に定義できます。したがって、データサイエンスのための優れた著作フレームワークとして機能し、コード、その出力、およびMarkdownで書き留めることができる考えを組み合わせることができます。さらに、R MarkdownドキュメントはPDF、HTML、Wordなどの出力形式にレンダリングできます。
+> <strong>クイズについての注意</strong>: すべてのクイズは[Quiz App folder](../../quiz-app)に収められており、合計52のクイズがそれぞれ3問ずつ含まれています。クイズはレッスン内からリンクされていますが、クイズアプリはローカルでも実行可能です。`quiz-app`フォルダー内の指示に従ってローカルホストまたはAzureへのデプロイを行ってください。
 
-> **クイズに関する注意**: すべてのクイズは[Quiz Appフォルダー](../../quiz-app)に含まれており、合計52のクイズがあり、それぞれ3つの質問が含まれています。それらはレッスン内からリンクされていますが、クイズアプリはローカルで実行できます。ローカルでホストするかAzureにデプロイする手順は`quiz-app`フォルダーに従ってください。
-
-| レッスン番号 |                             トピック                             |                   レッスングループ                   | 学習目標                                                                                                               |                                                              リンク先レッスン                                                               |                        著者                        |
-| :-----------: | :------------------------------------------------------------: | :-------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------: |
-|      01       |                機械学習の紹介                |      [Introduction](1-Introduction/README.md)       | 機械学習の基本的な概念を学ぶ                                                                                |                                             [レッスン](1-Introduction/1-intro-to-ML/README.md)                                             |                       Muhammad                       |
-|      02       |                機械学習の歴史                 |      [Introduction](1-Introduction/README.md)       | この分野の歴史を学ぶ                                                                                         |                                            [レッスン](1-Introduction/2-history-of-ML/README.md)                                            |                     Jen and Amy                      |
-|      03       |                 公平性と機械学習                  |      [Introduction](1-Introduction/README.md)       | 学生がMLモデルを構築および適用する際に考慮すべき重要な哲学的問題とは？ |                                              [レッスン](1-Introduction/3-fairness/README.md)                                               |                        Tomomi                        |
-|      04       |                機械学習のテクニック                 |      [Introduction](1-Introduction/README.md)       | ML研究者がMLモデルを構築するために使用するテクニックとは？                                                                       |                                          [Lesson](1-Introduction/4-techniques-of-ML/README.md)                                           |                    Chris and Jen                     |
-|      05       |                   回帰の入門                   |        [Regression](2-Regression/README.md)         | 回帰モデルのためのPythonとScikit-learnの入門                                                                  |         <ul><li>[Python](2-Regression/1-Tools/README.md)</li><li>[R](../../2-Regression/1-Tools/solution/R/lesson_1.html)</li></ul>         |      <ul><li>Jen</li><li>Eric Wanjau</li></ul>       |
-|      06       |                北米のカボチャの価格 🎃                |        [Regression](2-Regression/README.md)         | MLの準備としてデータの可視化とクリーニング                                                                                  |          <ul><li>[Python](2-Regression/2-Data/README.md)</li><li>[R](../../2-Regression/2-Data/solution/R/lesson_2.html)</li></ul>          |      <ul><li>Jen</li><li>Eric Wanjau</li></ul>       |
-|      07       |                北米のカボチャの価格 🎃                |        [Regression](2-Regression/README.md)         | 線形および多項式回帰モデルの構築                                                                                   |        <ul><li>[Python](2-Regression/3-Linear/README.md)</li><li>[R](../../2-Regression/3-Linear/solution/R/lesson_3.html)</li></ul>        |      <ul><li>Jen and Dmitry</li><li>Eric Wanjau</li></ul>       |
-|      08       |                北米のカボチャの価格 🎃                |        [Regression](2-Regression/README.md)         | ロジスティック回帰モデルの構築                                                                                               |     <ul><li>[Python](2-Regression/4-Logistic/README.md) </li><li>[R](../../2-Regression/4-Logistic/solution/R/lesson_4.html)</li></ul>      |      <ul><li>Jen</li><li>Eric Wanjau</li></ul>       |
-|      09       |                          ウェブアプリ 🔌                          |           [Web App](3-Web-App/README.md)            | トレーニング済みモデルを使用するウェブアプリの構築                                                                                       |                                                 [Python](3-Web-App/1-Web-App/README.md)                                                  |                         Jen                          |
-|      10       |                 分類の入門                 |    [Classification](4-Classification/README.md)     | データのクリーニング、準備、可視化；分類の入門                                                            | <ul><li> [Python](4-Classification/1-Introduction/README.md) </li><li>[R](../../4-Classification/1-Introduction/solution/R/lesson_10.html)  | <ul><li>Jen and Cassie</li><li>Eric Wanjau</li></ul> |
-|      11       |             美味しいアジアとインドの料理 🍜             |    [Classification](4-Classification/README.md)     | クラス分類器の入門                                                                                                     | <ul><li> [Python](4-Classification/2-Classifiers-1/README.md)</li><li>[R](../../4-Classification/2-Classifiers-1/solution/R/lesson_11.html) | <ul><li>Jen and Cassie</li><li>Eric Wanjau</li></ul> |
-|      12       |             美味しいアジアとインドの料理 🍜             |    [Classification](4-Classification/README.md)     | さらに多くのクラス分類器                                                                                                                | <ul><li> [Python](4-Classification/3-Classifiers-2/README.md)</li><li>[R](../../4-Classification/3-Classifiers-2/solution/R/lesson_12.html) | <ul><li>Jen and Cassie</li><li>Eric Wanjau</li></ul> |
-|      13       |             美味しいアジアとインドの料理 🍜             |    [Classification](4-Classification/README.md)     | モデルを使用してレコメンダーウェブアプリを構築                                                                                    |                                              [Python](4-Classification/4-Applied/README.md)                                              |                         Jen                          |
-|      14       |                   クラスタリングの入門                   |        [Clustering](5-Clustering/README.md)         | データのクリーニング、準備、可視化；クラスタリングの入門                                                                |         <ul><li> [Python](5-Clustering/1-Visualize/README.md)</li><li>[R](../../5-Clustering/1-Visualize/solution/R/lesson_14.html)         |      <ul><li>Jen</li><li>Eric Wanjau</li></ul>       |
-|      15       |              ナイジェリアの音楽の好みを探る 🎧              |        [Clustering](5-Clustering/README.md)         | K-Meansクラスタリング法を探求する                                                                                           |           <ul><li> [Python](5-Clustering/2-K-Means/README.md)</li><li>[R](../../5-Clustering/2-K-Means/solution/R/lesson_15.html)           |      <ul><li>Jen</li><li>Eric Wanjau</li></ul>       |
-|      16       |        自然言語処理の紹介 ☕️         |   [Natural language processing](6-NLP/README.md)    | シンプルなボットを作成してNLPの基本を学ぶ                                                                             |                                             [Python](6-NLP/1-Introduction-to-NLP/README.md)                                              |                       Stephen                        |
-|      17       |                      一般的なNLPタスク ☕️                      |   [Natural language processing](6-NLP/README.md)    | 言語構造を扱う際に必要な一般的なタスクを理解してNLPの知識を深める                          |                                                    [Python](6-NLP/2-Tasks/README.md)                                                     |                       Stephen                        |
+| レッスン番号 |                             トピック                              |                   レッスングループ                   | 学習目標                                                                                                                     |                                                              リンクされたレッスン                                                               |                        著者                        |
+| :-----------: | :------------------------------------------------------------: | :-------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------: |
+|      01       |                機械学習入門                |      [Introduction](1-Introduction/README.md)       | 機械学習の基本概念を学ぶ                                                                                |                                             [Lesson](1-Introduction/1-intro-to-ML/README.md)                                             |                       Muhammad                       |
+|      02       |                機械学習の歴史                 |      [Introduction](1-Introduction/README.md)       | この分野の歴史を学ぶ                                                                                         |                                            [Lesson](1-Introduction/2-history-of-ML/README.md)                                            |                     Jen and Amy                      |
+|      03       |                 公平性と機械学習                  |      [Introduction](1-Introduction/README.md)       | 学習者がMLモデルの構築と適用時に考慮すべき公平性に関する重要な哲学的問題とは？ |                                              [Lesson](1-Introduction/3-fairness/README.md)                                               |                        Tomomi                        |
+|      04       |                機械学習のための技術                 |      [Introduction](1-Introduction/README.md)       | ML研究者がMLモデルを構築するために用いる技術とは？                                                                       |                                          [Lesson](1-Introduction/4-techniques-of-ML/README.md)                                           |                    Chris and Jen                     |
+|      05       |                   回帰の入門                   |        [Regression](2-Regression/README.md)         | PythonとScikit-learnを使った回帰モデルの基礎を学ぶ                                                                  |         [Python](2-Regression/1-Tools/README.md) • [R](../../2-Regression/1-Tools/solution/R/lesson_1.html)         |      Jen • Eric Wanjau       |
+|      06       |                北米のかぼちゃ価格 🎃                |        [Regression](2-Regression/README.md)         | MLの準備としてデータの可視化とクレンジング                                                                                  |          [Python](2-Regression/2-Data/README.md) • [R](../../2-Regression/2-Data/solution/R/lesson_2.html)          |      Jen • Eric Wanjau       |
+|      07       |                北米のかぼちゃ価格 🎃                |        [Regression](2-Regression/README.md)         | 線形回帰と多項式回帰モデルの構築                                                                                   |        [Python](2-Regression/3-Linear/README.md) • [R](../../2-Regression/3-Linear/solution/R/lesson_3.html)        |      Jen and Dmitry • Eric Wanjau       |
+|      08       |                北米のかぼちゃ価格 🎃                |        [Regression](2-Regression/README.md)         | ロジスティック回帰モデルの構築                                                                                               |     [Python](2-Regression/4-Logistic/README.md) • [R](../../2-Regression/4-Logistic/solution/R/lesson_4.html)      |      Jen • Eric Wanjau       |
+|      09       |                          Webアプリ 🔌                          |           [Web App](3-Web-App/README.md)            | トレーニング済みモデルを利用するWebアプリを作成                                                                                       |                                                 [Python](3-Web-App/1-Web-App/README.md)                                                  |                         Jen                          |
+|      10       |                 分類入門                 |    [Classification](4-Classification/README.md)     | データのクレンジング、準備、可視化；分類の入門                                                            | [Python](4-Classification/1-Introduction/README.md) • [R](../../4-Classification/1-Introduction/solution/R/lesson_10.html)  | Jen and Cassie • Eric Wanjau |
+|      11       |             美味しいアジアとインド料理 🍜             |    [Classification](4-Classification/README.md)     | 分類器の入門                                                                                                     | [Python](4-Classification/2-Classifiers-1/README.md) • [R](../../4-Classification/2-Classifiers-1/solution/R/lesson_11.html) | Jen and Cassie • Eric Wanjau |
+|      12       |             美味しいアジアとインド料理 🍜             |    [Classification](4-Classification/README.md)     | さらに分類器                                                                                                                | [Python](4-Classification/3-Classifiers-2/README.md) • [R](../../4-Classification/3-Classifiers-2/solution/R/lesson_12.html) | Jen and Cassie • Eric Wanjau |
+|      13       |             美味しいアジアとインド料理 🍜             |    [Classification](4-Classification/README.md)     | モデルを使った推薦Webアプリを作成                                                                                    |                                              [Python](4-Classification/4-Applied/README.md)                                              |                         Jen                          |
+|      14       |                   クラスタリング入門                   |        [Clustering](5-Clustering/README.md)         | データのクレンジング、準備、可視化；クラスタリングの入門                                                                |         [Python](5-Clustering/1-Visualize/README.md) • [R](../../5-Clustering/1-Visualize/solution/R/lesson_14.html)         |      Jen • Eric Wanjau       |
+|      15       |              ナイジェリアの音楽趣向を探る 🎧              |        [Clustering](5-Clustering/README.md)         | K-平均クラスタリング法を探る                                                                                           |           [Python](5-Clustering/2-K-Means/README.md) • [R](../../5-Clustering/2-K-Means/solution/R/lesson_15.html)           |      Jen • Eric Wanjau       |
+|      16       |        自然言語処理入門 ☕️         |   [Natural language processing](6-NLP/README.md)    | 簡単なボットを作りながらNLPの基礎を学ぶ                                                                             |                                             [Python](6-NLP/1-Introduction-to-NLP/README.md)                                              |                       Stephen                        |
+|      17       |                      一般的なNLPタスク ☕️                      |   [Natural language processing](6-NLP/README.md)    | 言語構造を扱う際に必要な一般的なタスクを理解してNLP知識を深める                          |                                                    [Python](6-NLP/2-Tasks/README.md)                                                     |                       Stephen                        |
 |      18       |             翻訳と感情分析 ♥️              |   [Natural language processing](6-NLP/README.md)    | ジェーン・オースティンを使った翻訳と感情分析                                                                             |                                            [Python](6-NLP/3-Translation-Sentiment/README.md)                                             |                       Stephen                        |
-|      19       |                  ヨーロッパのロマンチックなホテル ♥️                  |   [Natural language processing](6-NLP/README.md)    | ホテルレビューを使った感情分析 1                                                                                         |                                               [Python](6-NLP/4-Hotel-Reviews-1/README.md)                                                |                       Stephen                        |
-|      20       |                  ヨーロッパのロマンチックなホテル ♥️                  |   [Natural language processing](6-NLP/README.md)    | ホテルレビューを使った感情分析 2                                                                                         |                                               [Python](6-NLP/5-Hotel-Reviews-2/README.md)                                                |                       Stephen                        |
-|      21       |            時系列予測の紹介             |        [Time series](7-TimeSeries/README.md)        | 時系列予測の紹介                                                                                         |                                             [Python](7-TimeSeries/1-Introduction/README.md)                                              |                      Francesca                       |
-|      22       | ⚡️ 世界の電力使用 ⚡️ - ARIMAによる時系列予測 |        [Time series](7-TimeSeries/README.md)        | ARIMAによる時系列予測                                                                                              |                                                 [Python](7-TimeSeries/2-ARIMA/README.md)                                                 |                      Francesca                       |
-|      23       |  ⚡️ 世界の電力使用 ⚡️ - SVRによる時系列予測  |        [Time series](7-TimeSeries/README.md)        | サポートベクターレグレッサーによる時系列予測                                                                           |                                                  [Python](7-TimeSeries/3-SVR/README.md)                                                  |                       Anirban                        |
-|      24       |             強化学習の紹介             | [Reinforcement learning](8-Reinforcement/README.md) | Q-Learningによる強化学習の紹介                                                                          |                                             [Python](8-Reinforcement/1-QLearning/README.md)                                              |                        Dmitry                        |
+|      19       |                  ヨーロッパのロマンチックホテル ♥️                  |   [Natural language processing](6-NLP/README.md)    | ホテルレビューによる感情分析1                                                                                         |                                               [Python](6-NLP/4-Hotel-Reviews-1/README.md)                                                |                       Stephen                        |
+|      20       |                  ヨーロッパのロマンチックホテル ♥️                  |   [Natural language processing](6-NLP/README.md)    | ホテルレビューによる感情分析2                                                                                         |                                               [Python](6-NLP/5-Hotel-Reviews-2/README.md)                                                |                       Stephen                        |
+|      21       |            時系列予測入門             |        [Time series](7-TimeSeries/README.md)        | 時系列予測入門                                                                                         |                                             [Python](7-TimeSeries/1-Introduction/README.md)                                              |                      Francesca                       |
+|      22       | ⚡️ 世界の電力使用 ⚡️ - ARIMAによる時系列予測 |        [Time series](7-TimeSeries/README.md)        | ARIMAを用いた時系列予測                                                                                              |                                                 [Python](7-TimeSeries/2-ARIMA/README.md)                                                 |                      Francesca                       |
+|      23       |  ⚡️ 世界の電力使用 ⚡️ - SVRによる時系列予測  |        [Time series](7-TimeSeries/README.md)        | サポートベクター回帰による時系列予測                                                                           |                                                  [Python](7-TimeSeries/3-SVR/README.md)                                                  |                       Anirban                        |
+|      24       |             強化学習入門             | [Reinforcement learning](8-Reinforcement/README.md) | Q学習を用いた強化学習の入門                                                                          |                                             [Python](8-Reinforcement/1-QLearning/README.md)                                              |                        Dmitry                        |
 |      25       |                 ピーターがオオカミを避けるのを助けよう！ 🐺                  | [Reinforcement learning](8-Reinforcement/README.md) | 強化学習ジム                                                                                                      |                                                [Python](8-Reinforcement/2-Gym/README.md)                                                 |                        Dmitry                        |
-|  Postscript   |            現実世界のMLシナリオとアプリケーション            |      [ML in the Wild](9-Real-World/README.md)       | 古典的なMLの興味深く、明らかな現実世界のアプリケーション                                                               |                                             [Lesson](9-Real-World/1-Applications/README.md)                                              |                         Team                         |
-|  Postscript   |            RAIダッシュボードを使用したMLのモデルデバッグ          |      [ML in the Wild](9-Real-World/README.md)       | Responsible AIダッシュボードコンポーネントを使用した機械学習のモデルデバッグ                                                              |                                             [Lesson](9-Real-World/2-Debugging-ML-Models/README.md)                                              |                         Ruth Yakubu                       |
+|  追伸   |            実世界のMLシナリオと応用            |      [ML in the Wild](9-Real-World/README.md)       | 古典的MLの興味深く示唆に富んだ実世界の応用                                                               |                                             [Lesson](9-Real-World/1-Applications/README.md)                                              |                         Team                         |
+|  追伸   |            RAIダッシュボードを用いたMLのモデルデバッグ          |      [ML in the Wild](9-Real-World/README.md)       | Responsible AIダッシュボードコンポーネントを用いた機械学習におけるモデルデバッグ                                                              |                                             [Lesson](9-Real-World/2-Debugging-ML-Models/README.md)                                              |                         Ruth Yakubu                       |
 
-> [このコースの追加リソースはMicrosoft Learnのコレクションで見つけることができます](https://learn.microsoft.com/en-us/collections/qrqzamz1nn2wx3?WT.mc_id=academic-77952-bethanycheum)
+> [本コースのすべての追加リソースはこちらのMicrosoft Learnコレクションでご覧いただけます](https://learn.microsoft.com/en-us/collections/qrqzamz1nn2wx3?WT.mc_id=academic-77952-bethanycheum)
 
 ## オフラインアクセス
 
-[Docsify](https://docsify.js.org/#/)を使用してこのドキュメントをオフラインで実行できます。このリポジトリをフォークし、ローカルマシンに[Docsifyをインストール](https://docsify.js.org/#/quickstart)し、このリポジトリのルートフォルダで`docsify serve`を入力します。ウェブサイトはlocalhostのポート3000で提供されます：`localhost:3000`。
+[Docsify](https://docsify.js.org/#/) を使用して、このドキュメントをオフラインで実行できます。このリポジトリをフォークし、ローカルマシンに[Docsifyをインストール](https://docsify.js.org/#/quickstart)してから、このリポジトリのルートフォルダーで `docsify serve` を入力してください。ウェブサイトはポート3000でローカルホストで提供されます： `localhost:3000`。
 
-## PDFs
-[ここ](https://microsoft.github.io/ML-For-Beginners/pdf/readme.pdf)でリンク付きのカリキュラムのPDFを見つけてください。
+## PDF
 
-## 助けが必要です
+カリキュラムのpdf（リンク付き）は[こちら](https://microsoft.github.io/ML-For-Beginners/pdf/readme.pdf)でご覧ください。
 
-翻訳に貢献したいですか？私たちの[翻訳ガイドライン](TRANSLATIONS.md)を読んで、作業負荷を管理するためのテンプレート化されたイシューを[こちら](https://github.com/microsoft/ML-For-Beginners/issues)に追加してください。
 
-## その他のカリキュラム
+## 🎒 その他のコース 
 
-私たちのチームは他のカリキュラムも制作しています！以下をご覧ください：
+当チームは他のコースも制作しています！ぜひご覧ください：
 
-- [AI for Beginners](https://aka.ms/ai4beginners)
-- [Data Science for Beginners](https://aka.ms/datascience-beginners)
-- [**New Version 2.0** - Generative AI for Beginners](https://aka.ms/genai-beginners)
-- [**NEW** Cybersecurity for Beginners](https://github.com/microsoft/Security-101??WT.mc_id=academic-96948-sayoung)
-- [Web Dev for Beginners](https://aka.ms/webdev-beginners)
-- [IoT for Beginners](https://aka.ms/iot-beginners)
-- [Machine Learning for Beginners](https://aka.ms/ml4beginners)
-- [XR Development for Beginners](https://aka.ms/xr-dev-for-beginners)
-- [Mastering GitHub Copilot for AI Paired Programming](https://aka.ms/GitHubCopilotAI)
+<!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### LangChain
+[![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+[![LangChain for Beginners](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
+---
 
-**免責事項**:
+### Azure / Edge / MCP / Agents
+[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
-この文書は機械翻訳サービスを使用して翻訳されています。正確性を期しておりますが、自動翻訳には誤りや不正確さが含まれる場合があります。原文が信頼できる情報源と見なされるべきです。重要な情報については、専門の人間による翻訳をお勧めします。この翻訳の使用により生じた誤解や誤認については、一切の責任を負いかねます。
+---
+ 
+### 生成AIシリーズ
+[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### コア学習
+[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### コパイロットシリーズ
+[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+<!-- CO-OP TRANSLATOR OTHER COURSES END -->
+
+## ヘルプを得る
+
+機械学習を学んだりAIアプリを作成したりする際に詰まったり質問があったりしても、心配はいりません — ヘルプをご利用いただけます。
+
+他の学習者や開発者とディスカッションに参加し、質問し、アイデアを共有できます。
+
+- コミュニティに参加して質問し、他の人と一緒に学ぶ
+- 機械学習の概念やプロジェクトのアイデアを議論する
+- 経験豊富な開発者から指導を受ける
+
+支援的なコミュニティはスキルを伸ばし、問題をより速く解決するのに役立ちます。
+
+[Microsoft Foundry Discord Community](https://discord.gg/nTYy5BXMWG)
+
+バグやエラーの発生、改善の提案があれば、このリポジトリで<strong>Issue</strong>を開いて問題を報告することもできます。
+
+製品に関するフィードバックや既存のコミュニティ投稿を検索するには、開発者フォーラムをご覧ください：
+
+[![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
+
+## 追加の学習のヒント
+
+- 各レッスン後にノートブックを復習して理解を深めましょう。
+- 自分でアルゴリズムを実装して練習しましょう。
+- 学んだ概念を使って実世界のデータセットを探求しましょう。
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免責事項**:  
+本書類はAI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性には努めておりますが、自動翻訳には誤りや不正確な内容が含まれる可能性があります。原文のネイティブ言語による文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因する誤解や誤訳については、一切の責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,148 +1,157 @@
-# Makine Öğrenimine Giriş
+# Makine öğrenimine giriş
 
-## [Ders Öncesi Test](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/1/)
-
----
-
-[![Yeni Başlayanlar İçin Makine Öğrenimi - Yeni Başlayanlar İçin Makine Öğrenimine Giriş](https://img.youtube.com/vi/6mSx_KJxcHI/0.jpg)](https://youtu.be/6mSx_KJxcHI "Yeni Başlayanlar İçin Makine Öğrenimi - Yeni Başlayanlar İçin Makine Öğrenimine Giriş")
-
-> 🎥 Bu dersi işleyen kısa bir video için yukarıdaki resme tıklayın.
-
-Yeni başlayanlar için klasik makine öğrenimi konusundaki bu kursa hoş geldiniz! Bu konuya tamamen yeni olsanız da, deneyimli bir ML uygulayıcısı olarak belirli bir alanı tazelemek isteseniz de, bize katıldığınız için mutluyuz! ML çalışmanıza dostça bir başlangıç noktası oluşturmak istiyoruz ve [geri bildiriminizi](https://github.com/microsoft/ML-For-Beginners/discussions) değerlendirmek, yanıtlamak ve dahil etmekten memnuniyet duyarız.
-
-[![ML'ye Giriş](https://img.youtube.com/vi/h0e2HAPTGF4/0.jpg)](https://youtu.be/h0e2HAPTGF4 "ML'ye Giriş")
-
-> 🎥 MIT'den John Guttag'ın makine öğrenimini tanıttığı video için yukarıdaki resme tıklayın
+## [Ders öncesi quiz](https://ff-quizzes.netlify.app/en/ml/)
 
 ---
-## Makine Öğrenimi ile Başlamak
 
-Bu müfredata başlamadan önce, bilgisayarınızı yerel olarak notebook'ları çalıştırmaya hazır hale getirmeniz gerekiyor.
+[![Başlangıç seviyesindekiler için ML - Makine Öğrenimine Giriş](https://img.youtube.com/vi/6mSx_KJxcHI/0.jpg)](https://youtu.be/6mSx_KJxcHI "Başlangıç seviyesindekiler için ML - Makine Öğrenimine Giriş")
 
-- **Bilgisayarınızı bu videolarla yapılandırın**. Sisteminizde [Python nasıl kurulur](https://youtu.be/CXZYvNRIAKM) ve geliştirme için bir [metin editörü nasıl ayarlanır](https://youtu.be/EU8eayHWoZg) öğrenmek için aşağıdaki bağlantıları kullanın.
-- **Python öğrenin**. Ayrıca bu kursta kullandığımız, veri bilimciler için faydalı bir programlama dili olan [Python](https://docs.microsoft.com/learn/paths/python-language/?WT.mc_id=academic-77952-leestott) hakkında temel bir anlayışa sahip olmanız önerilir.
-- **Node.js ve JavaScript öğrenin**. Bu kursta web uygulamaları oluştururken birkaç kez JavaScript kullanacağız, bu nedenle [node](https://nodejs.org) ve [npm](https://www.npmjs.com/) kurulu olmalı ve hem Python hem de JavaScript geliştirme için [Visual Studio Code](https://code.visualstudio.com/) kullanılabilir olmalıdır.
-- **GitHub hesabı oluşturun**. Bizi burada [GitHub](https://github.com) üzerinde bulduğunuza göre, muhtemelen bir hesabınız vardır, ancak yoksa bir hesap oluşturun ve bu müfredatı kendi kullanımınıza forklayın. (Bize bir yıldız vermekten çekinmeyin 😊)
-- **Scikit-learn'i keşfedin**. Bu derslerde referans verdiğimiz bir dizi ML kütüphanesi olan [Scikit-learn](https://scikit-learn.org/stable/user_guide.html) ile tanışın.
+> 🎥 Bu dersten geçen kısa video için yukarıdaki görsele tıklayın.
 
----
-## Makine Öğrenimi Nedir?
+Başlangıç seviyesindekiler için klasik makine öğrenimi kursuna hoş geldiniz! Bu konuya tamamen yeniyseniz ya da alanınızı tazelemek isteyen deneyimli bir ML uygulayıcısıysanız, bize katıldığınız için mutluyuz! Makine öğrenimi çalışmanız için dostane bir başlangıç noktası oluşturmak istiyoruz ve [geribildirimlerinizi](https://github.com/microsoft/ML-For-Beginners/discussions) değerlendirmeye, cevaplamaya ve dahil etmeye memnun oluruz.
 
-'Makine öğrenimi' terimi, günümüzün en popüler ve sık kullanılan terimlerinden biridir. Teknolojiye aşina iseniz, hangi alanda çalışıyor olursanız olun, bu terimi en az bir kez duymuş olma ihtimaliniz oldukça yüksektir. Ancak, makine öğreniminin mekanikleri çoğu insan için bir gizemdir. Makine öğrenimine yeni başlayan biri için konu bazen bunaltıcı olabilir. Bu nedenle, makine öğreniminin ne olduğunu anlamak ve pratik örneklerle adım adım öğrenmek önemlidir.
+[![Makine Öğrenimine Giriş](https://img.youtube.com/vi/h0e2HAPTGF4/0.jpg)](https://youtu.be/h0e2HAPTGF4 "Makine Öğrenimine Giriş")
+
+> 🎥 Aşağıdaki görsele tıklayarak bir video izleyin: MIT'den John Guttag makine öğrenimini tanıtıyor
 
 ---
-## Hype Eğrisi
+## Makine öğrenimine başlamak
 
-![ml hype curve](../../../../translated_images/hype.07183d711a17aafe70915909a0e45aa286ede136ee9424d418026ab00fec344c.tr.png)
+Bu müfredata başlamadan önce, bilgisayarınızın yerel olarak not defterlerini çalıştırmaya hazır olması gerekir.
 
-> Google Trends, 'makine öğrenimi' teriminin son zamanlardaki 'hype eğrisini' gösteriyor
-
----
-## Gizemli Bir Evren
-
-Büyüleyici gizemlerle dolu bir evrende yaşıyoruz. Stephen Hawking, Albert Einstein ve daha birçok büyük bilim insanı, etrafımızdaki dünyanın gizemlerini ortaya çıkaran anlamlı bilgileri aramak için hayatlarını adadılar. Bu, öğrenmenin insan halidir: Bir insan çocuğu yeni şeyler öğrenir ve büyüdükçe dünyasının yapısını yıl yıl keşfeder.
-
----
-## Çocuğun Beyni
-
-Bir çocuğun beyni ve duyuları, çevresindeki gerçekleri algılar ve hayatın gizli kalıplarını yavaş yavaş öğrenir, bu da çocuğun öğrenilen kalıpları tanımlamak için mantıksal kurallar oluşturmasına yardımcı olur. İnsan beyninin öğrenme süreci, insanları bu dünyanın en sofistike canlısı yapar. Gizli kalıpları keşfederek sürekli öğrenmek ve ardından bu kalıplar üzerinde yenilik yapmak, yaşamımız boyunca kendimizi daha iyi hale getirmemizi sağlar. Bu öğrenme kapasitesi ve evrimleşme yeteneği, [beyin plastisitesi](https://www.simplypsychology.org/brain-plasticity.html) adlı bir kavramla ilgilidir. Yüzeysel olarak, insan beyninin öğrenme süreci ile makine öğrenimi kavramları arasında bazı motive edici benzerlikler çizebiliriz.
+- **Makinenizi bu videolarla yapılandırın**. Sisteminizde [Python nasıl kurulur](https://youtu.be/CXZYvNRIAKM) öğrenmek ve geliştirme için bir [metin editörü nasıl kurulur](https://youtu.be/EU8eayHWoZg) öğrenmek için aşağıdaki bağlantıları kullanın.
+- **Python öğrenin**. Bu derste kullandığımız, veri bilimciler için yararlı bir programlama dili olan [Python](https://docs.microsoft.com/learn/paths/python-language/?WT.mc_id=academic-77952-leestott) hakkında temel bir anlayışa sahip olmak da önerilir.
+- **Node.js ve JavaScript öğrenin**. Bu derste web uygulamaları oluştururken birkaç kez JavaScript de kullanıyoruz, bu nedenle [node](https://nodejs.org) ve [npm](https://www.npmjs.com/) yüklü olmalı ve hem Python hem de JavaScript geliştirme için [Visual Studio Code](https://code.visualstudio.com/) hazır olmalıdır.
+- **Bir GitHub hesabı oluşturun**. Bizi burada [GitHub](https://github.com) üzerinde bulduğunuz için zaten bir hesabınız olabilir, ancak yoksa bir hesap oluşturun ve bu müfredatı kendi kullanımınız için fork edin. (Bize yıldız vermekten çekinmeyin 😊)
+- **Scikit-learn'u keşfedin**. Bu derslerde referans verdiğimiz bir makine öğrenimi kütüphaneleri seti olan [Scikit-learn](https://scikit-learn.org/stable/user_guide.html) ile tanışın.
 
 ---
-## İnsan Beyni
+## Makine öğrenimi nedir?
 
-[İnsan beyni](https://www.livescience.com/29365-human-brain.html), gerçek dünyadan şeyleri algılar, algılanan bilgileri işler, rasyonel kararlar alır ve duruma göre belirli eylemler gerçekleştirir. Buna zeki davranmak diyoruz. Zeki davranış sürecinin bir benzerini bir makineye programladığımızda, buna yapay zeka (AI) denir.
+'Makine öğrenimi' terimi, bugün en popüler ve en sık kullanılan terimlerden biridir. Teknolojiyle bir şekilde aşinalığınız varsa, hangi alanda çalışıyor olursanız olun, bu terimi en az bir kez duymuş olma olasılığınız oldukça yüksektir. Bununla birlikte, makine öğreniminin mekanikleri çoğu kişi için gizemlidir. Makine öğrenimine yeni başlayanlar için konu bazen bunaltıcı gelebilir. Bu nedenle, makine öğreniminin ne olduğunu tam anlamak ve onu pratik örneklerle adım adım öğrenmek önemlidir.
 
 ---
-## Bazı Terminoloji
+## Hype eğrisi
 
-Terimler karıştırılabilse de, makine öğrenimi (ML), yapay zekanın önemli bir alt kümesidir. **ML, rasyonel karar verme sürecini doğrulamak için algılanan verilerden anlamlı bilgiler ortaya çıkarmak ve gizli kalıpları bulmak için özel algoritmalar kullanmakla ilgilidir**.
+![ml hype curve](../../../../translated_images/tr/hype.07183d711a17aafe.webp)
+
+> Google Trends, 'makine öğrenimi' teriminin yakın zamandaki 'hype eğrisini' gösteriyor
+
+---
+## Gizemli bir evren
+
+Büyüleyici gizemlerle dolu bir evrende yaşıyoruz. Stephen Hawking, Albert Einstein gibi büyük bilim insanları, etrafımızdaki dünyanın gizemlerini ortaya çıkaran anlamlı bilgiler aramak için hayatlarını adamışlardır. Bu öğrenme hali doğrudandır: bir çocuk yeni şeyler öğrenir ve yetişkinliğe doğru büyürken dünyasının yapısını yıl yıl keşfeder.
+
+---
+## Çocuğun beyni
+
+Bir çocuğun beyni ve duyuları çevresindeki gerçekleri algılar ve yaşamın gizli kalıplarını öğrenir; bunlar, çocuğun öğrendiği kalıpları tanımlamak için mantıklı kurallar oluşturmasına yardımcı olur. İnsan beyninin öğrenme süreci, insanları bu dünyanın en sofistike canlıları yapar. Gizli kalıpları keşfederek ve sonra bu kalıplar üzerinde yenilik yaparak sürekli öğrenmek, kendimizi yaşam boyu daha iyi yapmamızı sağlar. Bu öğrenme kapasitesi ve gelişen yetenek, [beyin plastisitesi](https://www.simplypsychology.org/brain-plasticity.html) adı verilen bir kavramla ilişkilidir. Dıştan bakıldığında, insan beyninin öğrenme süreci ve makine öğrenimi kavramları arasında bazı motive edici benzerlikler çizilebilir.
+
+---
+## İnsan beyni
+
+[İnsan beyni](https://www.livescience.com/29365-human-brain.html), gerçek dünyadan şeyleri algılar, algılanan bilgiyi işler, rasyonel kararlar verir ve duruma göre belirli eylemler gerçekleştirir. Buna biz zeki davranmak diyoruz. Zeki davranış sürecinin bir benzerini bir makineye programladığımızda, buna yapay zeka (AI) denir.
+
+---
+## Bazı terimler
+
+Terimler karıştırılsa da, makine öğrenimi (ML) yapay zekanın önemli bir alt kümesidir. **ML, algılanan verilerden anlamlı bilgiler keşfetmek ve rasyonel karar verme sürecini desteklemek için gizli kalıpları bulmak üzere özel algoritmalar kullanmakla ilgilenir**.
 
 ---
 ## AI, ML, Derin Öğrenme
 
-![AI, ML, deep learning, data science](../../../../translated_images/ai-ml-ds.537ea441b124ebf69c144a52c0eb13a7af63c4355c2f92f440979380a2fb08b8.tr.png)
+![AI, ML, derin öğrenme, veri bilimi](../../../../translated_images/tr/ai-ml-ds.537ea441b124ebf6.webp)
 
-> AI, ML, derin öğrenme ve veri bilimi arasındaki ilişkileri gösteren bir diyagram. [Jen Looper](https://twitter.com/jenlooper) tarafından [bu grafik](https://softwareengineering.stackexchange.com/questions/366996/distinction-between-ai-ml-neural-networks-deep-learning-and-data-mining) ilham alınarak hazırlanan infografik
-
----
-## Kapsanacak Konular
-
-Bu müfredatta, bir başlangıcın bilmesi gereken makine öğreniminin temel kavramlarını ele alacağız. Öğrencilerin temel bilgileri öğrenmek için kullandığı mükemmel bir kütüphane olan Scikit-learn'i kullanarak 'klasik makine öğrenimi' dediğimiz şeyi kapsıyoruz. Yapay zeka veya derin öğrenmenin daha geniş kavramlarını anlamak için, makine öğreniminin güçlü bir temel bilgisine sahip olmak gereklidir ve bu bilgiyi burada sunmak istiyoruz.
+> AI, ML, derin öğrenme ve veri bilimi arasındaki ilişkileri gösteren bir diagram. [Jen Looper](https://twitter.com/jenlooper) tarafından oluşturulmuş, [bu grafik](https://softwareengineering.stackexchange.com/questions/366996/distinction-between-ai-ml-neural-networks-deep-learning-and-data-mining) temel alınmıştır.
 
 ---
-## Bu Kursta Öğrenecekleriniz:
+## Ele alınacak kavramlar
+
+Bu müfredatta, bir başlangıç seviyesinin bilmesi gereken sadece makine öğreniminin temel kavramlarını ele alacağız. Birçok öğrencinin temel becerileri öğrenmek için kullandığı mükemmel bir kütüphane olan Scikit-learn kullanarak esas olarak 'klasik makine öğrenimi'ni işliyoruz. Yapay zekanın ya da derin öğrenmenin daha geniş kavramlarını anlamak için makine öğreniminde sağlam temel bilgi şarttır, bunu burada size sunmak istiyoruz.
+
+---
+## Bu derste öğrenecekleriniz:
 
 - makine öğreniminin temel kavramları
-- ML'nin tarihi
+- ML tarihçesi
 - ML ve adalet
 - regresyon ML teknikleri
 - sınıflandırma ML teknikleri
 - kümeleme ML teknikleri
 - doğal dil işleme ML teknikleri
-- zaman serisi tahminleme ML teknikleri
+- zaman serisi tahmin ML teknikleri
 - pekiştirmeli öğrenme
 - ML'nin gerçek dünya uygulamaları
 
 ---
-## Kapsamayacağımız Konular
+## Ele alınmayacaklar
 
 - derin öğrenme
 - sinir ağları
 - AI
 
-Daha iyi bir öğrenme deneyimi sağlamak için, sinir ağlarının karmaşıklıklarından, 'derin öğrenme' - sinir ağları kullanarak çok katmanlı model oluşturma - ve AI'dan kaçınacağız, bunları farklı bir müfredatta ele alacağız. Ayrıca, bu daha geniş alanın bir yönüne odaklanmak için gelecek veri bilimi müfredatını sunacağız.
+Daha iyi bir öğrenme deneyimi sağlamak için sinir ağlarının karmaşıklığından, 'derin öğrenme' - sinir ağları kullanılarak çok katmanlı model oluşturma - ve AI'dan kaçınacağız; bunları başka bir müfredatta ele alacağız. Ayrıca bu daha büyük alanın veri bilimi yönüne odaklanan ilerleyen bir data science müfredatı sunmayı planlıyoruz.
 
 ---
-## Neden Makine Öğrenimi Çalışmalıyız?
+## Neden makine öğrenimi çalışmalısınız?
 
-Sistemler perspektifinden makine öğrenimi, verilerden gizli kalıpları öğrenerek akıllı kararlar almaya yardımcı olan otomatik sistemlerin oluşturulması olarak tanımlanır.
+Sistem perspektifinden makine öğrenimi, zekice karar vermeye yardımcı olmak için verilerden gizli kalıpları öğrenebilen otomatik sistemlerin oluşturulması olarak tanımlanır.
 
-Bu motivasyon, insan beyninin dış dünyadan algıladığı verilere dayanarak belirli şeyleri nasıl öğrendiğinden gevşek bir şekilde ilham almıştır.
+Bu motivasyon, insan beyninin dış dünyadan algıladığı verilere dayanarak bazı şeyleri nasıl öğrendiğiyle gevşekçe ilham alınmıştır.
 
-✅ Bir işin neden makine öğrenimi stratejilerini kullanmak isteyebileceğini düşünün, sabit kodlanmış kurallara dayalı bir motor oluşturmak yerine.
-
----
-## Makine Öğrenimi Uygulamaları
-
-Makine öğrenimi uygulamaları artık hemen her yerde ve akıllı telefonlarımız, bağlı cihazlarımız ve diğer sistemler tarafından üretilen veriler kadar yaygın. En son teknoloji makine öğrenimi algoritmalarının muazzam potansiyelini göz önünde bulundurarak, araştırmacılar, çok boyutlu ve çok disiplinli gerçek yaşam problemlerini büyük olumlu sonuçlarla çözme yeteneklerini araştırıyorlar.
+✅ Bir işletmenin neden katı kurallarla çalışan bir motor yaratmak yerine makine öğrenimi stratejileri kullanmak isteyebileceğini bir dakika düşünün.
 
 ---
-## Uygulamalı ML Örnekleri
+## Veri kalitesi neden önemlidir?
+
+Yüksek kaliteli veri model performansını artırır. Kötü veya gürültülü veriler, gelişmiş makine öğrenimi algoritmaları kullanılsa bile yanlış tahminlere yol açabilir.
+
+---
+## Makine öğrenimi uygulamaları
+
+Makine öğrenimi uygulamaları artık hemen her yerde ve akıllı telefonlarımız, bağlı cihazlarımız ve diğer sistemlerimiz tarafından üretilen veri kadar yaygın. En gelişmiş makine öğrenimi algoritmalarının muazzam potansiyelini göz önünde bulundurarak, araştırmacılar çok boyutlu ve çok disiplinli gerçek yaşam problemlerini büyük olumlu sonuçlarla çözme yeteneklerini keşfetmektedir.
+
+---
+## Uygulamalı ML örnekleri
 
 **Makine öğrenimini birçok şekilde kullanabilirsiniz**:
 
-- Bir hastanın tıbbi geçmişinden veya raporlarından hastalık olasılığını tahmin etmek için.
-- Hava durumu verilerini kullanarak hava olaylarını tahmin etmek için.
-- Bir metnin duyarlılığını anlamak için.
-- Propagandanın yayılmasını durdurmak için sahte haberleri tespit etmek için.
+- Bir hastanın tıbbi geçmişi veya raporlarından hastalığın olasılığını tahmin etmek.
+- Hava durumu verilerini kullanarak hava olaylarını tahmin etmek.
+- Bir metnin duygu durumunu anlamak.
+- Yanlış haberleri tespit ederek propaganda yayılmasını durdurmak.
 
-Finans, ekonomi, yer bilimi, uzay keşfi, biyomedikal mühendislik, bilişsel bilim ve hatta beşeri bilimler alanları, alanlarının zorlu, veri işleme ağırlıklı sorunlarını çözmek için makine öğrenimini benimsemiştir.
+Finans, ekonomi, yer bilimleri, uzay keşfi, biyomedikal mühendislik, bilişsel bilimler ve hatta beşeri bilimler alanları, kendi alanlarındaki zorlu, veri işleme yoğun sorunları çözmek için makine öğrenimini uyarlamıştır.
 
 ---
 ## Sonuç
 
-Makine öğrenimi, gerçek dünyadan veya üretilmiş verilerden anlamlı içgörüler bularak kalıp keşfetme sürecini otomatikleştirir. İş, sağlık ve finans uygulamaları da dahil olmak üzere birçok alanda son derece değerli olduğunu kanıtlamıştır.
+Makine öğrenimi, gerçek dünya veya üretilmiş verilerden anlamlı içgörüler bularak kalıp keşfi sürecini otomatikleştirir. İş, sağlık ve finans gibi alanlarda kendini çok değerli kanıtlamıştır.
 
-Yakın gelecekte, makine öğreniminin temellerini anlamak, yaygın olarak benimsenmesi nedeniyle herhangi bir alandaki insanlar için bir zorunluluk haline gelecektir.
+Yakın gelecekte, yaygın kullanımı nedeniyle makine öğreniminin temellerini anlamak herhangi bir alandan insanlar için zorunlu hale gelecektir.
 
 ---
-# 🚀 Meydan Okuma
+# 🚀 Meydan okuma
 
-Kağıt üzerinde veya [Excalidraw](https://excalidraw.com/) gibi bir çevrimiçi uygulama kullanarak, AI, ML, derin öğrenme ve veri bilimi arasındaki farkları anladığınızı çizin. Bu tekniklerin her birinin çözmede iyi olduğu problemler hakkında bazı fikirler ekleyin.
+AI, ML, derin öğrenme ve veri bilimi arasındaki farkları kağıda veya [Excalidraw](https://excalidraw.com/) gibi çevrimiçi bir uygulama kullanarak tasvir edin. Bu tekniklerin her birinin hangi sorunları çözmekte iyi olduğuna dair bazı fikirler ekleyin.
 
-# [Ders Sonrası Test](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/2/)
+# [Ders sonrası quiz](https://ff-quizzes.netlify.app/en/ml/)
 
 ---
 # İnceleme & Kendi Kendine Çalışma
 
-Bulutta ML algoritmalarıyla nasıl çalışabileceğiniz hakkında daha fazla bilgi edinmek için bu [Öğrenme Yolunu](https://docs.microsoft.com/learn/paths/create-no-code-predictive-models-azure-machine-learning/?WT.mc_id=academic-77952-leestott) takip edin.
+Bulutta ML algoritmaları ile nasıl çalışabileceğinizi öğrenmek için bu [Öğrenme Yolu](https://docs.microsoft.com/learn/paths/create-no-code-predictive-models-azure-machine-learning/?WT.mc_id=academic-77952-leestott)'nu takip edin.
 
-ML'nin temelleri hakkında bir [Öğrenme Yolu](https://docs.microsoft.com/learn/modules/introduction-to-machine-learning/?WT.mc_id=academic-77952-leestott) alın.
+ML'nin temelleri hakkında bir [Öğrenme Yolu](https://docs.microsoft.com/learn/modules/introduction-to-machine-learning/?WT.mc_id=academic-77952-leestott)'na katılın.
 
 ---
 # Ödev
 
-[Başlamak için](assignment.md)
+[Başlayın ve çalıştırın](assignment.md)
 
-**Feragatname**: 
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından doğabilecek yanlış anlaşılmalar veya yanlış yorumlamalardan sorumlu değiliz.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

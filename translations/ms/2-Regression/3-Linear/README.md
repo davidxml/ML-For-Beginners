@@ -1,124 +1,136 @@
-# Bina model regresi menggunakan Scikit-learn: regresi empat cara
+# Membangun model regresi menggunakan Scikit-learn: regresi dengan empat cara
 
-![Infografik regresi linear vs polinomial](../../../../translated_images/linear-polynomial.5523c7cb6576ccab0fecbd0e3505986eb2d191d9378e785f82befcf3a578a6e7.ms.png)
-> Infografik oleh [Dasani Madipalli](https://twitter.com/dasani_decoded)
-## [Kuis pra-kuliah](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/13/)
+## Nota Pemula
 
-> ### [Pelajaran ini tersedia dalam R!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)
-### Pengenalan 
+Regresi linear digunakan apabila kita ingin meramalkan **nilai berangka** (contohnya, harga rumah, suhu, atau jualan).  
+Ia berfungsi dengan mencari garis lurus yang paling mewakili hubungan antara ciri input dan output.
 
-Sejauh ini, Anda telah menjelajahi apa itu regresi dengan data sampel yang dikumpulkan dari dataset harga labu yang akan kita gunakan sepanjang pelajaran ini. Anda juga telah memvisualisasikannya menggunakan Matplotlib.
+Dalam pelajaran ini, kita memberi tumpuan kepada memahami konsep sebelum meneroka teknik regresi yang lebih maju.  
+![Linear vs polynomial regression infographic](../../../../translated_images/ms/linear-polynomial.5523c7cb6576ccab.webp)  
+> Infografik oleh [Dasani Madipalli](https://twitter.com/dasani_decoded)  
+## [Kuiz Pra-ceramah](https://ff-quizzes.netlify.app/en/ml/)
 
-Sekarang Anda siap untuk mendalami regresi untuk ML. Sementara visualisasi memungkinkan Anda memahami data, kekuatan sebenarnya dari Pembelajaran Mesin berasal dari _melatih model_. Model dilatih pada data historis untuk secara otomatis menangkap ketergantungan data, dan mereka memungkinkan Anda memprediksi hasil untuk data baru, yang belum pernah dilihat oleh model sebelumnya.
+> ### [Pelajaran ini juga tersedia dalam R!](../../../../2-Regression/3-Linear/solution/R/lesson_3.html)  
+### Pengenalan
 
-Dalam pelajaran ini, Anda akan mempelajari lebih lanjut tentang dua jenis regresi: _regresi linear dasar_ dan _regresi polinomial_, bersama dengan beberapa matematika yang mendasari teknik-teknik ini. Model-model tersebut akan memungkinkan kita memprediksi harga labu tergantung pada data input yang berbeda.
+Setakat ini anda telah meneroka apa itu regresi dengan data contoh yang diambil dari set data harga labu yang akan kita gunakan sepanjang pelajaran ini. Anda juga telah memvisualisasikannya menggunakan Matplotlib.
 
-[![ML untuk pemula - Memahami Regresi Linear](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "ML untuk pemula - Memahami Regresi Linear")
+Kini anda bersedia untuk menyelami lebih dalam regresi untuk ML. Walaupun visualisasi membolehkan anda memahami data, kuasa sebenar Pembelajaran Mesin datang dari _melatih model_. Model dilatih menggunakan data sejarah untuk secara automatik menangkap pergantungan data, dan membolehkan anda meramalkan hasil bagi data baru yang belum pernah dilihat model sebelum ini.
 
-> 🎥 Klik gambar di atas untuk video singkat tentang regresi linear.
+Dalam pelajaran ini, anda akan belajar lebih lanjut tentang dua jenis regresi: _regresi linear asas_ dan _regresi polinomial_, bersama beberapa matematik yang mendasari teknik-teknik ini. Model-model ini akan membolehkan kita meramalkan harga labu bergantung kepada data input yang berbeza.
 
-> Sepanjang kurikulum ini, kami mengasumsikan pengetahuan matematika minimal, dan berusaha membuatnya dapat diakses oleh siswa yang berasal dari bidang lain, jadi perhatikan catatan, 🧮 panggilan, diagram, dan alat bantu belajar lainnya untuk membantu pemahaman.
+[![ML for beginners - Understanding Linear Regression](https://img.youtube.com/vi/CRxFT8oTDMg/0.jpg)](https://youtu.be/CRxFT8oTDMg "ML for beginners - Understanding Linear Regression")
+
+> 🎥 Klik imej di atas untuk tontonan video ringkas mengenai regresi linear.
+
+> Sepanjang kurikulum ini, kami menganggap pengetahuan matematik yang minima, dan berusaha menjadikannya mudah difahami oleh pelajar yang datang dari bidang lain, jadi perhatikan nota, 🧮 panggilan, rajah, dan alat pembelajaran lain untuk membantu pemahaman.
 
 ### Prasyarat
 
-Anda seharusnya sudah familiar dengan struktur data labu yang kita periksa. Anda dapat menemukannya dimuat sebelumnya dan dibersihkan sebelumnya dalam file _notebook.ipynb_ pelajaran ini. Dalam file tersebut, harga labu ditampilkan per gantang dalam bingkai data baru. Pastikan Anda dapat menjalankan notebook ini dalam kernel di Visual Studio Code.
+Anda sepatutnya kini sudah biasa dengan struktur data labu yang kita periksa. Anda boleh menemuinya telah dimuat dan dibersihkan dalam fail _notebook.ipynb_ pelajaran ini. Dalam fail tersebut, harga labu dipaparkan per bushel dalam bingkai data baru. Pastikan anda boleh menjalankan nota ini dalam kernel di Visual Studio Code.
 
-### Persiapan
+### Persediaan
 
-Sebagai pengingat, Anda memuat data ini untuk menanyakan pertanyaan tentangnya. 
+Sebagai peringatan, anda memuatkan data ini untuk menyoal soalan mengenainya.
 
-- Kapan waktu terbaik untuk membeli labu?
-- Berapa harga yang bisa saya harapkan untuk satu kotak labu miniatur?
-- Haruskah saya membelinya dalam keranjang setengah gantang atau dalam kotak 1 1/9 gantang?
-Mari kita terus menggali data ini.
+- Bila masa terbaik untuk membeli labu?  
+- Berapakah harga yang boleh saya jangka bagi satu kotak labu mini?  
+- Patutkah saya membelinya dalam bakul setengah bushel atau kotak 1 1/9 bushel?  
+Mari terus menggali data ini.
 
-Dalam pelajaran sebelumnya, Anda membuat bingkai data Pandas dan mengisinya dengan bagian dari dataset asli, menstandarkan harga berdasarkan gantang. Dengan melakukan itu, Anda hanya bisa mengumpulkan sekitar 400 titik data dan hanya untuk bulan-bulan musim gugur.
+Dalam pelajaran sebelum ini, anda telah mencipta bingkai data Pandas dan mengisinya dengan sebahagian daripada set data asal, menstandardkan harga mengikut bushel. Dengan melakukan itu, bagaimanapun, anda hanya dapat mengumpul kira-kira 400 titik data dan hanya bagi bulan musim luruh.
 
-Lihat data yang telah dimuat sebelumnya dalam notebook yang menyertai pelajaran ini. Data dimuat sebelumnya dan diagram pencar awal dibuat untuk menunjukkan data bulan. Mungkin kita bisa mendapatkan lebih banyak detail tentang sifat data dengan membersihkannya lebih lanjut.
+Lihat data yang telah kita muatkan dalam notebook yang disertakan pelajaran ini. Data telah dimuat dan scatterplot awal dipetakan untuk menunjukkan data bulan. Mungkin kita boleh mendapatkan sedikit lebih banyak butiran tentang sifat data dengan membersihkannya lebih lanjut.
 
 ## Garis regresi linear
 
-Seperti yang Anda pelajari di Pelajaran 1, tujuan dari latihan regresi linear adalah untuk dapat memplot garis untuk:
+Seperti yang anda pelajari dalam Pelajaran 1, tujuan latihan regresi linear adalah untuk dapat melakar garis untuk:
 
-- **Menunjukkan hubungan variabel**. Menunjukkan hubungan antara variabel
-- **Membuat prediksi**. Membuat prediksi akurat tentang di mana titik data baru akan jatuh dalam hubungan dengan garis itu.
- 
-Biasanya **Regresi Kuadrat Terkecil** menggambar jenis garis ini. Istilah 'kuadrat terkecil' berarti semua titik data di sekitar garis regresi dikuadratkan dan kemudian dijumlahkan. Idealnya, jumlah akhir itu sekecil mungkin, karena kita menginginkan jumlah kesalahan yang rendah, atau `least-squares`. 
+- **Menunjukkan hubungan pemboleh ubah**. Menunjukkan hubungan antara pemboleh ubah  
+- **Membuat ramalan**. Membuat ramalan tepat tentang di mana titik data baru akan jatuh berbanding garis tersebut.
 
-Kita melakukannya karena kita ingin memodelkan garis yang memiliki jarak kumulatif terkecil dari semua titik data kita. Kita juga mengkuadratkan istilah-istilah sebelum menjumlahkannya karena kita lebih peduli dengan besarnya daripada arahnya.
+Biasanya, **Regresi Kuasa Dua Terkecil** digunakan untuk melakar jenis garis ini. Istilah "Least-Squares" merujuk kepada proses meminimumkan jumlah ralat dalam model kita. Untuk setiap titik data, kita mengukur jarak menegak (dipanggil residual) antara titik sebenar dan garis regresi kita.
 
-> **🧮 Tunjukkan matematika kepada saya** 
-> 
-> Garis ini, yang disebut _garis kecocokan terbaik_ dapat dinyatakan dengan [sebuah persamaan](https://en.wikipedia.org/wiki/Simple_linear_regression): 
-> 
+Kita kuasakan jarak ini untuk dua sebab utama:
+
+1. **Magnitud mengatasi Arah:** Kita ingin menganggap ralat -5 sama seperti ralat +5. Pengkuasaan menjadikan semua nilai positif.
+
+2. **Menghukum Nilai Luar:** Pengkuasaan memberikan berat lebih pada ralat yang besar, memaksa garis kekal lebih dekat kepada titik yang jauh.
+
+Kita kemudian menambah semua nilai kuasa dua ini bersama. Matlamat kita adalah untuk mencari garis spesifik di mana jumlah akhir ini adalah paling kecil (nilai terkecil yang boleh)—oleh itu namanya "Least-Squares".
+
+> **🧮 Tunjukkan saya matematiknya**  
+>  
+> Garis ini, dipanggil _garis kesesuaian terbaik_ boleh dinyatakan oleh [persamaan](https://en.wikipedia.org/wiki/Simple_linear_regression):  
+>  
 > ```
 > Y = a + bX
 > ```
->
-> `X` is the 'explanatory variable'. `Y` is the 'dependent variable'. The slope of the line is `b` and `a` is the y-intercept, which refers to the value of `Y` when `X = 0`. 
->
->![calculate the slope](../../../../translated_images/slope.f3c9d5910ddbfcf9096eb5564254ba22c9a32d7acd7694cab905d29ad8261db3.ms.png)
->
-> First, calculate the slope `b`. Infographic by [Jen Looper](https://twitter.com/jenlooper)
->
-> In other words, and referring to our pumpkin data's original question: "predict the price of a pumpkin per bushel by month", `X` would refer to the price and `Y` would refer to the month of sale. 
->
->![complete the equation](../../../../translated_images/calculation.a209813050a1ddb141cdc4bc56f3af31e67157ed499e16a2ecf9837542704c94.ms.png)
->
-> Calculate the value of Y. If you're paying around $4, it must be April! Infographic by [Jen Looper](https://twitter.com/jenlooper)
->
-> The math that calculates the line must demonstrate the slope of the line, which is also dependent on the intercept, or where `Y` is situated when `X = 0`.
->
-> You can observe the method of calculation for these values on the [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html) web site. Also visit [this Least-squares calculator](https://www.mathsisfun.com/data/least-squares-calculator.html) to watch how the numbers' values impact the line.
+>  
+> `X` adalah 'pemboleh ubah penjelas'. `Y` adalah 'pemboleh ubah bersandar'. Kecerunan garis ialah `b` dan `a` ialah pintasan-y, iaitu nilai `Y` apabila `X = 0`.  
+>  
+>![calculate the slope](../../../../translated_images/ms/slope.f3c9d5910ddbfcf9.webp)  
+>  
+> Pertama, kira kecerunan `b`. Infografik oleh [Jen Looper](https://twitter.com/jenlooper)  
+>  
+> Dalam kata lain, dan merujuk kepada soalan asal data labu kita: "membuat ramalan harga labu per bushel mengikut bulan", `X` merujuk kepada harga dan `Y` merujuk kepada bulan jualan.  
+>  
+>![complete the equation](../../../../translated_images/ms/calculation.a209813050a1ddb1.webp)  
+>  
+> Kira nilai Y. Jika anda membayar sekitar $4, mestilah April! Infografik oleh [Jen Looper](https://twitter.com/jenlooper)  
+>  
+> Matematik yang mengira garis ini mesti menunjukkan kecerunan garis, yang juga bergantung kepada pintasan, iaitu tempat `Y` terletak apabila `X = 0`.  
+>  
+> Anda boleh melihat kaedah pengiraan nilai-nilai ini di laman web [Math is Fun](https://www.mathsisfun.com/data/least-squares-regression.html). Juga lawati [kalkulator Least-squares ini](https://www.mathsisfun.com/data/least-squares-calculator.html) untuk melihat bagaimana nilai nombor mempengaruhi garis.
 
-## Correlation
+## Korelasi
 
-One more term to understand is the **Correlation Coefficient** between given X and Y variables. Using a scatterplot, you can quickly visualize this coefficient. A plot with datapoints scattered in a neat line have high correlation, but a plot with datapoints scattered everywhere between X and Y have a low correlation.
+Satu lagi istilah yang perlu difahami ialah **Pekali Korelasi** antara pemboleh ubah X dan Y yang diberikan. Dengan menggunakan scatterplot, anda boleh segera memvisualisasikan pekali ini. Plot dengan titik data yang bersepah membentuk garis kemas mempunyai korelasi tinggi, manakala plot dengan titik data yang bersepah di mana-mana sahaja antara X dan Y mempunyai korelasi rendah.
 
-A good linear regression model will be one that has a high (nearer to 1 than 0) Correlation Coefficient using the Least-Squares Regression method with a line of regression.
+Model regresi linear yang baik adalah yang mempunyai Pekali Korelasi yang tinggi (lebih hampir kepada 1 daripada 0) menggunakan kaedah Regresi Least-Squares dengan garis regresi.
 
-✅ Run the notebook accompanying this lesson and look at the Month to Price scatterplot. Does the data associating Month to Price for pumpkin sales seem to have high or low correlation, according to your visual interpretation of the scatterplot? Does that change if you use more fine-grained measure instead of `Month`, eg. *day of the year* (i.e. number of days since the beginning of the year)?
+✅ Jalankan notebook yang disertakan pelajaran ini dan lihat scatterplot Bulan ke Harga. Adakah data yang mengaitkan Bulan ke Harga bagi jualan labu kelihatan mempunyai korelasi tinggi atau rendah, mengikut tafsiran visual anda terhadap scatterplot tersebut? Adakah ia berubah jika anda menggunakan ukuran yang lebih terperinci daripada `Month`, contohnya *hari dalam tahun* (iaitu bilangan hari sejak awal tahun)?
 
-In the code below, we will assume that we have cleaned up the data, and obtained a data frame called `new_pumpkins`, similar to the following:
+Dalam kod di bawah, kita akan mengandaikan bahawa kita telah membersihkan data, dan memperoleh bingkai data yang dinamakan `new_pumpkins`, yang serupa dengan berikut:
 
-ID | Month | DayOfYear | Variety | City | Package | Low Price | High Price | Price
----|-------|-----------|---------|------|---------|-----------|------------|-------
-70 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
-71 | 9 | 267 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636
-72 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 18.0 | 18.0 | 16.363636
-73 | 10 | 274 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 17.0 | 17.0 | 15.454545
-74 | 10 | 281 | PIE TYPE | BALTIMORE | 1 1/9 bushel cartons | 15.0 | 15.0 | 13.636364
+ID | Bulan | DayOfYear | Jenis | Bandar | Pakej | Harga Rendah | Harga Tinggi | Harga  
+---|-------|-----------|---------|------|---------|-----------|------------|-------  
+70 | 9 | 267 | JENIS PAI | BALTIMORE | Karton 1 1/9 bushel | 15.0 | 15.0 | 13.636364  
+71 | 9 | 267 | JENIS PAI | BALTIMORE | Karton 1 1/9 bushel | 18.0 | 18.0 | 16.363636  
+72 | 10 | 274 | JENIS PAI | BALTIMORE | Karton 1 1/9 bushel | 18.0 | 18.0 | 16.363636  
+73 | 10 | 274 | JENIS PAI | BALTIMORE | Karton 1 1/9 bushel | 17.0 | 17.0 | 15.454545  
+74 | 10 | 281 | JENIS PAI | BALTIMORE | Karton 1 1/9 bushel | 15.0 | 15.0 | 13.636364  
 
-> The code to clean the data is available in [`notebook.ipynb`](../../../../2-Regression/3-Linear/notebook.ipynb). We have performed the same cleaning steps as in the previous lesson, and have calculated `DayOfYear` column menggunakan ekspresi berikut: 
+> Kod untuk membersihkan data boleh didapati dalam [`notebook.ipynb`](notebook.ipynb). Kita telah melakukan langkah pembersihan yang sama seperti dalam pelajaran sebelumnya, dan telah mengira lajur `DayOfYear` menggunakan ungkapan berikut:
 
 ```python
 day_of_year = pd.to_datetime(pumpkins['Date']).apply(lambda dt: (dt-datetime(dt.year,1,1)).days)
 ```
-
-Sekarang Anda memahami matematika di balik regresi linear, mari kita buat model Regresi untuk melihat apakah kita dapat memprediksi paket labu mana yang akan memiliki harga labu terbaik. Seseorang yang membeli labu untuk tambalan labu liburan mungkin menginginkan informasi ini untuk dapat mengoptimalkan pembelian paket labu untuk tambalan tersebut.
+  
+Sekarang bahawa anda memahami matematik di sebalik regresi linear, mari cipta model Regresi untuk melihat jika kita boleh meramalkan pakej mana labu yang akan mempunyai harga labu terbaik. Seseorang yang membeli labu untuk kawasan labu perayaan mungkin mahukan maklumat ini untuk mengoptimumkan pembelian pakej labu mereka.
 
 ## Mencari Korelasi
 
-[![ML untuk pemula - Mencari Korelasi: Kunci Regresi Linear](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "ML untuk pemula - Mencari Korelasi: Kunci Regresi Linear")
+[![ML for beginners - Looking for Correlation: The Key to Linear Regression](https://img.youtube.com/vi/uoRq-lW2eQo/0.jpg)](https://youtu.be/uoRq-lW2eQo "ML for beginners - Looking for Correlation: The Key to Linear Regression")
 
-> 🎥 Klik gambar di atas untuk video singkat tentang korelasi.
+> 🎥 Klik imej di atas untuk tontonan video ringkas mengenai korelasi.
 
-Dari pelajaran sebelumnya, Anda mungkin telah melihat bahwa harga rata-rata untuk bulan yang berbeda terlihat seperti ini:
+Daripada pelajaran sebelum ini anda mungkin telah melihat bahawa harga purata bagi bulan-bulan berbeza kelihatan seperti ini:
 
-<img alt="Harga rata-rata per bulan" src="../2-Data/images/barchart.png" width="50%"/>
+<img alt="Average price by month" src="../../../../translated_images/ms/barchart.a833ea9194346d76.webp" width="50%"/>
 
-Ini menunjukkan bahwa harus ada beberapa korelasi, dan kita dapat mencoba melatih model regresi linear untuk memprediksi hubungan antara `Month` and `Price`, or between `DayOfYear` and `Price`. Here is the scatter plot that shows the latter relationship:
+Ini mencadangkan bahawa harus ada korelasi tertentu, dan kita boleh cuba melatih model regresi linear untuk meramalkan hubungan antara `Month` dan `Price`, atau antara `DayOfYear` dan `Price`. Berikut adalah scatter plot yang menunjukkan hubungan yang kedua:
 
-<img alt="Scatter plot of Price vs. Day of Year" src="images/scatter-dayofyear.png" width="50%" /> 
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/ms/scatter-dayofyear.bc171c189c9fd553.webp" width="50%" />  
 
-Let's see if there is a correlation using the `corr` function:
+Mari kita lihat jika terdapat korelasi menggunakan fungsi `corr`:
 
 ```python
 print(new_pumpkins['Month'].corr(new_pumpkins['Price']))
 print(new_pumpkins['DayOfYear'].corr(new_pumpkins['Price']))
 ```
-
-Sepertinya korelasinya cukup kecil, -0.15 oleh `Month` and -0.17 by the `DayOfMonth`, but there could be another important relationship. It looks like there are different clusters of prices corresponding to different pumpkin varieties. To confirm this hypothesis, let's plot each pumpkin category using a different color. By passing an `ax` parameter to the `scatter` plotting function kita bisa plot semua titik pada grafik yang sama:
+  
+Nampaknya korelasi agak kecil, -0.15 mengikut `Month` dan -0.17 mengikut `DayOfYear`, tetapi mungkin ada hubungan penting lain. Nampaknya terdapat kelompok harga yang berbeza berkaitan dengan pelbagai jenis labu. Untuk mengesahkan hipotesis ini, mari plotkan setiap kategori labu menggunakan warna yang berbeza. Dengan memberikan parameter `ax` kepada fungsi `scatter` kita boleh plot semua titik pada graf yang sama:
 
 ```python
 ax=None
@@ -127,41 +139,41 @@ for i,var in enumerate(new_pumpkins['Variety'].unique()):
     df = new_pumpkins[new_pumpkins['Variety']==var]
     ax = df.plot.scatter('DayOfYear','Price',ax=ax,c=colors[i],label=var)
 ```
+  
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/ms/scatter-dayofyear-color.65790faefbb9d54f.webp" width="50%" />  
 
-<img alt="Diagram pencar Harga vs. Hari dalam Tahun" src="images/scatter-dayofyear-color.png" width="50%" /> 
-
-Penyelidikan kami menunjukkan bahwa variasi memiliki lebih banyak pengaruh pada harga keseluruhan daripada tanggal penjualan yang sebenarnya. Kita bisa melihat ini dengan diagram batang:
+Penyiasatan kita mencadangkan bahawa jenis labu mempunyai lebih kesan ke atas harga keseluruhan daripada tarikh jualan sebenar. Kita dapat lihat ini dengan graf bar:
 
 ```python
 new_pumpkins.groupby('Variety')['Price'].mean().plot(kind='bar')
 ```
+  
+<img alt="Bar graph of price vs variety" src="../../../../translated_images/ms/price-by-variety.744a2f9925d9bcb4.webp" width="50%" />  
 
-<img alt="Diagram batang harga vs variasi" src="images/price-by-variety.png" width="50%" /> 
-
-Mari kita fokus untuk saat ini hanya pada satu variasi labu, 'jenis pai', dan lihat apa pengaruh tanggal terhadap harga:
+Mari kita fokus buat masa ini pada satu jenis labu, iaitu 'jenis pai', dan lihat kesan tarikh ke atas harga:
 
 ```python
 pie_pumpkins = new_pumpkins[new_pumpkins['Variety']=='PIE TYPE']
 pie_pumpkins.plot.scatter('DayOfYear','Price') 
 ```
-<img alt="Diagram pencar Harga vs. Hari dalam Tahun" src="images/pie-pumpkins-scatter.png" width="50%" /> 
+<img alt="Scatter plot of Price vs. Day of Year" src="../../../../translated_images/ms/pie-pumpkins-scatter.d14f9804a53f927e.webp" width="50%" />  
 
-Jika kita sekarang menghitung korelasi antara `Price` and `DayOfYear` using `corr` function, we will get something like `-0.27` - yang berarti melatih model prediktif masuk akal.
+Jika kita sekarang mengira korelasi antara `Price` dan `DayOfYear` menggunakan fungsi `corr`, kita akan dapat nilai lebih kurang `-0.27` - yang bermakna melatih model ramalan adalah munasabah.
 
-> Sebelum melatih model regresi linear, penting untuk memastikan bahwa data kita bersih. Regresi linear tidak bekerja dengan baik dengan nilai yang hilang, sehingga masuk akal untuk menghapus semua sel kosong:
+> Sebelum melatih model regresi linear, adalah penting untuk memastikan data kita bersih. Regresi linear tidak berfungsi dengan baik dengan nilai hilang, maka adalah wajar untuk membuang semua sel kosong:
 
 ```python
 pie_pumpkins.dropna(inplace=True)
 pie_pumpkins.info()
 ```
+  
+Pendekatan lain adalah mengisi nilai kosong tersebut dengan nilai purata dari lajur yang sepadan.
 
-Pendekatan lain adalah mengisi nilai kosong tersebut dengan nilai rata-rata dari kolom yang sesuai.
+## Regresi Linear Mudah
 
-## Regresi Linear Sederhana
+[![ML for beginners - Linear and Polynomial Regression using Scikit-learn](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "ML for beginners - Linear and Polynomial Regression using Scikit-learn")
 
-[![ML untuk pemula - Regresi Linear dan Polinomial menggunakan Scikit-learn](https://img.youtube.com/vi/e4c_UP2fSjg/0.jpg)](https://youtu.be/e4c_UP2fSjg "ML untuk pemula - Regresi Linear dan Polinomial menggunakan Scikit-learn")
-
-> 🎥 Klik gambar di atas untuk video singkat tentang regresi linear dan polinomial.
+> 🎥 Klik imej di atas untuk tontonan video ringkas mengenai regresi linear dan polinomial.
 
 Untuk melatih model Regresi Linear kita, kita akan menggunakan perpustakaan **Scikit-learn**.
 
@@ -170,70 +182,70 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 ```
-
-Kita mulai dengan memisahkan nilai input (fitur) dan output yang diharapkan (label) menjadi array numpy terpisah:
+  
+Kita mulakan dengan memisahkan nilai input (ciri) dan output yang dijangkakan (label) ke dalam array numpy yang berasingan:
 
 ```python
 X = pie_pumpkins['DayOfYear'].to_numpy().reshape(-1,1)
 y = pie_pumpkins['Price']
 ```
+  
+> Perhatikan bahawa kita terpaksa melakukan `reshape` ke atas data input supaya pakej Regresi Linear memahami dengan betul. Regresi Linear mengharapkan array 2D sebagai input, di mana setiap baris array sepadan dengan satu vektor ciri input. Dalam kes kita, kerana kita hanya ada satu input - kita perlukan array dengan bentuk N&times;1, di mana N ialah saiz dataset.
 
-> Perhatikan bahwa kita harus melakukan `reshape` pada data input agar paket Regresi Linear memahaminya dengan benar. Regresi Linear mengharapkan array 2D sebagai input, di mana setiap baris dari array sesuai dengan vektor fitur input. Dalam kasus kita, karena kita hanya memiliki satu input - kita memerlukan array dengan bentuk N×1, di mana N adalah ukuran dataset.
-
-Kemudian, kita perlu membagi data menjadi dataset pelatihan dan pengujian, sehingga kita dapat memvalidasi model kita setelah pelatihan:
+Kemudian, kita perlu membahagikan data ke dalam dataset latihan dan ujian, supaya kita boleh mengesahkan model selepas latihan:
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 ```
-
-Akhirnya, melatih model Regresi Linear yang sebenarnya hanya membutuhkan dua baris kode. Kita mendefinisikan `LinearRegression` object, and fit it to our data using the `fit` method:
+  
+Akhir sekali, melatih model Regresi Linear yang sebenar hanya mengambil dua baris kod. Kita mentakrifkan objek `LinearRegression`, dan memasukannya dengan data kita menggunakan kaedah `fit`:
 
 ```python
 lin_reg = LinearRegression()
 lin_reg.fit(X_train,y_train)
 ```
 
-`LinearRegression` object after `fit`-ting contains all the coefficients of the regression, which can be accessed using `.coef_` property. In our case, there is just one coefficient, which should be around `-0.017`. It means that prices seem to drop a bit with time, but not too much, around 2 cents per day. We can also access the intersection point of the regression with Y-axis using `lin_reg.intercept_` - it will be around `21` dalam kasus kita, yang menunjukkan harga di awal tahun.
+Objek `LinearRegression` selepas `fit` mengandungi semua pekali regresi, yang boleh diakses menggunakan sifat `.coef_`. Dalam kes kami, hanya ada satu pekali, yang sepatutnya sekitar `-0.017`. Ini bermakna harga nampaknya menurun sedikit dengan masa, tetapi tidak terlalu banyak, sekitar 2 sen sehari. Kami juga boleh mengakses titik pertemuan regresi dengan paksi Y menggunakan `lin_reg.intercept_` - ia akan sekitar `21` dalam kes kami, menunjukkan harga pada awal tahun.
 
-Untuk melihat seberapa akurat model kita, kita bisa memprediksi harga pada dataset pengujian, dan kemudian mengukur seberapa dekat prediksi kita dengan nilai yang diharapkan. Ini bisa dilakukan menggunakan metrik mean square error (MSE), yang merupakan rata-rata dari semua perbedaan kuadrat antara nilai yang diharapkan dan yang diprediksi.
+Untuk melihat sejauh mana tepatnya model kami, kami boleh meramalkan harga pada dataset ujian, dan kemudian mengukur sejauh mana ramalan kami hampir dengan nilai yang dijangka. Ini boleh dilakukan menggunakan metrik ralat kuasa dua purata (RMSE), yang merupakan punca kuasa dua purata semua perbezaan kuasa dua antara nilai dijangka dan diramal.
 
 ```python
 pred = lin_reg.predict(X_test)
 
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
 ```
 
-Kesalahan kita tampaknya sekitar 2 poin, yaitu ~17%. Tidak terlalu bagus. Indikator lain dari kualitas model adalah **koefisien determinasi**, yang dapat diperoleh seperti ini:
+Ralat kami nampaknya sekitar 2 mata, iaitu ~17%. Tidak begitu baik. Penunjuk lain tentang kualiti model adalah **koefisien penentuan**, yang boleh diperoleh seperti berikut:
 
 ```python
 score = lin_reg.score(X_train,y_train)
 print('Model determination: ', score)
 ```
-Jika nilainya 0, itu berarti model tidak memperhitungkan data input, dan bertindak sebagai *prediktor linear terburuk*, yang hanya merupakan nilai rata-rata dari hasil. Nilai 1 berarti kita dapat memprediksi semua output yang diharapkan dengan sempurna. Dalam kasus kita, koefisiennya sekitar 0.06, yang cukup rendah.
+Jika nilai adalah 0, ia bermakna model tidak mengambil kira data input, dan bertindak sebagai *peramal linear terburuk*, yang hanya nilai purata hasil. Nilai 1 bermaksud kita boleh meramalkan semua output yang dijangka dengan sempurna. Dalam kes kami, koefisien sekitar 0.06, yang agak rendah.
 
-Kita juga bisa memplot data uji bersama dengan garis regresi untuk lebih melihat bagaimana regresi bekerja dalam kasus kita:
+Kami juga boleh memplot data ujian bersama dengan garis regresi untuk lebih jelas melihat bagaimana regresi berfungsi dalam kes kami:
 
 ```python
 plt.scatter(X_test,y_test)
 plt.plot(X_test,pred)
 ```
 
-<img alt="Regresi linear" src="images/linear-results.png" width="50%" />
+<img alt="Linear regression" src="../../../../translated_images/ms/linear-results.f7c3552c85b0ed1c.webp" width="50%" />
 
 ## Regresi Polinomial
 
-Jenis lain dari Regresi Linear adalah Regresi Polinomial. Sementara kadang-kadang ada hubungan linear antara variabel - semakin besar labu dalam volume, semakin tinggi harga - kadang-kadang hubungan ini tidak bisa diplot sebagai bidang atau garis lurus. 
+Satu lagi jenis Regresi Linear ialah Regresi Polinomial. Walaupun kadangkala terdapat hubungan linear antara pembolehubah - semakin besar labu dari segi isi padu, semakin tinggi harga - kadangkala hubungan ini tidak dapat diplot sebagai satah atau garis lurus.
 
-✅ Berikut adalah [beberapa contoh lagi](https://online.stat.psu.edu/stat501/lesson/9/9.8) data yang bisa menggunakan Regresi Polinomial
+✅ Berikut adalah [beberapa contoh lagi](https://online.stat.psu.edu/stat501/lesson/9/9.8) data yang boleh menggunakan Regresi Polinomial
 
-Lihat lagi hubungan antara Tanggal dan Harga. Apakah diagram pencar ini tampak seperti harus dianalisis dengan garis lurus? Bukankah harga bisa berfluktuasi? Dalam hal ini, Anda bisa mencoba regresi polinomial.
+Lihat sekali lagi hubungan antara Tarikh dan Harga. Adakah scatterplot ini nampak seperti perlu dianalisis dengan garis lurus? Tidakkah harga boleh berubah-ubah? Dalam kes ini, anda boleh cuba regresi polinomial.
 
-✅ Polinomial adalah ekspresi matematika yang mungkin terdiri dari satu atau lebih variabel dan koefisien
+✅ Polinomial ialah ungkapan matematik yang mungkin mengandungi satu atau lebih pembolehubah dan pekali
 
-Regresi polinomial menciptakan garis melengkung untuk lebih cocok dengan data non-linear. Dalam kasus kita, jika kita menyertakan variabel `DayOfYear` kuadrat ke dalam data input, kita harus bisa menyesuaikan data kita dengan kurva parabola, yang akan memiliki minimum pada titik tertentu dalam tahun tersebut.
+Regresi polinomial menghasilkan garis melengkung untuk menyesuaikan data taklinear dengan lebih baik. Dalam kes kami, jika kami termasuk pembolehubah `DayOfYear` dikuasakan dua dalam data input, kami sepatutnya dapat menyesuaikan data kami dengan lengkung parabola, yang akan mempunyai minimum pada suatu titik dalam tahun tersebut.
 
-Scikit-learn menyertakan [API pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) yang membantu untuk menggabungkan langkah-langkah pemrosesan data yang berbeda bersama-sama. Sebuah **pipeline** adalah rantai **estimators**. Dalam kasus kita, kita akan membuat pipeline yang pertama menambahkan fitur polinomial ke model kita, dan kemudian melatih regresi:
+Scikit-learn menyediakan API [pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html?highlight=pipeline#sklearn.pipeline.make_pipeline) yang berguna untuk menggabungkan beberapa langkah pemprosesan data bersama-sama. **Pipeline** ialah rantai **penganggar**. Dalam kes kami, kami akan membuat pipeline yang pertama-tama menambah ciri polinomial kepada model kami, dan kemudian melatih regresi:
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
@@ -244,36 +256,58 @@ pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 pipeline.fit(X_train,y_train)
 ```
 
-Menggunakan `PolynomialFeatures(2)` means that we will include all second-degree polynomials from the input data. In our case it will just mean `DayOfYear`<sup>2</sup>, but given two input variables X and Y, this will add X<sup>2</sup>, XY and Y<sup>2</sup>. We may also use higher degree polynomials if we want.
+Menggunakan `PolynomialFeatures(2)` bermakna kami akan memasukkan semua polinomial darjah dua dari data input. Dalam kes kami ia hanya bermakna `DayOfYear`<sup>2</sup>, tetapi diberikan dua pembolehubah input X dan Y, ini akan menambah X<sup>2</sup>, XY dan Y<sup>2</sup>. Kami juga boleh menggunakan polinomial darjah lebih tinggi jika mahu.
 
-Pipelines can be used in the same manner as the original `LinearRegression` object, i.e. we can `fit` the pipeline, and then use `predict` to get the prediction results. Here is the graph showing test data, and the approximation curve:
+Pipeline boleh digunakan sama seperti objek `LinearRegression` asal, iaitu kami boleh `fit` pipeline, dan kemudian menggunakan `predict` untuk mendapatkan hasil ramalan:
 
-<img alt="Polynomial regression" src="images/poly-results.png" width="50%" />
+```python
+pred = pipeline.predict(X_test)
 
-Using Polynomial Regression, we can get slightly lower MSE and higher determination, but not significantly. We need to take into account other features!
+rmse = np.sqrt(mean_squared_error(y_test,pred))
+print(f'RMSE: {rmse:3.3} ({rmse/np.mean(pred)*100:3.3}%)')
 
-> You can see that the minimal pumpkin prices are observed somewhere around Halloween. How can you explain this? 
+score = pipeline.score(X_train,y_train)
+print('Model determination: ', score)
+```
 
-🎃 Congratulations, you just created a model that can help predict the price of pie pumpkins. You can probably repeat the same procedure for all pumpkin types, but that would be tedious. Let's learn now how to take pumpkin variety into account in our model!
+Untuk melukis lengkung anggaran yang licin, kami menggunakan `np.linspace` untuk membuat julat nilai input yang seragam, bukannya melukis terus pada data ujian yang tidak tersusun (yang akan menghasilkan garis bergelombang):
 
-## Categorical Features
+```python
+X_range = np.linspace(X_test.min(), X_test.max(), 100).reshape(-1,1)
+y_range = pipeline.predict(X_range)
 
-In the ideal world, we want to be able to predict prices for different pumpkin varieties using the same model. However, the `Variety` column is somewhat different from columns like `Month`, because it contains non-numeric values. Such columns are called **categorical**.
+plt.scatter(X_test, y_test)
+plt.plot(X_range, y_range)
+```
+
+Ini ialah graf yang menunjukkan data ujian, dan lengkung anggaran:
+
+<img alt="Polynomial regression" src="../../../../translated_images/ms/poly-results.ee587348f0f1f60b.webp" width="50%" />
+
+Menggunakan Regresi Polinomial, kami boleh mendapat RMSE yang sedikit lebih rendah dan koefisien penentuan yang lebih tinggi, tetapi tidak signifikan. Kami perlu mengambil kira ciri-ciri lain!
+
+> Anda boleh lihat bahawa harga labu terendah diperhatikan sekitar Halloween. Bagaimana anda boleh menjelaskan ini?
+
+🎃 Tahniah, anda baru sahaja mencipta model yang boleh membantu meramalkan harga labu pai. Anda mungkin boleh mengulangi prosedur yang sama untuk semua jenis labu, tetapi itu akan melecehkan. Mari kita pelajari sekarang bagaimana untuk mengambil kira varieti labu dalam model kami!
+
+## Ciri Kategori
+
+Dalam dunia ideal, kami ingin dapat meramalkan harga untuk pelbagai varieti labu menggunakan model yang sama. Walau bagaimanapun, lajur `Variety` agak berbeza daripada lajur seperti `Month`, kerana ia mengandungi nilai bukan berangka. Lajur seperti ini dipanggil **kategori**.
 
 [![ML for beginners - Categorical Feature Predictions with Linear Regression](https://img.youtube.com/vi/DYGliioIAE0/0.jpg)](https://youtu.be/DYGliioIAE0 "ML for beginners - Categorical Feature Predictions with Linear Regression")
 
-> 🎥 Click the image above for a short video overview of using categorical features.
+> 🎥 Klik imej di atas untuk video ringkas mengenai penggunaan ciri kategori.
 
-Here you can see how average price depends on variety:
+Di sini anda boleh lihat bagaimana harga purata bergantung pada varieti:
 
-<img alt="Average price by variety" src="images/price-by-variety.png" width="50%" />
+<img alt="Average price by variety" src="../../../../translated_images/ms/price-by-variety.744a2f9925d9bcb4.webp" width="50%" />
 
-To take variety into account, we first need to convert it to numeric form, or **encode** it. There are several way we can do it:
+Untuk mengambil kira varieti, kita terlebih dahulu perlu menukarnya kepada bentuk berangka, atau **m encode** ia. Terdapat beberapa cara kita boleh lakukan:
 
-* Simple **numeric encoding** will build a table of different varieties, and then replace the variety name by an index in that table. This is not the best idea for linear regression, because linear regression takes the actual numeric value of the index, and adds it to the result, multiplying by some coefficient. In our case, the relationship between the index number and the price is clearly non-linear, even if we make sure that indices are ordered in some specific way.
-* **One-hot encoding** will replace the `Variety` column by 4 different columns, one for each variety. Each column will contain `1` if the corresponding row is of a given variety, and `0` sebaliknya. Ini berarti akan ada empat koefisien dalam regresi linear, satu untuk setiap variasi labu, yang bertanggung jawab atas "harga awal" (atau lebih tepatnya "harga tambahan") untuk variasi tersebut.
+* **Pengekodan berangka** mudah akan membina jadual varieti yang berbeza, dan kemudian menggantikan nama varieti dengan indeks dalam jadual itu. Ini bukan idea terbaik untuk regresi linear, kerana regresi linear mengambil nilai berangka sebenar indeks, dan menambahkannya ke hasil, didarab dengan pekali tertentu. Dalam kes kami, hubungan antara nombor indeks dan harga jelas tidak linear, walaupun kami pastikan indeks diatur dalam sesuatu susunan tertentu.
+* **One-hot encoding** akan menggantikan lajur `Variety` dengan 4 lajur berlainan, satu untuk setiap varieti. Setiap lajur akan mengandungi `1` jika baris sepadan adalah varieti tertentu, dan `0` jika tidak. Ini bermakna akan ada empat pekali dalam regresi linear, satu untuk setiap varieti labu, bertanggungjawab untuk "harga permulaan" (atau lebih tepat "harga tambahan") untuk varieti tersebut.
 
-Kode di bawah ini menunjukkan bagaimana kita bisa one-hot encode variasi:
+Kod di bawah menunjukkan bagaimana kita boleh one-hot encode varieti:
 
 ```python
 pd.get_dummies(new_pumpkins['Variety'])
@@ -290,14 +324,14 @@ pd.get_dummies(new_pumpkins['Variety'])
 1741 | 0 | 1 | 0 | 0
 1742 | 0 | 1 | 0 | 0
 
-Untuk melatih regresi linear menggunakan variasi one-hot encoded sebagai input, kita hanya perlu menginisialisasi data `X` and `y` dengan benar:
+Untuk melatih regresi linear menggunakan varieti yang telah di-one-hot encode sebagai input, kita hanya perlu inisialisasi data `X` dan `y` dengan betul:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety'])
 y = new_pumpkins['Price']
 ```
 
-Sisa kode sama seperti yang kita gunakan di atas untuk melatih Regresi Linear. Jika Anda mencobanya, Anda akan melihat bahwa mean squared error hampir sama, tetapi kita mendapatkan koefisien determinasi yang jauh lebih tinggi (~77%). Untuk mendapatkan prediksi yang lebih akurat, kita bisa mempertimbangkan lebih banyak fitur kategorikal, serta fitur numerik, seperti `Month` or `DayOfYear`. To get one large array of features, we can use `join`:
+Baki kod adalah sama seperti yang kami gunakan sebelum ini untuk melatih Regresi Linear. Jika anda mencubanya, anda akan lihat bahawa ralat kuasa dua purata adalah lebih kurang sama, tetapi kami mendapat koefisien penentuan yang jauh lebih tinggi (~77%). Untuk mendapatkan ramalan yang lebih tepat, kita boleh mengambil kira lebih banyak ciri kategori, serta ciri berangka, seperti `Month` atau `DayOfYear`. Untuk mendapatkan satu tatasusunan ciri yang besar, kita boleh gunakan `join`:
 
 ```python
 X = pd.get_dummies(new_pumpkins['Variety']) \
@@ -307,64 +341,68 @@ X = pd.get_dummies(new_pumpkins['Variety']) \
 y = new_pumpkins['Price']
 ```
 
-Di sini kita juga mempertimbangkan `City` and `Package` type, yang memberi kita MSE 2.84 (10%), dan determinasi 0.94!
+Di sini kami juga mengambil kira `City` dan jenis `Package`, yang memberikan kami RMSE 2.84 (10.5%), dan koefisien penentuan 0.94!
 
-## Menggabungkan semuanya
+## Menggabungkan Kesemuanya
 
-Untuk membuat model terbaik, kita bisa menggunakan data gabungan (satu-hot encoded categorical + numeric) dari contoh di atas bersama dengan Regresi Polinomial. Berikut adalah kode lengkapnya untuk kenyamanan Anda:
+Untuk membuat model terbaik, kami boleh gunakan data gabungan (categorical yang di-one-hot encode + data berangka) dari contoh di atas bersama Regresi Polinomial. Berikut adalah kod lengkap untuk kemudahan anda:
 
 ```python
-# set up training data
+# sediakan data latihan
 X = pd.get_dummies(new_pumpkins['Variety']) \
         .join(new_pumpkins['Month']) \
         .join(pd.get_dummies(new_pumpkins['City'])) \
         .join(pd.get_dummies(new_pumpkins['Package']))
 y = new_pumpkins['Price']
 
-# make train-test split
+# buat pecahan latih-uji
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-# setup and train the pipeline
+# sediakan dan latih laluan paip
 pipeline = make_pipeline(PolynomialFeatures(2), LinearRegression())
 pipeline.fit(X_train,y_train)
 
-# predict results for test data
+# ramal keputusan untuk data ujian
 pred = pipeline.predict(X_test)
 
-# calculate MSE and determination
-mse = np.sqrt(mean_squared_error(y_test,pred))
-print(f'Mean error: {mse:3.3} ({mse/np.mean(pred)*100:3.3}%)')
+# kira RMSE dan penentuan
+rmse = mean_squared_error(y_test, pred, squared=False)
+print(f'RMSE: {rmse:3.3} ({rmse/pred.mean()*100:3.3}%)')
 
 score = pipeline.score(X_train,y_train)
 print('Model determination: ', score)
 ```
 
-Ini harus memberi kita koefisien determinasi terbaik hampir 97%, dan MSE=2.23 (~8% kesalahan prediksi).
+Ini sepatutnya memberikan koefisien penentuan terbaik hampir 97%, dan RMSE=2.23 (~8% ralat ramalan).
 
-| Model | MSE | Determinasi |
-|-------|-----|-------------|
-| `DayOfYear` Linear | 2.77 (17.2%) | 0.07 |
-| `DayOfYear` Polynomial | 2.73 (17.0%) | 0.08 |
-| `Variety` Linear | 5.24 (19.7%) | 0.77 |
-| Semua fitur Linear | 2.84 (10.5%) | 0.94 |
-| Semua fitur Polinomial | 2.23 (8.25%) | 0.97 |
+| Model | RMSE | Penentuan |
+|-------|-----|-----------|
+| Linear `DayOfYear` | 2.77 (17.2%) | 0.07 |
+| Polinomial `DayOfYear` | 2.73 (17.0%) | 0.08 |
+| Linear `Variety` | 5.24 (19.7%) | 0.77 |
+| Linear Semua ciri | 2.84 (10.5%) | 0.94 |
+| Polinomial Semua ciri | 2.23 (8.25%) | 0.97 |
 
-🏆 Kerja bagus! Anda membuat empat model Regresi dalam satu pelajaran, dan meningkatkan kualitas model hingga 97%. Di bagian akhir tentang Regresi, Anda akan belajar tentang Regresi Logistik untuk menentukan kategori.
+🏆 Tahniah! Anda telah mencipta empat model Regresi dalam satu pelajaran, dan meningkatkan kualiti model ke 97%. Dalam bahagian akhir mengenai Regresi, anda akan belajar tentang Regresi Logistik untuk menentukan kategori.
 
 ---
-## 🚀Tantangan
+## 🚀Cabaran
 
-Uji beberapa variabel berbeda dalam notebook ini untuk melihat bagaimana korelasi sesuai dengan akurasi model.
+Uji beberapa pembolehubah berbeza dalam buku nota ini untuk melihat bagaimana korelasi berkait dengan ketepatan model.
 
-## [Kuis pasca-kuliah](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/14/)
+## [Kuiz selepas kuliah](https://ff-quizzes.netlify.app/en/ml/)
 
-## Tinjauan & Studi Mandiri
+## Ulasan & Belajar Sendiri
 
-Dalam pelajaran ini kita belajar tentang Regresi Linear. Ada jenis Regresi penting lainnya. Baca tentang teknik Stepwise, Ridge, Lasso, dan Elasticnet. Kursus yang bagus untuk belajar lebih lanjut adalah [Kursus Pembelajaran Statistik Stanford](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
+Dalam pelajaran ini kami belajar mengenai Regresi Linear. Terdapat jenis Regresi penting lain. Baca mengenai teknik Stepwise, Ridge, Lasso dan Elasticnet. Kursus yang baik untuk dipelajari bagi mendalami adalah [kursus Pembelajaran Statistik Stanford](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)
 
-## Tugas 
+## Tugasan
 
-[Membangun Model](assignment.md)
+[Bangunkan Model](assignment.md)
 
-**Penafian**: 
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI berasaskan mesin. Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Penafian**:  
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang rasmi. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
